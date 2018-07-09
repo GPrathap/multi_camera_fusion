@@ -92,6 +92,8 @@ bool EventManager::Subscribe(EventID event_id, Event *event, bool nonblocking) {
   }
 
   ADEBUG << "EVENT_ID: " << event_id << "QUEUE LENGTH:" << queue->size();
+  if (queue->size() == 0)
+    return true;
   queue->pop(event);
   return true;
 }
