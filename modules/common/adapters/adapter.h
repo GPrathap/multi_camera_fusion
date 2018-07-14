@@ -45,6 +45,7 @@
 #include "sensor_msgs/Image.h"
 #include "sensor_msgs/PointCloud2.h"
 #include "std_msgs/String.h"
+#include "sensor_msgs/Imu.h"
 
 /**
  * @namespace apollo::common::adapter
@@ -390,6 +391,10 @@ class Adapter : public AdapterBase {
   }
   bool FeedFile(const std::string& message_file,
                 IdentifierType<::sensor_msgs::Image>) {
+    return false;
+  }
+  bool FeedFile(const std::string& message_file,
+                IdentifierType<::sensor_msgs::Imu>) {
     return false;
   }
   bool FeedFile(const std::string& message_file,

@@ -53,6 +53,7 @@
 #include "sensor_msgs/CompressedImage.h"
 #include "sensor_msgs/Image.h"
 #include "sensor_msgs/PointCloud2.h"
+#include "sensor_msgs/Imu.h"
 #include "std_msgs/String.h"
 
 /**
@@ -129,6 +130,7 @@ using GnssRawDataAdapter = Adapter<std_msgs::String>;
 using StreamStatusAdapter = Adapter<drivers::gnss_status::StreamStatus>;
 using GnssHeadingAdapter = Adapter<drivers::gnss::Heading>;
 using RtcmDataAdapter = Adapter<std_msgs::String>;
+using ImuRosAdapter = Adapter<::sensor_msgs::Imu>;
 
 }  // namespace adapter
 }  // namespace common

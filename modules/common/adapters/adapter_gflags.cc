@@ -134,3 +134,5 @@ DEFINE_string(heading_topic, "/apollo/sensor/gnss/heading",
               "gnss heading topic name");
 DEFINE_string(rtcm_data_topic, "/apollo/sensor/gnss/rtcm_data",
               "gnss rtcm data topic name");
+DEFINE_string(imu_ros_topic, "/unity/imu",
+              "imu ros topic name");             

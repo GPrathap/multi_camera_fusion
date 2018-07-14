@@ -81,4 +81,7 @@ DECLARE_string(rtcm_data_topic);
 // Guardian topic
 DECLARE_string(guardian_topic);
 
+//for standart ros sensors messages
+DECLARE_string(imu_ros_topic);
+
 #endif  // MODULES_COMMON_ADAPTERS_ADAPTER_GFLAGS_H_
