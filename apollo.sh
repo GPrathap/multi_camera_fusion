@@ -28,7 +28,7 @@ function source_apollo_base() {
 }
 
 function apollo_check_system_config() {
-  # check docker environment
+  # check docker environmente
   if [ ${MACHINE_ARCH} == "x86_64" ] && [ ${APOLLO_IN_DOCKER} != "true" ]; then
     echo -e "${RED}Must run $0 in dev docker or release docker${NO_COLOR}"
     exit 0
@@ -446,6 +446,30 @@ function build_velodyne() {
   rm -rf modules/devel_isolated/
 }
 
+function build_pylon_cam() {
+
+  CURRENT_PATH=$(pwd)
+  if [ -d "${ROS_ROOT}" ]; then
+    ROS_PATH="${ROS_ROOT}/../.."
+  else
+    warning "ROS not found. Run apolllo.sh build first."
+    exit 1
+  fi
+
+  source "${ROS_PATH}/setup.bash"
+
+  cd modules
+  catkin_make_isolated --install --source drivers/pylon_cam \
+    --install-space "${ROS_PATH}" -DCMAKE_BUILD_TYPE=Release \
+    --cmake-args --no-warn-unused-cli
+  find "${ROS_PATH}" -name "*.pyc" -print0 | xargs -0 rm -rf
+  cd -
+
+  rm -rf modules/.catkin_workspace
+  rm -rf modules/build_isolated/
+  rm -rf modules/devel_isolated/
+}
+
 
 function build_lslidar() {
   CURRENT_PATH=$(pwd)
@@ -538,6 +562,7 @@ function print_usage() {
   ${BLUE}build_lslidar${NONE}: build lslidar driver
   ${BLUE}build_rslidar${NONE}: build rslidar driver
   ${BLUE}build_usbcam${NONE}: build usb camera driver
+  ${BLUE}build_pylon_cam${NONE}: build pylon_cam driver
   ${BLUE}build_opt_gpu${NONE}: build optimized binary with Caffe GPU mode support
   ${BLUE}build_fe${NONE}: compile frontend javascript code, this requires all the node_modules to be installed already
   ${BLUE}build_no_perception [dbg|opt]${NONE}: run build build skip building perception module, useful when some perception dependencies are not satisified, e.g., CUDA, CUDNN, LIDAR, etc.
@@ -632,6 +657,9 @@ function main() {
       ;;
     build_rslidar)
       build_rslidar
+      ;;
+    build_pylon_cam)
+      build_pylon_cam
       ;;
     build_usbcam)
       build_usbcam
