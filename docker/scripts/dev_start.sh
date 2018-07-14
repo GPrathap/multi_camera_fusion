@@ -258,6 +258,7 @@ function main(){
     docker run -it \
         -d \
         --privileged \
+        --runtime nvidia \
         --name apollo_dev \
         ${MAP_VOLUME_CONF} \
         --volumes-from ${LOCALIZATION_VOLUME} \

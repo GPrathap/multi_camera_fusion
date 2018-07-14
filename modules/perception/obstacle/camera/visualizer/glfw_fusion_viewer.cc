@@ -278,6 +278,7 @@ bool GLFWFusionViewer::window_init() {
   win_width_ = scene_width_ + image_width_;
   win_height_ =
       (image_height_ * 2 > win_height_) ? image_height_ * 2 : win_height_;
+  glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
   window_ = glfwCreateWindow(win_width_, win_height_, "gl_camera_visualizer",
                              nullptr, nullptr);
   if (window_ == nullptr) {
@@ -297,8 +298,9 @@ bool GLFWFusionViewer::window_init() {
   glfwSetMouseButtonCallback(window_, mouse_button_callback);
   glfwSetCursorPosCallback(window_, mouse_cursor_position_callback);
   glfwSetScrollCallback(window_, mouse_scroll_callback);
-
+  AINFO << "Befor show GL window!";
   glfwShowWindow(window_);
+  AINFO << "GL window initialization is done!";
   return true;
 }
 
@@ -337,10 +339,12 @@ bool GLFWFusionViewer::opengl_init() {
   glEnable(GL_NORMALIZE);
   glEnable(GL_COLOR_MATERIAL);
 
+  glewExperimental=GL_TRUE;
   GLenum err = glewInit();
   if (GLEW_OK != err) {
     fprintf(stderr, "GLEW init failed！\n");
-    exit(EXIT_FAILURE);
+    fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+    //exit(EXIT_FAILURE);
   }
   /*********************************************************   gen cloud vao &
    * vbo   **********************************************************/

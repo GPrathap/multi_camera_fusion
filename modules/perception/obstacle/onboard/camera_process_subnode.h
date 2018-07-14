@@ -27,6 +27,8 @@
 #include "Eigen/Dense"
 #include "cv_bridge/cv_bridge.h"
 #include "sensor_msgs/Image.h"
+#include "sensor_msgs/CompressedImage.h"
+#include <sensor_msgs/image_encodings.h>
 #include "sensor_msgs/fill_image.h"
 #include "yaml-cpp/yaml.h"
 
@@ -77,9 +79,11 @@ class CameraProcessSubnode : public Subnode {
   bool InitModules();
 
   void ImgCallback(const sensor_msgs::Image& message);
+  void ImgCompressCallback(const sensor_msgs::CompressedImage &message);
   void ChassisCallback(const apollo::canbus::Chassis& message);
 
   bool MessageToMat(const sensor_msgs::Image& msg, cv::Mat* img);
+  bool CompMessageToMat(const sensor_msgs::CompressedImage &msg, cv::Mat *img);
   bool MatToMessage(const cv::Mat& img, sensor_msgs::Image *msg);
 
   void VisualObjToSensorObj(
@@ -94,6 +98,8 @@ class CameraProcessSubnode : public Subnode {
                               sensor_objects);
   void PublishPerceptionPbLnMsk(const cv::Mat& mask,
                                 const sensor_msgs::Image &message);
+  void PublishPerceptionPbLnMsk(const cv::Mat& mask,
+                                const sensor_msgs::CompressedImage &message);
 
   // General
   std::string device_id_ = "camera";

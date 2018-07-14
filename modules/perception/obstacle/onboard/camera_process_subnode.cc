@@ -42,6 +42,8 @@ bool CameraProcessSubnode::InitInternal() {
 
   AdapterManager::AddImageFrontCallback(&CameraProcessSubnode::ImgCallback,
                                         this);
+  AdapterManager::AddCompressedImageCallback(&CameraProcessSubnode::ImgCompressCallback,
+                                        this);                                        
   if (pb_obj_) {
     AdapterManager::AddChassisCallback(&CameraProcessSubnode::ChassisCallback,
                                        this);
@@ -166,6 +168,82 @@ void CameraProcessSubnode::ImgCallback(const sensor_msgs::Image &message) {
   if (pb_ln_msk_) PublishPerceptionPbLnMsk(mask, message);
 }
 
+void CameraProcessSubnode::ImgCompressCallback(const sensor_msgs::CompressedImage &message) {
+  double timestamp = message.header.stamp.toSec();
+  ADEBUG << "CameraProcessSubnode ImgCallback: timestamp: ";
+  ADEBUG << std::fixed << std::setprecision(64) << timestamp;
+  AINFO << "camera received image : " << GLOG_TIMESTAMP(timestamp)
+        << " at time: " << GLOG_TIMESTAMP(TimeUtil::GetCurrentTime());
+  double curr_timestamp = timestamp * 1e9;
+
+  if (FLAGS_skip_camera_frame && timestamp_ns_ > 0.0) {
+    if ((curr_timestamp - timestamp_ns_) < (1e9 / FLAGS_camera_hz) &&
+        curr_timestamp > timestamp_ns_) {
+      ADEBUG << "CameraProcessSubnode Skip frame";
+      return;
+    }
+  }
+
+  timestamp_ns_ = curr_timestamp;
+  ADEBUG << "CameraProcessSubnode Process: "
+         << " frame: " << ++seq_num_;
+  PERF_FUNCTION("CameraProcessSubnode");
+  PERF_BLOCK_START();
+
+  cv::Mat img;
+  if (!FLAGS_image_file_debug) {
+    CompMessageToMat(message, &img);
+  } else {
+    img = cv::imread(FLAGS_image_file_path, CV_LOAD_IMAGE_COLOR);
+  }
+  cv::resize(img, img, cv::Size(1920, 1080), 0, 0);
+  std::vector<std::shared_ptr<VisualObject>> objects;
+  cv::Mat mask;
+
+  PERF_BLOCK_END("CameraProcessSubnode_Image_Preprocess");
+  detector_->Multitask(img, CameraDetectorOptions(), &objects, &mask);
+  mask = mask*2;
+  if (FLAGS_use_whole_lane_line) {
+    cv::Mat mask1;
+    detector_->Lanetask(img, &mask1);
+    mask += mask1;
+  }
+
+  PERF_BLOCK_END("CameraProcessSubnode_detector_");
+
+  converter_->Convert(&objects);
+  PERF_BLOCK_END("CameraProcessSubnode_converter_");
+
+  transformer_->Transform(&objects);
+  adjusted_extrinsics_ =
+  transformer_->GetAdjustedExtrinsics(&camera_to_car_adj_);
+  PERF_BLOCK_END("CameraProcessSubnode_transformer_");
+
+  tracker_->Associate(img, timestamp, &objects);
+  PERF_BLOCK_END("CameraProcessSubnode_tracker_");
+
+  filter_->Filter(timestamp, &objects);
+  PERF_BLOCK_END("CameraProcessSubnode_filter_");
+
+  auto ccm = Singleton<CalibrationConfigManager>::get();
+  auto calibrator = ccm->get_camera_calibration();
+  calibrator->SetCar2CameraExtrinsicsAdj(camera_to_car_adj_,
+                                         adjusted_extrinsics_);
+
+  std::shared_ptr<SensorObjects> out_objs(new SensorObjects);
+  out_objs->timestamp = timestamp;
+  VisualObjToSensorObj(objects, &out_objs);
+
+  SharedDataPtr<CameraItem> camera_item_ptr(new CameraItem);
+  camera_item_ptr->image_src_mat = img.clone();
+  mask.copyTo(out_objs->camera_frame_supplement->lane_map);
+  PublishDataAndEvent(timestamp, out_objs, camera_item_ptr);
+  PERF_BLOCK_END("CameraProcessSubnode publish in DAG");
+
+  if (pb_obj_) PublishPerceptionPbObj(out_objs);
+  if (pb_ln_msk_) PublishPerceptionPbLnMsk(mask, message);
+}
+
 void CameraProcessSubnode::ChassisCallback(
     const apollo::canbus::Chassis &message) {
   chassis_.CopyFrom(message);
@@ -183,6 +261,26 @@ bool CameraProcessSubnode::MessageToMat(const sensor_msgs::Image &msg,
         cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
     *img = cv_ptr->image;
   }
+
+  return true;
+}
+
+bool CameraProcessSubnode::CompMessageToMat(const sensor_msgs::CompressedImage &msg,
+                                        cv::Mat *img) {
+
+  cv_bridge::CvImagePtr cv_ptr(new cv_bridge::CvImage);
+
+  // Copy message header
+  cv_ptr->header = msg.header;
+
+  cv_ptr->image = cv::imdecode(cv::Mat(msg.data), CV_LOAD_IMAGE_UNCHANGED);
+
+  cv_ptr->encoding = sensor_msgs::image_encodings::BGR8;
+                                   
+
+  *img = cv::Mat(cv_ptr->image.rows, cv_ptr->image.cols, CV_8UC3);
+  *img = cv_ptr->image;
+  
 
   return true;
 }
@@ -316,6 +414,17 @@ void CameraProcessSubnode::PublishPerceptionPbObj(
 
 void CameraProcessSubnode::PublishPerceptionPbLnMsk(
   const cv::Mat& mask, const sensor_msgs::Image &message) {
+  sensor_msgs::Image lane_mask_msg;
+  lane_mask_msg.header = message.header;
+  lane_mask_msg.header.frame_id = "lane_mask";
+  MatToMessage(mask, &lane_mask_msg);
+
+  AdapterManager::PublishPerceptionLaneMask(lane_mask_msg);
+  ADEBUG << "PublishPerceptionLaneMask";
+}
+
+void CameraProcessSubnode::PublishPerceptionPbLnMsk(
+  const cv::Mat& mask, const sensor_msgs::CompressedImage &message) {
   sensor_msgs::Image lane_mask_msg;
   lane_mask_msg.header = message.header;
   lane_mask_msg.header.frame_id = "lane_mask";
