@@ -304,6 +304,7 @@ class AdapterManager {
 
   //for standard ROS sensor messages
   REGISTER_ADAPTER(ImuRos);
+  REGISTER_ADAPTER(OdometryRos);  
 
   DECLARE_SINGLETON(AdapterManager);
 };

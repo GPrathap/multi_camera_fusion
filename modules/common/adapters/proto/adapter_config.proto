@@ -65,6 +65,7 @@ message AdapterConfig {
     RTCM_DATA = 57;
     RACOBIT_RADAR = 59;  
     IMU_ROS = 60;
+    ODOMETRY_ROS = 61;
   }
   enum Mode {
     RECEIVE_ONLY = 0;

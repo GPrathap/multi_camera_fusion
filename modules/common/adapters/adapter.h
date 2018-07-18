@@ -46,6 +46,7 @@
 #include "sensor_msgs/PointCloud2.h"
 #include "std_msgs/String.h"
 #include "sensor_msgs/Imu.h"
+#include "nav_msgs/Odometry.h"
 
 /**
  * @namespace apollo::common::adapter
@@ -397,6 +398,10 @@ class Adapter : public AdapterBase {
                 IdentifierType<::sensor_msgs::Imu>) {
     return false;
   }
+  bool FeedFile(const std::string& message_file,
+                IdentifierType<::nav_msgs::Odometry>) {
+    return false;
+  }  
   bool FeedFile(const std::string& message_file,
                 IdentifierType<::std_msgs::String>) {
     return false;

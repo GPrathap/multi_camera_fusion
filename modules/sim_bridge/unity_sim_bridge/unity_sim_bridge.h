@@ -33,9 +33,11 @@
 #include "gtest/gtest_prod.h"
 
 #include "modules/localization/proto/imu.pb.h"
+#include "modules/localization/proto/gps.pb.h"
 #include "modules/common/status/status.h"
 #include "modules/sim_bridge/sim_bridge_base.h"
 #include "sensor_msgs/Imu.h"
+#include "nav_msgs/Odometry.h"
 
 /**
  * @namespace apollo::sim_bridge
@@ -70,6 +72,8 @@ class UnitySimBridge : public SimBridgeBase {
  private:
   void OnImu(const sensor_msgs::Imu &msg);
   void FillImuMsg(const sensor_msgs::Imu &msg, localization::CorrectedImu *imu_msg);
+  void OnOdometry(const nav_msgs::Odometry &msg);
+  void FillGpsMsg(const nav_msgs::Odometry &msg, localization::Gps *gps_msg);
 
  private:
 

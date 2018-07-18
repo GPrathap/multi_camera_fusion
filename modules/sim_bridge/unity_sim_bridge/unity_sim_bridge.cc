@@ -40,6 +40,7 @@ Status UnitySimBridge::Start() {
 
   //add callbacks here
   AdapterManager::AddImuRosCallback(&UnitySimBridge::OnImu, this); 
+  AdapterManager::AddOdometryRosCallback(&UnitySimBridge::OnOdometry, this); 
   return Status::OK();
 }
 
@@ -54,8 +55,10 @@ void UnitySimBridge::OnImu(const sensor_msgs::Imu &msg) {
 
   // publish imu messages
   AdapterManager::PublishImu(imu_msg);
-  ADEBUG << "[OnImu]: Imu message publish success!";
+  AINFO << "[OnImu]: Imu message publish success!";
 }
+
+
 
 void UnitySimBridge::FillImuMsg(const sensor_msgs::Imu &msg, localization::CorrectedImu *imu_msg) {
 
@@ -76,6 +79,38 @@ void UnitySimBridge::FillImuMsg(const sensor_msgs::Imu &msg, localization::Corre
   mutable_imu->mutable_orientation()->set_qy(msg.orientation.y);
   mutable_imu->mutable_orientation()->set_qz(msg.orientation.z);
   mutable_imu->mutable_orientation()->set_qw(msg.orientation.w);
+
+}
+
+void UnitySimBridge::OnOdometry(const nav_msgs::Odometry &msg)
+{
+  localization::Gps gps_msg;
+
+  FillGpsMsg(msg, &gps_msg);
+  // publish imu messages
+  AdapterManager::PublishGps(gps_msg);
+  AINFO << "[OnGps]: Gps message publish success!";
+}
+
+void UnitySimBridge::FillGpsMsg(const nav_msgs::Odometry &msg, localization::Gps *gps_msg)
+{
+  // header
+  AdapterManager::FillGpsHeader(FLAGS_sim_bridge_module_name,
+                                         gps_msg);
+
+  auto mutable_loc = gps_msg->mutable_localization();
+  mutable_loc->mutable_position()->set_x(msg.pose.pose.position.x);
+  mutable_loc->mutable_position()->set_y(msg.pose.pose.position.y);
+  mutable_loc->mutable_position()->set_z(msg.pose.pose.position.z);
+
+  mutable_loc->mutable_linear_velocity()->set_x(msg.twist.twist.linear.x);
+  mutable_loc->mutable_linear_velocity()->set_y(msg.twist.twist.linear.y);
+  mutable_loc->mutable_linear_velocity()->set_z(msg.twist.twist.linear.z);
+
+  mutable_loc->mutable_orientation()->set_qx(msg.pose.pose.orientation.x);
+  mutable_loc->mutable_orientation()->set_qy(msg.pose.pose.orientation.y);
+  mutable_loc->mutable_orientation()->set_qz(msg.pose.pose.orientation.z);
+  mutable_loc->mutable_orientation()->set_qw(msg.pose.pose.orientation.w);
 
 }
 

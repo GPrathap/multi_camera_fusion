@@ -239,6 +239,9 @@ void AdapterManager::Init(const AdapterManagerConfig &configs) {
       case AdapterConfig::IMU_ROS:
         EnableImuRos(FLAGS_imu_ros_topic, config);
         break;
+      case AdapterConfig::ODOMETRY_ROS:
+        EnableOdometryRos(FLAGS_odom_ros_topic, config);
+        break;
       default:
         AERROR << "Unknown adapter config type!";
         break;

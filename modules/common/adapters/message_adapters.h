@@ -54,6 +54,7 @@
 #include "sensor_msgs/Image.h"
 #include "sensor_msgs/PointCloud2.h"
 #include "sensor_msgs/Imu.h"
+#include "nav_msgs/Odometry.h"
 #include "std_msgs/String.h"
 
 /**
@@ -131,6 +132,7 @@ using StreamStatusAdapter = Adapter<drivers::gnss_status::StreamStatus>;
 using GnssHeadingAdapter = Adapter<drivers::gnss::Heading>;
 using RtcmDataAdapter = Adapter<std_msgs::String>;
 using ImuRosAdapter = Adapter<::sensor_msgs::Imu>;
+using OdometryRosAdapter = Adapter<::nav_msgs::Odometry>;
 
 }  // namespace adapter
 }  // namespace common
