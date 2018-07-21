@@ -7,6 +7,7 @@ cc_library(
     deps = [
         ":data_parser",
         ":novatel_parser",
+        ":nmea_parser",
         ":rtcm_parser",
         ":rtcm3_parser"
     ],
@@ -21,6 +22,7 @@ cc_library(
         ],
     deps = [
         ":novatel_parser",
+        ":nmea_parser",
         "//external:gflags",
         "//modules/common:log",
         "//modules/common/monitor_log",
@@ -38,6 +40,25 @@ cc_library(
 cc_library(
     name = "novatel_parser",
     srcs = ["novatel_parser.cc"],
+    hdrs = [
+        "parser.h",
+        "novatel_messages.h",
+        "rtcm_decode.h"
+        ],
+    deps = [
+        "//external:gflags",
+        "//modules/common:log",
+        "//modules/common/monitor_log",
+        "//modules/drivers/gnss/proto:gnss_proto",
+        "//modules/drivers/gnss/third_party:rtcm",
+        "//modules/drivers/gnss/util:gnss_util",
+        "@ros//:ros_common"
+    ],
+)
+
+cc_library(
+    name = "nmea_parser",
+    srcs = ["nmea_parser.cc"],
     hdrs = [
         "parser.h",
         "novatel_messages.h",

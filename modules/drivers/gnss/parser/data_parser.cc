@@ -80,7 +80,8 @@ Parser *CreateParser(config::Config config, bool is_base_station = false) {
   switch (config.data().format()) {
     case config::Stream::NOVATEL_BINARY:
       return Parser::CreateNovatel(config);
-
+    case config::Stream::NMEA:
+      return Parser::CreateNmea(config);
     default:
       return nullptr;
   }
@@ -288,6 +289,7 @@ void DataParser::PublishOdometry(const MessagePtr message) {
   geometry_msgs::TransformStamped transform;
   GpsToTransformStamped(gps, &transform);
   tf_broadcaster_.sendTransform(transform);
+  AINFO << "PublishOdometry";
 }
 
 void DataParser::PublishCorrimu(const MessagePtr message) {
