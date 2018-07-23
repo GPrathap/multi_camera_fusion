@@ -24,6 +24,7 @@ VERSION_X86_64="dev-x86_64-20180702_1140"
 VERSION_AARCH64="dev-aarch64-20170927_1111"
 VERSION_OPT=""
 
+
 # Check whether user has agreed license agreement
 function check_agreement() {
   agreement_record="${HOME}/.apollo_agreement.txt"
@@ -178,7 +179,7 @@ for map_name in ${DEFAULT_MAPS[@]}; do
     source ${APOLLO_ROOT_DIR}/docker/scripts/restart_map_volume.sh ${map_name} "${VOLUME_VERSION}"
 done
 
-IMG=${DOCKER_REPO}:$VERSION
+IMG="alexbuyval/apolloui:latest"
 
 function local_volumes() {
     # Apollo root and bazel cache dirs are required.
