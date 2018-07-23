@@ -55,6 +55,7 @@
 #include "sensor_msgs/PointCloud2.h"
 #include "sensor_msgs/Imu.h"
 #include "nav_msgs/Odometry.h"
+#include "car_unity_simulator/CarControl.h"
 #include "std_msgs/String.h"
 
 /**
@@ -133,6 +134,7 @@ using GnssHeadingAdapter = Adapter<drivers::gnss::Heading>;
 using RtcmDataAdapter = Adapter<std_msgs::String>;
 using ImuRosAdapter = Adapter<::sensor_msgs::Imu>;
 using OdometryRosAdapter = Adapter<::nav_msgs::Odometry>;
+using UnityCarControlAdapter = Adapter<::car_unity_simulator::CarControl>;
 
 }  // namespace adapter
 }  // namespace common

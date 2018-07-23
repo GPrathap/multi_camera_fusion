@@ -242,6 +242,9 @@ void AdapterManager::Init(const AdapterManagerConfig &configs) {
       case AdapterConfig::ODOMETRY_ROS:
         EnableOdometryRos(FLAGS_odom_ros_topic, config);
         break;
+      case AdapterConfig::UNITY_CAR_CONTROL:
+        EnableUnityCarControl(FLAGS_unity_car_control_topic, config);
+        break;        
       default:
         AERROR << "Unknown adapter config type!";
         break;

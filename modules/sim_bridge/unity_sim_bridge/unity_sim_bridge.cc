@@ -90,6 +90,11 @@ void UnitySimBridge::OnOdometry(const nav_msgs::Odometry &msg)
   // publish imu messages
   AdapterManager::PublishGps(gps_msg);
   AINFO << "[OnGps]: Gps message publish success!";
+
+  car_unity_simulator::CarControl control_msg;
+  FillUnityCarControlMsg(&control_msg);
+  AdapterManager::PublishUnityCarControl(control_msg);
+  AINFO << "[OnGps]: Control message publish success!";
 }
 
 void UnitySimBridge::FillGpsMsg(const nav_msgs::Odometry &msg, localization::Gps *gps_msg)
@@ -114,6 +119,10 @@ void UnitySimBridge::FillGpsMsg(const nav_msgs::Odometry &msg, localization::Gps
 
 }
 
+void UnitySimBridge::FillUnityCarControlMsg(car_unity_simulator::CarControl *control_msg)
+{
+  control_msg->throttle = 0.1;
+}
 
 }  // namespace sim_bridge
 }  // namespace apollo

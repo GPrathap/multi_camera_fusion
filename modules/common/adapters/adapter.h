@@ -47,6 +47,7 @@
 #include "std_msgs/String.h"
 #include "sensor_msgs/Imu.h"
 #include "nav_msgs/Odometry.h"
+#include "car_unity_simulator/CarControl.h"
 
 /**
  * @namespace apollo::common::adapter
@@ -400,6 +401,10 @@ class Adapter : public AdapterBase {
   }
   bool FeedFile(const std::string& message_file,
                 IdentifierType<::nav_msgs::Odometry>) {
+    return false;
+  }  
+  bool FeedFile(const std::string& message_file,
+                IdentifierType<::car_unity_simulator::CarControl>) {
     return false;
   }  
   bool FeedFile(const std::string& message_file,

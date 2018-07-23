@@ -38,6 +38,7 @@
 #include "modules/sim_bridge/sim_bridge_base.h"
 #include "sensor_msgs/Imu.h"
 #include "nav_msgs/Odometry.h"
+#include "car_unity_simulator/CarControl.h"
 
 /**
  * @namespace apollo::sim_bridge
@@ -74,6 +75,7 @@ class UnitySimBridge : public SimBridgeBase {
   void FillImuMsg(const sensor_msgs::Imu &msg, localization::CorrectedImu *imu_msg);
   void OnOdometry(const nav_msgs::Odometry &msg);
   void FillGpsMsg(const nav_msgs::Odometry &msg, localization::Gps *gps_msg);
+  void FillUnityCarControlMsg(car_unity_simulator::CarControl *control_msg);
 
  private:
 

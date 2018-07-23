@@ -84,5 +84,6 @@ DECLARE_string(guardian_topic);
 //for standart ros sensors messages
 DECLARE_string(imu_ros_topic);
 DECLARE_string(odom_ros_topic);
+DECLARE_string(unity_car_control_topic);
 
 #endif  // MODULES_COMMON_ADAPTERS_ADAPTER_GFLAGS_H_
