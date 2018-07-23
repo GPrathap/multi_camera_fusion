@@ -85,9 +85,7 @@ class NmeaParser : public Parser {
 
   std::string buffer_;
 
-  size_t header_length_ = 0;
-
-  size_t total_length_ = 0;
+  double last_heading_;
 
   ::apollo::drivers::gnss::Ins ins_;
   ::apollo::drivers::gnss::Heading heading_;
@@ -140,17 +138,27 @@ Parser::MessageType NmeaParser::PrepareMessage(MessagePtr* message_ptr) {
   AINFO << "Message type: " << elementVector[0];
   if (elementVector[0] == "GPGGA"){
     message_id = nmea::GPGGA;
-  } 
+  } else if (elementVector[0] == "PNVGBLS"){
+    message_id = nmea::HEADING;
+  }
 
   double latitude = 0.0;
   double longitude = 0.0;
   double altitude = 0.0;
+  double seconds = 0.0;
+
+  double baseline = 0.0;
+  double pitch = 0.0;
 
   AINFO << "Message ID: " << message_id;
 
   switch (message_id) {
     case nmea::GPGGA:
 
+        seconds = ros::Time::now().toSec();
+        ins_.set_measurement_time(seconds);
+        ins_.mutable_header()->set_timestamp_sec(ros::Time::now().toSec());
+        
         latitude            = getCoordinates(elementVector[2]);
         if (elementVector[3] == "S") latitude  = -latitude;
         longitude           = getCoordinates(elementVector[4]);
@@ -160,12 +168,12 @@ Parser::MessageType NmeaParser::PrepareMessage(MessagePtr* message_ptr) {
         ins_.mutable_position()->set_lon(latitude);
         ins_.mutable_position()->set_lat(longitude);
         ins_.mutable_position()->set_height(altitude);
-        // ins_.mutable_euler_angles()->set_x(pva->roll * DEG_TO_RAD);
-        // ins_.mutable_euler_angles()->set_y(-pva->pitch * DEG_TO_RAD);
-        // ins_.mutable_euler_angles()->set_z(azimuth_deg_to_yaw_rad(pva->azimuth));
-        // ins_.mutable_linear_velocity()->set_x(pva->east_velocity);
-        // ins_.mutable_linear_velocity()->set_y(pva->north_velocity);
-        // ins_.mutable_linear_velocity()->set_z(pva->up_velocity);
+        ins_.mutable_euler_angles()->set_x(0.0);
+        ins_.mutable_euler_angles()->set_y(0.0);
+        ins_.mutable_euler_angles()->set_z(last_heading_ * M_PI / 180.0);
+        ins_.mutable_linear_velocity()->set_x(0.0);
+        ins_.mutable_linear_velocity()->set_y(0.0);
+        ins_.mutable_linear_velocity()->set_z(0.0);
 
         AINFO << "Lat: " << latitude << " Long: " << longitude << " Alt: " << altitude;
 
@@ -178,10 +186,15 @@ Parser::MessageType NmeaParser::PrepareMessage(MessagePtr* message_ptr) {
     case nmea::HEADING:
 
         //получить данные из buffer_
+        baseline            = stringToDouble(elementVector[5]);
+        last_heading_            = stringToDouble(elementVector[6]);
+        pitch            = stringToDouble(elementVector[7]);
 
-        heading_.set_baseline_length(0.0);
-        heading_.set_heading(0.0);
-        heading_.set_pitch(0.0);
+        heading_.set_baseline_length(baseline);
+        heading_.set_heading(last_heading_);
+        heading_.set_pitch(pitch);
+
+        AINFO << "Baseline: " << baseline << " Heading: " << last_heading_ << " Pitch: " << pitch;
 
         *message_ptr = &heading_;
         return MessageType::HEADING;
