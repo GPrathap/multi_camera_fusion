@@ -302,6 +302,11 @@ class AdapterManager {
   REGISTER_ADAPTER(GnssHeading);
   REGISTER_ADAPTER(RtcmData);
 
+  //for standard ROS sensor messages
+  REGISTER_ADAPTER(ImuRos);
+  REGISTER_ADAPTER(OdometryRos);  
+  REGISTER_ADAPTER(UnityCarControl); 
+
   DECLARE_SINGLETON(AdapterManager);
 };
 

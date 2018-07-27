@@ -1,16 +1,16 @@
 data {
-    format: NOVATEL_BINARY
+    format: NMEA
     serial {
-        device: "/dev/novatel0"
+        device: "/dev/ttyUSB1"
         baud_rate: 115200
     }
 }
 
 rtk_from {
-    format: RTCM_V3
+    format: NMEA
     ntrip {
-        #address: "111.111.111.11"
-        #port: 0000
+        address: "192.168.0.19"
+        port: 52000
         #mount_point: "yourport"
         #user: "username"
         #password: "password"
@@ -20,10 +20,10 @@ rtk_from {
 }
 
 rtk_to {
-    format: NOVATEL_BINARY
+    format: NMEA
     serial {
-        device: "/dev/novatel1"
-        baud_rate: 115200
+        device: "/dev/ttyUSB0"
+        baud_rate: 230400
     }
 }
 

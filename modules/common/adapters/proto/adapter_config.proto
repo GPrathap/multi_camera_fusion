@@ -64,6 +64,9 @@ message AdapterConfig {
     GNSS_HEADING = 56;
     RTCM_DATA = 57;
     RACOBIT_RADAR = 59;  
+    IMU_ROS = 60;
+    ODOMETRY_ROS = 61;
+    UNITY_CAR_CONTROL = 62;
   }
   enum Mode {
     RECEIVE_ONLY = 0;

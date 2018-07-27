@@ -26,6 +26,7 @@ run perception "$@" --flagfile=/apollo/modules/perception/conf/perception_lowcos
 ```
 
 Each module contains several subnodes. You can define necessary subnodes into `dag_.config' file.
+The perception framework is a directed acyclic graph (DAG). There are three components in DAG configuration, including sub-nodes, edges and shared data. Each function is implemented as a sub-node in DAG. The sub-nodes that share data have an edge from producer to customer.
 Here is example of dag.config with two subnodes and link between them:
 ```
 subnode_config {
