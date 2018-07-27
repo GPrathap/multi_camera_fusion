@@ -37,7 +37,7 @@
                <param name="auto_exposure_upper_limit" value="2000000.0" />
                <param name="trigger_internal" value="$(arg trigger_internal)"/>
                <param name="trigger_fps" value="$(arg trigger_fps)" />
-      <remap from="/camera_short/image_raw0" to="$(arg traffic_short_topic_name)" />
+      <remap from="/camera_short/image_raw" to="$(arg traffic_short_topic_name)" />
       <remap from="/apollo/sensor/camera/traffic/camera_info" to="$(arg traffic_short_topic_name)/camera_info" />
     </node>
   </group>
