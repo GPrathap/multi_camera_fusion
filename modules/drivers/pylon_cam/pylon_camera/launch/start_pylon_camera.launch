@@ -1,14 +1,14 @@
 <launch>
-  <arg name="traffic_short_topic_name" default="/apollo/sensor/camera/traffic/image_short" />
-    <arg name="traffic_long_topic_name" default="/apollo/sensor/camera/traffic/image_long" />
+    <arg name="perception_front_left_side_topic_name" default="/apollo/sensor/camera/perception/image_front_left_side" />
+    <arg name="perception_front_right_side_topic_name" default="/apollo/sensor/camera/perception/image_front_right_side" />
     <arg name="perception_obstacle" default="/apollo/perception/obstacle/camera" />
     <arg name="frame_rate" default="20"/>
     <arg name="trigger_internal" default="0" />
     <arg name="trigger_fps" default="20" />
 
-    <group ns="camera_long">
+    <group ns="camera_front_left_side">
         <node pkg="nodelet" type="nodelet" name="camera_nodelet_manager" args="manager" respawn="true" />
-        <node pkg="nodelet" type="nodelet" name="sensor_camera_traffic_long" output="screen"
+        <node pkg="nodelet" type="nodelet" name="sensor_camera_front_left_side" output="screen"
               args="load pylon_camera/PylonCamNodelet camera_nodelet_manager" respawn="true" >
 
              <param name="camera_frame" value="pylon_camera" />
@@ -20,14 +20,14 @@
              <param name="trigger_internal" value="$(arg trigger_internal)"/>
              <param name="trigger_fps" value="$(arg trigger_fps)" />
 
-             <remap from="/camera_long/image_raw" to="$(arg traffic_long_topic_name)" />
-             <remap from="/apollo/sensor/camera/traffic/camera_info" to="$(arg traffic_long_topic_name)/camera_info" />
+             <remap from="/camera_front_left_side/image_raw" to="$(arg perception_front_left_side_topic_name)" />
+             <remap from="/apollo/sensor/camera/traffic/camera_info" to="$(arg perception_front_left_side_topic_name)/camera_info" />
         </node>
     </group>
 
-  <group ns="camera_short">
+  <group ns="camera_front_right_side">
     <node pkg="nodelet" type="nodelet" name="camera_nodelet_manager" args="manager" respawn="true" />
-    <node pkg="nodelet" type="nodelet" name="sensor_camera_traffic_short" output="screen"
+    <node pkg="nodelet" type="nodelet" name="sensor_camera_front_right_side" output="screen"
           args="load pylon_camera/PylonCamNodelet camera_nodelet_manager" respawn="true" >
                <param name="camera_frame" value="pylon_camera" />
                <param name="device_user_id" value="obstacle_right" />
@@ -37,8 +37,8 @@
                <param name="auto_exposure_upper_limit" value="2000000.0" />
                <param name="trigger_internal" value="$(arg trigger_internal)"/>
                <param name="trigger_fps" value="$(arg trigger_fps)" />
-      <remap from="/camera_short/image_raw" to="$(arg traffic_short_topic_name)" />
-      <remap from="/apollo/sensor/camera/traffic/camera_info" to="$(arg traffic_short_topic_name)/camera_info" />
+      <remap from="/camera_front_right_side/image_raw" to="$(arg perception_front_right_side_topic_name)" />
+      <remap from="/apollo/sensor/camera/traffic/camera_info" to="$(arg perception_front_right_side_topic_name)/camera_info" />
     </node>
   </group>
 
