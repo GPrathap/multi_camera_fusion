@@ -48,6 +48,10 @@ int main(int argc, char **argv) {
       n.subscribe(FLAGS_perception_obstacle_topic, 1000, OnPerception);
   ros::Subscriber sub_tl_image_short =
       n.subscribe(FLAGS_image_short_topic, 1000, OnImageShort);
+  ros::Subscriber sub_perception_left_front_debug =
+          n.subscribe(FLAGS_image_front_left_side_topic, 1000, OnPerception);
+  ros::Subscriber sub_perception_right_front_debug =
+          n.subscribe(FLAGS_image_front_right_side_topic, 1000, OnPerception);
 
   ros::spin();
   return 0;

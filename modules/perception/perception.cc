@@ -25,6 +25,8 @@
 #include "modules/perception/obstacle/onboard/async_fusion_subnode.h"
 #include "modules/perception/obstacle/onboard/camera_process_subnode.h"
 #include "modules/perception/obstacle/onboard/camera_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_process_subnode.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_shared_data.h"
 #include "modules/perception/obstacle/onboard/cipv_subnode.h"
 #include "modules/perception/obstacle/onboard/fusion_shared_data.h"
 #include "modules/perception/obstacle/onboard/fusion_subnode.h"
@@ -76,6 +78,10 @@ void Perception::RegistAllOnboardClass() {
   RegisterFactoryFusionSharedData();
   traffic_light::RegisterFactoryTLPreprocessingData();
 
+
+  RegisterFactoryCamera2ObjectData();
+  RegisterFactoryCamera2SharedData();
+
   /// register subnode
   RegisterFactoryLidar64ProcessSubnode();
   RegisterFactoryLidar16ProcessSubnode();
@@ -90,6 +96,8 @@ void Perception::RegistAllOnboardClass() {
   lowcostvisualizer::RegisterFactoryVisualizationSubnode();
   traffic_light::RegisterFactoryTLPreprocessorSubnode();
   traffic_light::RegisterFactoryTLProcSubnode();
+
+  RegisterFactoryCamera2ProcessSubnode();
 }
 
 Status Perception::Start() {
