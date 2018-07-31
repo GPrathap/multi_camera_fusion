@@ -106,6 +106,7 @@ cc_library(
         "camera_process_subnode.cc",
     ],
     hdrs = [
+        "common_camera_shared_data.h",
         "camera_process_subnode.h",
         "object_shared_data.h",
     ],
@@ -137,6 +138,7 @@ cc_library(
         "pylon_camera_process_subnode.cc",
     ],
     hdrs = [
+        "common_camera_shared_data.h",
         "object_shared_data.h",
         "pylon_camera_process_subnode.h",
     ],
