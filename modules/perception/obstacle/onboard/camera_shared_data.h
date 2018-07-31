@@ -23,7 +23,7 @@
 #include "modules/perception/obstacle/base/object.h"
 #include "modules/perception/obstacle/base/object_supplement.h"
 #include "modules/perception/onboard/common_shared_data.h"
-#include "modules/perception/onboard/common_camera_shared_data.h"
+#include "modules/perception/obstacle/onboard/common_camera_shared_data.h"
 
 namespace apollo {
 namespace perception {
