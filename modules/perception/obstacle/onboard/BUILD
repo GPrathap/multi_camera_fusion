@@ -244,6 +244,7 @@ cc_library(
         "pylon_camera_shared_data.cc"
     ],
     hdrs = [
+        "common_camera_shared_data.h",
         "camera_shared_data.h",
         "fusion_shared_data.h",
         "lane_shared_data.h",
