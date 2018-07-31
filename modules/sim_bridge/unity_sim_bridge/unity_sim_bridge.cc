@@ -40,7 +40,8 @@ Status UnitySimBridge::Start() {
 
   //add callbacks here
   AdapterManager::AddImuRosCallback(&UnitySimBridge::OnImu, this); 
-  AdapterManager::AddOdometryRosCallback(&UnitySimBridge::OnOdometry, this); 
+  AdapterManager::AddOdometryRosCallback(&UnitySimBridge::OnOdometry, this);
+  AdapterManager::AddControlCommandCallback(&UnitySimBridge::OnControl, this);
   return Status::OK();
 }
 
@@ -87,14 +88,14 @@ void UnitySimBridge::OnOdometry(const nav_msgs::Odometry &msg)
   localization::Gps gps_msg;
 
   FillGpsMsg(msg, &gps_msg);
-  // publish imu messages
+  // publish gps messages
   AdapterManager::PublishGps(gps_msg);
   AINFO << "[OnGps]: Gps message publish success!";
 
-  car_unity_simulator::CarControl control_msg;
+  /*car_unity_simulator::CarControl control_msg;
   FillUnityCarControlMsg(&control_msg);
   AdapterManager::PublishUnityCarControl(control_msg);
-  AINFO << "[OnGps]: Control message publish success!";
+  AINFO << "[OnGps]: Control message publish success!";*/
 }
 
 void UnitySimBridge::FillGpsMsg(const nav_msgs::Odometry &msg, localization::Gps *gps_msg)
@@ -119,10 +120,26 @@ void UnitySimBridge::FillGpsMsg(const nav_msgs::Odometry &msg, localization::Gps
 
 }
 
-void UnitySimBridge::FillUnityCarControlMsg(car_unity_simulator::CarControl *control_msg)
+void UnitySimBridge::FillUnityCarControlMsg(const control::ControlCommand &control_cmd, car_unity_simulator::CarControl *control_msg)
 {
-  control_msg->throttle = 0.1;
+
+  control_msg->throttle = control_cmd.throttle();
+  control_msg->steering = control_cmd.steering_target();
+  control_msg->brake = control_cmd.brake();
+  AINFO << "[CONTROL]: " << control_msg->throttle;
+
 }
+
+void UnitySimBridge::OnControl(const control::ControlCommand &msg)
+{
+  car_unity_simulator::CarControl control_msg;
+
+  FillUnityCarControlMsg(msg, &control_msg);
+  AdapterManager::PublishUnityCarControl(control_msg);
+  AINFO << "[OnControl]: Control message publish success!";
+}
+
+
 
 }  // namespace sim_bridge
 }  // namespace apollo
