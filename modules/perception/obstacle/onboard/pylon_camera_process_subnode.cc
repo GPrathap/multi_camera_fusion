@@ -32,9 +32,9 @@ namespace apollo {
 
           // Shared Data
           cam_obj_data_ = static_cast<Camera2ObjectData *>(
-                  shared_data_manager_->GetSharedData("Camera1ObjectData"));
+                  shared_data_manager_->GetSharedData("Camera2ObjectData"));
           cam_shared_data_ = static_cast<Camera2SharedData *>(
-                  shared_data_manager_->GetSharedData("Camera1SharedData"));
+                  shared_data_manager_->GetSharedData("Camera2SharedData"));
 
           InitCalibration();
 
