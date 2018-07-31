@@ -156,7 +156,7 @@ namespace apollo {
           out_objs->timestamp = timestamp;
           VisualObjToSensorObj(objects, &out_objs);
 
-          SharedDataPtr<CameraItem> camera_item_ptr(new CameraItem);
+          SharedDataPtr<ImageInfo> camera_item_ptr(new ImageInfo);
           camera_item_ptr->image_src_mat = img.clone();
           mask.copyTo(out_objs->camera_frame_supplement->lane_map);
           PublishDataAndEvent(timestamp, out_objs, camera_item_ptr);
@@ -270,7 +270,7 @@ namespace apollo {
 
         void Camera2ProcessSubnode::PublishDataAndEvent(
                 const double timestamp, const SharedDataPtr<SensorObjects> &sensor_objects,
-                const SharedDataPtr<CameraItem> &camera_item) {
+                const SharedDataPtr<ImageInfo> &camera_item) {
           CommonSharedDataKey key(timestamp, device_id_);
           cam_obj_data_->Add(key, sensor_objects);
           cam_shared_data_->Add(key, camera_item);

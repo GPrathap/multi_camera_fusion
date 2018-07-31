@@ -27,13 +27,13 @@
 namespace apollo {
     namespace perception {
 
-        struct CameraItem {
+        struct ImageInfo {
             cv::Mat image_src_mat;
             SeqId seq_num = 0u;
             double timestamp = 0.0;
         };
 
-        class Camera2SharedData : public CommonSharedData<CameraItem> {
+        class Camera2SharedData : public CommonSharedData<ImageInfo> {
         public:
             Camera2SharedData() = default;
             virtual ~Camera2SharedData() = default;
