@@ -88,7 +88,7 @@ namespace apollo {
 
             void PublishDataAndEvent(const double timestamp,
                                      const SharedDataPtr<SensorObjects>& sensor_objects,
-                                     const SharedDataPtr<ImageInfo>& camera_item);
+                                     const SharedDataPtr<CameraItem>& camera_item);
 
             void PublishPerceptionPbObj(const SharedDataPtr<SensorObjects>&
             sensor_objects);

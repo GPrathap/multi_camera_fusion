@@ -1,3 +1,6 @@
+//
+// Created by root on 7/31/18.
+//
 /******************************************************************************
  * Copyright 2017 The Apollo Authors. All Rights Reserved.
  *
@@ -14,36 +17,20 @@
  * limitations under the License.
  *****************************************************************************/
 
-#ifndef MODULES_PERCEPTION_OBSTACLE_ONBOARD_CAMERA1_SHARED_DATA_H_
-#define MODULES_PERCEPTION_OBSTACLE_ONBOARD_CAMERA1_SHARED_DATA_H_
+#ifndef APOLLO_COMMOM_CAMERA_SHARED_DATA_H
+#define APOLLO_COMMOM_CAMERA_SHARED_DATA_H
 
-#include <boost/circular_buffer.hpp>
 #include <opencv2/opencv.hpp>
 #include <string>
 #include "modules/perception/obstacle/base/object.h"
-#include "modules/perception/obstacle/base/object_supplement.h"
-#include "modules/perception/onboard/common_shared_data.h"
-#include "modules/perception/onboard/common_camera_shared_data.h"
 
 namespace apollo {
     namespace perception {
-
-        class Camera2SharedData : public CommonSharedData<CameraItem> {
-        public:
-            Camera2SharedData() = default;
-            virtual ~Camera2SharedData() = default;
-
-            std::string name() const override {
-                return "Camera2SharedData";
-            }
-
-        private:
-            DISALLOW_COPY_AND_ASSIGN(Camera2SharedData);
+        struct CameraItem {
+            cv::Mat image_src_mat;
+            SeqId seq_num = 0u;
+            double timestamp = 0.0;
         };
-
-        REGISTER_SHAREDDATA(Camera2SharedData);
-
-    }  // namespace perception
-}  // namespace apollo
-
-#endif  // MODULES_PERCEPTION_OBSTACLE_ONBOARD_OBJECT_SHARED_DATA_H
+    }
+}
+#endif //APOLLO_COMMOM_CAMERA_SHARED_DATA_H
