@@ -37,6 +37,8 @@ namespace trackvisualizer {
 
 using apollo::common::ErrorCode;
 using apollo::common::Status;
+using  apollo::perception::lowcostvisualizer::FrameContent;
+
 
 bool TrackVisualizationSubnode::InitInternal() {
   CHECK(shared_data_manager_ != NULL);

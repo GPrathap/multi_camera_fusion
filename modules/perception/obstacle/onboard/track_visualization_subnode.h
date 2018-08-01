@@ -55,14 +55,14 @@ class TrackVisualizationSubnode : public Subnode {
 
   void SetFrameContent(const Event& event, const std::string& device_id,
                        const std::string& data_key, const double timestamp,
-                       FrameContent* content);
-  void SetFusionContent(const std::string& data_key, FrameContent* content,
+                       apollo::perception::lowcostvisualizer::FrameContent* content);
+  void SetFusionContent(const std::string& data_key,  apollo::perception::lowcostvisualizer::FrameContent* content,
                         double timestamp);
-  void SetCameraContent(const std::string& data_key, FrameContent* content,
+  void SetCameraContent(const std::string& data_key,  apollo::perception::lowcostvisualizer::FrameContent* content,
                         double timestamp);
-  void SetRadarContent(const std::string& data_key, FrameContent* content,
+  void SetRadarContent(const std::string& data_key,  apollo::perception::lowcostvisualizer::FrameContent* content,
                        double timestamp);
-  void SetLaneContent(const std::string& data_key, FrameContent* content,
+  void SetLaneContent(const std::string& data_key,  apollo::perception::lowcostvisualizer::FrameContent* content,
                       double timestamp);
 
   RadarObjectData* radar_object_data_ = nullptr;
@@ -73,7 +73,7 @@ class TrackVisualizationSubnode : public Subnode {
   FusionSharedData* fusion_data_ = nullptr;
   std::unique_ptr<BaseVisualizer> frame_visualizer_;
   MotionService* motion_service_ = nullptr;
-  FrameContent content_;
+  apollo::perception::lowcostvisualizer::FrameContent content_;
 
   EventID vis_driven_event_id_;
   EventID radar_event_id_;
