@@ -94,6 +94,7 @@ void Perception::RegistAllOnboardClass() {
   RegisterFactoryMotionService();
   RegisterFactoryUltrasonicObstacleSubnode();
   lowcostvisualizer::RegisterFactoryVisualizationSubnode();
+  trackvisualizer::RegisterFactoryTrackVisualizationSubnode();
   traffic_light::RegisterFactoryTLPreprocessorSubnode();
   traffic_light::RegisterFactoryTLProcSubnode();
 

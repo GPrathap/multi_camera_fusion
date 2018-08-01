@@ -306,6 +306,28 @@ cc_library(
 )
 
 cc_library(
+    name = "track_visualization_subnode",
+    srcs = [
+        "track_visualization_subnode.cc",
+    ],
+    hdrs = [
+        "object_shared_data.h",
+        "track_visualization_subnode.h",
+    ],
+    deps = [
+        ":perception_obstacle_shared_data",
+        "//modules/common:log",
+        "//modules/perception/lib/config_manager",
+        "//modules/perception/obstacle/base",
+        "//modules/perception/obstacle/camera/common:util",
+        "//modules/perception/obstacle/camera/motion",
+        "//modules/perception/obstacle/camera/visualizer",
+        "//modules/perception/obstacle/onboard:motion_subnode",
+        "//modules/perception/onboard",
+    ],
+)
+
+cc_library(
     name = "cipv_subnode",
     srcs = [
         "cipv_subnode.cc",
