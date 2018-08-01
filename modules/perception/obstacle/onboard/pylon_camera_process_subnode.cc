@@ -60,7 +60,7 @@ namespace apollo {
         }
 
         bool Camera2ProcessSubnode::InitModules() {
-          //RegisterFactoryYoloCameraDetector();
+          RegisterFactoryYoloCameraDetector();
           RegisterFactoryGeometryCameraConverter();
           RegisterFactoryCascadedCameraTracker();
           RegisterFactoryFlatCameraTransformer();

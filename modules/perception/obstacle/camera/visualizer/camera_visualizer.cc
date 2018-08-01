@@ -39,19 +39,27 @@ const int kMaxCachedImageNum = 10;
 
 void OnPerception(const PerceptionObstacles &);
 void OnImageShort(sensor_msgs::ImagePtr);
+void OnImageFrontRightSide(sensor_msgs::ImagePtr);
+void OnImageFrontLeftSide(sensor_msgs::ImagePtr);
 
 int main(int argc, char **argv) {
   ros::init(argc, argv, "camera_visualizer");
   ros::NodeHandle n;
 
-  ros::Subscriber sub_perception_debug =
-      n.subscribe(FLAGS_perception_obstacle_topic, 1000, OnPerception);
-  ros::Subscriber sub_tl_image_short =
+  /*ros::Subscriber sub_perception_debug =
+      n.subscribe(FLAGS_perception_obstacle_topic, 1000, OnPerception);*/
+  /*ros::Subscriber sub_tl_image_short =
       n.subscribe(FLAGS_image_short_topic, 1000, OnImageShort);
   ros::Subscriber sub_perception_left_front_debug =
           n.subscribe(FLAGS_image_front_left_side_topic, 1000, OnPerception);
   ros::Subscriber sub_perception_right_front_debug =
-          n.subscribe(FLAGS_image_front_right_side_topic, 1000, OnPerception);
+          n.subscribe(FLAGS_image_front_right_side_topic, 1000, OnPerception);*/
+
+  ros::Subscriber sub_perception_left_front_debug =
+          n.subscribe(FLAGS_image_front_left_side_topic, 1000, OnImageFrontLeftSide);
+
+  ros::Subscriber sub_perception_right_front_debug =
+          n.subscribe(FLAGS_image_front_right_side_topic, 1000, OnImageFrontRightSide);
 
   ros::spin();
   return 0;
@@ -86,5 +94,13 @@ void OnImage(CameraId camera_id, sensor_msgs::ImagePtr msg) {
 }
 
 void OnImageShort(sensor_msgs::ImagePtr msg) {
+  OnImage(CameraId::SHORT_FOCUS, msg);
+}
+
+void OnImageFrontRightSide(sensor_msgs::ImagePtr msg){
+  OnImage(CameraId::SHORT_FOCUS, msg);
+}
+
+void OnImageFrontLeftSide(sensor_msgs::ImagePtr msg){
   OnImage(CameraId::SHORT_FOCUS, msg);
 }
