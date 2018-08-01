@@ -40,8 +40,11 @@ namespace apollo {
 
           InitModules();
 
-          AdapterManager::AddImageFrontCallback(&Camera2ProcessSubnode::ImgCallback,
+//          AdapterManager::AddImageFrontCallback(&Camera2ProcessSubnode::ImgCallback,
+//                                                this);
+          AdapterManager::AddImageFrontRightSideCallback(&Camera2ProcessSubnode::ImgCallback,
                                                 this);
+
           if (pb_obj_) {
             AdapterManager::AddChassisCallback(&Camera2ProcessSubnode::ChassisCallback,
                                                this);
