@@ -51,7 +51,7 @@ bool TrackVisualizationSubnode::InitInternal() {
 
   // init camera object data
   if (camera_event_id_ != -1 || fusion_event_id_ != -1) {
-    camera_object_data_ = dynamic_cast<CameraObjectData*>(
+    camera_object_data_ = dynamic_cast<Camera2ObjectData*>(
         shared_data_manager_->GetSharedData("Camera2ObjectData"));
     if (camera_object_data_ == nullptr) {
       AERROR << "Failed to get Camera2ObjectData.";
@@ -60,7 +60,7 @@ bool TrackVisualizationSubnode::InitInternal() {
     AINFO << "Init shared datas successfully, data: "
           << camera_object_data_->name();
 
-    camera_shared_data_ = dynamic_cast<CameraSharedData*>(
+    camera_shared_data_ = dynamic_cast<Camera2SharedData*>(
         shared_data_manager_->GetSharedData("Camera2SharedData"));
     if (camera_shared_data_ == nullptr) {
       AERROR << "Failed to get Camera2SharedData.";
