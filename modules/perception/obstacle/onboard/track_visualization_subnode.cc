@@ -127,9 +127,9 @@ bool TrackVisualizationSubnode::InitInternal() {
   }
 
   // init frame_visualizer
-  RegisterFactoryGLFusionVisualizer();
+  apollo::perception::lowcostvisualizer::RegisterFactoryGLFusionVisualizer();
   frame_visualizer_.reset(
-      BaseVisualizerRegisterer::GetInstanceByName(FLAGS_frame_visualizer));
+          apollo::perception::lowcostvisualizer::BaseVisualizerRegisterer::GetInstanceByName(FLAGS_frame_visualizer));
   if (!frame_visualizer_) {
     AERROR << "Failed to get instance: " << FLAGS_frame_visualizer;
     return false;
