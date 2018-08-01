@@ -71,7 +71,7 @@ class TrackVisualizationSubnode : public Subnode {
   CameraSharedData* camera_shared_data_ = nullptr;
   LaneSharedData* lane_shared_data_ = nullptr;
   FusionSharedData* fusion_data_ = nullptr;
-  std::unique_ptr<BaseVisualizer> frame_visualizer_;
+  std::unique_ptr<apollo::perception::lowcostvisualizer::BaseVisualizer> frame_visualizer_;
   MotionService* motion_service_ = nullptr;
   apollo::perception::lowcostvisualizer::FrameContent content_;
 

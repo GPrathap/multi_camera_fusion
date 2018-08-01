@@ -37,7 +37,8 @@ namespace trackvisualizer {
 
 using apollo::common::ErrorCode;
 using apollo::common::Status;
-using  apollo::perception::lowcostvisualizer::FrameContent;
+using apollo::perception::lowcostvisualizer::FrameContent;
+using apollo::perception::lowcostvisualizer::BaseVisualizer;
 
 
 bool TrackVisualizationSubnode::InitInternal() {
