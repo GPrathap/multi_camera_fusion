@@ -44,6 +44,8 @@ namespace apollo {
 //                                                this);
           AdapterManager::AddImageFrontRightSideCallback(&Camera2ProcessSubnode::ImgCallback,
                                                 this);
+          AdapterManager::AddImageFrontLeftSideCallback(&Camera2ProcessSubnode::ImgCallback,
+                                                         this);
 
           if (pb_obj_) {
             AdapterManager::AddChassisCallback(&Camera2ProcessSubnode::ChassisCallback,
