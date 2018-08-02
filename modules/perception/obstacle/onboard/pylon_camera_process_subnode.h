@@ -99,6 +99,7 @@ namespace apollo {
 
             // General
             std::string device_id_ = "camera";
+            std::string camera_orientation = "front";
             SeqId seq_num_ = 0;
             double timestamp_ns_ = 0.0;
 
