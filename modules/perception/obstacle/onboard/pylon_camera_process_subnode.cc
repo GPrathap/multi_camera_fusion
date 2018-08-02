@@ -44,8 +44,8 @@ namespace apollo {
 //                                                this);
           AdapterManager::AddImageFrontRightSideCallback(&Camera2ProcessSubnode::ImgCallback,
                                                 this);
-          AdapterManager::AddImageFrontLeftSideCallback(&Camera2ProcessSubnode::ImgCallback,
-                                                         this);
+//          AdapterManager::AddImageFrontLeftSideCallback(&Camera2ProcessSubnode::ImgCallback,
+//                                                         this);
 
           if (pb_obj_) {
             AdapterManager::AddChassisCallback(&Camera2ProcessSubnode::ChassisCallback,
@@ -114,7 +114,7 @@ namespace apollo {
           timestamp_ns_ = curr_timestamp;
           ADEBUG << "CameraProcessSubnode Process: "
                  << " frame: " << ++seq_num_;
-          PERF_FUNCTION("CameraProcessSubnode");
+          PERF_FUNCTION("Camera2ProcessSubnode");
           PERF_BLOCK_START();
 
           cv::Mat img;
@@ -165,7 +165,7 @@ namespace apollo {
           camera_item_ptr->image_src_mat = img.clone();
           mask.copyTo(out_objs->camera_frame_supplement->lane_map);
           PublishDataAndEvent(timestamp, out_objs, camera_item_ptr);
-          PERF_BLOCK_END("CameraProcessSubnode publish in DAG");
+          PERF_BLOCK_END("Camera2ProcessSubnode publish in DAG");
 
           if (pb_obj_) PublishPerceptionPbObj(out_objs);
           if (pb_ln_msk_) PublishPerceptionPbLnMsk(mask, message);

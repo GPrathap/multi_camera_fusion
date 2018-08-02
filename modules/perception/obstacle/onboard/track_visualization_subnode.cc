@@ -391,7 +391,7 @@ apollo::common::Status TrackVisualizationSubnode::ProcEvents() {
         return Status(ErrorCode::PERCEPTION_ERROR, "Failed to proc events.");
       }
       AINFO << "event: " << events[j].event_id << " device_id:" << device_id
-            << " timestamp: ";
+            << " timestamp: " << timestamp << "data key" << data_key;
       AINFO << std::fixed << std::setprecision(64) << timestamp;
 
       SetFrameContent(events[j], device_id, data_key, timestamp, &content_);
