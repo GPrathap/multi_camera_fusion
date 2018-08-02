@@ -53,6 +53,8 @@
 #include "modules/perception/obstacle/camera/tracker/cascaded_camera_tracker.h"
 #include "modules/perception/obstacle/camera/transformer/flat_camera_transformer.h"
 #include "modules/perception/obstacle/onboard/pylon_camera_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_right_side_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_left_side_shared_data.h"
 #include "modules/perception/obstacle/onboard/object_shared_data.h"
 #include "modules/perception/onboard/subnode.h"
 #include "modules/perception/onboard/subnode_helper.h"
@@ -103,6 +105,10 @@ namespace apollo {
             // Shared Data
             PylonCameraObjectData* cam_obj_data_;
             PylonCameraSharedData* cam_shared_data_;
+            PylonCameraRightSideObjectData* camera_object_right_side_data_ = nullptr;
+            PylonCameraRightSideSharedData* camera_shared_right_side_data_ = nullptr;
+            PylonCameraLeftSideObjectData* camera_object_left_side_data_ = nullptr;
+            PylonCameraLeftSideSharedData* camera_shared_left_side_data_ = nullptr;
 
             // Calibration
             int32_t image_height_ = 1080;

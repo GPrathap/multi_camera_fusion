@@ -57,32 +57,45 @@ bool TrackVisualizationSubnode::InitInternal() {
 
   // init camera object data
   if (camera_event_id_ != -1 || fusion_event_id_ != -1) {
-
+    camera_orientation = reserve_field_map["camera_orientation"];
     if( reserve_field_map["camera_orientation"] == "right_side"){
-      camera_object_data_ = dynamic_cast<PylonCameraObjectData*>(
+      camera_object_right_side_data_ = dynamic_cast<PylonCameraRightSideObjectData*>(
               shared_data_manager_->GetSharedData("PylonCameraRightSideObjectData"));
-      camera_shared_data_ = dynamic_cast<PylonCameraSharedData*>(
+      camera_shared_right_side_data_ = dynamic_cast<PylonCameraRightSideSharedData*>(
               shared_data_manager_->GetSharedData("PylonCameraRightSideSharedData"));
+      if (camera_object_right_side_data_ == nullptr) {
+        AERROR << "Failed to get  PylonCameraRightSideObjectData.";
+        return false;
+      }
+      AINFO << "Init shared datas successfully, data: "
+            << camera_object_right_side_data_->name();
+
+      if (camera_shared_right_side_data_ == nullptr) {
+        AERROR << "Failed to get  PylonCameraSharedData.";
+        return false;
+      }
+      AINFO << "Init shared datas successfully, data: "
+            << camera_shared_right_side_data_->name();
     }else if( reserve_field_map["camera_orientation"] == "left_side"){
-      camera_object_data_ = dynamic_cast<PylonCameraObjectData*>(
+      camera_object_left_side_data_ = dynamic_cast<PylonCameraLeftSideObjectData*>(
               shared_data_manager_->GetSharedData("PylonCameraLeftSideObjectData"));
-      camera_shared_data_ = dynamic_cast<PylonCameraSharedData*>(
+      camera_shared_left_side_data_ = dynamic_cast<PylonCameraLeftSideSharedData*>(
               shared_data_manager_->GetSharedData("PylonCameraLeftSideSharedData"));
+      if (camera_object_left_side_data_ == nullptr) {
+        AERROR << "Failed to get  PylonCameraObjectData.";
+        return false;
+      }
+      AINFO << "Init shared datas successfully, data: "
+            << camera_object_left_side_data_->name();
+
+      if (camera_shared_left_side_data_ == nullptr) {
+        AERROR << "Failed to get  PylonCameraLeftSideSharedData.";
+        return false;
+      }
+      AINFO << "Init shared datas successfully, data: "
+            << camera_shared_left_side_data_->name();
     }
 
-    if (camera_object_data_ == nullptr) {
-      AERROR << "Failed to get  PylonCameraObjectData.";
-      return false;
-    }
-    AINFO << "Init shared datas successfully, data: "
-          << camera_object_data_->name();
-
-    if (camera_shared_data_ == nullptr) {
-      AERROR << "Failed to get  PylonCameraSharedData.";
-      return false;
-    }
-    AINFO << "Init shared datas successfully, data: "
-          << camera_shared_data_->name();
   }
 
   // init cipv object data
@@ -260,18 +273,36 @@ void TrackVisualizationSubnode::SetCameraContent(const std::string& data_key,
                                             FrameContent* content,
                                             double timestamp) {
   std::shared_ptr<CameraItem> camera_item;
-  if (!camera_shared_data_->Get(data_key, &camera_item) ||
-      camera_item == nullptr) {
-    AERROR << "Failed to get shared data: " << camera_shared_data_->name();
-    return;
+  if(camera_orientation == "left_side"){
+    if (!camera_shared_left_side_data_->Get(data_key, &camera_item) ||
+        camera_item == nullptr) {
+      AERROR << "Failed to get shared data: " << camera_shared_left_side_data_->name();
+      return;
+    }
+  }else if(camera_orientation == "right_side"){
+    if (!camera_shared_right_side_data_->Get(data_key, &camera_item) ||
+        camera_item == nullptr) {
+      AERROR << "Failed to get shared data: " << camera_shared_right_side_data_->name();
+      return;
+    }
   }
+
   cv::Mat image = camera_item->image_src_mat.clone();
   content->set_image_content(timestamp, image);
 
   std::shared_ptr<SensorObjects> objs;
-  if (!camera_object_data_->Get(data_key, &objs) || objs == nullptr) {
-    AERROR << "Failed to get shared data: " << camera_object_data_->name();
-    return;
+  if(camera_orientation == "left_side"){
+    if (!camera_object_left_side_data_->Get(data_key, &objs) ||
+            objs == nullptr) {
+      AERROR << "Failed to get shared data: " << camera_object_left_side_data_->name();
+      return;
+    }
+  }else if(camera_orientation == "right_side"){
+    if (!camera_object_right_side_data_->Get(data_key, &objs) ||
+            objs == nullptr) {
+      AERROR << "Failed to get shared data: " << camera_object_right_side_data_->name();
+      return;
+    }
   }
   content->set_camera_content(timestamp, objs->sensor2world_pose,
                               objs->sensor2world_pose_static, objs->objects,
@@ -347,11 +378,20 @@ void TrackVisualizationSubnode::SetFrameContent(const Event& event,
     if (FLAGS_show_camera_objects || FLAGS_show_camera_objects2d ||
         FLAGS_show_camera_parsing) {
       std::shared_ptr<CameraItem> camera_item;
-      if (!camera_shared_data_->Get(data_key, &camera_item) ||
-          camera_item == nullptr) {
-        AERROR << "Failed to get shared data: " << camera_shared_data_->name();
-        return;
+      if(camera_orientation == "left_side"){
+        if (!camera_shared_left_side_data_->Get(data_key, &camera_item) ||
+            camera_item == nullptr) {
+          AERROR << "Failed to get shared data: " << camera_shared_left_side_data_->name();
+          return;
+        }
+      }else if(camera_orientation == "right_side"){
+        if (!camera_shared_right_side_data_->Get(data_key, &camera_item) ||
+            camera_item == nullptr) {
+          AERROR << "Failed to get shared data: " << camera_shared_right_side_data_->name();
+          return;
+        }
       }
+
       cv::Mat clone_image = camera_item->image_src_mat;
       cv::Mat image = camera_item->image_src_mat.clone();
       content->set_image_content(timestamp, image);

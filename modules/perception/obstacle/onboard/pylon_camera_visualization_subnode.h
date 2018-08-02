@@ -24,6 +24,8 @@
 #include "modules/perception/obstacle/camera/visualizer/frame_content.h"
 #include "modules/perception/obstacle/camera/visualizer/gl_fusion_visualizer.h"
 #include "modules/perception/obstacle/onboard/pylon_camera_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_right_side_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_left_side_shared_data.h"
 #include "modules/perception/obstacle/onboard/fusion_shared_data.h"
 #include "modules/perception/obstacle/onboard/lane_shared_data.h"
 #include "modules/perception/obstacle/onboard/motion_service.h"
@@ -65,10 +67,15 @@ class TrackVisualizationSubnode : public Subnode {
   void SetLaneContent(const std::string& data_key,  apollo::perception::lowcostvisualizer::FrameContent* content,
                       double timestamp);
 
+
   RadarObjectData* radar_object_data_ = nullptr;
-  PylonCameraObjectData* camera_object_data_ = nullptr;
   CIPVObjectData* cipv_object_data_ = nullptr;
   PylonCameraSharedData* camera_shared_data_ = nullptr;
+  PylonCameraObjectData* camera_object_data_ = nullptr;
+  PylonCameraRightSideObjectData* camera_object_right_side_data_ = nullptr;
+  PylonCameraRightSideSharedData* camera_shared_right_side_data_ = nullptr;
+  PylonCameraLeftSideObjectData* camera_object_left_side_data_ = nullptr;
+  PylonCameraLeftSideSharedData* camera_shared_left_side_data_ = nullptr;
   LaneSharedData* lane_shared_data_ = nullptr;
   FusionSharedData* fusion_data_ = nullptr;
   std::unique_ptr<apollo::perception::lowcostvisualizer::BaseVisualizer> frame_visualizer_;
@@ -87,6 +94,7 @@ class TrackVisualizationSubnode : public Subnode {
   Eigen::Matrix4d camera_to_car_pose_;
 
   bool init_ = false;
+  std::string camera_orientation = "front";
   DISALLOW_COPY_AND_ASSIGN(TrackVisualizationSubnode);
 };
 

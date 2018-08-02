@@ -30,22 +30,22 @@ namespace apollo {
           if (fields.count("pb_obj") && stoi(fields["pb_obj"])) pb_obj_ = true;
           if (fields.count("pb_ln_msk") && stoi(fields["pb_ln_msk"])) pb_ln_msk_ = true;
 
-          if (fields.count("camera_orientation") && fields["camera_orientation"]=="left_side"){
+          if (fields.count("camera_orientation") && fields["camera_orientation"]=="right_side"){
             AdapterManager::AddImageFrontRightSideCallback(&PylonCameraProcessSubnode::ImgCallback,
                                                            this);
             // Shared Data
-            cam_obj_data_ = static_cast<PylonCameraObjectData *>(
+            camera_object_right_side_data_ = static_cast<PylonCameraRightSideObjectData *>(
                     shared_data_manager_->GetSharedData("PylonCameraRightSideObjectData"));
-            cam_shared_data_ = static_cast<PylonCameraSharedData *>(
+            camera_shared_right_side_data_ = static_cast<PylonCameraRightSideSharedData *>(
                     shared_data_manager_->GetSharedData("PylonCameraRightSideSharedData"));
 
-          }else if (fields.count("camera_orientation") && fields["camera_orientation"]=="right_side"){
+          }else if (fields.count("camera_orientation") && fields["camera_orientation"]=="left_side"){
             AdapterManager::AddImageFrontLeftSideCallback(&PylonCameraProcessSubnode::ImgCallback,
                                                           this);
             // Shared Data
-            cam_obj_data_ = static_cast<PylonCameraObjectData *>(
+            camera_object_left_side_data_ = static_cast<PylonCameraLeftSideObjectData *>(
                     shared_data_manager_->GetSharedData("PylonCameraLeftSideObjectData"));
-            cam_shared_data_ = static_cast<PylonCameraSharedData *>(
+            camera_shared_left_side_data_ = static_cast<PylonCameraLeftSideSharedData *>(
                     shared_data_manager_->GetSharedData("PylonCameraLeftSideSharedData"));
           }
 
@@ -283,8 +283,15 @@ namespace apollo {
                 const double timestamp, const SharedDataPtr<SensorObjects> &sensor_objects,
                 const SharedDataPtr<CameraItem> &camera_item) {
           CommonSharedDataKey key(timestamp, device_id_);
-          cam_obj_data_->Add(key, sensor_objects);
-          cam_shared_data_->Add(key, camera_item);
+
+
+          if(camera_orientation == "left_side"){
+            camera_object_left_side_data_->Add(key, sensor_objects);
+            camera_shared_left_side_data_->Add(key, camera_item);
+          }else if(camera_orientation == "right_side"){
+            camera_object_right_side_data_->Add(key, sensor_objects);
+            camera_shared_right_side_data_->Add(key, camera_item);
+          }
 
           for (size_t idx = 0; idx < pub_meta_events_.size(); ++idx) {
             const EventMeta &event_meta = pub_meta_events_[idx];
