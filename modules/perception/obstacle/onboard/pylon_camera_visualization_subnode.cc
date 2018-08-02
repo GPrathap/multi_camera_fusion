@@ -57,13 +57,13 @@ bool TrackVisualizationSubnode::InitInternal() {
 
   // init camera object data
   if (camera_event_id_ != -1 || fusion_event_id_ != -1) {
-    std::string camera_orientation = reserve_field_map.find("camera_orientation");
-    if( camera_orientation == "right_side"){
+
+    if( reserve_field_map["camera_orientation"] == "right_side"){
       camera_object_data_ = dynamic_cast<PylonCameraObjectData*>(
               shared_data_manager_->GetSharedData("PylonCameraRightSideObjectData"));
       camera_shared_data_ = dynamic_cast<PylonCameraSharedData*>(
               shared_data_manager_->GetSharedData("PylonCameraRightSideSharedData"));
-    }else if( camera_orientation == "left_side"){
+    }else if( reserve_field_map["camera_orientation"] == "left_side"){
       camera_object_data_ = dynamic_cast<PylonCameraObjectData*>(
               shared_data_manager_->GetSharedData("PylonCameraLeftSideObjectData"));
       camera_shared_data_ = dynamic_cast<PylonCameraSharedData*>(
