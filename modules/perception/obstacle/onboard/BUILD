@@ -133,7 +133,7 @@ cc_library(
 
 
 cc_library(
-    name = "camera2_subnode",
+    name = "pylon_camera_subnode",
     srcs = [
         "pylon_camera_process_subnode.cc",
     ],
@@ -306,13 +306,13 @@ cc_library(
 )
 
 cc_library(
-    name = "track_visualization_subnode",
+    name = "pylon_camera_visualization_subnode",
     srcs = [
-        "track_visualization_subnode.cc",
+        "pylon_camera_visualization_subnode.cc",
     ],
     hdrs = [
         "object_shared_data.h",
-        "track_visualization_subnode.h",
+        "pylon_camera_visualization_subnode.h",
     ],
     deps = [
         ":perception_obstacle_shared_data",
