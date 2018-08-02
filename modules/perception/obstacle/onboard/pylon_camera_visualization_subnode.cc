@@ -56,9 +56,12 @@ bool TrackVisualizationSubnode::InitInternal() {
 
 
   // init camera object data
+  AINFO << "init camera object----> ";
   if (camera_event_id_ != -1 || fusion_event_id_ != -1) {
     camera_orientation = reserve_field_map["camera_orientation"];
+    AINFO << "init camera object----> " << camera_orientation;
     if( reserve_field_map["camera_orientation"] == "right_side"){
+      AINFO << "init camera object right side ----> " << camera_orientation;
       camera_object_right_side_data_ = dynamic_cast<PylonCameraRightSideObjectData*>(
               shared_data_manager_->GetSharedData("PylonCameraRightSideObjectData"));
       camera_shared_right_side_data_ = dynamic_cast<PylonCameraRightSideSharedData*>(
@@ -77,6 +80,7 @@ bool TrackVisualizationSubnode::InitInternal() {
       AINFO << "Init shared datas successfully, data: "
             << camera_shared_right_side_data_->name();
     }else if( reserve_field_map["camera_orientation"] == "left_side"){
+      AINFO << "init camera object left side ----> " << camera_orientation;
       camera_object_left_side_data_ = dynamic_cast<PylonCameraLeftSideObjectData*>(
               shared_data_manager_->GetSharedData("PylonCameraLeftSideObjectData"));
       camera_shared_left_side_data_ = dynamic_cast<PylonCameraLeftSideSharedData*>(
@@ -94,6 +98,8 @@ bool TrackVisualizationSubnode::InitInternal() {
       }
       AINFO << "Init shared datas successfully, data: "
             << camera_shared_left_side_data_->name();
+    }else{
+      AINFO << "Camera shared data not initialized" << camera_orientation;
     }
 
   }
