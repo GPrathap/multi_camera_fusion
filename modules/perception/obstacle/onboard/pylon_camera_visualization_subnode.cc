@@ -71,14 +71,14 @@ bool TrackVisualizationSubnode::InitInternal() {
     }
 
     if (camera_object_data_ == nullptr) {
-      AERROR << "Failed to get " << camera_orientation << " PylonCameraObjectData.";
+      AERROR << "Failed to get  PylonCameraObjectData.";
       return false;
     }
     AINFO << "Init shared datas successfully, data: "
           << camera_object_data_->name();
 
     if (camera_shared_data_ == nullptr) {
-      AERROR << "Failed to get " << camera_orientation << " PylonCameraSharedData.";
+      AERROR << "Failed to get  PylonCameraSharedData.";
       return false;
     }
     AINFO << "Init shared datas successfully, data: "
