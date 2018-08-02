@@ -101,8 +101,8 @@ namespace apollo {
             double timestamp_ns_ = 0.0;
 
             // Shared Data
-            Camera2ObjectData* cam_obj_data_;
-            Camera2SharedData* cam_shared_data_;
+            PylonCameraObjectData* cam_obj_data_;
+            PylonCameraSharedData* cam_shared_data_;
 
             // Calibration
             int32_t image_height_ = 1080;

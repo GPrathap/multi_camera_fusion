@@ -51,19 +51,19 @@ bool TrackVisualizationSubnode::InitInternal() {
 
   // init camera object data
   if (camera_event_id_ != -1 || fusion_event_id_ != -1) {
-    camera_object_data_ = dynamic_cast<Camera2ObjectData*>(
-        shared_data_manager_->GetSharedData("Camera2ObjectData"));
+    camera_object_data_ = dynamic_cast<PylonCameraObjectData*>(
+        shared_data_manager_->GetSharedData("PylonCameraObjectData"));
     if (camera_object_data_ == nullptr) {
-      AERROR << "Failed to get Camera2ObjectData.";
+      AERROR << "Failed to get PylonCameraObjectData.";
       return false;
     }
     AINFO << "Init shared datas successfully, data: "
           << camera_object_data_->name();
 
-    camera_shared_data_ = dynamic_cast<Camera2SharedData*>(
-        shared_data_manager_->GetSharedData("Camera2SharedData"));
+    camera_shared_data_ = dynamic_cast<PylonCameraSharedData*>(
+        shared_data_manager_->GetSharedData("PylonCameraSharedData"));
     if (camera_shared_data_ == nullptr) {
-      AERROR << "Failed to get Camera2SharedData.";
+      AERROR << "Failed to get PylonCameraSharedData.";
       return false;
     }
     AINFO << "Init shared datas successfully, data: "

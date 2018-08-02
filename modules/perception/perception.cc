@@ -80,8 +80,8 @@ void Perception::RegistAllOnboardClass() {
   traffic_light::RegisterFactoryTLPreprocessingData();
 
 
-  RegisterFactoryCamera2ObjectData();
-  RegisterFactoryCamera2SharedData();
+  RegisterFactoryPylonCameraObjectData();
+  RegisterFactoryPylonCameraSharedData();
 
   /// register subnode
   RegisterFactoryLidar64ProcessSubnode();

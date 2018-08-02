@@ -66,9 +66,9 @@ class TrackVisualizationSubnode : public Subnode {
                       double timestamp);
 
   RadarObjectData* radar_object_data_ = nullptr;
-  Camera2ObjectData* camera_object_data_ = nullptr;
+  PylonCameraObjectData* camera_object_data_ = nullptr;
   CIPVObjectData* cipv_object_data_ = nullptr;
-  Camera2SharedData* camera_shared_data_ = nullptr;
+  PylonCameraSharedData* camera_shared_data_ = nullptr;
   LaneSharedData* lane_shared_data_ = nullptr;
   FusionSharedData* fusion_data_ = nullptr;
   std::unique_ptr<apollo::perception::lowcostvisualizer::BaseVisualizer> frame_visualizer_;

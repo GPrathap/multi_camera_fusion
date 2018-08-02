@@ -31,10 +31,10 @@ namespace apollo {
           if (fields.count("pb_ln_msk") && stoi(fields["pb_ln_msk"])) pb_ln_msk_ = true;
 
           // Shared Data
-          cam_obj_data_ = static_cast<Camera2ObjectData *>(
-                  shared_data_manager_->GetSharedData("Camera2ObjectData"));
-          cam_shared_data_ = static_cast<Camera2SharedData *>(
-                  shared_data_manager_->GetSharedData("Camera2SharedData"));
+          cam_obj_data_ = static_cast<PylonCameraObjectData *>(
+                  shared_data_manager_->GetSharedData("PylonCameraObjectData"));
+          cam_shared_data_ = static_cast<PylonCameraSharedData *>(
+                  shared_data_manager_->GetSharedData("PylonCameraSharedData"));
 
           InitCalibration();
 
