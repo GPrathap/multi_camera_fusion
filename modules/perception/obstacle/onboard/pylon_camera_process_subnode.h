@@ -62,10 +62,10 @@
 namespace apollo {
     namespace perception {
 
-        class Camera2ProcessSubnode : public Subnode {
+        class PylonCameraProcessSubnode : public Subnode {
         public:
-            Camera2ProcessSubnode() = default;
-            ~Camera2ProcessSubnode() = default;
+            PylonCameraProcessSubnode() = default;
+            ~PylonCameraProcessSubnode() = default;
 
             apollo::common::Status ProcEvents() override {
                 return apollo::common::Status::OK();
@@ -129,7 +129,7 @@ namespace apollo {
             std::unique_ptr<BaseCameraFilter> filter_;
         };
 
-        REGISTER_SUBNODE(Camera2ProcessSubnode);
+        REGISTER_SUBNODE(PylonCameraProcessSubnode);
 
     }  // namespace perception
 }  // namespace apollo

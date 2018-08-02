@@ -21,7 +21,7 @@ namespace apollo {
 
         using apollo::common::adapter::AdapterManager;
 
-        bool Camera2ProcessSubnode::InitInternal() {
+        bool PylonCameraProcessSubnode::InitInternal() {
           // Subnode config in DAG streaming
           std::unordered_map<std::string, std::string> fields;
           SubnodeHelper::ParseReserveField(reserve_, &fields);
@@ -40,21 +40,16 @@ namespace apollo {
 
           InitModules();
 
-//          AdapterManager::AddImageFrontCallback(&Camera2ProcessSubnode::ImgCallback,
-//                                                this);
-          AdapterManager::AddImageFrontRightSideCallback(&Camera2ProcessSubnode::ImgCallback,
+          AdapterManager::AddImageFrontRightSideCallback(&PylonCameraProcessSubnode::ImgCallback,
                                                 this);
-//          AdapterManager::AddImageFrontLeftSideCallback(&Camera2ProcessSubnode::ImgCallback,
-//                                                         this);
 
           if (pb_obj_) {
-            AdapterManager::AddChassisCallback(&Camera2ProcessSubnode::ChassisCallback,
-                                               this);
+            AdapterManager::AddChassisCallback(&PylonCameraProcessSubnode::ChassisCallback, this);
           }
           return true;
         }
 
-        bool Camera2ProcessSubnode::InitCalibration() {
+        bool PylonCameraProcessSubnode::InitCalibration() {
           auto ccm = Singleton<CalibrationConfigManager>::get();
           CameraCalibrationPtr calibrator = ccm->get_camera_calibration();
 
@@ -64,7 +59,7 @@ namespace apollo {
           return true;
         }
 
-        bool Camera2ProcessSubnode::InitModules() {
+        bool PylonCameraProcessSubnode::InitModules() {
           RegisterFactoryYoloCameraDetector();
           RegisterFactoryGeometryCameraConverter();
           RegisterFactoryCascadedCameraTracker();
@@ -95,9 +90,9 @@ namespace apollo {
           return true;
         }
 
-        void Camera2ProcessSubnode::ImgCallback(const sensor_msgs::Image &message) {
+        void PylonCameraProcessSubnode::ImgCallback(const sensor_msgs::Image &message) {
           double timestamp = message.header.stamp.toSec();
-          ADEBUG << "CameraProcessSubnode ImgCallback: timestamp: ";
+          ADEBUG << "PylonCameraProcessSubnode ImgCallback: timestamp: ";
           ADEBUG << std::fixed << std::setprecision(64) << timestamp;
           AINFO << "camera received image : " << GLOG_TIMESTAMP(timestamp)
                 << " at time: " << GLOG_TIMESTAMP(TimeUtil::GetCurrentTime());
@@ -106,15 +101,15 @@ namespace apollo {
           if (FLAGS_skip_camera_frame && timestamp_ns_ > 0.0) {
             if ((curr_timestamp - timestamp_ns_) < (1e9 / FLAGS_camera_hz) &&
                 curr_timestamp > timestamp_ns_) {
-              ADEBUG << "CameraProcessSubnode Skip frame";
+              ADEBUG << "PylonCameraProcessSubnode Skip frame";
               return;
             }
           }
 
           timestamp_ns_ = curr_timestamp;
-          ADEBUG << "CameraProcessSubnode Process: "
+          ADEBUG << "PylonCameraProcessSubnode Process: "
                  << " frame: " << ++seq_num_;
-          PERF_FUNCTION("Camera2ProcessSubnode");
+          PERF_FUNCTION("PylonCameraProcessSubnode");
           PERF_BLOCK_START();
 
           cv::Mat img;
@@ -127,7 +122,7 @@ namespace apollo {
           std::vector<std::shared_ptr<VisualObject>> objects;
           cv::Mat mask;
 
-          PERF_BLOCK_END("CameraProcessSubnode_Image_Preprocess");
+          PERF_BLOCK_END("PylonCameraProcessSubnode_Image_Preprocess");
           detector_->Multitask(img, CameraDetectorOptions(), &objects, &mask);
           mask = mask*2;
           if (FLAGS_use_whole_lane_line) {
@@ -136,21 +131,21 @@ namespace apollo {
             mask += mask1;
           }
 
-          PERF_BLOCK_END("CameraProcessSubnode_detector_");
+          PERF_BLOCK_END("PylonCameraProcessSubnode_detector_");
 
           converter_->Convert(&objects);
-          PERF_BLOCK_END("CameraProcessSubnode_converter_");
+          PERF_BLOCK_END("PylonCameraProcessSubnode_converter_");
 
           transformer_->Transform(&objects);
           adjusted_extrinsics_ =
                   transformer_->GetAdjustedExtrinsics(&camera_to_car_adj_);
-          PERF_BLOCK_END("CameraProcessSubnode_transformer_");
+          PERF_BLOCK_END("PylonCameraProcessSubnode_transformer_");
 
           tracker_->Associate(img, timestamp, &objects);
-          PERF_BLOCK_END("CameraProcessSubnode_tracker_");
+          PERF_BLOCK_END("PylonCameraProcessSubnode_tracker_");
 
           filter_->Filter(timestamp, &objects);
-          PERF_BLOCK_END("CameraProcessSubnode_filter_");
+          PERF_BLOCK_END("PylonCameraProcessSubnode_filter_");
 
           auto ccm = Singleton<CalibrationConfigManager>::get();
           auto calibrator = ccm->get_camera_calibration();
@@ -165,18 +160,18 @@ namespace apollo {
           camera_item_ptr->image_src_mat = img.clone();
           mask.copyTo(out_objs->camera_frame_supplement->lane_map);
           PublishDataAndEvent(timestamp, out_objs, camera_item_ptr);
-          PERF_BLOCK_END("Camera2ProcessSubnode publish in DAG");
+          PERF_BLOCK_END("PylonCameraProcessSubnode publish in DAG");
 
           if (pb_obj_) PublishPerceptionPbObj(out_objs);
           if (pb_ln_msk_) PublishPerceptionPbLnMsk(mask, message);
         }
 
-        void Camera2ProcessSubnode::ChassisCallback(
+        void PylonCameraProcessSubnode::ChassisCallback(
                 const apollo::canbus::Chassis &message) {
           chassis_.CopyFrom(message);
         }
 
-        bool Camera2ProcessSubnode::MessageToMat(const sensor_msgs::Image &msg,
+        bool PylonCameraProcessSubnode::MessageToMat(const sensor_msgs::Image &msg,
                                                  cv::Mat *img) {
           *img = cv::Mat(msg.height, msg.width, CV_8UC3);
           int pixel_num = msg.width * msg.height;
@@ -192,7 +187,7 @@ namespace apollo {
           return true;
         }
 
-        bool Camera2ProcessSubnode::MatToMessage(const cv::Mat& img,
+        bool PylonCameraProcessSubnode::MatToMessage(const cv::Mat& img,
                                                  sensor_msgs::Image *msg) {
           if (img.type() == CV_8UC1) {
             sensor_msgs::fillImage(*msg, sensor_msgs::image_encodings::MONO8,
@@ -220,7 +215,7 @@ namespace apollo {
           }
         }
 
-        void Camera2ProcessSubnode::VisualObjToSensorObj(
+        void PylonCameraProcessSubnode::VisualObjToSensorObj(
                 const std::vector<std::shared_ptr<VisualObject>> &objects,
                 SharedDataPtr<SensorObjects> *sensor_objects) {
           (*sensor_objects)->sensor_type = SensorType::CAMERA;
@@ -273,7 +268,7 @@ namespace apollo {
           }
         }
 
-        void Camera2ProcessSubnode::PublishDataAndEvent(
+        void PylonCameraProcessSubnode::PublishDataAndEvent(
                 const double timestamp, const SharedDataPtr<SensorObjects> &sensor_objects,
                 const SharedDataPtr<CameraItem> &camera_item) {
           CommonSharedDataKey key(timestamp, device_id_);
@@ -290,7 +285,7 @@ namespace apollo {
           }
         }
 
-        void Camera2ProcessSubnode::PublishPerceptionPbObj(
+        void PylonCameraProcessSubnode::PublishPerceptionPbObj(
                 const SharedDataPtr<SensorObjects> &sensor_objects) {
           PerceptionObstacles obstacles;
 
@@ -319,7 +314,7 @@ namespace apollo {
           ADEBUG << "PublishPerceptionObstacles: " << obstacles.ShortDebugString();
         }
 
-        void Camera2ProcessSubnode::PublishPerceptionPbLnMsk(
+        void PylonCameraProcessSubnode::PublishPerceptionPbLnMsk(
                 const cv::Mat& mask, const sensor_msgs::Image &message) {
           sensor_msgs::Image lane_mask_msg;
           lane_mask_msg.header = message.header;

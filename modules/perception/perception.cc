@@ -99,7 +99,7 @@ void Perception::RegistAllOnboardClass() {
   traffic_light::RegisterFactoryTLPreprocessorSubnode();
   traffic_light::RegisterFactoryTLProcSubnode();
 
-  RegisterFactoryCamera2ProcessSubnode();
+  RegisterFactoryPylonCameraProcessSubnode();
 }
 
 Status Perception::Start() {
