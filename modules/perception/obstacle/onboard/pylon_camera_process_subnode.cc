@@ -30,23 +30,29 @@ namespace apollo {
           if (fields.count("pb_obj") && stoi(fields["pb_obj"])) pb_obj_ = true;
           if (fields.count("pb_ln_msk") && stoi(fields["pb_ln_msk"])) pb_ln_msk_ = true;
 
-          // Shared Data
-          cam_obj_data_ = static_cast<PylonCameraObjectData *>(
-                  shared_data_manager_->GetSharedData("PylonCameraObjectData"));
-          cam_shared_data_ = static_cast<PylonCameraSharedData *>(
-                  shared_data_manager_->GetSharedData("PylonCameraSharedData"));
+          if (fields.count("camera_orientation") && fields["camera_orientation"]=="left_side"){
+            AdapterManager::AddImageFrontRightSideCallback(&PylonCameraProcessSubnode::ImgCallback,
+                                                           this);
+            // Shared Data
+            cam_obj_data_ = static_cast<PylonCameraObjectData *>(
+                    shared_data_manager_->GetSharedData("PylonCameraRightSideObjectData"));
+            cam_shared_data_ = static_cast<PylonCameraSharedData *>(
+                    shared_data_manager_->GetSharedData("PylonCameraRightSideSharedData"));
+
+          }else if (fields.count("camera_orientation") && fields["camera_orientation"]=="right_side"){
+            AdapterManager::AddImageFrontLeftSideCallback(&PylonCameraProcessSubnode::ImgCallback,
+                                                          this);
+            // Shared Data
+            cam_obj_data_ = static_cast<PylonCameraObjectData *>(
+                    shared_data_manager_->GetSharedData("PylonCameraLeftSideObjectData"));
+            cam_shared_data_ = static_cast<PylonCameraSharedData *>(
+                    shared_data_manager_->GetSharedData("PylonCameraLeftSideSharedData"));
+          }
+
 
           InitCalibration();
 
           InitModules();
-
-          if (fields.count("camera_orientation") && fields["camera_orientation"]=="left_side"){
-            AdapterManager::AddImageFrontRightSideCallback(&PylonCameraProcessSubnode::ImgCallback,
-                                                           this);
-          }else if (fields.count("camera_orientation") && fields["camera_orientation"]=="right_side"){
-            AdapterManager::AddImageFrontLeftSideCallback(&PylonCameraProcessSubnode::ImgCallback,
-                                                           this);
-          }
 
           if (pb_obj_) {
             AdapterManager::AddChassisCallback(&PylonCameraProcessSubnode::ChassisCallback, this);

@@ -241,7 +241,9 @@ cc_library(
     srcs = [
         "camera_shared_data.cc",
         "fusion_shared_data.cc",
-        "pylon_camera_shared_data.cc"
+        "pylon_camera_shared_data.cc",
+        "pylon_camera_left_side_shared_data.cc",
+        "pylon_camera_right_side_shared_data.cc"
     ],
     hdrs = [
         "common_camera_shared_data.h",
@@ -249,6 +251,8 @@ cc_library(
         "fusion_shared_data.h",
         "lane_shared_data.h",
         "pylon_camera_shared_data.h",
+        "pylon_camera_left_side_shared_data.h",
+        "pylon_camera_right_side_shared_data.h"
     ],
     deps = [
         "//modules/perception/obstacle/base",
