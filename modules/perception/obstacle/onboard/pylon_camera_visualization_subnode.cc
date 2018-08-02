@@ -48,22 +48,37 @@ bool TrackVisualizationSubnode::InitInternal() {
     AERROR << "Failed to init stream.";
     return false;
   }
+  std::unordered_map<std::string, std::string> reserve_field_map;
+  if (!SubnodeHelper::ParseReserveField(reserve_, &reserve_field_map)) {
+    AERROR << "Failed to parse reserve string: " << reserve_;
+    return false;
+  }
+
 
   // init camera object data
   if (camera_event_id_ != -1 || fusion_event_id_ != -1) {
-    camera_object_data_ = dynamic_cast<PylonCameraObjectData*>(
-        shared_data_manager_->GetSharedData("PylonCameraObjectData"));
+    auto camera_orientation = reserve_field_map.find("camera_orientation");
+    if( camera_orientation == "right_side"){
+      camera_object_data_ = dynamic_cast<PylonCameraObjectData*>(
+              shared_data_manager_->GetSharedData("PylonCameraRightSideObjectData"));
+      camera_shared_data_ = dynamic_cast<PylonCameraSharedData*>(
+              shared_data_manager_->GetSharedData("PylonCameraRightSideSharedData"));
+    }else if( camera_orientation == "left_side"){
+      camera_object_data_ = dynamic_cast<PylonCameraObjectData*>(
+              shared_data_manager_->GetSharedData("PylonCameraLeftSideObjectData"));
+      camera_shared_data_ = dynamic_cast<PylonCameraSharedData*>(
+              shared_data_manager_->GetSharedData("PylonCameraLeftSideSharedData"));
+    }
+
     if (camera_object_data_ == nullptr) {
-      AERROR << "Failed to get PylonCameraObjectData.";
+      AERROR << "Failed to get " << camera_orientation << " PylonCameraObjectData.";
       return false;
     }
     AINFO << "Init shared datas successfully, data: "
           << camera_object_data_->name();
 
-    camera_shared_data_ = dynamic_cast<PylonCameraSharedData*>(
-        shared_data_manager_->GetSharedData("PylonCameraSharedData"));
     if (camera_shared_data_ == nullptr) {
-      AERROR << "Failed to get PylonCameraSharedData.";
+      AERROR << "Failed to get " << camera_orientation << " PylonCameraSharedData.";
       return false;
     }
     AINFO << "Init shared datas successfully, data: "
