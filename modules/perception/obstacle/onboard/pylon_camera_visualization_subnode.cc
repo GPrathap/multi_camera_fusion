@@ -56,7 +56,7 @@ bool TrackVisualizationSubnode::InitInternal() {
 
 
   // init camera object data
-  AINFO << "init camera object----> ";
+  AINFO << "init camera object---->~~####~ "<<reserve_field_map["device_id"];
   if (camera_event_id_ != -1 || fusion_event_id_ != -1) {
     camera_orientation = reserve_field_map["camera_orientation"];
     AINFO << "init camera object----> " << camera_orientation;
