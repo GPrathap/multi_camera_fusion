@@ -40,8 +40,13 @@ namespace apollo {
 
           InitModules();
 
-          AdapterManager::AddImageFrontRightSideCallback(&PylonCameraProcessSubnode::ImgCallback,
-                                                this);
+          if (fields.count("camera_orientation") && fields["camera_orientation"]=="left_side"){
+            AdapterManager::AddImageFrontRightSideCallback(&PylonCameraProcessSubnode::ImgCallback,
+                                                           this);
+          }else if (fields.count("camera_orientation") && fields["camera_orientation"]=="right_side"){
+            AdapterManager::AddImageFrontLeftSideCallback(&PylonCameraProcessSubnode::ImgCallback,
+                                                           this);
+          }
 
           if (pb_obj_) {
             AdapterManager::AddChassisCallback(&PylonCameraProcessSubnode::ChassisCallback, this);
