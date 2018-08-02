@@ -30,6 +30,7 @@ namespace apollo {
           if (fields.count("pb_obj") && stoi(fields["pb_obj"])) pb_obj_ = true;
           if (fields.count("pb_ln_msk") && stoi(fields["pb_ln_msk"])) pb_ln_msk_ = true;
           camera_orientation = fields["camera_orientation"];
+          AINFO << "init camera object----> " << camera_orientation;
           if (fields.count("camera_orientation") && fields["camera_orientation"]=="right_side"){
             AdapterManager::AddImageFrontRightSideCallback(&PylonCameraProcessSubnode::ImgCallback,
                                                            this);
