@@ -14,7 +14,7 @@
  * limitations under the License.
  *****************************************************************************/
 
-#include "modules/perception/obstacle/onboard/track_visualization_subnode.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_visualization_subnode.h"
 
 #include <string>
 #include <unordered_map>
