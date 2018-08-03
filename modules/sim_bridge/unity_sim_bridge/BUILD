@@ -20,6 +20,7 @@ cc_library(
         "//modules/sim_bridge/proto:sim_bridge_config_proto",
         "//modules/sim_bridge/common:sim_bridge_common",
         "//modules/localization/proto:imu_proto",
+        "//modules/common/configs:vehicle_config_helper",
         "@ros//:ros_common",
     ],
 )
