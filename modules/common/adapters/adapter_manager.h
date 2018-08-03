@@ -305,7 +305,10 @@ class AdapterManager {
   //for standard ROS sensor messages
   REGISTER_ADAPTER(ImuRos);
   REGISTER_ADAPTER(OdometryRos);  
-  REGISTER_ADAPTER(UnityCarControl); 
+  REGISTER_ADAPTER(UnityCarControl);
+
+  REGISTER_ADAPTER(ImageFrontLeftSide);
+  REGISTER_ADAPTER(ImageFrontRightSide);
 
   DECLARE_SINGLETON(AdapterManager);
 };

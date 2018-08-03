@@ -63,10 +63,12 @@ message AdapterConfig {
     STREAM_STATUS = 55;
     GNSS_HEADING = 56;
     RTCM_DATA = 57;
-    RACOBIT_RADAR = 59;  
+    RACOBIT_RADAR = 59;
     IMU_ROS = 60;
     ODOMETRY_ROS = 61;
     UNITY_CAR_CONTROL = 62;
+    IMAGE_FRONT_LEFT_SIDE = 63;
+    IMAGE_FRONT_RIGHT_SIDE = 64;
   }
   enum Mode {
     RECEIVE_ONLY = 0;

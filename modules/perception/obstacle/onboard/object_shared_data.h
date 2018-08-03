@@ -41,12 +41,18 @@ namespace perception {
 OBJECT_SHARED_DATA(LidarObjectData);
 OBJECT_SHARED_DATA(RadarObjectData);
 OBJECT_SHARED_DATA(CameraObjectData);
+OBJECT_SHARED_DATA(PylonCameraObjectData);
+OBJECT_SHARED_DATA(PylonCameraRightSideObjectData);
+OBJECT_SHARED_DATA(PylonCameraLeftSideObjectData);
 OBJECT_SHARED_DATA(CIPVObjectData);
 OBJECT_SHARED_DATA(UltrasonicObjectData);
 
 REGISTER_SHAREDDATA(LidarObjectData);
 REGISTER_SHAREDDATA(RadarObjectData);
 REGISTER_SHAREDDATA(CameraObjectData);
+REGISTER_SHAREDDATA(PylonCameraObjectData);
+REGISTER_SHAREDDATA(PylonCameraRightSideObjectData);
+REGISTER_SHAREDDATA(PylonCameraLeftSideObjectData);
 REGISTER_SHAREDDATA(CIPVObjectData);
 REGISTER_SHAREDDATA(UltrasonicObjectData);
 

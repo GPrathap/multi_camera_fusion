@@ -23,15 +23,10 @@
 #include "modules/perception/obstacle/base/object.h"
 #include "modules/perception/obstacle/base/object_supplement.h"
 #include "modules/perception/onboard/common_shared_data.h"
+#include "modules/perception/obstacle/onboard/common_camera_shared_data.h"
 
 namespace apollo {
 namespace perception {
-
-struct CameraItem {
-  cv::Mat image_src_mat;
-  SeqId seq_num = 0u;
-  double timestamp = 0.0;
-};
 
 class CameraSharedData : public CommonSharedData<CameraItem> {
  public:

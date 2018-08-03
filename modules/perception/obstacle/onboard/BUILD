@@ -106,8 +106,41 @@ cc_library(
         "camera_process_subnode.cc",
     ],
     hdrs = [
+        "common_camera_shared_data.h",
         "camera_process_subnode.h",
         "object_shared_data.h",
+    ],
+    deps = [
+        ":perception_obstacle_shared_data",
+        "//modules/common:log",
+        "//modules/common/adapters:adapter_manager",
+        "//modules/common/time",
+        "//modules/perception/common",
+        "//modules/perception/lib/config_manager",
+        "//modules/perception/obstacle/camera/converter",
+        "//modules/perception/obstacle/camera/detector/yolo_camera_detector",
+        "//modules/perception/obstacle/camera/dummy",
+        "//modules/perception/obstacle/camera/filter",
+        "//modules/perception/obstacle/camera/tracker",
+        "//modules/perception/obstacle/camera/transformer",
+        "//modules/perception/onboard",
+        "//modules/perception/traffic_light/util",
+        "@eigen",
+        "@opencv2//:core",
+        "@ros//:ros_common",
+    ],
+)
+
+
+cc_library(
+    name = "pylon_camera_subnode",
+    srcs = [
+        "pylon_camera_process_subnode.cc",
+    ],
+    hdrs = [
+        "common_camera_shared_data.h",
+        "object_shared_data.h",
+        "pylon_camera_process_subnode.h",
     ],
     deps = [
         ":perception_obstacle_shared_data",
@@ -208,11 +241,18 @@ cc_library(
     srcs = [
         "camera_shared_data.cc",
         "fusion_shared_data.cc",
+        "pylon_camera_shared_data.cc",
+        "pylon_camera_left_side_shared_data.cc",
+        "pylon_camera_right_side_shared_data.cc"
     ],
     hdrs = [
+        "common_camera_shared_data.h",
         "camera_shared_data.h",
         "fusion_shared_data.h",
         "lane_shared_data.h",
+        "pylon_camera_shared_data.h",
+        "pylon_camera_left_side_shared_data.h",
+        "pylon_camera_right_side_shared_data.h"
     ],
     deps = [
         "//modules/perception/obstacle/base",
@@ -255,6 +295,28 @@ cc_library(
     hdrs = [
         "object_shared_data.h",
         "visualization_subnode.h",
+    ],
+    deps = [
+        ":perception_obstacle_shared_data",
+        "//modules/common:log",
+        "//modules/perception/lib/config_manager",
+        "//modules/perception/obstacle/base",
+        "//modules/perception/obstacle/camera/common:util",
+        "//modules/perception/obstacle/camera/motion",
+        "//modules/perception/obstacle/camera/visualizer",
+        "//modules/perception/obstacle/onboard:motion_subnode",
+        "//modules/perception/onboard",
+    ],
+)
+
+cc_library(
+    name = "pylon_camera_visualization_subnode",
+    srcs = [
+        "pylon_camera_visualization_subnode.cc",
+    ],
+    hdrs = [
+        "object_shared_data.h",
+        "pylon_camera_visualization_subnode.h",
     ],
     deps = [
         ":perception_obstacle_shared_data",
