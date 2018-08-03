@@ -34,6 +34,7 @@
 
 #include "modules/localization/proto/imu.pb.h"
 #include "modules/localization/proto/gps.pb.h"
+#include "modules/control/proto/control_cmd.pb.h"
 #include "modules/common/status/status.h"
 #include "modules/sim_bridge/sim_bridge_base.h"
 #include "sensor_msgs/Imu.h"
@@ -75,7 +76,8 @@ class UnitySimBridge : public SimBridgeBase {
   void FillImuMsg(const sensor_msgs::Imu &msg, localization::CorrectedImu *imu_msg);
   void OnOdometry(const nav_msgs::Odometry &msg);
   void FillGpsMsg(const nav_msgs::Odometry &msg, localization::Gps *gps_msg);
-  void FillUnityCarControlMsg(car_unity_simulator::CarControl *control_msg);
+  void OnControl(const control::ControlCommand &msg);
+  void FillUnityCarControlMsg(const control::ControlCommand &control_cmd, car_unity_simulator::CarControl *control_msg);
 
  private:
 
