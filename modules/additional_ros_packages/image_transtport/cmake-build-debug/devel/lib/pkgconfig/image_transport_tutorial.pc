@@ -1,0 +1,8 @@
+prefix=/home/geesara/image_transport_ws/image_common/image_transport/tutorial/cmake-build-debug/devel
+
+Name: image_transport_tutorial
+Description: Description of image_transport_tutorial
+Version: 0.0.0
+Cflags: -I/home/geesara/image_transport_ws/image_common/image_transport/tutorial/cmake-build-debug/devel/include
+Libs: -L/home/geesara/image_transport_ws/image_common/image_transport/tutorial/cmake-build-debug/devel/lib 
+Requires: cv_bridge image_transport message_runtime sensor_msgs
