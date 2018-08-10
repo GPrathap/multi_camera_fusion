@@ -244,10 +244,6 @@ class SimulationWorldService {
   FRIEND_TEST(SimulationWorldServiceTest, UpdateDecision);
   FRIEND_TEST(SimulationWorldServiceTest, UpdatePrediction);
   FRIEND_TEST(SimulationWorldServiceTest, UpdateRouting);
-  FRIEND_TEST(SimulationWorldServiceTest, UpdateGps);
-  FRIEND_TEST(SimulationWorldServiceTest, UpdateControlCommandWithSimpleLonLat);
-  FRIEND_TEST(SimulationWorldServiceTest, UpdateControlCommandWithSimpleMpc);
-  FRIEND_TEST(SimulationWorldServiceTest, DownsampleSpeedPointsByInterval);
 };
 
 }  // namespace dreamview

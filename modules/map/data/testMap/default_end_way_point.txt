@@ -1,0 +1,11 @@
+landmark {
+    name: "1_-1",
+    waypoint {
+        id: "1_-1"
+        s: 153.0
+        pose {
+          x: -86.0
+          y: 500.0
+        }
+    }
+}
