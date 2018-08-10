@@ -187,7 +187,8 @@ function local_volumes() {
              -v $HOME/.cache:${DOCKER_HOME}/.cache"
     case "$(uname -s)" in
         Linux)
-            volumes="${volumes} -v /dev:/dev \
+            volumes="${volumes} -v /dataset:/dataset \
+				-v /dev:/dev \
                                 -v /media:/media \
                                 -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
                                 -v /etc/localtime:/etc/localtime:ro \
