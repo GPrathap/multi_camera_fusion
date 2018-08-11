@@ -190,6 +190,8 @@ bool GLFWFusionViewer::initialize() {
   show_trajectory_ = true;
   draw_lane_objects_ = true;
 
+  INFO << "GLFWFusionViewer::1" << std::endl;
+
   CalibrationConfigManager* calibration_config_manager =
       Singleton<CalibrationConfigManager>::get();
   CameraCalibrationPtr calibrator =
@@ -197,11 +199,16 @@ bool GLFWFusionViewer::initialize() {
   camera_intrinsic_ = calibrator->get_camera_intrinsic();
   distort_camera_intrinsic_ = calibrator->get_camera_model();
 
+  INFO << "GLFWFusionViewer::2" << std::endl;
+
   if (show_lane_) {
     lane_post_process_config::ModelConfigs config;
+    INFO << "GLFWFusionViewer::3" << std::endl;
     CHECK(GetProtoFromFile(FLAGS_cc_lane_post_processor_config_file, &config));
     lane_map_threshold_ = config.lane_map_confidence_thresh();
+    INFO << "GLFWFusionViewer::4" << std::endl;
     lane_start_y_pos_ = config.start_y_pos();
+    INFO << "GLFWFusionViewer::5" << std::endl;
     lane_map_scale_ = 1.0f / config.lane_map_scale();
     AINFO << "onboard lane post-processor: "
           << FLAGS_onboard_lane_post_processor;
