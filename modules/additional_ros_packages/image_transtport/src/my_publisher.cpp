@@ -32,7 +32,7 @@ int main(int argc, char** argv)
   vector<std::string> files_right = globVector(std::string(argv[2])+"/*");
   std::cout<< "Number of images to be sent" << files_left.size() << std::endl;
   std::cout<< "Number of images to be sent" << files_right.size() << std::endl;
-  ros::Rate loop_rate(0.25);
+  ros::Rate loop_rate(0.5);
     unsigned int i=0;
      while (nh.ok()) {
           std::cout<< files_left.at(i) << std::endl;
