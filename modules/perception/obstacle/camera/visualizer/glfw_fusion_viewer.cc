@@ -156,6 +156,7 @@ void GLFWFusionViewer::get_class_color(int cls, float rgb[3]) {
 
 bool GLFWFusionViewer::initialize() {
   AINFO << "GLFWFusionViewer::initialize()" << std::endl;
+  AINFO << "GLFWFusionViewer::next" << std::endl;
   if (init_) {
     AINFO << " GLFWFusionViewer is already initialized !" << std::endl;
     return false;
