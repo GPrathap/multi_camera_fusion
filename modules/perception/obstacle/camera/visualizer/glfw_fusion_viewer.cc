@@ -161,21 +161,22 @@ bool GLFWFusionViewer::initialize() {
     AINFO << " GLFWFusionViewer is already initialized !" << std::endl;
     return false;
   }
-
+  AINFO << "GLFWFusionViewer::next" << std::endl;
   if (!window_init()) {
     AERROR << " Failed to initialize the window !" << std::endl;
     return false;
   }
-
+  AINFO << "GLFWFusionViewer::next" << std::endl;
   if (!camera_init()) {
     AERROR << " Failed to initialize the camera !" << std::endl;
     return false;
   }
-
+  AINFO << "GLFWFusionViewer::next" << std::endl;
   if (!opengl_init()) {
     AERROR << " Failed to initialize opengl !" << std::endl;
     return false;
   }
+  AINFO << "GLFWFusionViewer::next" << std::endl;
   help_str = "H: show help";
 
   // for camera visualization
