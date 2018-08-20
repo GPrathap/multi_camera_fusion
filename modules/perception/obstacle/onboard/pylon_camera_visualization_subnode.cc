@@ -93,6 +93,96 @@ bool TrackVisualizationSubnode::InitInternal() {
       }
       AINFO << "Init shared datas successfully, data: "
             << camera_shared_left_side_data_->name();
+    }else if( reserve_field_map["camera_orientation"] == "right"){
+      camera_object_right_data_ = static_cast<PylonCameraRightObjectData *>(
+              shared_data_manager_->GetSharedData("PylonCameraRightObjectData"));
+      camera_shared_right_data_ = static_cast<PylonCameraRightSharedData *>(
+              shared_data_manager_->GetSharedData("PylonCameraRightSharedData"));
+      if (camera_object_right_data_ == nullptr) {
+        AERROR << "Failed to get  camera_object_right_data_ object.";
+        return false;
+      }
+      AINFO << "Init object camera_shared_right_data_ successfully, data: "
+            << camera_object_left_side_data_->name();
+
+      if (camera_shared_right_data_ == nullptr) {
+        AERROR << "Failed to get  camera_shared_right_data_.";
+        return false;
+      }
+      AINFO << "Init shared camera_shared_right_data_ successfully, data: "
+            << camera_shared_right_data_->name();
+    }else if( reserve_field_map["camera_orientation"] == "left"){
+      camera_object_left_data_ = static_cast<PylonCameraLeftObjectData *>(
+              shared_data_manager_->GetSharedData("PylonCameraLeftObjectData"));
+      camera_shared_left_data_ = static_cast<PylonCameraLeftSharedData *>(
+              shared_data_manager_->GetSharedData("PylonCameraLeftSharedData"));
+      if (camera_object_left_data_ == nullptr) {
+        AERROR << "Failed to get  camera_object_left_data_ object.";
+        return false;
+      }
+      AINFO << "Init object camera_shared_left_data_ successfully, data: "
+            << camera_object_left_side_data_->name();
+
+      if (camera_shared_left_data_ == nullptr) {
+        AERROR << "Failed to get  camera_shared_left_data_.";
+        return false;
+      }
+      AINFO << "Init shared camera_shared_left_data_ successfully, data: "
+            << camera_shared_left_data_->name();
+    }else if( reserve_field_map["camera_orientation"] == "right_backwards_side"){
+      camera_object_right_backwards_side_data_ = static_cast<PylonCameraRightBackwardsSideObjectData *>(
+              shared_data_manager_->GetSharedData("PylonCameraRightBackwardsSideObjectData"));
+      camera_shared_right__backwards_side_data_ = static_cast<PylonCameraRightBackwardsSideSharedData *>(
+              shared_data_manager_->GetSharedData("PylonCameraRightBackwardsSideSharedData"));
+      if (camera_object_right_backwards_side_data_ == nullptr) {
+        AERROR << "Failed to get  camera_object_left_data_ object.";
+        return false;
+      }
+      AINFO << "Init object camera_object_right_backwards_side_data_ successfully, data: "
+            << camera_object_right_backwards_side_data_->name();
+
+      if (camera_shared_right__backwards_side_data_ == nullptr) {
+        AERROR << "Failed to get  camera_shared_right__backwards_side_data_.";
+        return false;
+      }
+      AINFO << "Init shared camera_shared_right__backwards_side_data_ successfully, data: "
+            << camera_shared_right__backwards_side_data_->name();
+    }else if( reserve_field_map["camera_orientation"] == "left_backwards_side"){
+      camera_object_left_backwards_side_data_ = static_cast<PylonCameraLeftBackwardsSideObjectData *>(
+              shared_data_manager_->GetSharedData("PylonCameraLeftBackwardsSideObjectData"));
+      camera_shared_left__backwards_side_data_ = static_cast<PylonCameraLeftBackwardsSideSharedData *>(
+              shared_data_manager_->GetSharedData("PylonCameraLeftBackwardsSideSharedData"));
+      if (camera_object_left_backwards_side_data_ == nullptr) {
+        AERROR << "Failed to get  camera_object_left_backwards_side_data_ object.";
+        return false;
+      }
+      AINFO << "Init object camera_object_left_backwards_side_data_ successfully, data: "
+            << camera_object_right_backwards_side_data_->name();
+
+      if (camera_shared_left__backwards_side_data_ == nullptr) {
+        AERROR << "Failed to get  camera_shared_left__backwards_side_data_.";
+        return false;
+      }
+      AINFO << "Init shared camera_shared_right__backwards_side_data_ successfully, data: "
+            << camera_shared_left__backwards_side_data_->name();
+    }else if( reserve_field_map["camera_orientation"] == "front"){
+      cam_obj_data_ = static_cast<PylonCameraObjectData *>(
+              shared_data_manager_->GetSharedData("PylonCameraObjectData"));
+      cam_shared_data_ = static_cast<PylonCameraSharedData *>(
+              shared_data_manager_->GetSharedData("PylonCameraSharedData"));
+      if (camera_object_left_backwards_side_data_ == nullptr) {
+        AERROR << "Failed to get  cam_obj_data_ object.";
+        return false;
+      }
+      AINFO << "Init object cam_obj_data_ successfully, data: "
+            << cam_obj_data_->name();
+
+      if (cam_shared_data_ == nullptr) {
+        AERROR << "Failed to get  cam_shared_data_.";
+        return false;
+      }
+      AINFO << "Init shared camera_shared_right__backwards_side_data_ successfully, data: "
+            << cam_shared_data_->name();
     }
 
   }

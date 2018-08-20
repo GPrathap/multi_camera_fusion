@@ -48,6 +48,49 @@ namespace apollo {
                     shared_data_manager_->GetSharedData("PylonCameraLeftSideObjectData"));
             camera_shared_left_side_data_ = static_cast<PylonCameraLeftSideSharedData *>(
                     shared_data_manager_->GetSharedData("PylonCameraLeftSideSharedData"));
+          }if (fields.count("camera_orientation") && fields["camera_orientation"]=="right"){
+            AdapterManager::AddImageRightCallback(&PylonCameraProcessSubnode::ImgCallback,
+                                                           this);
+            // Shared Data
+            camera_object_right_data_ = static_cast<PylonCameraRightObjectData *>(
+                    shared_data_manager_->GetSharedData("PylonCameraRightObjectData"));
+            camera_shared_right_data_ = static_cast<PylonCameraRightSharedData *>(
+                    shared_data_manager_->GetSharedData("PylonCameraRightSharedData"));
+
+          }else if (fields.count("camera_orientation") && fields["camera_orientation"]=="left"){
+            AdapterManager::AddImageLeftCallback(&PylonCameraProcessSubnode::ImgCallback,
+                                                          this);
+            // Shared Data
+            camera_object_left_data_ = static_cast<PylonCameraLeftObjectData *>(
+                    shared_data_manager_->GetSharedData("PylonCameraLeftObjectData"));
+            camera_shared_left_data_ = static_cast<PylonCameraLeftSharedData *>(
+                    shared_data_manager_->GetSharedData("PylonCameraLeftSharedData"));
+          }if (fields.count("camera_orientation") && fields["camera_orientation"]=="right_backwards_side"){
+            AdapterManager::AddImageRightBackwardsSideCallback(&PylonCameraProcessSubnode::ImgCallback,
+                                                           this);
+            // Shared Data
+            camera_object_right_backwards_side_data_ = static_cast<PylonCameraRightBackwardsSideObjectData *>(
+                    shared_data_manager_->GetSharedData("PylonCameraRightBackwardsSideObjectData"));
+            camera_shared_right__backwards_side_data_ = static_cast<PylonCameraRightBackwardsSideSharedData *>(
+                    shared_data_manager_->GetSharedData("PylonCameraRightBackwardsSideSharedData"));
+
+          }if (fields.count("camera_orientation") && fields["camera_orientation"]=="left_backwards_side"){
+            AdapterManager::AddImageLeftBackwardsSideCallback(&PylonCameraProcessSubnode::ImgCallback,
+                                                               this);
+            // Shared Data
+            camera_object_left_backwards_side_data_ = static_cast<PylonCameraLeftBackwardsSideObjectData *>(
+                    shared_data_manager_->GetSharedData("PylonCameraLeftBackwardsSideObjectData"));
+            camera_shared_left__backwards_side_data_ = static_cast<PylonCameraLeftBackwardsSideSharedData *>(
+                    shared_data_manager_->GetSharedData("PylonCameraLeftBackwardsSideSharedData"));
+
+          }else if (fields.count("camera_orientation") && fields["camera_orientation"]=="front"){
+            AdapterManager::AddImageFrontCameraCallback(&PylonCameraProcessSubnode::ImgCallback,
+                                                          this);
+            // Shared Data
+            cam_obj_data_ = static_cast<PylonCameraObjectData *>(
+                    shared_data_manager_->GetSharedData("PylonCameraObjectData"));
+            cam_shared_data_ = static_cast<PylonCameraSharedData *>(
+                    shared_data_manager_->GetSharedData("PylonCameraSharedData"));
           }
 
 

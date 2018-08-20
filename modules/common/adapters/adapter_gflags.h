@@ -88,5 +88,9 @@ DECLARE_string(unity_car_control_topic);
 
 DECLARE_string(image_front_left_side_topic);
 DECLARE_string(image_front_right_side_topic);
-
+DECLARE_string(image_left_topic);
+DECLARE_string(image_right_topic);
+DECLARE_string(image_left_backwards_topic);
+DECLARE_string(image_right_backwards_topic);
+DECLARE_string(image_front_camera_topic);
 #endif  // MODULES_COMMON_ADAPTERS_ADAPTER_GFLAGS_H_
