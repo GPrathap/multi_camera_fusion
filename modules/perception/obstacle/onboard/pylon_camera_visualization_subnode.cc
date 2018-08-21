@@ -127,7 +127,7 @@ bool TrackVisualizationSubnode::InitInternal() {
       }
       AERROR << "----|4--->>>";
       AINFO << "Init object camera_shared_left_data_ successfully, data: "
-            << camera_object_left_side_data_->name();
+            << camera_object_left_data_->name();
 
       if (camera_shared_left_data_ == nullptr) {
         AERROR << "Failed to get  camera_shared_left_data_.";
