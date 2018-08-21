@@ -94,10 +94,13 @@ bool TrackVisualizationSubnode::InitInternal() {
       AINFO << "Init shared datas successfully, data: "
             << camera_shared_left_side_data_->name();
     }else if( reserve_field_map["camera_orientation"] == "right"){
-      camera_object_right_data_ = static_cast<PylonCameraRightObjectData *>(
+      AERROR << "1----1";
+      camera_object_right_data_ = static_cast<PylonCameraRightObjectData*>(
               shared_data_manager_->GetSharedData("PylonCameraRightObjectData"));
-      camera_shared_right_data_ = static_cast<PylonCameraRightSharedData *>(
+      AERROR << "1----2";
+      camera_shared_right_data_ = static_cast<PylonCameraRightSharedData*>(
               shared_data_manager_->GetSharedData("PylonCameraRightSharedData"));
+      AERROR << "1----3";
       if (camera_object_right_data_ == nullptr) {
         AERROR << "Failed to get  camera_object_right_data_ object.";
         return false;
@@ -112,10 +115,13 @@ bool TrackVisualizationSubnode::InitInternal() {
       AINFO << "Init shared camera_shared_right_data_ successfully, data: "
             << camera_shared_right_data_->name();
     }else if( reserve_field_map["camera_orientation"] == "left"){
+      AERROR << "----1";
       camera_object_left_data_ = static_cast<PylonCameraLeftObjectData *>(
               shared_data_manager_->GetSharedData("PylonCameraLeftObjectData"));
+      AERROR << "----2";
       camera_shared_left_data_ = static_cast<PylonCameraLeftSharedData *>(
               shared_data_manager_->GetSharedData("PylonCameraLeftSharedData"));
+      AERROR << "----3";
       if (camera_object_left_data_ == nullptr) {
         AERROR << "Failed to get  camera_object_left_data_ object.";
         return false;

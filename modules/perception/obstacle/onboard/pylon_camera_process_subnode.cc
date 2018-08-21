@@ -48,6 +48,7 @@ namespace apollo {
                     shared_data_manager_->GetSharedData("PylonCameraLeftSideObjectData"));
             camera_shared_left_side_data_ = static_cast<PylonCameraLeftSideSharedData *>(
                     shared_data_manager_->GetSharedData("PylonCameraLeftSideSharedData"));
+
           }if (fields.count("camera_orientation") && fields["camera_orientation"]=="right"){
             AdapterManager::AddImageRightCallback(&PylonCameraProcessSubnode::ImgCallback,
                                                            this);
