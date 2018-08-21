@@ -44,6 +44,10 @@ OBJECT_SHARED_DATA(CameraObjectData);
 OBJECT_SHARED_DATA(PylonCameraObjectData);
 OBJECT_SHARED_DATA(PylonCameraRightSideObjectData);
 OBJECT_SHARED_DATA(PylonCameraLeftSideObjectData);
+OBJECT_SHARED_DATA(PylonCameraRightObjectData);
+OBJECT_SHARED_DATA(PylonCameraLeftObjectData);
+OBJECT_SHARED_DATA(PylonCameraLeftBackwardsSideObjectData);
+OBJECT_SHARED_DATA(PylonCameraRightBackwardsSideObjectData);
 OBJECT_SHARED_DATA(CIPVObjectData);
 OBJECT_SHARED_DATA(UltrasonicObjectData);
 
@@ -53,6 +57,10 @@ REGISTER_SHAREDDATA(CameraObjectData);
 REGISTER_SHAREDDATA(PylonCameraObjectData);
 REGISTER_SHAREDDATA(PylonCameraRightSideObjectData);
 REGISTER_SHAREDDATA(PylonCameraLeftSideObjectData);
+REGISTER_SHAREDDATA(PylonCameraRightObjectData);
+REGISTER_SHAREDDATA(PylonCameraLeftObjectData);
+REGISTER_SHAREDDATA(PylonCameraLeftBackwardsSideObjectData);
+REGISTER_SHAREDDATA(PylonCameraRightBackwardsSideObjectData);
 REGISTER_SHAREDDATA(CIPVObjectData);
 REGISTER_SHAREDDATA(UltrasonicObjectData);
 
