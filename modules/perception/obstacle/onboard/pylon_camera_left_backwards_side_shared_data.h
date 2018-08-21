@@ -28,20 +28,20 @@
 namespace apollo {
     namespace perception {
 
-        class PylonCameraLeftSideBackwardsSharedData : public CommonSharedData<CameraItem> {
+        class PylonCameraLeftBackwardsSideSharedData : public CommonSharedData<CameraItem> {
         public:
-            PylonCameraLeftSideBackwardsSharedData() = default;
-            virtual ~PylonCameraLeftSideBackwardsSharedData() = default;
+            PylonCameraLeftBackwardsSideSharedData() = default;
+            virtual ~PylonCameraLeftBackwardsSideSharedData() = default;
 
             std::string name() const override {
-                return "PylonCameraLeftSideBackwardsSharedData";
+                return "PylonCameraLeftBackwardsSideSharedData";
             }
 
         private:
-            DISALLOW_COPY_AND_ASSIGN(PylonCameraLeftSideBackwardsSharedData);
+            DISALLOW_COPY_AND_ASSIGN(PylonCameraLeftBackwardsSideSharedData);
         };
 
-        REGISTER_SHAREDDATA(PylonCameraLeftSideBackwardsSharedData);
+        REGISTER_SHAREDDATA(PylonCameraLeftBackwardsSideSharedData);
 
     }  // namespace perception
 }  // namespace apollo
