@@ -52,13 +52,13 @@ int main(int argc, char** argv)
           sensor_msgs::ImagePtr msg_left = cv_bridge::CvImage(std_msgs::Header(), "bgr8", image_left).toImageMsg();
           sensor_msgs::ImagePtr msg_right = cv_bridge::CvImage(std_msgs::Header(), "bgr8", image_right).toImageMsg();
 
-            pub_front_left.publish(msg_left);
-            pub_left.publish(msg_left);
-            pub_left_backwards.publish(msg_left);
-            pub_front_right.publish(msg_right);
-            pub_right.publish(msg_right);
-            pub_right_backwards.publish(msg_right);
-            pub_front.publish(msg_right);
+          pub_front_left.publish(msg_left);
+          pub_left.publish(msg_left);
+          pub_left_backwards.publish(msg_left);
+          pub_front_right.publish(msg_right);
+          pub_right.publish(msg_right);
+          pub_right_backwards.publish(msg_right);
+          pub_front.publish(msg_right);
 
           ros::spinOnce();
           loop_rate.sleep();
