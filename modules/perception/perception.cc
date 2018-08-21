@@ -91,16 +91,16 @@ void Perception::RegistAllOnboardClass() {
   RegisterFactoryPylonCameraLeftSideObjectData();
   RegisterFactoryPylonCameraRightObjectData();
   RegisterFactoryPylonCameraLeftObjectData();
-  RegisterFactoryPylonCameraLeftSideBackwardsObjectData();
-  RegisterFactoryPylonCameraRightSideBackwardsObjectData();
+  RegisterFactoryPylonCameraLeftBackwardsSideObjectData();
+  RegisterFactoryPylonCameraRightBackwardsSideObjectData();
 
   RegisterFactoryPylonCameraSharedData();
   RegisterFactoryPylonCameraRightSideSharedData();
   RegisterFactoryPylonCameraLeftSideSharedData();
   RegisterFactoryPylonCameraRightSharedData();
   RegisterFactoryPylonCameraLeftSharedData();
-  RegisterFactoryPylonCameraLeftSideBackwardsSharedData();
-  RegisterFactoryPylonCameraRightSideBackwardsSharedData();
+  RegisterFactoryPylonCameraLeftBackwardsSideSharedData();
+  RegisterFactoryPylonCameraRightBackwardsSideSharedData();
 
   /// register subnode
   RegisterFactoryLidar64ProcessSubnode();
