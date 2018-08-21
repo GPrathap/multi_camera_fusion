@@ -42,12 +42,14 @@ using apollo::perception::lowcostvisualizer::BaseVisualizer;
 
 
 bool TrackVisualizationSubnode::InitInternal() {
+  AERROR << "trying to init modules";
   CHECK(shared_data_manager_ != NULL);
   // init stream
   if (!InitStream()) {
     AERROR << "Failed to init stream.";
     return false;
   }
+  AERROR << "trying to init 2";
   std::unordered_map<std::string, std::string> reserve_field_map;
   if (!SubnodeHelper::ParseReserveField(reserve_, &reserve_field_map)) {
     AERROR << "Failed to parse reserve string: " << reserve_;
@@ -94,19 +96,16 @@ bool TrackVisualizationSubnode::InitInternal() {
       AINFO << "Init shared datas successfully, data: "
             << camera_shared_left_side_data_->name();
     }else if( reserve_field_map["camera_orientation"] == "right"){
-      AERROR << "1----1";
       camera_object_right_data_ = static_cast<PylonCameraRightObjectData*>(
               shared_data_manager_->GetSharedData("PylonCameraRightObjectData"));
-      AERROR << "1----2";
       camera_shared_right_data_ = static_cast<PylonCameraRightSharedData*>(
               shared_data_manager_->GetSharedData("PylonCameraRightSharedData"));
-      AERROR << "1----3";
       if (camera_object_right_data_ == nullptr) {
         AERROR << "Failed to get  camera_object_right_data_ object.";
         return false;
       }
       AINFO << "Init object camera_shared_right_data_ successfully, data: "
-            << camera_object_left_side_data_->name();
+            << camera_object_right_data_->name();
 
       if (camera_shared_right_data_ == nullptr) {
         AERROR << "Failed to get  camera_shared_right_data_.";
@@ -115,13 +114,12 @@ bool TrackVisualizationSubnode::InitInternal() {
       AINFO << "Init shared camera_shared_right_data_ successfully, data: "
             << camera_shared_right_data_->name();
     }else if( reserve_field_map["camera_orientation"] == "left"){
-      AERROR << "----1";
       camera_object_left_data_ = static_cast<PylonCameraLeftObjectData *>(
               shared_data_manager_->GetSharedData("PylonCameraLeftObjectData"));
-      AERROR << "----2";
+
       camera_shared_left_data_ = static_cast<PylonCameraLeftSharedData *>(
               shared_data_manager_->GetSharedData("PylonCameraLeftSharedData"));
-      AERROR << "----3";
+
       if (camera_object_left_data_ == nullptr) {
         AERROR << "Failed to get  camera_object_left_data_ object.";
         return false;
