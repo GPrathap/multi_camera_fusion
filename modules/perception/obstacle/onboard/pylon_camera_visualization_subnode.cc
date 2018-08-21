@@ -163,7 +163,7 @@ bool TrackVisualizationSubnode::InitInternal() {
         return false;
       }
       AINFO << "Init object camera_object_left_backwards_side_data_ successfully, data: "
-            << camera_object_right_backwards_side_data_->name();
+            << camera_object_left_backwards_side_data_->name();
 
       if (camera_shared_left__backwards_side_data_ == nullptr) {
         AERROR << "Failed to get  camera_shared_left__backwards_side_data_.";
