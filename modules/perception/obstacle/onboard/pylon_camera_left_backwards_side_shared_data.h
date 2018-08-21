@@ -30,7 +30,7 @@ namespace apollo {
 
         class PylonCameraLeftSideBackwardsSharedData : public CommonSharedData<CameraItem> {
         public:
-            PylonCameraLeftSideSharedData() = default;
+            PylonCameraLeftSideBackwardsSharedData() = default;
             virtual ~PylonCameraLeftSideBackwardsSharedData() = default;
 
             std::string name() const override {
