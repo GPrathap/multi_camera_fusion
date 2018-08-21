@@ -215,7 +215,7 @@ namespace apollo {
           camera_item_ptr->image_src_mat = img.clone();
           mask.copyTo(out_objs->camera_frame_supplement->lane_map);
           PublishDataAndEvent(timestamp, out_objs, camera_item_ptr);
-          PERF_BLOCK_END("PylonCameraProcessSubnode publish in DAG");
+          PERF_BLOCK_END("PylonCameraProcess Subnode publish in DAG");
 
           if (pb_obj_) PublishPerceptionPbObj(out_objs);
           if (pb_ln_msk_) PublishPerceptionPbLnMsk(mask, message);
