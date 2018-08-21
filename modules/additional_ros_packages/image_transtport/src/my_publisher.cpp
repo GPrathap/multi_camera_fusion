@@ -26,12 +26,21 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "image_publisher");
   ros::NodeHandle nh;
   image_transport::ImageTransport it(nh);
-  image_transport::Publisher pub_left = it.advertise("/apollo/sensor/camera/perception/image_front_left_side", 1);
-  image_transport::Publisher pub_right = it.advertise("/apollo/sensor/camera/perception/image_front_right_side", 1);
+
+  image_transport::Publisher pub_front_left = it.advertise("/apollo/sensor/camera/perception/image_front_left_side", 1);
+  image_transport::Publisher pub_front_right = it.advertise("/apollo/sensor/camera/perception/image_front_right_side", 1);
+  image_transport::Publisher pub_left = it.advertise("/apollo/sensor/camera/perception/image_left", 1);
+  image_transport::Publisher pub_right = it.advertise("/apollo/sensor/camera/perception/image_right", 1);
+  image_transport::Publisher pub_left_backwards = it.advertise("/apollo/sensor/camera/perception/image_left_backwards", 1);
+  image_transport::Publisher pub_right_backwards = it.advertise("/apollo/sensor/camera/perception/image_right_backwards", 1);
+  image_transport::Publisher pub_front = it.advertise("/apollo/sensor/camera/perception/image_front_camera", 1);
+
+
   vector<std::string> files_left = globVector(std::string(argv[1])+"/*");
   vector<std::string> files_right = globVector(std::string(argv[2])+"/*");
-  std::cout<< "Number of images to be sent" << files_left.size() << std::endl;
-  std::cout<< "Number of images to be sent" << files_right.size() << std::endl;
+
+  std::cout<< "Number of images to be sent: " << files_left.size() << std::endl;
+
   ros::Rate loop_rate(0.25);
     unsigned int i=0;
      while (nh.ok()) {
@@ -42,8 +51,15 @@ int main(int argc, char** argv)
           cv::Mat image_right = cv::imread(files_right.at(i), CV_LOAD_IMAGE_COLOR);
           sensor_msgs::ImagePtr msg_left = cv_bridge::CvImage(std_msgs::Header(), "bgr8", image_left).toImageMsg();
           sensor_msgs::ImagePtr msg_right = cv_bridge::CvImage(std_msgs::Header(), "bgr8", image_right).toImageMsg();
-          pub_left.publish(msg_left);
-          pub_right.publish(msg_right);
+
+            pub_front_left.publish(msg_left);
+            pub_left.publish(msg_left);
+            pub_left_backwards.publish(msg_left);
+            pub_front_right.publish(msg_right);
+            pub_right.publish(msg_right);
+            pub_right_backwards.publish(msg_right);
+            pub_front.publish(msg_right);
+
           ros::spinOnce();
           loop_rate.sleep();
           i++;
