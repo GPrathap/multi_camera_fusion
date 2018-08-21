@@ -29,6 +29,10 @@
 #include "modules/perception/obstacle/onboard/pylon_camera_shared_data.h"
 #include "modules/perception/obstacle/onboard/pylon_camera_right_side_shared_data.h"
 #include "modules/perception/obstacle/onboard/pylon_camera_left_side_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_right_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_left_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_right_backwards_side_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_left_backwards_side_shared_data.h"
 #include "modules/perception/obstacle/onboard/cipv_subnode.h"
 #include "modules/perception/obstacle/onboard/fusion_shared_data.h"
 #include "modules/perception/obstacle/onboard/fusion_subnode.h"
@@ -85,9 +89,18 @@ void Perception::RegistAllOnboardClass() {
   RegisterFactoryPylonCameraObjectData();
   RegisterFactoryPylonCameraRightSideObjectData();
   RegisterFactoryPylonCameraLeftSideObjectData();
+  RegisterFactoryPylonCameraRightObjectData();
+  RegisterFactoryPylonCameraLeftObjectData();
+  RegisterFactoryPylonCameraLeftSideBackwardsObjectData();
+  RegisterFactoryPylonCameraRightSideBackwardsObjectData();
+
   RegisterFactoryPylonCameraSharedData();
   RegisterFactoryPylonCameraRightSideSharedData();
   RegisterFactoryPylonCameraLeftSideSharedData();
+  RegisterFactoryPylonCameraRightSharedData();
+  RegisterFactoryPylonCameraLeftSharedData();
+  RegisterFactoryPylonCameraLeftSideBackwardsSharedData();
+  RegisterFactoryPylonCameraRightSideBackwardsSharedData();
 
   /// register subnode
   RegisterFactoryLidar64ProcessSubnode();

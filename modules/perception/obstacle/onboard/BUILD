@@ -252,7 +252,11 @@ cc_library(
         "lane_shared_data.h",
         "pylon_camera_shared_data.h",
         "pylon_camera_left_side_shared_data.h",
-        "pylon_camera_right_side_shared_data.h"
+        "pylon_camera_right_side_shared_data.h",
+        "pylon_camera_left_backwards_side_shared_data.h",
+        "pylon_camera_right_backwards_side_shared_data.h",
+        "pylon_camera_left_shared_data.h",
+        "pylon_camera_right_shared_data.h"
     ],
     deps = [
         "//modules/perception/obstacle/base",
