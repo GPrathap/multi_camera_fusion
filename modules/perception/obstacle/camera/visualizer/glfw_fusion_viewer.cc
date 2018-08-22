@@ -276,10 +276,12 @@ void GLFWFusionViewer::set_camera_para(Eigen::Vector3d i_position,
 }
 
 bool GLFWFusionViewer::window_init() {
+  std::cerr << "window_init trying to create glfw window!\n";
   if (!glfwInit()) {
     std::cerr << "Failed to initialize glfw !\n";
     return false;
   }
+  std::cerr << "window_init_after glfw init trying to create glfw window!\n";
 
   // window_ = glfwCreateWindow(win_width_, win_height_, "opengl_visualizer",
   // nullptr, nullptr);
