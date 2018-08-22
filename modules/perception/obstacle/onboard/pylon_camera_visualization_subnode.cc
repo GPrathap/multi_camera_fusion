@@ -543,6 +543,36 @@ void TrackVisualizationSubnode::SetFrameContent(const Event& event,
           AERROR << "Failed to get shared data: " << camera_shared_right_side_data_->name();
           return;
         }
+      }else if(camera_orientation == "right"){
+        if (!camera_shared_right_data_->Get(data_key, &camera_item) ||
+            camera_item == nullptr) {
+          AERROR << "Failed to get shared data: " << camera_shared_right_data_->name();
+          return;
+        }
+      }else if(camera_orientation == "left"){
+        if (!camera_shared_left_data_->Get(data_key, &camera_item) ||
+            camera_item == nullptr) {
+          AERROR << "Failed to get shared data: " << camera_shared_left_data_->name();
+          return;
+        }
+      }else if(camera_orientation == "right_backwards_side"){
+        if (!camera_shared_right__backwards_side_data_->Get(data_key, &camera_item) ||
+            camera_item == nullptr) {
+          AERROR << "Failed to get shared data: " << camera_shared_right__backwards_side_data_->name();
+          return;
+        }
+      }else if(camera_orientation == "left_backwards_side"){
+        if (!camera_shared_left__backwards_side_data_->Get(data_key, &camera_item) ||
+            camera_item == nullptr) {
+          AERROR << "Failed to get shared data: " << camera_shared_left__backwards_side_data_->name();
+          return;
+        }
+      }else if(camera_orientation == "front"){
+        if (!cam_shared_data_->Get(data_key, &camera_item) ||
+            camera_item == nullptr) {
+          AERROR << "Failed to get shared data: " << cam_shared_data_->name();
+          return;
+        }
       }
 
       cv::Mat clone_image = camera_item->image_src_mat;

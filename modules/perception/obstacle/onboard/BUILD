@@ -243,7 +243,12 @@ cc_library(
         "fusion_shared_data.cc",
         "pylon_camera_shared_data.cc",
         "pylon_camera_left_side_shared_data.cc",
-        "pylon_camera_right_side_shared_data.cc"
+        "pylon_camera_right_side_shared_data.cc",
+        "pylon_camera_left_side_shared_data.cc",
+        "pylon_camera_left_shared_data.cc",
+        "pylon_camera_right_shared_data.cc",
+        "pylon_camera_left_backwards_side_shared_data.cc",
+        "pylon_camera_right_backwards_side_shared_data.cc",
     ],
     hdrs = [
         "common_camera_shared_data.h",
