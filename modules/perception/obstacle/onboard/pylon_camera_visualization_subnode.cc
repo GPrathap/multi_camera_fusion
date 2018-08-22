@@ -645,7 +645,7 @@ apollo::common::Status TrackVisualizationSubnode::ProcEvents() {
         frame_visualizer_->init();
         init_ = true;
       }
-      AERROR << "ProcEvents after init ...";
+      AERROR << "ProcEvents after after init ...";
       frame_visualizer_->update_camera_system(&content_);
       frame_visualizer_->render(&content_);
     }

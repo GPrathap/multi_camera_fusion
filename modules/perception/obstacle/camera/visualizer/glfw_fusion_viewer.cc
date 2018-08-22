@@ -281,10 +281,10 @@ bool GLFWFusionViewer::window_init() {
 //  window_initializer_lock.lock();
 //  if (is_glfw_initialized == false){
     std::cerr << "Still glfw not initialized\n";
-    if (!glfwInit()) {
-      std::cerr << "Failed to initialize glfw !\n";
-      return false;
-    }
+//    if (!glfwInit()) {
+//      std::cerr << "Failed to initialize glfw !\n";
+//      return false;
+//    }
 //    is_glfw_initialized = true;
 //  }
 //  window_initializer_lock.unlock();
