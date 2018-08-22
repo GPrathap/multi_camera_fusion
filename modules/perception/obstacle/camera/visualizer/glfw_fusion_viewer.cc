@@ -284,7 +284,7 @@ bool GLFWFusionViewer::window_init() {
     return false;
   }
   window_initializer_lock.unlock();
-  std::cerr << "window_init_after glfw init trying to create glfw window!\n";
+  std::cerr << "window_init falling to create glfw window!\n";
 
   // window_ = glfwCreateWindow(win_width_, win_height_, "opengl_visualizer",
   // nullptr, nullptr);
