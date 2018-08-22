@@ -252,6 +252,7 @@ class GLFWFusionViewer {
   bool show_help_text;
   std::string help_str;
   std::mutex window_initializer_lock;
+  bool is_glfw_initialized = false;
 
   void get_class_color(int cls, float rgb[3]);
 
