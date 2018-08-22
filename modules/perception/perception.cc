@@ -61,7 +61,7 @@ Status Perception::Init() {
 
   if (!glfwInit()) {
     std::cerr << "Failed to initialize glfw !\n";
-    return false;
+    return Status(ErrorCode::PERCEPTION_ERROR, "failed to init glfw");
   }
 
   AdapterManager::Init(FLAGS_perception_adapter_config_filename);
