@@ -336,6 +336,21 @@ namespace apollo {
           }else if(camera_orientation == "right_side"){
             camera_object_right_side_data_->Add(key, sensor_objects);
             camera_shared_right_side_data_->Add(key, camera_item);
+          }else if(camera_orientation == "left"){
+            camera_object_left_data_->Add(key, sensor_objects);
+            camera_shared_left_data_->Add(key, camera_item);
+          }else if(camera_orientation == "right"){
+            camera_object_right_data_->Add(key, sensor_objects);
+            camera_shared_right_data_->Add(key, camera_item);
+          }else if(camera_orientation == "left_backwards_side"){
+            camera_object_left_backwards_side_data_->Add(key, sensor_objects);
+            camera_shared_left__backwards_side_data_->Add(key, camera_item);
+          }else if(camera_orientation == "right_backwards_side"){
+            camera_object_right_backwards_side_data_->Add(key, sensor_objects);
+            camera_shared_right__backwards_side_data_->Add(key, camera_item);
+          }else if(camera_orientation == "front"){
+            cam_obj_data_->Add(key, sensor_objects);
+            cam_shared_data_->Add(key, camera_item);
           }
 
           for (size_t idx = 0; idx < pub_meta_events_.size(); ++idx) {
