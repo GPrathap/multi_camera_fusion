@@ -29,6 +29,7 @@
 #include <string>
 #include <vector>
 
+
 #include "gflags/gflags.h"
 #include "modules/common/util/file.h"
 #include "modules/perception/lib/config_manager/calibration_config_manager.h"
@@ -277,10 +278,12 @@ void GLFWFusionViewer::set_camera_para(Eigen::Vector3d i_position,
 
 bool GLFWFusionViewer::window_init() {
   std::cerr << "window_init trying to create glfw window!\n";
+  window_initializer_lock.lock();
   if (!glfwInit()) {
     std::cerr << "Failed to initialize glfw !\n";
     return false;
   }
+  window_initializer_lock.unlock();
   std::cerr << "window_init_after glfw init trying to create glfw window!\n";
 
   // window_ = glfwCreateWindow(win_width_, win_height_, "opengl_visualizer",
