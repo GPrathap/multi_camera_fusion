@@ -409,6 +409,7 @@ void TrackVisualizationSubnode::SetCameraContent(const std::string& data_key,
   }
 
   cv::Mat image = camera_item->image_src_mat.clone();
+  AERROR << "size of the image : " << image.rows;
   content->set_image_content(timestamp, image);
 
   std::shared_ptr<SensorObjects> objs;
