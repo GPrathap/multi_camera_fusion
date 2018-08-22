@@ -426,31 +426,31 @@ void TrackVisualizationSubnode::SetCameraContent(const std::string& data_key,
       return;
     }
   }else if(camera_orientation == "right"){
-    if (!camera_object_right_data_->Get(data_key, &camera_item) ||
+    if (!camera_object_right_data_->Get(data_key, &objs) ||
         camera_item == nullptr) {
       AERROR << "Failed to get shared data: " << camera_object_right_data_->name();
       return;
     }
   }else if(camera_orientation == "left"){
-    if (!camera_object_left_data_->Get(data_key, &camera_item) ||
+    if (!camera_object_left_data_->Get(data_key, &objs) ||
         camera_item == nullptr) {
       AERROR << "Failed to get shared data: " << camera_object_left_data_->name();
       return;
     }
   }else if(camera_orientation == "right_backwards_side"){
-    if (!camera_object_right_backwards_side_data_->Get(data_key, &camera_item) ||
+    if (!camera_object_right_backwards_side_data_->Get(data_key, &objs) ||
         camera_item == nullptr) {
       AERROR << "Failed to get shared data: " << camera_object_right_backwards_side_data_->name();
       return;
     }
   }else if(camera_orientation == "left_backwards_side"){
-    if (!camera_object_left_backwards_side_data_->Get(data_key, &camera_item) ||
+    if (!camera_object_left_backwards_side_data_->Get(data_key, &objs) ||
         camera_item == nullptr) {
       AERROR << "Failed to get shared data: " << camera_object_left_backwards_side_data_->name();
       return;
     }
   }else if(camera_orientation == "front"){
-    if (!cam_object_data_->Get(data_key, &camera_item) ||
+    if (!cam_object_data_->Get(data_key, &objs) ||
         camera_item == nullptr) {
       AERROR << "Failed to get shared data: " << cam_object_data_->name();
       return;
