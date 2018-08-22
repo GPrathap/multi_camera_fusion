@@ -450,9 +450,9 @@ void TrackVisualizationSubnode::SetCameraContent(const std::string& data_key,
       return;
     }
   }else if(camera_orientation == "front"){
-    if (!cam_object_data_->Get(data_key, &objs) ||
+    if (!cam_obj_data_->Get(data_key, &objs) ||
         camera_item == nullptr) {
-      AERROR << "Failed to get shared data: " << cam_object_data_->name();
+      AERROR << "Failed to get shared data: " << cam_obj_data_->name();
       return;
     }
   }
