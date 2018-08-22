@@ -165,7 +165,7 @@ bool TrackVisualizationSubnode::InitInternal() {
         AERROR << "Failed to get  camera_shared_left__backwards_side_data_.";
         return false;
       }
-      AINFO << "Init shared camera_shared_right__backwards_side_data_ successfully, data: "
+      AINFO << "Init shared camera_shared_left__backwards_side_data_ successfully, data: "
             << camera_shared_left__backwards_side_data_->name();
     }else if( reserve_field_map["camera_orientation"] == "front"){
       cam_obj_data_ = static_cast<PylonCameraObjectData *>(
@@ -183,7 +183,7 @@ bool TrackVisualizationSubnode::InitInternal() {
         AERROR << "Failed to get  cam_shared_data_.";
         return false;
       }
-      AINFO << "Init shared camera_shared_right__backwards_side_data_ successfully, data: "
+      AINFO << "Init shared front view camera successfully, data: "
             << cam_shared_data_->name();
     }
 
@@ -376,25 +376,87 @@ void TrackVisualizationSubnode::SetCameraContent(const std::string& data_key,
       AERROR << "Failed to get shared data: " << camera_shared_right_side_data_->name();
       return;
     }
+  }else if(camera_orientation == "right"){
+    if (!camera_shared_right_data_->Get(data_key, &camera_item) ||
+        camera_item == nullptr) {
+      AERROR << "Failed to get shared data: " << camera_shared_right_data_->name();
+      return;
+    }
+  }else if(camera_orientation == "left"){
+    if (!camera_shared_left_data_->Get(data_key, &camera_item) ||
+        camera_item == nullptr) {
+      AERROR << "Failed to get shared data: " << camera_shared_left_data_->name();
+      return;
+    }
+  }else if(camera_orientation == "right_backwards_side"){
+    if (!camera_shared_right__backwards_side_data_->Get(data_key, &camera_item) ||
+        camera_item == nullptr) {
+      AERROR << "Failed to get shared data: " << camera_shared_right__backwards_side_data_->name();
+      return;
+    }
+  }else if(camera_orientation == "left_backwards_side"){
+    if (!camera_shared_left__backwards_side_data_->Get(data_key, &camera_item) ||
+        camera_item == nullptr) {
+      AERROR << "Failed to get shared data: " << camera_shared_left__backwards_side_data_->name();
+      return;
+    }
+  }else if(camera_orientation == "front"){
+    if (!cam_shared_data_->Get(data_key, &camera_item) ||
+        camera_item == nullptr) {
+      AERROR << "Failed to get shared data: " << cam_shared_data_->name();
+      return;
+    }
   }
 
   cv::Mat image = camera_item->image_src_mat.clone();
   content->set_image_content(timestamp, image);
 
   std::shared_ptr<SensorObjects> objs;
+
   if(camera_orientation == "left_side"){
     if (!camera_object_left_side_data_->Get(data_key, &objs) ||
-            objs == nullptr) {
+        objs == nullptr) {
       AERROR << "Failed to get shared data: " << camera_object_left_side_data_->name();
       return;
     }
   }else if(camera_orientation == "right_side"){
     if (!camera_object_right_side_data_->Get(data_key, &objs) ||
-            objs == nullptr) {
+        objs == nullptr) {
       AERROR << "Failed to get shared data: " << camera_object_right_side_data_->name();
       return;
     }
+  }else if(camera_orientation == "right"){
+    if (!camera_object_right_data_->Get(data_key, &camera_item) ||
+        camera_item == nullptr) {
+      AERROR << "Failed to get shared data: " << camera_object_right_data_->name();
+      return;
+    }
+  }else if(camera_orientation == "left"){
+    if (!camera_object_left_data_->Get(data_key, &camera_item) ||
+        camera_item == nullptr) {
+      AERROR << "Failed to get shared data: " << camera_object_left_data_->name();
+      return;
+    }
+  }else if(camera_orientation == "right_backwards_side"){
+    if (!camera_object_right_backwards_side_data_->Get(data_key, &camera_item) ||
+        camera_item == nullptr) {
+      AERROR << "Failed to get shared data: " << camera_object_right_backwards_side_data_->name();
+      return;
+    }
+  }else if(camera_orientation == "left_backwards_side"){
+    if (!camera_object_left_backwards_side_data_->Get(data_key, &camera_item) ||
+        camera_item == nullptr) {
+      AERROR << "Failed to get shared data: " << camera_object_left_backwards_side_data_->name();
+      return;
+    }
+  }else if(camera_orientation == "front"){
+    if (!cam_object_data_->Get(data_key, &camera_item) ||
+        camera_item == nullptr) {
+      AERROR << "Failed to get shared data: " << cam_object_data_->name();
+      return;
+    }
   }
+
   content->set_camera_content(timestamp, objs->sensor2world_pose,
                               objs->sensor2world_pose_static, objs->objects,
                               (*(objs->camera_frame_supplement)));
