@@ -3,10 +3,7 @@ project(image_publisher_node)
 
 find_package(catkin REQUIRED COMPONENTS cv_bridge image_transport message_generation sensor_msgs)
 
-# add the resized image message
-add_message_files(DIRECTORY msg
-   FILES ResizedImage.msg
-)
+
 generate_messages(DEPENDENCIES sensor_msgs)
 
 catkin_package(CATKIN_DEPENDS cv_bridge image_transport message_runtime sensor_msgs)
