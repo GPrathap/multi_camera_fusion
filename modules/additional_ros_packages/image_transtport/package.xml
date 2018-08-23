@@ -1,7 +1,7 @@
 <package>
-  <name>image_transport_tutorial</name>
+  <name>image_publisher_node</name>
   <version>0.0.0</version>
-  <description>Tutorial for image_transport. This is useful for the tutorials at http://wiki.ros.org/image_transport/Tutorials/</description>
+  <description>Sending images for selected topics</description>
   <author>Vincent Rabaud</author>
   <maintainer email="vincent.rabaud@gmail.com">Vincent Rabaud</maintainer>
   <license>Apache 2.0</license>
