@@ -273,7 +273,6 @@ function main(){
         -e DOCKER_GRP_ID=$GRP_ID \
         -e DOCKER_IMG=$IMG \
         $(local_volumes) \
-        #--net host \
         -w /apollo \
         --add-host in_dev_docker:127.0.0.1 \
         --add-host ${LOCAL_HOST}:127.0.0.1 \
