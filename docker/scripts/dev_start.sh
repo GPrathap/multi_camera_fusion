@@ -187,8 +187,8 @@ function local_volumes() {
              -v $HOME/.cache:${DOCKER_HOME}/.cache"
     case "$(uname -s)" in
         Linux)
-            volumes="${volumes} -v /dataset:/dataset \
-				                -v /dev:/dev \
+            volumes="${volumes} -v /dev:/dev \
+                                -v /dataset:/dataset \
                                 -v /media:/media \
                                 -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
                                 -v /etc/localtime:/etc/localtime:ro \
@@ -256,14 +256,6 @@ function main(){
     docker pull ${YOLO3D_VOLUME_IMAGE}
     docker run -it -d --rm --name ${YOLO3D_VOLUME} ${YOLO3D_VOLUME_IMAGE}
 
-    XAUTH=/tmp/.docker.xauth
-    xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | sudo xauth -f $XAUTH nmerge -
-    sudo chmod 777 $XAUTH
-    X11PORT=`echo $DISPLAY | sed 's/^[^:]*:\([^\.]\+\).*/\1/'`
-    TCPPORT=`expr 6000 + $X11PORT`
-    sudo ufw allow from 172.17.0.0/16 to any port $TCPPORT proto tcp
-    DISPLAY=`echo $DISPLAY | sed 's/^[^:]*\(.*\)/172.17.0.1\1/'`
-
     info "Starting docker container \"apollo_dev\" ..."
     docker run -it \
         -d \
@@ -273,16 +265,15 @@ function main(){
         ${MAP_VOLUME_CONF} \
         --volumes-from ${LOCALIZATION_VOLUME} \
         --volumes-from ${YOLO3D_VOLUME} \
-        -e DISPLAY=`echo $DISPLAY | sed 's/^[^:]*\(.*\)/172.17.0.1\1/'` \
+        -e DISPLAY=$display \
         -e DOCKER_USER=$USER \
         -e USER=$USER \
         -e DOCKER_USER_ID=$USER_ID \
         -e DOCKER_GRP="$GRP" \
         -e DOCKER_GRP_ID=$GRP_ID \
         -e DOCKER_IMG=$IMG \
-        -v $XAUTH:$XAUTH \
-        -e XAUTHORITY=$XAUTH \
         $(local_volumes) \
+        --net host \
         -w /apollo \
         --add-host in_dev_docker:127.0.0.1 \
         --add-host ${LOCAL_HOST}:127.0.0.1 \
