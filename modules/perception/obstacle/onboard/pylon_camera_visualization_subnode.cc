@@ -364,7 +364,6 @@ void TrackVisualizationSubnode::SetCameraContent(const std::string& data_key,
                                             FrameContent* content,
                                             double timestamp) {
   std::shared_ptr<CameraItem> camera_item;
-  AERROR << "inside the camera content";
   if(camera_orientation == "left_side"){
     if (!camera_shared_left_side_data_->Get(data_key, &camera_item) ||
         camera_item == nullptr) {
@@ -612,7 +611,7 @@ void TrackVisualizationSubnode::SetFrameContent(const Event& event,
 
 apollo::common::Status TrackVisualizationSubnode::ProcEvents() {
   for (auto event_meta : sub_meta_events_) {
-     AINFO <<"Vis_sub: event_meta id: " << event_meta.event_id;
+    AINFO <<"Vis_sub: event_meta id: " << event_meta.event_id;
     std::vector<Event> events;
     if (!SubscribeEvents(event_meta, &events)) {
       return Status(ErrorCode::PERCEPTION_ERROR, "Failed to proc events.");
@@ -633,19 +632,15 @@ apollo::common::Status TrackVisualizationSubnode::ProcEvents() {
       AINFO << "event: " << events[j].event_id << " device_id:" << device_id
             << " timestamp: " << timestamp << "data key" << data_key;
       AINFO << std::fixed << std::setprecision(64) << timestamp;
-      AERROR << "ProcEvents";
       SetFrameContent(events[j], device_id, data_key, timestamp, &content_);
-      AERROR << "ProcEvents after";
     }
 
     if (event_meta.event_id == vis_driven_event_id_) {
       // Init of frame_visualizer must be in one thread with render,
-      AERROR << "ProcEvents before init ...";
       if (!init_) {
         frame_visualizer_->init();
         init_ = true;
       }
-      AERROR << "ProcEvents after after init ...";
       frame_visualizer_->update_camera_system(&content_);
       frame_visualizer_->render(&content_);
     }

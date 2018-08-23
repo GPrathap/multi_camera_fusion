@@ -188,7 +188,7 @@ function local_volumes() {
     case "$(uname -s)" in
         Linux)
             volumes="${volumes} -v /dataset:/dataset \
-				-v /dev:/dev \
+				                -v /dev:/dev \
                                 -v /media:/media \
                                 -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
                                 -v /etc/localtime:/etc/localtime:ro \
@@ -265,7 +265,7 @@ function main(){
         ${MAP_VOLUME_CONF} \
         --volumes-from ${LOCALIZATION_VOLUME} \
         --volumes-from ${YOLO3D_VOLUME} \
-        -e DISPLAY=$display \
+        -e DISPLAY=`echo $DISPLAY | sed 's/^[^:]*\(.*\)/172.17.0.1\1/'` \
         -e DOCKER_USER=$USER \
         -e USER=$USER \
         -e DOCKER_USER_ID=$USER_ID \
@@ -273,7 +273,7 @@ function main(){
         -e DOCKER_GRP_ID=$GRP_ID \
         -e DOCKER_IMG=$IMG \
         $(local_volumes) \
-        --net host \
+        #--net host \
         -w /apollo \
         --add-host in_dev_docker:127.0.0.1 \
         --add-host ${LOCAL_HOST}:127.0.0.1 \

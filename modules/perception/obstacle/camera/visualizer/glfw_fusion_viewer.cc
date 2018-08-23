@@ -157,7 +157,6 @@ void GLFWFusionViewer::get_class_color(int cls, float rgb[3]) {
 
 bool GLFWFusionViewer::initialize() {
   AINFO << "GLFWFusionViewer::initialize()" << std::endl;
-  AINFO << "GLFWFusionViewer::next" << std::endl;
   if (init_) {
     AINFO << " GLFWFusionViewer is already initialized !" << std::endl;
     return false;
@@ -167,17 +166,14 @@ bool GLFWFusionViewer::initialize() {
     AERROR << " Failed to initialize the window !" << std::endl;
     return false;
   }
-  AINFO << "GLFWFusionViewer::next" << std::endl;
   if (!camera_init()) {
     AERROR << " Failed to initialize the camera !" << std::endl;
     return false;
   }
-  AINFO << "GLFWFusionViewer::next" << std::endl;
   if (!opengl_init()) {
     AERROR << " Failed to initialize opengl !" << std::endl;
     return false;
   }
-  AINFO << "GLFWFusionViewer::next" << std::endl;
   help_str = "H: show help";
 
   // for camera visualization
@@ -193,8 +189,6 @@ bool GLFWFusionViewer::initialize() {
   show_trajectory_ = true;
   draw_lane_objects_ = true;
 
-  AINFO << "GLFWFusionViewer::1" << std::endl;
-
   CalibrationConfigManager* calibration_config_manager =
       Singleton<CalibrationConfigManager>::get();
   CameraCalibrationPtr calibrator =
@@ -202,16 +196,11 @@ bool GLFWFusionViewer::initialize() {
   camera_intrinsic_ = calibrator->get_camera_intrinsic();
   distort_camera_intrinsic_ = calibrator->get_camera_model();
 
-  AINFO << "GLFWFusionViewer::2" << std::endl;
-
   if (show_lane_) {
     lane_post_process_config::ModelConfigs config;
-    AINFO << "GLFWFusionViewer::3" << std::endl;
     CHECK(GetProtoFromFile(FLAGS_cc_lane_post_processor_config_file, &config));
     lane_map_threshold_ = config.lane_map_confidence_thresh();
-    AINFO << "GLFWFusionViewer::4" << std::endl;
     lane_start_y_pos_ = config.start_y_pos();
-    AINFO << "GLFWFusionViewer::5" << std::endl;
     lane_map_scale_ = 1.0f / config.lane_map_scale();
     AINFO << "onboard lane post-processor: "
           << FLAGS_onboard_lane_post_processor;
@@ -277,19 +266,10 @@ void GLFWFusionViewer::set_camera_para(Eigen::Vector3d i_position,
 }
 
 bool GLFWFusionViewer::window_init() {
-  std::cerr << "window_init trying to create glfw window!\n";
-//  window_initializer_lock.lock();
-//  if (is_glfw_initialized == false){
-    std::cerr << "Still glfw not initialized\n";
 //    if (!glfwInit()) {
 //      std::cerr << "Failed to initialize glfw !\n";
 //      return false;
 //    }
-//    is_glfw_initialized = true;
-//  }
-//  window_initializer_lock.unlock();
-  std::cerr << "created glfw window!\n";
-
   // window_ = glfwCreateWindow(win_width_, win_height_, "opengl_visualizer",
   // nullptr, nullptr);
   // glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
@@ -304,6 +284,7 @@ bool GLFWFusionViewer::window_init() {
     glfwTerminate();
     return false;
   }
+  AINFO << "Created glfw window!\n";
 
   glfwMakeContextCurrent(window_);
   glfwSwapInterval(1);
@@ -316,7 +297,6 @@ bool GLFWFusionViewer::window_init() {
   glfwSetMouseButtonCallback(window_, mouse_button_callback);
   glfwSetCursorPosCallback(window_, mouse_cursor_position_callback);
   glfwSetScrollCallback(window_, mouse_scroll_callback);
-  AINFO << "Befor show GL window!";
   glfwShowWindow(window_);
   AINFO << "GL window initialization is done!";
   return true;
