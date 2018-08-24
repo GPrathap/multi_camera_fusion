@@ -56,6 +56,7 @@
 #include "sensor_msgs/Imu.h"
 #include "nav_msgs/Odometry.h"
 #include "car_unity_simulator/CarControl.h"
+#include "car_unity_simulator/CarState.h"
 #include "std_msgs/String.h"
 
 /**
@@ -137,6 +138,7 @@ using RtcmDataAdapter = Adapter<std_msgs::String>;
 using ImuRosAdapter = Adapter<::sensor_msgs::Imu>;
 using OdometryRosAdapter = Adapter<::nav_msgs::Odometry>;
 using UnityCarControlAdapter = Adapter<::car_unity_simulator::CarControl>;
+using UnityCarStateAdapter = Adapter<::car_unity_simulator::CarState>;
 
 }  // namespace adapter
 }  // namespace common

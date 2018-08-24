@@ -40,6 +40,7 @@
 #include "sensor_msgs/Imu.h"
 #include "nav_msgs/Odometry.h"
 #include "car_unity_simulator/CarControl.h"
+#include "car_unity_simulator/CarState.h"
 
 /**
  * @namespace apollo::sim_bridge
@@ -72,6 +73,7 @@ class UnitySimBridge : public SimBridgeBase {
   apollo::common::Status Stop() override;
 
  private:
+  void OnUnityCarState(const car_unity_simulator::CarState &msg);
   void OnImu(const sensor_msgs::Imu &msg);
   void FillImuMsg(const sensor_msgs::Imu &msg, localization::CorrectedImu *imu_msg);
   void OnOdometry(const nav_msgs::Odometry &msg);

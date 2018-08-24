@@ -245,6 +245,8 @@ void AdapterManager::Init(const AdapterManagerConfig &configs) {
       case AdapterConfig::UNITY_CAR_CONTROL:
         EnableUnityCarControl(FLAGS_unity_car_control_topic, config);
         break;
+      case AdapterConfig::UNITY_CAR_STATE:
+        EnableUnityCarState(FLAGS_unity_car_state_topic, config);        
       case AdapterConfig::IMAGE_FRONT_LEFT_SIDE:
         EnableImageFrontLeftSide(FLAGS_image_front_left_side_topic, config);
             break;
