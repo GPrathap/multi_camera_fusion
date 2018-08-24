@@ -67,8 +67,10 @@ message AdapterConfig {
     IMU_ROS = 60;
     ODOMETRY_ROS = 61;
     UNITY_CAR_CONTROL = 62;
-    IMAGE_FRONT_LEFT_SIDE = 63;
-    IMAGE_FRONT_RIGHT_SIDE = 64;
+    UNITY_CAR_STATE = 63;
+    IMAGE_FRONT_LEFT_SIDE = 64;
+    IMAGE_FRONT_RIGHT_SIDE = 65;
+
   }
   enum Mode {
     RECEIVE_ONLY = 0;
