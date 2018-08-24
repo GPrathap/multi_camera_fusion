@@ -5,7 +5,7 @@
 # 3. To override the flag values, you must set it after this file, as all Flags
 #    are evaluated strictly in order.
 
---vehicle_config_path=/apollo/modules/common/data/mkz_config.pb.txt
+--vehicle_config_path=/apollo/modules/common/data/unity_config.pb.txt
 
 --map_dir=/apollo/modules/map/data/sunnyvale_big_loop
 
@@ -14,3 +14,12 @@
 --use_navigation_mode=false
 
 --map_dir=/apollo/modules/map/data/sunnyvale_big_loop
+
+--map_dir=/apollo/modules/map/data/testMap
+
+--map_dir=/apollo/modules/map/data/demo
+
+--map_dir=/apollo/modules/map/data/testMap
+--map_dir=/apollo/modules/map/data/unity_turn_right
+
+

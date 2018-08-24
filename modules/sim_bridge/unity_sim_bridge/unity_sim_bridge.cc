@@ -43,12 +43,33 @@ Status UnitySimBridge::Start() {
   //add callbacks here
   AdapterManager::AddImuRosCallback(&UnitySimBridge::OnImu, this); 
   AdapterManager::AddOdometryRosCallback(&UnitySimBridge::OnOdometry, this);
+  AdapterManager::AddUnityCarStateCallback(&UnitySimBridge::OnUnityCarState, this);
   AdapterManager::AddControlCommandCallback(&UnitySimBridge::OnControl, this);
   return Status::OK();
 }
 
 Status UnitySimBridge::Stop() {
   return Status::OK();
+}
+
+void UnitySimBridge::OnUnityCarState(const car_unity_simulator::CarState &msg) {
+  
+  const auto &vehicle_param = VehicleConfigHelper::GetConfig().vehicle_param();
+  
+  canbus::Chassis chassis;
+
+  chassis.set_error_code(canbus::Chassis::NO_ERROR);
+  chassis.set_driving_mode(canbus::Chassis::COMPLETE_AUTO_DRIVE);
+  chassis.set_gear_location(canbus::Chassis::GEAR_DRIVE);
+  chassis.set_engine_started(true);
+  double vel = sqrt(msg.vel.x*msg.vel.x + msg.vel.y*msg.vel.y);
+  if (vel < 0.1)
+    vel = 0.0; 
+  chassis.set_speed_mps(vel);
+  chassis.set_steering_percentage (msg.steering/ (vehicle_param.max_steer_angle() / M_PI * 180) * 100);
+
+  AdapterManager::PublishChassis(chassis);
+  AINFO << "[OnChassis]: Chassis message publish success!";
 }
 
 void UnitySimBridge::OnImu(const sensor_msgs::Imu &msg) {
@@ -93,26 +114,6 @@ void UnitySimBridge::OnOdometry(const nav_msgs::Odometry &msg)
   // publish gps messages
   AdapterManager::PublishGps(gps_msg);
   AINFO << "[OnGps]: Gps message publish success!";
-
-  /*car_unity_simulator::CarControl control_msg;
-  FillUnityCarControlMsg(&control_msg);
-  AdapterManager::PublishUnityCarControl(control_msg);
-  AINFO << "[OnGps]: Control message publish success!";*/
-
-  canbus::Chassis chassis;
-
-  chassis.set_error_code(canbus::Chassis::NO_ERROR);
-  chassis.set_driving_mode(canbus::Chassis::COMPLETE_AUTO_DRIVE);
-  chassis.set_gear_location(canbus::Chassis::GEAR_DRIVE);
-  chassis.set_engine_started(true);
-  //chassis.mutable_engage_advice()->set_advice(common::EngageAdvice::KEEP_ENGAGED);
-  double vel = sqrt(msg.twist.twist.linear.x*msg.twist.twist.linear.x + msg.twist.twist.linear.y*msg.twist.twist.linear.y);
-  if (vel < 0.1)
-    vel = 0.0; 
-  chassis.set_speed_mps(vel);
-  //chassis.engage_advice().set_advice(common::EngageAdvice_Advice::EngageAdvice_Advice_KEEP_ENGAGED); //NOT WORKING
-  AdapterManager::PublishChassis(chassis);
-  AINFO << "[OnChassis]: Chassis message publish success!";
 }
 
 void UnitySimBridge::FillGpsMsg(const nav_msgs::Odometry &msg, localization::Gps *gps_msg)
@@ -161,11 +162,9 @@ void UnitySimBridge::FillUnityCarControlMsg(const control::ControlCommand &contr
   control_msg->throttle = accel;
 
   double steering_angle =
-      control_cmd.steering_target() / 100.0 * vehicle_param.max_steer_angle();
+      control_cmd.steering_target() / 100.0 * vehicle_param.max_steer_angle() / M_PI * 180;
 
-  const double max_unity_steer_angle = 25.0; //degrees
-
-  control_msg->steering = steering_angle / max_unity_steer_angle;
+  control_msg->steering = steering_angle;
   AINFO << "[CONTROL] Throttle: " << control_msg->throttle << " Steering: "<< control_msg->steering;
 
 }

@@ -306,7 +306,7 @@ class AdapterManager {
   REGISTER_ADAPTER(ImuRos);
   REGISTER_ADAPTER(OdometryRos);  
   REGISTER_ADAPTER(UnityCarControl);
-
+  REGISTER_ADAPTER(UnityCarState);
   REGISTER_ADAPTER(ImageFrontLeftSide);
   REGISTER_ADAPTER(ImageFrontRightSide);
   REGISTER_ADAPTER(ImageRight);

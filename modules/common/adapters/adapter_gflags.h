@@ -85,7 +85,7 @@ DECLARE_string(guardian_topic);
 DECLARE_string(imu_ros_topic);
 DECLARE_string(odom_ros_topic);
 DECLARE_string(unity_car_control_topic);
-
+DECLARE_string(unity_car_state_topic);
 DECLARE_string(image_front_left_side_topic);
 DECLARE_string(image_front_right_side_topic);
 DECLARE_string(image_left_topic);

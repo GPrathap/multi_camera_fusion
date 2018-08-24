@@ -140,6 +140,8 @@ DEFINE_string(odom_ros_topic, "/unity/odometry",
               "odometry ros topic name");
 DEFINE_string(unity_car_control_topic, "/unity/car_control",
               "unity_car_control topic name");
+DEFINE_string(unity_car_state_topic, "/unity/car_state",
+              "unity_car_state topic name");   
 DEFINE_string(image_front_left_side_topic, "/apollo/sensor/camera/perception/image_front_left_side",
               "front left side view camera");
 DEFINE_string(image_front_right_side_topic, "/apollo/sensor/camera/perception/image_front_right_side",
