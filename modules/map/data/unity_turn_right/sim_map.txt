@@ -1,0 +1,3202 @@
+lane {
+  id {
+    id: "1"
+  }
+  central_curve {
+    segment {
+      line_segment {
+        point {
+          x: -86
+          y: 0
+        }
+        point {
+          x: -86
+          y: 99
+        }
+      }
+      length: 100
+    }
+  }
+  left_boundary {
+    curve {
+      segment {
+        line_segment {
+          point {
+            x: -87.65
+            y: 2.0206672185931328e-16
+          }
+          point {
+            x: -87.65
+            y: 99
+          }
+        }
+      }
+    }
+    length: 100
+    boundary_type {
+      s: 0
+      types: DOTTED_YELLOW
+    }
+  }
+  right_boundary {
+    curve {
+      segment {
+        line_segment {
+          point {
+            x: -84.35
+            y: 0
+          }
+          point {
+            x: -84.35
+            y: 99
+          }
+        }
+      }
+    }
+    length: 100
+    boundary_type {
+      s: 0
+      types: DOTTED_YELLOW
+    }
+  }
+  length: 100
+  speed_limit: 20
+  successor_id {
+    id: "2"
+  }
+  type: CITY_DRIVING
+  turn: NO_TURN
+  direction: FORWARD
+}
+lane {
+  id {
+    id: "2"
+  }
+  central_curve {
+    segment {
+      line_segment {
+        point {
+          x: -86
+          y: 99
+        }
+        point {
+          x: -86
+          y: 199
+        }
+      }
+      length: 100
+    }
+  }
+  left_boundary {
+    curve {
+      segment {
+        line_segment {
+          point {
+            x: -87.65
+            y: 99
+          }
+          point {
+            x: -87.65
+            y: 199
+          }
+        }
+      }
+    }
+    length: 100
+    boundary_type {
+      s: 0
+      types: DOTTED_YELLOW
+    }
+  }
+  right_boundary {
+    curve {
+      segment {
+        line_segment {
+          point {
+            x: -84.35
+            y: 99
+          }
+          point {
+            x: -84.35
+            y: 199
+          }
+        }
+      }
+    }
+    length: 100
+    boundary_type {
+      s: 0
+      types: DOTTED_YELLOW
+    }
+  }
+  length: 100
+  speed_limit: 20
+  predecessor_id {
+    id: "1"
+  }
+  successor_id {
+    id: "3"
+  }
+  type: CITY_DRIVING
+  turn: NO_TURN
+  direction: FORWARD
+}
+lane {
+  id {
+    id: "3"
+  }
+  central_curve {
+    segment {
+      line_segment {
+        point {
+          x: -86
+          y: 199
+        }
+        point {
+          x: -86
+          y: 245
+        }
+        point {
+          x: -85.858136013670418
+          y: 246.99496230775989
+        }
+        point {
+          x: -85.311213905689925
+          y: 249.94289214694942
+        }
+        point {
+          x: -83.8588524423126
+          y: 252.56462280427166
+        }
+        point {
+          x: -82.045999086238041
+          y: 254.94027225507756
+        }
+        point {
+          x: -79.611755045193647
+          y: 256.65553208466872
+        }
+        point {
+          x: -75.870239631653263
+          y: 257.99326425033422
+        }
+        point {
+          x: -39.885317927306119
+          y: 258.1
+        }
+      }
+      length: 100
+    }
+  }
+  left_boundary {
+    curve {
+      segment {
+        line_segment {
+          point {
+            x: -87.65
+            y: 199
+          }
+          point {
+            x: -87.6458439039019
+            y: 245.11703778872192
+          }
+          point {
+            x: -86.77827422369495
+            y: 250.69803056031148
+          }
+          point {
+            x: -83.300054507177109
+            y: 256.01258051356172
+          }
+          point {
+            x: -76.224929482637535
+            y: 259.60469067112069
+          }
+          point {
+            x: -39.885317927306119
+            y: 259.75
+          }
+        }
+      }
+    }
+    length: 100
+    boundary_type {
+      s: 0
+      types: DOTTED_YELLOW
+    }
+  }
+  right_boundary {
+    curve {
+      segment {
+        line_segment {
+          point {
+            x: -84.35
+            y: 199
+          }
+          point {
+            x: -84.3541560960981
+            y: 244.88296221127808
+          }
+          point {
+            x: -84.22228346222937
+            y: 246.77935518834164
+          }
+          point {
+            x: -83.884817423275052
+            y: 248.64370275546162
+          }
+          point {
+            x: -83.400176870655514
+            y: 250.01273786956847
+          }
+          point {
+            x: -82.091711251340328
+            y: 252.34789681969755
+          }
+          point {
+            x: -80.791943665298973
+            y: 253.8679639965934
+          }
+          point {
+            x: -78.7425899859307
+            y: 255.25301573903974
+          }
+          point {
+            x: -75.515549780668991
+            y: 256.38183782954775
+          }
+          point {
+            x: -39.885317927306119
+            y: 256.45000000000005
+          }
+        }
+      }
+    }
+    length: 100
+    boundary_type {
+      s: 0
+      types: DOTTED_YELLOW
+    }
+  }
+  length: 100
+  speed_limit: 20
+  predecessor_id {
+    id: "2"
+  }
+  successor_id {
+    id: "4"
+  }
+  type: CITY_DRIVING
+  turn: NO_TURN
+  direction: FORWARD
+}
+lane {
+  id {
+    id: "4"
+  }
+  central_curve {
+    segment {
+      line_segment {
+        point {
+          x: -39.885317927306119
+          y: 258.1
+        }
+        point {
+          x: -2.8853179273061187
+          y: 258.1
+        }
+      }
+      length: 100
+    }
+  }
+  left_boundary {
+    curve {
+      segment {
+        line_segment {
+          point {
+            x: -39.885317927306119
+            y: 259.75
+          }
+          point {
+            x: -2.8853179273061187
+            y: 259.75
+          }
+        }
+      }
+    }
+    length: 100
+    boundary_type {
+      s: 0
+      types: DOTTED_YELLOW
+    }
+  }
+  right_boundary {
+    curve {
+      segment {
+        line_segment {
+          point {
+            x: -39.885317927306119
+            y: 256.45000000000005
+          }
+          point {
+            x: -2.8853179273061187
+            y: 256.45000000000005
+          }
+        }
+      }
+    }
+    length: 100
+    boundary_type {
+      s: 0
+      types: DOTTED_YELLOW
+    }
+  }
+  length: 100
+  speed_limit: 20
+  predecessor_id {
+    id: "3"
+  }
+  type: CITY_DRIVING
+  turn: NO_TURN
+  direction: FORWARD
+}
+stop_sign {
+  id {
+    id: "2"
+  }
+  stop_line {
+    segment {
+      line_segment {
+        point {
+          x: -88
+          y: 15
+        }
+        point {
+          x: -80
+          y: 15
+        }
+      }
+    }
+  }
+  overlap_id {
+    id: "1_-1_and_2"
+  }
+}
+road {
+  id {
+    id: "1"
+  }
+  section {
+    id {
+      id: "2"
+    }
+    lane_id {
+      id: "1"
+    }
+    lane_id {
+      id: "2"
+    }
+    lane_id {
+      id: "3"
+    }
+    lane_id {
+      id: "4"
+    }
+    boundary {
+      outer_polygon {
+        edge {
+          curve {
+            segment {
+              line_segment {
+                point {
+                  x: -87.65
+                  y: 2.0206672185931328e-16
+                }
+                point {
+                  x: -87.65
+                  y: 1.0000000000000002
+                }
+                point {
+                  x: -87.65
+                  y: 2
+                }
+                point {
+                  x: -87.65
+                  y: 3
+                }
+                point {
+                  x: -87.65
+                  y: 4
+                }
+                point {
+                  x: -87.65
+                  y: 5
+                }
+                point {
+                  x: -87.65
+                  y: 6
+                }
+                point {
+                  x: -87.65
+                  y: 7
+                }
+                point {
+                  x: -87.65
+                  y: 8
+                }
+                point {
+                  x: -87.65
+                  y: 9
+                }
+                point {
+                  x: -87.65
+                  y: 10
+                }
+                point {
+                  x: -87.65
+                  y: 11
+                }
+                point {
+                  x: -87.65
+                  y: 12
+                }
+                point {
+                  x: -87.65
+                  y: 13
+                }
+                point {
+                  x: -87.65
+                  y: 14
+                }
+                point {
+                  x: -87.65
+                  y: 15
+                }
+                point {
+                  x: -87.65
+                  y: 16
+                }
+                point {
+                  x: -87.65
+                  y: 17
+                }
+                point {
+                  x: -87.65
+                  y: 18
+                }
+                point {
+                  x: -87.65
+                  y: 19
+                }
+                point {
+                  x: -87.65
+                  y: 20
+                }
+                point {
+                  x: -87.65
+                  y: 21
+                }
+                point {
+                  x: -87.65
+                  y: 22
+                }
+                point {
+                  x: -87.65
+                  y: 23
+                }
+                point {
+                  x: -87.65
+                  y: 24
+                }
+                point {
+                  x: -87.65
+                  y: 25
+                }
+                point {
+                  x: -87.65
+                  y: 26
+                }
+                point {
+                  x: -87.65
+                  y: 27
+                }
+                point {
+                  x: -87.65
+                  y: 28
+                }
+                point {
+                  x: -87.65
+                  y: 29
+                }
+                point {
+                  x: -87.65
+                  y: 30
+                }
+                point {
+                  x: -87.65
+                  y: 30.999999999999996
+                }
+                point {
+                  x: -87.65
+                  y: 32
+                }
+                point {
+                  x: -87.65
+                  y: 33
+                }
+                point {
+                  x: -87.65
+                  y: 34
+                }
+                point {
+                  x: -87.65
+                  y: 35
+                }
+                point {
+                  x: -87.65
+                  y: 36
+                }
+                point {
+                  x: -87.65
+                  y: 37
+                }
+                point {
+                  x: -87.65
+                  y: 38
+                }
+                point {
+                  x: -87.65
+                  y: 39
+                }
+                point {
+                  x: -87.65
+                  y: 40
+                }
+                point {
+                  x: -87.65
+                  y: 41
+                }
+                point {
+                  x: -87.65
+                  y: 42
+                }
+                point {
+                  x: -87.65
+                  y: 43
+                }
+                point {
+                  x: -87.65
+                  y: 44
+                }
+                point {
+                  x: -87.65
+                  y: 45
+                }
+                point {
+                  x: -87.65
+                  y: 46
+                }
+                point {
+                  x: -87.65
+                  y: 47
+                }
+                point {
+                  x: -87.65
+                  y: 48
+                }
+                point {
+                  x: -87.65
+                  y: 49
+                }
+                point {
+                  x: -87.65
+                  y: 50
+                }
+                point {
+                  x: -87.65
+                  y: 51
+                }
+                point {
+                  x: -87.65
+                  y: 52
+                }
+                point {
+                  x: -87.65
+                  y: 53
+                }
+                point {
+                  x: -87.65
+                  y: 54
+                }
+                point {
+                  x: -87.65
+                  y: 55
+                }
+                point {
+                  x: -87.65
+                  y: 56
+                }
+                point {
+                  x: -87.65
+                  y: 57
+                }
+                point {
+                  x: -87.65
+                  y: 58
+                }
+                point {
+                  x: -87.65
+                  y: 59
+                }
+                point {
+                  x: -87.65
+                  y: 60
+                }
+                point {
+                  x: -87.65
+                  y: 61
+                }
+                point {
+                  x: -87.65
+                  y: 61.999999999999993
+                }
+                point {
+                  x: -87.65
+                  y: 62.999999999999993
+                }
+                point {
+                  x: -87.65
+                  y: 64
+                }
+                point {
+                  x: -87.65
+                  y: 65
+                }
+                point {
+                  x: -87.65
+                  y: 66
+                }
+                point {
+                  x: -87.65
+                  y: 67
+                }
+                point {
+                  x: -87.65
+                  y: 68
+                }
+                point {
+                  x: -87.65
+                  y: 69
+                }
+                point {
+                  x: -87.65
+                  y: 70
+                }
+                point {
+                  x: -87.65
+                  y: 71
+                }
+                point {
+                  x: -87.65
+                  y: 72
+                }
+                point {
+                  x: -87.65
+                  y: 73
+                }
+                point {
+                  x: -87.65
+                  y: 74
+                }
+                point {
+                  x: -87.65
+                  y: 75
+                }
+                point {
+                  x: -87.65
+                  y: 76
+                }
+                point {
+                  x: -87.65
+                  y: 77
+                }
+                point {
+                  x: -87.65
+                  y: 78
+                }
+                point {
+                  x: -87.65
+                  y: 79
+                }
+                point {
+                  x: -87.65
+                  y: 80
+                }
+                point {
+                  x: -87.65
+                  y: 81
+                }
+                point {
+                  x: -87.65
+                  y: 82
+                }
+                point {
+                  x: -87.65
+                  y: 83
+                }
+                point {
+                  x: -87.65
+                  y: 84
+                }
+                point {
+                  x: -87.65
+                  y: 85
+                }
+                point {
+                  x: -87.65
+                  y: 86
+                }
+                point {
+                  x: -87.65
+                  y: 87
+                }
+                point {
+                  x: -87.65
+                  y: 88
+                }
+                point {
+                  x: -87.65
+                  y: 89
+                }
+                point {
+                  x: -87.65
+                  y: 90
+                }
+                point {
+                  x: -87.65
+                  y: 91
+                }
+                point {
+                  x: -87.65
+                  y: 92
+                }
+                point {
+                  x: -87.65
+                  y: 93
+                }
+                point {
+                  x: -87.65
+                  y: 94
+                }
+                point {
+                  x: -87.65
+                  y: 95
+                }
+                point {
+                  x: -87.65
+                  y: 96
+                }
+                point {
+                  x: -87.65
+                  y: 97
+                }
+                point {
+                  x: -87.65
+                  y: 98
+                }
+                point {
+                  x: -87.65
+                  y: 99
+                }
+              }
+            }
+          }
+          type: LEFT_BOUNDARY
+        }
+        edge {
+          curve {
+            segment {
+              line_segment {
+                point {
+                  x: -84.35
+                  y: 0
+                }
+                point {
+                  x: -84.35
+                  y: 1
+                }
+                point {
+                  x: -84.35
+                  y: 2
+                }
+                point {
+                  x: -84.35
+                  y: 3
+                }
+                point {
+                  x: -84.35
+                  y: 4
+                }
+                point {
+                  x: -84.35
+                  y: 5
+                }
+                point {
+                  x: -84.35
+                  y: 6
+                }
+                point {
+                  x: -84.35
+                  y: 7
+                }
+                point {
+                  x: -84.35
+                  y: 8
+                }
+                point {
+                  x: -84.35
+                  y: 9
+                }
+                point {
+                  x: -84.35
+                  y: 10
+                }
+                point {
+                  x: -84.35
+                  y: 11
+                }
+                point {
+                  x: -84.35
+                  y: 12
+                }
+                point {
+                  x: -84.35
+                  y: 13
+                }
+                point {
+                  x: -84.35
+                  y: 14
+                }
+                point {
+                  x: -84.35
+                  y: 15
+                }
+                point {
+                  x: -84.35
+                  y: 16
+                }
+                point {
+                  x: -84.35
+                  y: 17
+                }
+                point {
+                  x: -84.35
+                  y: 18
+                }
+                point {
+                  x: -84.35
+                  y: 19
+                }
+                point {
+                  x: -84.35
+                  y: 20
+                }
+                point {
+                  x: -84.35
+                  y: 21
+                }
+                point {
+                  x: -84.35
+                  y: 22
+                }
+                point {
+                  x: -84.35
+                  y: 23
+                }
+                point {
+                  x: -84.35
+                  y: 24
+                }
+                point {
+                  x: -84.35
+                  y: 25
+                }
+                point {
+                  x: -84.35
+                  y: 26
+                }
+                point {
+                  x: -84.35
+                  y: 27
+                }
+                point {
+                  x: -84.35
+                  y: 28
+                }
+                point {
+                  x: -84.35
+                  y: 29
+                }
+                point {
+                  x: -84.35
+                  y: 30
+                }
+                point {
+                  x: -84.35
+                  y: 30.999999999999996
+                }
+                point {
+                  x: -84.35
+                  y: 32
+                }
+                point {
+                  x: -84.35
+                  y: 33
+                }
+                point {
+                  x: -84.35
+                  y: 34
+                }
+                point {
+                  x: -84.35
+                  y: 35
+                }
+                point {
+                  x: -84.35
+                  y: 36
+                }
+                point {
+                  x: -84.35
+                  y: 37
+                }
+                point {
+                  x: -84.35
+                  y: 38
+                }
+                point {
+                  x: -84.35
+                  y: 39
+                }
+                point {
+                  x: -84.35
+                  y: 40
+                }
+                point {
+                  x: -84.35
+                  y: 41
+                }
+                point {
+                  x: -84.35
+                  y: 42
+                }
+                point {
+                  x: -84.35
+                  y: 43
+                }
+                point {
+                  x: -84.35
+                  y: 44
+                }
+                point {
+                  x: -84.35
+                  y: 45
+                }
+                point {
+                  x: -84.35
+                  y: 46
+                }
+                point {
+                  x: -84.35
+                  y: 47
+                }
+                point {
+                  x: -84.35
+                  y: 48
+                }
+                point {
+                  x: -84.35
+                  y: 49
+                }
+                point {
+                  x: -84.35
+                  y: 50
+                }
+                point {
+                  x: -84.35
+                  y: 51
+                }
+                point {
+                  x: -84.35
+                  y: 52
+                }
+                point {
+                  x: -84.35
+                  y: 53
+                }
+                point {
+                  x: -84.35
+                  y: 54
+                }
+                point {
+                  x: -84.35
+                  y: 55
+                }
+                point {
+                  x: -84.35
+                  y: 56
+                }
+                point {
+                  x: -84.35
+                  y: 57
+                }
+                point {
+                  x: -84.35
+                  y: 58
+                }
+                point {
+                  x: -84.35
+                  y: 59
+                }
+                point {
+                  x: -84.35
+                  y: 60
+                }
+                point {
+                  x: -84.35
+                  y: 61
+                }
+                point {
+                  x: -84.35
+                  y: 61.999999999999993
+                }
+                point {
+                  x: -84.35
+                  y: 62.999999999999993
+                }
+                point {
+                  x: -84.35
+                  y: 64
+                }
+                point {
+                  x: -84.35
+                  y: 65
+                }
+                point {
+                  x: -84.35
+                  y: 66
+                }
+                point {
+                  x: -84.35
+                  y: 67
+                }
+                point {
+                  x: -84.35
+                  y: 68
+                }
+                point {
+                  x: -84.35
+                  y: 69
+                }
+                point {
+                  x: -84.35
+                  y: 70
+                }
+                point {
+                  x: -84.35
+                  y: 71
+                }
+                point {
+                  x: -84.35
+                  y: 72
+                }
+                point {
+                  x: -84.35
+                  y: 73
+                }
+                point {
+                  x: -84.35
+                  y: 74
+                }
+                point {
+                  x: -84.35
+                  y: 75
+                }
+                point {
+                  x: -84.35
+                  y: 76
+                }
+                point {
+                  x: -84.35
+                  y: 77
+                }
+                point {
+                  x: -84.35
+                  y: 78
+                }
+                point {
+                  x: -84.35
+                  y: 79
+                }
+                point {
+                  x: -84.35
+                  y: 80
+                }
+                point {
+                  x: -84.35
+                  y: 81
+                }
+                point {
+                  x: -84.35
+                  y: 82
+                }
+                point {
+                  x: -84.35
+                  y: 83
+                }
+                point {
+                  x: -84.35
+                  y: 84
+                }
+                point {
+                  x: -84.35
+                  y: 85
+                }
+                point {
+                  x: -84.35
+                  y: 86
+                }
+                point {
+                  x: -84.35
+                  y: 87
+                }
+                point {
+                  x: -84.35
+                  y: 88
+                }
+                point {
+                  x: -84.35
+                  y: 89
+                }
+                point {
+                  x: -84.35
+                  y: 90
+                }
+                point {
+                  x: -84.35
+                  y: 91
+                }
+                point {
+                  x: -84.35
+                  y: 92
+                }
+                point {
+                  x: -84.35
+                  y: 93
+                }
+                point {
+                  x: -84.35
+                  y: 94
+                }
+                point {
+                  x: -84.35
+                  y: 95
+                }
+                point {
+                  x: -84.35
+                  y: 96
+                }
+                point {
+                  x: -84.35
+                  y: 97
+                }
+                point {
+                  x: -84.35
+                  y: 98
+                }
+                point {
+                  x: -84.35
+                  y: 99
+                }
+              }
+            }
+          }
+          type: RIGHT_BOUNDARY
+        }
+        edge {
+          curve {
+            segment {
+              line_segment {
+                point {
+                  x: -88.65
+                  y: 99
+                }
+                point {
+                  x: -87.65
+                  y: 100
+                }
+                point {
+                  x: -87.65
+                  y: 101
+                }
+                point {
+                  x: -87.65
+                  y: 102
+                }
+                point {
+                  x: -87.65
+                  y: 103
+                }
+                point {
+                  x: -87.65
+                  y: 104
+                }
+                point {
+                  x: -87.65
+                  y: 105
+                }
+                point {
+                  x: -87.65
+                  y: 106
+                }
+                point {
+                  x: -87.65
+                  y: 107
+                }
+                point {
+                  x: -87.65
+                  y: 108
+                }
+                point {
+                  x: -87.65
+                  y: 109
+                }
+                point {
+                  x: -87.65
+                  y: 110
+                }
+                point {
+                  x: -87.65
+                  y: 111
+                }
+                point {
+                  x: -87.65
+                  y: 112
+                }
+                point {
+                  x: -87.65
+                  y: 113
+                }
+                point {
+                  x: -87.65
+                  y: 114
+                }
+                point {
+                  x: -87.65
+                  y: 115
+                }
+                point {
+                  x: -87.65
+                  y: 116
+                }
+                point {
+                  x: -87.65
+                  y: 117
+                }
+                point {
+                  x: -87.65
+                  y: 118
+                }
+                point {
+                  x: -87.65
+                  y: 119
+                }
+                point {
+                  x: -87.65
+                  y: 120
+                }
+                point {
+                  x: -87.65
+                  y: 121
+                }
+                point {
+                  x: -87.65
+                  y: 122
+                }
+                point {
+                  x: -87.65
+                  y: 123
+                }
+                point {
+                  x: -87.65
+                  y: 123.99999999999999
+                }
+                point {
+                  x: -87.65
+                  y: 125
+                }
+                point {
+                  x: -87.65
+                  y: 125.99999999999999
+                }
+                point {
+                  x: -87.65
+                  y: 127
+                }
+                point {
+                  x: -87.65
+                  y: 128
+                }
+                point {
+                  x: -87.65
+                  y: 129
+                }
+                point {
+                  x: -87.65
+                  y: 130
+                }
+                point {
+                  x: -87.65
+                  y: 131
+                }
+                point {
+                  x: -87.65
+                  y: 132
+                }
+                point {
+                  x: -87.65
+                  y: 133
+                }
+                point {
+                  x: -87.65
+                  y: 134
+                }
+                point {
+                  x: -87.65
+                  y: 135
+                }
+                point {
+                  x: -87.65
+                  y: 136
+                }
+                point {
+                  x: -87.65
+                  y: 137
+                }
+                point {
+                  x: -87.65
+                  y: 138
+                }
+                point {
+                  x: -87.65
+                  y: 139
+                }
+                point {
+                  x: -87.65
+                  y: 140
+                }
+                point {
+                  x: -87.65
+                  y: 141
+                }
+                point {
+                  x: -87.65
+                  y: 142
+                }
+                point {
+                  x: -87.65
+                  y: 143
+                }
+                point {
+                  x: -87.65
+                  y: 144
+                }
+                point {
+                  x: -87.65
+                  y: 145
+                }
+                point {
+                  x: -87.65
+                  y: 146
+                }
+                point {
+                  x: -87.65
+                  y: 147
+                }
+                point {
+                  x: -87.65
+                  y: 148
+                }
+                point {
+                  x: -87.65
+                  y: 149
+                }
+                point {
+                  x: -87.65
+                  y: 150
+                }
+                point {
+                  x: -87.65
+                  y: 151
+                }
+                point {
+                  x: -87.65
+                  y: 152
+                }
+                point {
+                  x: -87.65
+                  y: 153
+                }
+                point {
+                  x: -87.65
+                  y: 154
+                }
+                point {
+                  x: -87.65
+                  y: 155
+                }
+                point {
+                  x: -87.65
+                  y: 156
+                }
+                point {
+                  x: -87.65
+                  y: 157
+                }
+                point {
+                  x: -87.65
+                  y: 158
+                }
+                point {
+                  x: -87.65
+                  y: 159
+                }
+                point {
+                  x: -87.65
+                  y: 160
+                }
+                point {
+                  x: -87.65
+                  y: 161
+                }
+                point {
+                  x: -87.65
+                  y: 162
+                }
+                point {
+                  x: -87.65
+                  y: 163
+                }
+                point {
+                  x: -87.65
+                  y: 164
+                }
+                point {
+                  x: -87.65
+                  y: 165
+                }
+                point {
+                  x: -87.65
+                  y: 166
+                }
+                point {
+                  x: -87.65
+                  y: 167
+                }
+                point {
+                  x: -87.65
+                  y: 168
+                }
+                point {
+                  x: -87.65
+                  y: 169
+                }
+                point {
+                  x: -87.65
+                  y: 170
+                }
+                point {
+                  x: -87.65
+                  y: 171
+                }
+                point {
+                  x: -87.65
+                  y: 172
+                }
+                point {
+                  x: -87.65
+                  y: 173
+                }
+                point {
+                  x: -87.65
+                  y: 174
+                }
+                point {
+                  x: -87.65
+                  y: 175
+                }
+                point {
+                  x: -87.65
+                  y: 176
+                }
+                point {
+                  x: -87.65
+                  y: 177
+                }
+                point {
+                  x: -87.65
+                  y: 178
+                }
+                point {
+                  x: -87.65
+                  y: 179
+                }
+                point {
+                  x: -87.65
+                  y: 180
+                }
+                point {
+                  x: -87.65
+                  y: 181
+                }
+                point {
+                  x: -87.65
+                  y: 182
+                }
+                point {
+                  x: -87.65
+                  y: 183
+                }
+                point {
+                  x: -87.65
+                  y: 184
+                }
+                point {
+                  x: -87.65
+                  y: 185
+                }
+                point {
+                  x: -87.65
+                  y: 186
+                }
+                point {
+                  x: -87.65
+                  y: 187
+                }
+                point {
+                  x: -87.65
+                  y: 188
+                }
+                point {
+                  x: -87.65
+                  y: 189
+                }
+                point {
+                  x: -87.65
+                  y: 190
+                }
+                point {
+                  x: -87.65
+                  y: 191
+                }
+                point {
+                  x: -87.65
+                  y: 192
+                }
+                point {
+                  x: -87.65
+                  y: 193
+                }
+                point {
+                  x: -87.65
+                  y: 194
+                }
+                point {
+                  x: -87.65
+                  y: 195
+                }
+                point {
+                  x: -87.65
+                  y: 196
+                }
+                point {
+                  x: -87.65
+                  y: 197
+                }
+                point {
+                  x: -87.65
+                  y: 198
+                }
+                point {
+                  x: -87.65
+                  y: 199
+                }
+              }
+            }
+          }
+          type: LEFT_BOUNDARY
+        }
+        edge {
+          curve {
+            segment {
+              line_segment {
+                point {
+                  x: -83.35
+                  y: 99
+                }
+                point {
+                  x: -84.35
+                  y: 100
+                }
+                point {
+                  x: -84.35
+                  y: 101
+                }
+                point {
+                  x: -84.35
+                  y: 102
+                }
+                point {
+                  x: -84.35
+                  y: 103
+                }
+                point {
+                  x: -84.35
+                  y: 104
+                }
+                point {
+                  x: -84.35
+                  y: 105
+                }
+                point {
+                  x: -84.35
+                  y: 106
+                }
+                point {
+                  x: -84.35
+                  y: 107
+                }
+                point {
+                  x: -84.35
+                  y: 108
+                }
+                point {
+                  x: -84.35
+                  y: 109
+                }
+                point {
+                  x: -84.35
+                  y: 110
+                }
+                point {
+                  x: -84.35
+                  y: 111
+                }
+                point {
+                  x: -84.35
+                  y: 112
+                }
+                point {
+                  x: -84.35
+                  y: 113
+                }
+                point {
+                  x: -84.35
+                  y: 114
+                }
+                point {
+                  x: -84.35
+                  y: 115
+                }
+                point {
+                  x: -84.35
+                  y: 116
+                }
+                point {
+                  x: -84.35
+                  y: 117
+                }
+                point {
+                  x: -84.35
+                  y: 118
+                }
+                point {
+                  x: -84.35
+                  y: 119
+                }
+                point {
+                  x: -84.35
+                  y: 120
+                }
+                point {
+                  x: -84.35
+                  y: 121
+                }
+                point {
+                  x: -84.35
+                  y: 122
+                }
+                point {
+                  x: -84.35
+                  y: 123
+                }
+                point {
+                  x: -84.35
+                  y: 123.99999999999999
+                }
+                point {
+                  x: -84.35
+                  y: 125
+                }
+                point {
+                  x: -84.35
+                  y: 125.99999999999999
+                }
+                point {
+                  x: -84.35
+                  y: 127
+                }
+                point {
+                  x: -84.35
+                  y: 128
+                }
+                point {
+                  x: -84.35
+                  y: 129
+                }
+                point {
+                  x: -84.35
+                  y: 130
+                }
+                point {
+                  x: -84.35
+                  y: 131
+                }
+                point {
+                  x: -84.35
+                  y: 132
+                }
+                point {
+                  x: -84.35
+                  y: 133
+                }
+                point {
+                  x: -84.35
+                  y: 134
+                }
+                point {
+                  x: -84.35
+                  y: 135
+                }
+                point {
+                  x: -84.35
+                  y: 136
+                }
+                point {
+                  x: -84.35
+                  y: 137
+                }
+                point {
+                  x: -84.35
+                  y: 138
+                }
+                point {
+                  x: -84.35
+                  y: 139
+                }
+                point {
+                  x: -84.35
+                  y: 140
+                }
+                point {
+                  x: -84.35
+                  y: 141
+                }
+                point {
+                  x: -84.35
+                  y: 142
+                }
+                point {
+                  x: -84.35
+                  y: 143
+                }
+                point {
+                  x: -84.35
+                  y: 144
+                }
+                point {
+                  x: -84.35
+                  y: 145
+                }
+                point {
+                  x: -84.35
+                  y: 146
+                }
+                point {
+                  x: -84.35
+                  y: 147
+                }
+                point {
+                  x: -84.35
+                  y: 148
+                }
+                point {
+                  x: -84.35
+                  y: 149
+                }
+                point {
+                  x: -84.35
+                  y: 150
+                }
+                point {
+                  x: -84.35
+                  y: 151
+                }
+                point {
+                  x: -84.35
+                  y: 152
+                }
+                point {
+                  x: -84.35
+                  y: 153
+                }
+                point {
+                  x: -84.35
+                  y: 154
+                }
+                point {
+                  x: -84.35
+                  y: 155
+                }
+                point {
+                  x: -84.35
+                  y: 156
+                }
+                point {
+                  x: -84.35
+                  y: 157
+                }
+                point {
+                  x: -84.35
+                  y: 158
+                }
+                point {
+                  x: -84.35
+                  y: 159
+                }
+                point {
+                  x: -84.35
+                  y: 160
+                }
+                point {
+                  x: -84.35
+                  y: 161
+                }
+                point {
+                  x: -84.35
+                  y: 162
+                }
+                point {
+                  x: -84.35
+                  y: 163
+                }
+                point {
+                  x: -84.35
+                  y: 164
+                }
+                point {
+                  x: -84.35
+                  y: 165
+                }
+                point {
+                  x: -84.35
+                  y: 166
+                }
+                point {
+                  x: -84.35
+                  y: 167
+                }
+                point {
+                  x: -84.35
+                  y: 168
+                }
+                point {
+                  x: -84.35
+                  y: 169
+                }
+                point {
+                  x: -84.35
+                  y: 170
+                }
+                point {
+                  x: -84.35
+                  y: 171
+                }
+                point {
+                  x: -84.35
+                  y: 172
+                }
+                point {
+                  x: -84.35
+                  y: 173
+                }
+                point {
+                  x: -84.35
+                  y: 174
+                }
+                point {
+                  x: -84.35
+                  y: 175
+                }
+                point {
+                  x: -84.35
+                  y: 176
+                }
+                point {
+                  x: -84.35
+                  y: 177
+                }
+                point {
+                  x: -84.35
+                  y: 178
+                }
+                point {
+                  x: -84.35
+                  y: 179
+                }
+                point {
+                  x: -84.35
+                  y: 180
+                }
+                point {
+                  x: -84.35
+                  y: 181
+                }
+                point {
+                  x: -84.35
+                  y: 182
+                }
+                point {
+                  x: -84.35
+                  y: 183
+                }
+                point {
+                  x: -84.35
+                  y: 184
+                }
+                point {
+                  x: -84.35
+                  y: 185
+                }
+                point {
+                  x: -84.35
+                  y: 186
+                }
+                point {
+                  x: -84.35
+                  y: 187
+                }
+                point {
+                  x: -84.35
+                  y: 188
+                }
+                point {
+                  x: -84.35
+                  y: 189
+                }
+                point {
+                  x: -84.35
+                  y: 190
+                }
+                point {
+                  x: -84.35
+                  y: 191
+                }
+                point {
+                  x: -84.35
+                  y: 192
+                }
+                point {
+                  x: -84.35
+                  y: 193
+                }
+                point {
+                  x: -84.35
+                  y: 194
+                }
+                point {
+                  x: -84.35
+                  y: 195
+                }
+                point {
+                  x: -84.35
+                  y: 196
+                }
+                point {
+                  x: -84.35
+                  y: 197
+                }
+                point {
+                  x: -84.35
+                  y: 198
+                }
+                point {
+                  x: -84.35
+                  y: 199
+                }
+              }
+            }
+          }
+          type: RIGHT_BOUNDARY
+        }
+        edge {
+          curve {
+            segment {
+              line_segment {
+                point {
+                  x: -88.65
+                  y: 199
+                }
+                point {
+                  x: -87.65
+                  y: 200
+                }
+                point {
+                  x: -87.65
+                  y: 201
+                }
+                point {
+                  x: -87.65
+                  y: 202
+                }
+                point {
+                  x: -87.65
+                  y: 203
+                }
+                point {
+                  x: -87.65
+                  y: 204
+                }
+                point {
+                  x: -87.65
+                  y: 205
+                }
+                point {
+                  x: -87.65
+                  y: 206
+                }
+                point {
+                  x: -87.65
+                  y: 207
+                }
+                point {
+                  x: -87.65
+                  y: 208
+                }
+                point {
+                  x: -87.65
+                  y: 209
+                }
+                point {
+                  x: -87.65
+                  y: 210
+                }
+                point {
+                  x: -87.65
+                  y: 211
+                }
+                point {
+                  x: -87.65
+                  y: 212
+                }
+                point {
+                  x: -87.65
+                  y: 213
+                }
+                point {
+                  x: -87.65
+                  y: 214
+                }
+                point {
+                  x: -87.65
+                  y: 215
+                }
+                point {
+                  x: -87.65
+                  y: 216
+                }
+                point {
+                  x: -87.65
+                  y: 217
+                }
+                point {
+                  x: -87.65
+                  y: 218
+                }
+                point {
+                  x: -87.65
+                  y: 219
+                }
+                point {
+                  x: -87.65
+                  y: 220
+                }
+                point {
+                  x: -87.65
+                  y: 221
+                }
+                point {
+                  x: -87.65
+                  y: 222
+                }
+                point {
+                  x: -87.65
+                  y: 223
+                }
+                point {
+                  x: -87.65
+                  y: 224
+                }
+                point {
+                  x: -87.65
+                  y: 225
+                }
+                point {
+                  x: -87.65
+                  y: 226
+                }
+                point {
+                  x: -87.65
+                  y: 227
+                }
+                point {
+                  x: -87.65
+                  y: 228
+                }
+                point {
+                  x: -87.65
+                  y: 229
+                }
+                point {
+                  x: -87.65
+                  y: 230
+                }
+                point {
+                  x: -87.65
+                  y: 231
+                }
+                point {
+                  x: -87.65
+                  y: 232
+                }
+                point {
+                  x: -87.65
+                  y: 233
+                }
+                point {
+                  x: -87.65
+                  y: 234
+                }
+                point {
+                  x: -87.65
+                  y: 235
+                }
+                point {
+                  x: -87.65
+                  y: 236
+                }
+                point {
+                  x: -87.65
+                  y: 237
+                }
+                point {
+                  x: -87.65
+                  y: 238
+                }
+                point {
+                  x: -87.65
+                  y: 239
+                }
+                point {
+                  x: -87.65
+                  y: 240
+                }
+                point {
+                  x: -87.65
+                  y: 241
+                }
+                point {
+                  x: -87.65
+                  y: 242
+                }
+                point {
+                  x: -87.65
+                  y: 243
+                }
+                point {
+                  x: -87.65
+                  y: 244
+                }
+                point {
+                  x: -87.6458439039019
+                  y: 245.11703778872192
+                }
+                point {
+                  x: -87.574911910737114
+                  y: 246.1145189426019
+                }
+                point {
+                  x: -87.493988565111465
+                  y: 247.21056942717814
+                }
+                point {
+                  x: -87.315662245893947
+                  y: 248.29829892932585
+                }
+                point {
+                  x: -87.122978293297564
+                  y: 249.27955979902964
+                }
+                point {
+                  x: -86.77827422369495
+                  y: 250.69803056031148
+                }
+                point {
+                  x: -86.277072230523686
+                  y: 251.62936184822553
+                }
+                point {
+                  x: -85.787186176385177
+                  y: 252.50114832091288
+                }
+                point {
+                  x: -85.29730012224671
+                  y: 253.37293479360014
+                }
+                point {
+                  x: -84.599822093218521
+                  y: 254.49251333666581
+                }
+                point {
+                  x: -83.9499383001978
+                  y: 255.25254692511376
+                }
+                point {
+                  x: -83.300054507177109
+                  y: 256.01258051356172
+                }
+                point {
+                  x: -82.180939917340226
+                  y: 257.00451502513039
+                }
+                point {
+                  x: -81.330930010898371
+                  y: 257.53128172771403
+                }
+                point {
+                  x: -80.480920104456587
+                  y: 258.05804843029767
+                }
+                point {
+                  x: -79.20990485539491
+                  y: 258.74767540701919
+                }
+                point {
+                  x: -78.249036944987139
+                  y: 259.02468237218176
+                }
+                point {
+                  x: -77.288169034579354
+                  y: 259.30168933734438
+                }
+                point {
+                  x: -76.224929482637535
+                  y: 259.60469067112069
+                }
+                point {
+                  x: -74.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -73.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -72.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -71.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -70.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -69.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -68.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -67.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -66.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -65.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -64.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -63.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -62.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -61.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -60.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -59.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -58.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -57.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -56.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -55.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -54.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -53.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -52.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -51.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -50.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -49.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -48.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -47.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -46.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -45.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -44.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -43.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -42.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -41.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -40.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -39.885317927306119
+                  y: 259.75
+                }
+              }
+            }
+          }
+          type: LEFT_BOUNDARY
+        }
+        edge {
+          curve {
+            segment {
+              line_segment {
+                point {
+                  x: -83.35
+                  y: 199
+                }
+                point {
+                  x: -84.35
+                  y: 200
+                }
+                point {
+                  x: -84.35
+                  y: 201
+                }
+                point {
+                  x: -84.35
+                  y: 202
+                }
+                point {
+                  x: -84.35
+                  y: 203
+                }
+                point {
+                  x: -84.35
+                  y: 204
+                }
+                point {
+                  x: -84.35
+                  y: 205
+                }
+                point {
+                  x: -84.35
+                  y: 206
+                }
+                point {
+                  x: -84.35
+                  y: 207
+                }
+                point {
+                  x: -84.35
+                  y: 208
+                }
+                point {
+                  x: -84.35
+                  y: 209
+                }
+                point {
+                  x: -84.35
+                  y: 210
+                }
+                point {
+                  x: -84.35
+                  y: 211
+                }
+                point {
+                  x: -84.35
+                  y: 212
+                }
+                point {
+                  x: -84.35
+                  y: 213
+                }
+                point {
+                  x: -84.35
+                  y: 214
+                }
+                point {
+                  x: -84.35
+                  y: 215
+                }
+                point {
+                  x: -84.35
+                  y: 216
+                }
+                point {
+                  x: -84.35
+                  y: 217
+                }
+                point {
+                  x: -84.35
+                  y: 218
+                }
+                point {
+                  x: -84.35
+                  y: 219
+                }
+                point {
+                  x: -84.35
+                  y: 220
+                }
+                point {
+                  x: -84.35
+                  y: 221
+                }
+                point {
+                  x: -84.35
+                  y: 222
+                }
+                point {
+                  x: -84.35
+                  y: 223
+                }
+                point {
+                  x: -84.35
+                  y: 224
+                }
+                point {
+                  x: -84.35
+                  y: 225
+                }
+                point {
+                  x: -84.35
+                  y: 226
+                }
+                point {
+                  x: -84.35
+                  y: 227
+                }
+                point {
+                  x: -84.35
+                  y: 228
+                }
+                point {
+                  x: -84.35
+                  y: 229
+                }
+                point {
+                  x: -84.35
+                  y: 230
+                }
+                point {
+                  x: -84.35
+                  y: 231
+                }
+                point {
+                  x: -84.35
+                  y: 232
+                }
+                point {
+                  x: -84.35
+                  y: 233
+                }
+                point {
+                  x: -84.35
+                  y: 234
+                }
+                point {
+                  x: -84.35
+                  y: 235
+                }
+                point {
+                  x: -84.35
+                  y: 236
+                }
+                point {
+                  x: -84.35
+                  y: 237
+                }
+                point {
+                  x: -84.35
+                  y: 238
+                }
+                point {
+                  x: -84.35
+                  y: 239
+                }
+                point {
+                  x: -84.35
+                  y: 240
+                }
+                point {
+                  x: -84.35
+                  y: 241
+                }
+                point {
+                  x: -84.35
+                  y: 242
+                }
+                point {
+                  x: -84.35
+                  y: 243
+                }
+                point {
+                  x: -84.35
+                  y: 244
+                }
+                point {
+                  x: -84.3541560960981
+                  y: 244.88296221127808
+                }
+                point {
+                  x: -84.2832241029333
+                  y: 245.88044336515802
+                }
+                point {
+                  x: -84.22228346222937
+                  y: 246.77935518834164
+                }
+                point {
+                  x: -84.077501375871435
+                  y: 247.66244188575783
+                }
+                point {
+                  x: -83.884817423275052
+                  y: 248.64370275546162
+                }
+                point {
+                  x: -83.8441535876849
+                  y: 249.18775373358736
+                }
+                point {
+                  x: -83.400176870655514
+                  y: 250.01273786956847
+                }
+                point {
+                  x: -82.910290816517
+                  y: 250.88452434225582
+                }
+                point {
+                  x: -82.420404762378482
+                  y: 251.75631081494319
+                }
+                point {
+                  x: -82.091711251340328
+                  y: 252.34789681969755
+                }
+                point {
+                  x: -81.441827458319665
+                  y: 253.10793040814545
+                }
+                point {
+                  x: -80.791943665298973
+                  y: 253.8679639965934
+                }
+                point {
+                  x: -80.4426097988142
+                  y: 254.19948233387251
+                }
+                point {
+                  x: -79.59259989237249
+                  y: 254.7262490364561
+                }
+                point {
+                  x: -78.7425899859307
+                  y: 255.25301573903974
+                }
+                point {
+                  x: -78.29578187035824
+                  y: 255.57681130267358
+                }
+                point {
+                  x: -77.33491395995047
+                  y: 255.85381826783615
+                }
+                point {
+                  x: -76.374046049542713
+                  y: 256.1308252329988
+                }
+                point {
+                  x: -75.515549780668991
+                  y: 256.38183782954775
+                }
+                point {
+                  x: -74.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -73.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -72.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -71.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -70.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -69.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -68.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -67.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -66.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -65.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -64.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -63.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -62.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -61.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -60.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -59.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -58.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -57.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -56.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -55.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -54.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -53.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -52.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -51.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -50.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -49.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -48.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -47.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -46.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -45.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -44.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -43.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -42.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -41.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -40.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -39.885317927306119
+                  y: 256.45000000000005
+                }
+              }
+            }
+          }
+          type: RIGHT_BOUNDARY
+        }
+        edge {
+          curve {
+            segment {
+              line_segment {
+                point {
+                  x: -39.885317927306119
+                  y: 260.75
+                }
+                point {
+                  x: -38.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -37.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -36.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -35.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -34.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -33.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -32.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -31.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -30.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -29.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -28.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -27.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -26.885317927306112
+                  y: 259.75
+                }
+                point {
+                  x: -25.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -24.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -23.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -22.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -21.885317927306126
+                  y: 259.75
+                }
+                point {
+                  x: -20.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -19.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -18.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -17.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -16.885317927306126
+                  y: 259.75
+                }
+                point {
+                  x: -15.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -14.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -13.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -12.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -11.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -10.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -9.8853179273061187
+                  y: 259.75
+                }
+                point {
+                  x: -8.8853179273061187
+                  y: 259.75
+                }
+                point {
+                  x: -7.8853179273061187
+                  y: 259.75
+                }
+                point {
+                  x: -6.8853179273061187
+                  y: 259.75
+                }
+                point {
+                  x: -5.8853179273061187
+                  y: 259.75
+                }
+                point {
+                  x: -4.8853179273061187
+                  y: 259.75
+                }
+                point {
+                  x: -3.8853179273061187
+                  y: 259.75
+                }
+                point {
+                  x: -2.8853179273061187
+                  y: 259.75
+                }
+              }
+            }
+          }
+          type: LEFT_BOUNDARY
+        }
+        edge {
+          curve {
+            segment {
+              line_segment {
+                point {
+                  x: -39.885317927306119
+                  y: 255.45000000000002
+                }
+                point {
+                  x: -38.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -37.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -36.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -35.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -34.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -33.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -32.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -31.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -30.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -29.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -28.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -27.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -26.885317927306112
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -25.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -24.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -23.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -22.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -21.885317927306126
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -20.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -19.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -18.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -17.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -16.885317927306126
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -15.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -14.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -13.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -12.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -11.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -10.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -9.8853179273061187
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -8.8853179273061187
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -7.8853179273061187
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -6.8853179273061187
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -5.8853179273061187
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -4.8853179273061187
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -3.8853179273061187
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -2.8853179273061187
+                  y: 256.45000000000005
+                }
+              }
+            }
+          }
+          type: RIGHT_BOUNDARY
+        }
+      }
+    }
+  }
+}

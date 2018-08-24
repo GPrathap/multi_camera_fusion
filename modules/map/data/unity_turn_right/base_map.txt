@@ -1,0 +1,9830 @@
+lane {
+  id {
+    id: "1"
+  }
+  central_curve {
+    segment {
+      line_segment {
+        point {
+          x: -86.0
+          y: 0.0
+        }
+        point {
+          x: -86.0
+          y: 1.0
+        }
+        point {
+          x: -86.0
+          y: 2.0
+        }
+        point {
+          x: -86.0
+          y: 3.0
+        }
+        point {
+          x: -86.0
+          y: 4.0
+        }
+        point {
+          x: -86.0
+          y: 5.0
+        }
+        point {
+          x: -86.0
+          y: 6.0
+        }
+        point {
+          x: -86.0
+          y: 7.0
+        }
+        point {
+          x: -86.0
+          y: 8.0
+        }
+        point {
+          x: -86.0
+          y: 9.0
+        }
+        point {
+          x: -86.0
+          y: 10.0
+        }
+        point {
+          x: -86.0
+          y: 11.0
+        }
+        point {
+          x: -86.0
+          y: 12.0
+        }
+        point {
+          x: -86.0
+          y: 13.0
+        }
+        point {
+          x: -86.0
+          y: 14.0
+        }
+        point {
+          x: -86.0
+          y: 15.0
+        }
+        point {
+          x: -86.0
+          y: 16.0
+        }
+        point {
+          x: -86.0
+          y: 17.0
+        }
+        point {
+          x: -86.0
+          y: 18.0
+        }
+        point {
+          x: -86.0
+          y: 19.0
+        }
+        point {
+          x: -86.0
+          y: 20.0
+        }
+        point {
+          x: -86.0
+          y: 21.0
+        }
+        point {
+          x: -86.0
+          y: 22.0
+        }
+        point {
+          x: -86.0
+          y: 23.0
+        }
+        point {
+          x: -86.0
+          y: 24.0
+        }
+        point {
+          x: -86.0
+          y: 25.0
+        }
+        point {
+          x: -86.0
+          y: 26.0
+        }
+        point {
+          x: -86.0
+          y: 27.0
+        }
+        point {
+          x: -86.0
+          y: 28.0
+        }
+        point {
+          x: -86.0
+          y: 29.0
+        }
+        point {
+          x: -86.0
+          y: 30.0
+        }
+        point {
+          x: -86.0
+          y: 30.999999999999996
+        }
+        point {
+          x: -86.0
+          y: 32.0
+        }
+        point {
+          x: -86.0
+          y: 33.0
+        }
+        point {
+          x: -86.0
+          y: 34.0
+        }
+        point {
+          x: -86.0
+          y: 35.0
+        }
+        point {
+          x: -86.0
+          y: 36.0
+        }
+        point {
+          x: -86.0
+          y: 37.0
+        }
+        point {
+          x: -86.0
+          y: 38.0
+        }
+        point {
+          x: -86.0
+          y: 39.0
+        }
+        point {
+          x: -86.0
+          y: 40.0
+        }
+        point {
+          x: -86.0
+          y: 41.0
+        }
+        point {
+          x: -86.0
+          y: 42.0
+        }
+        point {
+          x: -86.0
+          y: 43.0
+        }
+        point {
+          x: -86.0
+          y: 44.0
+        }
+        point {
+          x: -86.0
+          y: 45.0
+        }
+        point {
+          x: -86.0
+          y: 46.0
+        }
+        point {
+          x: -86.0
+          y: 47.0
+        }
+        point {
+          x: -86.0
+          y: 48.0
+        }
+        point {
+          x: -86.0
+          y: 49.0
+        }
+        point {
+          x: -86.0
+          y: 50.0
+        }
+        point {
+          x: -86.0
+          y: 51.0
+        }
+        point {
+          x: -86.0
+          y: 52.0
+        }
+        point {
+          x: -86.0
+          y: 53.0
+        }
+        point {
+          x: -86.0
+          y: 54.0
+        }
+        point {
+          x: -86.0
+          y: 55.0
+        }
+        point {
+          x: -86.0
+          y: 56.0
+        }
+        point {
+          x: -86.0
+          y: 57.0
+        }
+        point {
+          x: -86.0
+          y: 58.0
+        }
+        point {
+          x: -86.0
+          y: 59.0
+        }
+        point {
+          x: -86.0
+          y: 60.0
+        }
+        point {
+          x: -86.0
+          y: 61.0
+        }
+        point {
+          x: -86.0
+          y: 61.99999999999999
+        }
+        point {
+          x: -86.0
+          y: 62.99999999999999
+        }
+        point {
+          x: -86.0
+          y: 64.0
+        }
+        point {
+          x: -86.0
+          y: 65.0
+        }
+        point {
+          x: -86.0
+          y: 66.0
+        }
+        point {
+          x: -86.0
+          y: 67.0
+        }
+        point {
+          x: -86.0
+          y: 68.0
+        }
+        point {
+          x: -86.0
+          y: 69.0
+        }
+        point {
+          x: -86.0
+          y: 70.0
+        }
+        point {
+          x: -86.0
+          y: 71.0
+        }
+        point {
+          x: -86.0
+          y: 72.0
+        }
+        point {
+          x: -86.0
+          y: 73.0
+        }
+        point {
+          x: -86.0
+          y: 74.0
+        }
+        point {
+          x: -86.0
+          y: 75.0
+        }
+        point {
+          x: -86.0
+          y: 76.0
+        }
+        point {
+          x: -86.0
+          y: 77.0
+        }
+        point {
+          x: -86.0
+          y: 78.0
+        }
+        point {
+          x: -86.0
+          y: 79.0
+        }
+        point {
+          x: -86.0
+          y: 80.0
+        }
+        point {
+          x: -86.0
+          y: 81.0
+        }
+        point {
+          x: -86.0
+          y: 82.0
+        }
+        point {
+          x: -86.0
+          y: 83.0
+        }
+        point {
+          x: -86.0
+          y: 84.0
+        }
+        point {
+          x: -86.0
+          y: 85.0
+        }
+        point {
+          x: -86.0
+          y: 86.0
+        }
+        point {
+          x: -86.0
+          y: 87.0
+        }
+        point {
+          x: -86.0
+          y: 88.0
+        }
+        point {
+          x: -86.0
+          y: 89.0
+        }
+        point {
+          x: -86.0
+          y: 90.0
+        }
+        point {
+          x: -86.0
+          y: 91.0
+        }
+        point {
+          x: -86.0
+          y: 92.0
+        }
+        point {
+          x: -86.0
+          y: 93.0
+        }
+        point {
+          x: -86.0
+          y: 94.0
+        }
+        point {
+          x: -86.0
+          y: 95.0
+        }
+        point {
+          x: -86.0
+          y: 96.0
+        }
+        point {
+          x: -86.0
+          y: 97.0
+        }
+        point {
+          x: -86.0
+          y: 98.0
+        }
+        point {
+          x: -86.0
+          y: 99.0
+        }
+      }
+      length: 100.0
+    }
+  }
+  left_boundary {
+    curve {
+      segment {
+        line_segment {
+          point {
+            x: -87.65
+            y: 2.0206672185931328e-16
+          }
+          point {
+            x: -87.65
+            y: 1.0000000000000002
+          }
+          point {
+            x: -87.65
+            y: 2.0
+          }
+          point {
+            x: -87.65
+            y: 3.0
+          }
+          point {
+            x: -87.65
+            y: 4.0
+          }
+          point {
+            x: -87.65
+            y: 5.0
+          }
+          point {
+            x: -87.65
+            y: 6.0
+          }
+          point {
+            x: -87.65
+            y: 7.0
+          }
+          point {
+            x: -87.65
+            y: 8.0
+          }
+          point {
+            x: -87.65
+            y: 9.0
+          }
+          point {
+            x: -87.65
+            y: 10.0
+          }
+          point {
+            x: -87.65
+            y: 11.0
+          }
+          point {
+            x: -87.65
+            y: 12.0
+          }
+          point {
+            x: -87.65
+            y: 13.0
+          }
+          point {
+            x: -87.65
+            y: 14.0
+          }
+          point {
+            x: -87.65
+            y: 15.0
+          }
+          point {
+            x: -87.65
+            y: 16.0
+          }
+          point {
+            x: -87.65
+            y: 17.0
+          }
+          point {
+            x: -87.65
+            y: 18.0
+          }
+          point {
+            x: -87.65
+            y: 19.0
+          }
+          point {
+            x: -87.65
+            y: 20.0
+          }
+          point {
+            x: -87.65
+            y: 21.0
+          }
+          point {
+            x: -87.65
+            y: 22.0
+          }
+          point {
+            x: -87.65
+            y: 23.0
+          }
+          point {
+            x: -87.65
+            y: 24.0
+          }
+          point {
+            x: -87.65
+            y: 25.0
+          }
+          point {
+            x: -87.65
+            y: 26.0
+          }
+          point {
+            x: -87.65
+            y: 27.0
+          }
+          point {
+            x: -87.65
+            y: 28.0
+          }
+          point {
+            x: -87.65
+            y: 29.0
+          }
+          point {
+            x: -87.65
+            y: 30.0
+          }
+          point {
+            x: -87.65
+            y: 30.999999999999996
+          }
+          point {
+            x: -87.65
+            y: 32.0
+          }
+          point {
+            x: -87.65
+            y: 33.0
+          }
+          point {
+            x: -87.65
+            y: 34.0
+          }
+          point {
+            x: -87.65
+            y: 35.0
+          }
+          point {
+            x: -87.65
+            y: 36.0
+          }
+          point {
+            x: -87.65
+            y: 37.0
+          }
+          point {
+            x: -87.65
+            y: 38.0
+          }
+          point {
+            x: -87.65
+            y: 39.0
+          }
+          point {
+            x: -87.65
+            y: 40.0
+          }
+          point {
+            x: -87.65
+            y: 41.0
+          }
+          point {
+            x: -87.65
+            y: 42.0
+          }
+          point {
+            x: -87.65
+            y: 43.0
+          }
+          point {
+            x: -87.65
+            y: 44.0
+          }
+          point {
+            x: -87.65
+            y: 45.0
+          }
+          point {
+            x: -87.65
+            y: 46.0
+          }
+          point {
+            x: -87.65
+            y: 47.0
+          }
+          point {
+            x: -87.65
+            y: 48.0
+          }
+          point {
+            x: -87.65
+            y: 49.0
+          }
+          point {
+            x: -87.65
+            y: 50.0
+          }
+          point {
+            x: -87.65
+            y: 51.0
+          }
+          point {
+            x: -87.65
+            y: 52.0
+          }
+          point {
+            x: -87.65
+            y: 53.0
+          }
+          point {
+            x: -87.65
+            y: 54.0
+          }
+          point {
+            x: -87.65
+            y: 55.0
+          }
+          point {
+            x: -87.65
+            y: 56.0
+          }
+          point {
+            x: -87.65
+            y: 57.0
+          }
+          point {
+            x: -87.65
+            y: 58.0
+          }
+          point {
+            x: -87.65
+            y: 59.0
+          }
+          point {
+            x: -87.65
+            y: 60.0
+          }
+          point {
+            x: -87.65
+            y: 61.0
+          }
+          point {
+            x: -87.65
+            y: 61.99999999999999
+          }
+          point {
+            x: -87.65
+            y: 62.99999999999999
+          }
+          point {
+            x: -87.65
+            y: 64.0
+          }
+          point {
+            x: -87.65
+            y: 65.0
+          }
+          point {
+            x: -87.65
+            y: 66.0
+          }
+          point {
+            x: -87.65
+            y: 67.0
+          }
+          point {
+            x: -87.65
+            y: 68.0
+          }
+          point {
+            x: -87.65
+            y: 69.0
+          }
+          point {
+            x: -87.65
+            y: 70.0
+          }
+          point {
+            x: -87.65
+            y: 71.0
+          }
+          point {
+            x: -87.65
+            y: 72.0
+          }
+          point {
+            x: -87.65
+            y: 73.0
+          }
+          point {
+            x: -87.65
+            y: 74.0
+          }
+          point {
+            x: -87.65
+            y: 75.0
+          }
+          point {
+            x: -87.65
+            y: 76.0
+          }
+          point {
+            x: -87.65
+            y: 77.0
+          }
+          point {
+            x: -87.65
+            y: 78.0
+          }
+          point {
+            x: -87.65
+            y: 79.0
+          }
+          point {
+            x: -87.65
+            y: 80.0
+          }
+          point {
+            x: -87.65
+            y: 81.0
+          }
+          point {
+            x: -87.65
+            y: 82.0
+          }
+          point {
+            x: -87.65
+            y: 83.0
+          }
+          point {
+            x: -87.65
+            y: 84.0
+          }
+          point {
+            x: -87.65
+            y: 85.0
+          }
+          point {
+            x: -87.65
+            y: 86.0
+          }
+          point {
+            x: -87.65
+            y: 87.0
+          }
+          point {
+            x: -87.65
+            y: 88.0
+          }
+          point {
+            x: -87.65
+            y: 89.0
+          }
+          point {
+            x: -87.65
+            y: 90.0
+          }
+          point {
+            x: -87.65
+            y: 91.0
+          }
+          point {
+            x: -87.65
+            y: 92.0
+          }
+          point {
+            x: -87.65
+            y: 93.0
+          }
+          point {
+            x: -87.65
+            y: 94.0
+          }
+          point {
+            x: -87.65
+            y: 95.0
+          }
+          point {
+            x: -87.65
+            y: 96.0
+          }
+          point {
+            x: -87.65
+            y: 97.0
+          }
+          point {
+            x: -87.65
+            y: 98.0
+          }
+          point {
+            x: -87.65
+            y: 99.0
+          }
+        }
+      }
+    }
+    length: 100.0
+    boundary_type {
+      s: 0
+      types: DOTTED_YELLOW
+    }
+  }
+  right_boundary {
+    curve {
+      segment {
+        line_segment {
+          point {
+            x: -84.35
+            y: 0.0
+          }
+          point {
+            x: -84.35
+            y: 1.0
+          }
+          point {
+            x: -84.35
+            y: 2.0
+          }
+          point {
+            x: -84.35
+            y: 3.0
+          }
+          point {
+            x: -84.35
+            y: 4.0
+          }
+          point {
+            x: -84.35
+            y: 5.0
+          }
+          point {
+            x: -84.35
+            y: 6.0
+          }
+          point {
+            x: -84.35
+            y: 7.0
+          }
+          point {
+            x: -84.35
+            y: 8.0
+          }
+          point {
+            x: -84.35
+            y: 9.0
+          }
+          point {
+            x: -84.35
+            y: 10.0
+          }
+          point {
+            x: -84.35
+            y: 11.0
+          }
+          point {
+            x: -84.35
+            y: 12.0
+          }
+          point {
+            x: -84.35
+            y: 13.0
+          }
+          point {
+            x: -84.35
+            y: 14.0
+          }
+          point {
+            x: -84.35
+            y: 15.0
+          }
+          point {
+            x: -84.35
+            y: 16.0
+          }
+          point {
+            x: -84.35
+            y: 17.0
+          }
+          point {
+            x: -84.35
+            y: 18.0
+          }
+          point {
+            x: -84.35
+            y: 19.0
+          }
+          point {
+            x: -84.35
+            y: 20.0
+          }
+          point {
+            x: -84.35
+            y: 21.0
+          }
+          point {
+            x: -84.35
+            y: 22.0
+          }
+          point {
+            x: -84.35
+            y: 23.0
+          }
+          point {
+            x: -84.35
+            y: 24.0
+          }
+          point {
+            x: -84.35
+            y: 25.0
+          }
+          point {
+            x: -84.35
+            y: 26.0
+          }
+          point {
+            x: -84.35
+            y: 27.0
+          }
+          point {
+            x: -84.35
+            y: 28.0
+          }
+          point {
+            x: -84.35
+            y: 29.0
+          }
+          point {
+            x: -84.35
+            y: 30.0
+          }
+          point {
+            x: -84.35
+            y: 30.999999999999996
+          }
+          point {
+            x: -84.35
+            y: 32.0
+          }
+          point {
+            x: -84.35
+            y: 33.0
+          }
+          point {
+            x: -84.35
+            y: 34.0
+          }
+          point {
+            x: -84.35
+            y: 35.0
+          }
+          point {
+            x: -84.35
+            y: 36.0
+          }
+          point {
+            x: -84.35
+            y: 37.0
+          }
+          point {
+            x: -84.35
+            y: 38.0
+          }
+          point {
+            x: -84.35
+            y: 39.0
+          }
+          point {
+            x: -84.35
+            y: 40.0
+          }
+          point {
+            x: -84.35
+            y: 41.0
+          }
+          point {
+            x: -84.35
+            y: 42.0
+          }
+          point {
+            x: -84.35
+            y: 43.0
+          }
+          point {
+            x: -84.35
+            y: 44.0
+          }
+          point {
+            x: -84.35
+            y: 45.0
+          }
+          point {
+            x: -84.35
+            y: 46.0
+          }
+          point {
+            x: -84.35
+            y: 47.0
+          }
+          point {
+            x: -84.35
+            y: 48.0
+          }
+          point {
+            x: -84.35
+            y: 49.0
+          }
+          point {
+            x: -84.35
+            y: 50.0
+          }
+          point {
+            x: -84.35
+            y: 51.0
+          }
+          point {
+            x: -84.35
+            y: 52.0
+          }
+          point {
+            x: -84.35
+            y: 53.0
+          }
+          point {
+            x: -84.35
+            y: 54.0
+          }
+          point {
+            x: -84.35
+            y: 55.0
+          }
+          point {
+            x: -84.35
+            y: 56.0
+          }
+          point {
+            x: -84.35
+            y: 57.0
+          }
+          point {
+            x: -84.35
+            y: 58.0
+          }
+          point {
+            x: -84.35
+            y: 59.0
+          }
+          point {
+            x: -84.35
+            y: 60.0
+          }
+          point {
+            x: -84.35
+            y: 61.0
+          }
+          point {
+            x: -84.35
+            y: 61.99999999999999
+          }
+          point {
+            x: -84.35
+            y: 62.99999999999999
+          }
+          point {
+            x: -84.35
+            y: 64.0
+          }
+          point {
+            x: -84.35
+            y: 65.0
+          }
+          point {
+            x: -84.35
+            y: 66.0
+          }
+          point {
+            x: -84.35
+            y: 67.0
+          }
+          point {
+            x: -84.35
+            y: 68.0
+          }
+          point {
+            x: -84.35
+            y: 69.0
+          }
+          point {
+            x: -84.35
+            y: 70.0
+          }
+          point {
+            x: -84.35
+            y: 71.0
+          }
+          point {
+            x: -84.35
+            y: 72.0
+          }
+          point {
+            x: -84.35
+            y: 73.0
+          }
+          point {
+            x: -84.35
+            y: 74.0
+          }
+          point {
+            x: -84.35
+            y: 75.0
+          }
+          point {
+            x: -84.35
+            y: 76.0
+          }
+          point {
+            x: -84.35
+            y: 77.0
+          }
+          point {
+            x: -84.35
+            y: 78.0
+          }
+          point {
+            x: -84.35
+            y: 79.0
+          }
+          point {
+            x: -84.35
+            y: 80.0
+          }
+          point {
+            x: -84.35
+            y: 81.0
+          }
+          point {
+            x: -84.35
+            y: 82.0
+          }
+          point {
+            x: -84.35
+            y: 83.0
+          }
+          point {
+            x: -84.35
+            y: 84.0
+          }
+          point {
+            x: -84.35
+            y: 85.0
+          }
+          point {
+            x: -84.35
+            y: 86.0
+          }
+          point {
+            x: -84.35
+            y: 87.0
+          }
+          point {
+            x: -84.35
+            y: 88.0
+          }
+          point {
+            x: -84.35
+            y: 89.0
+          }
+          point {
+            x: -84.35
+            y: 90.0
+          }
+          point {
+            x: -84.35
+            y: 91.0
+          }
+          point {
+            x: -84.35
+            y: 92.0
+          }
+          point {
+            x: -84.35
+            y: 93.0
+          }
+          point {
+            x: -84.35
+            y: 94.0
+          }
+          point {
+            x: -84.35
+            y: 95.0
+          }
+          point {
+            x: -84.35
+            y: 96.0
+          }
+          point {
+            x: -84.35
+            y: 97.0
+          }
+          point {
+            x: -84.35
+            y: 98.0
+          }
+          point {
+            x: -84.35
+            y: 99.0
+          }
+        }
+      }
+    }
+    length: 100.0
+    boundary_type {
+      s: 0
+      types: DOTTED_YELLOW
+    }
+  }
+  length: 100.0
+  speed_limit: 20.0
+  successor_id {
+    id: "2"
+  }
+  type: CITY_DRIVING
+  turn: NO_TURN
+  left_sample {
+    s: 1
+    width: 1.65
+  }
+  left_sample {
+    s: 2
+    width: 1.65
+  }
+  left_sample {
+    s: 3
+    width: 1.65
+  }
+  left_sample {
+    s: 4
+    width: 1.65
+  }
+  left_sample {
+    s: 5
+    width: 1.65
+  }
+  left_sample {
+    s: 6
+    width: 1.65
+  }
+  left_sample {
+    s: 7
+    width: 1.65
+  }
+  left_sample {
+    s: 8
+    width: 1.65
+  }
+  left_sample {
+    s: 9
+    width: 1.65
+  }
+  left_sample {
+    s: 10
+    width: 1.65
+  }
+  left_sample {
+    s: 11
+    width: 1.65
+  }
+  left_sample {
+    s: 12
+    width: 1.65
+  }
+  left_sample {
+    s: 13
+    width: 1.65
+  }
+  left_sample {
+    s: 14
+    width: 1.65
+  }
+  left_sample {
+    s: 15
+    width: 1.65
+  }
+  left_sample {
+    s: 16
+    width: 1.65
+  }
+  left_sample {
+    s: 17
+    width: 1.65
+  }
+  left_sample {
+    s: 18
+    width: 1.65
+  }
+  left_sample {
+    s: 19
+    width: 1.65
+  }
+  left_sample {
+    s: 20
+    width: 1.65
+  }
+  left_sample {
+    s: 21
+    width: 1.65
+  }
+  left_sample {
+    s: 22
+    width: 1.65
+  }
+  left_sample {
+    s: 23
+    width: 1.65
+  }
+  left_sample {
+    s: 24
+    width: 1.65
+  }
+  left_sample {
+    s: 25
+    width: 1.65
+  }
+  left_sample {
+    s: 26
+    width: 1.65
+  }
+  left_sample {
+    s: 27
+    width: 1.65
+  }
+  left_sample {
+    s: 28
+    width: 1.65
+  }
+  left_sample {
+    s: 29
+    width: 1.65
+  }
+  left_sample {
+    s: 30
+    width: 1.65
+  }
+  left_sample {
+    s: 31
+    width: 1.65
+  }
+  left_sample {
+    s: 32
+    width: 1.65
+  }
+  left_sample {
+    s: 33
+    width: 1.65
+  }
+  left_sample {
+    s: 34
+    width: 1.65
+  }
+  left_sample {
+    s: 35
+    width: 1.65
+  }
+  left_sample {
+    s: 36
+    width: 1.65
+  }
+  left_sample {
+    s: 37
+    width: 1.65
+  }
+  left_sample {
+    s: 38
+    width: 1.65
+  }
+  left_sample {
+    s: 39
+    width: 1.65
+  }
+  left_sample {
+    s: 40
+    width: 1.65
+  }
+  left_sample {
+    s: 41
+    width: 1.65
+  }
+  left_sample {
+    s: 42
+    width: 1.65
+  }
+  left_sample {
+    s: 43
+    width: 1.65
+  }
+  left_sample {
+    s: 44
+    width: 1.65
+  }
+  left_sample {
+    s: 45
+    width: 1.65
+  }
+  left_sample {
+    s: 46
+    width: 1.65
+  }
+  left_sample {
+    s: 47
+    width: 1.65
+  }
+  left_sample {
+    s: 48
+    width: 1.65
+  }
+  left_sample {
+    s: 49
+    width: 1.65
+  }
+  left_sample {
+    s: 50
+    width: 1.65
+  }
+  left_sample {
+    s: 51
+    width: 1.65
+  }
+  left_sample {
+    s: 52
+    width: 1.65
+  }
+  left_sample {
+    s: 53
+    width: 1.65
+  }
+  left_sample {
+    s: 54
+    width: 1.65
+  }
+  left_sample {
+    s: 55
+    width: 1.65
+  }
+  left_sample {
+    s: 56
+    width: 1.65
+  }
+  left_sample {
+    s: 57
+    width: 1.65
+  }
+  left_sample {
+    s: 58
+    width: 1.65
+  }
+  left_sample {
+    s: 59
+    width: 1.65
+  }
+  left_sample {
+    s: 60
+    width: 1.65
+  }
+  left_sample {
+    s: 61
+    width: 1.65
+  }
+  left_sample {
+    s: 62
+    width: 1.65
+  }
+  left_sample {
+    s: 63
+    width: 1.65
+  }
+  left_sample {
+    s: 64
+    width: 1.65
+  }
+  left_sample {
+    s: 65
+    width: 1.65
+  }
+  left_sample {
+    s: 66
+    width: 1.65
+  }
+  left_sample {
+    s: 67
+    width: 1.65
+  }
+  left_sample {
+    s: 68
+    width: 1.65
+  }
+  left_sample {
+    s: 69
+    width: 1.65
+  }
+  left_sample {
+    s: 70
+    width: 1.65
+  }
+  left_sample {
+    s: 71
+    width: 1.65
+  }
+  left_sample {
+    s: 72
+    width: 1.65
+  }
+  left_sample {
+    s: 73
+    width: 1.65
+  }
+  left_sample {
+    s: 74
+    width: 1.65
+  }
+  left_sample {
+    s: 75
+    width: 1.65
+  }
+  left_sample {
+    s: 76
+    width: 1.65
+  }
+  left_sample {
+    s: 77
+    width: 1.65
+  }
+  left_sample {
+    s: 78
+    width: 1.65
+  }
+  left_sample {
+    s: 79
+    width: 1.65
+  }
+  left_sample {
+    s: 80
+    width: 1.65
+  }
+  left_sample {
+    s: 81
+    width: 1.65
+  }
+  left_sample {
+    s: 82
+    width: 1.65
+  }
+  left_sample {
+    s: 83
+    width: 1.65
+  }
+  left_sample {
+    s: 84
+    width: 1.65
+  }
+  left_sample {
+    s: 85
+    width: 1.65
+  }
+  left_sample {
+    s: 86
+    width: 1.65
+  }
+  left_sample {
+    s: 87
+    width: 1.65
+  }
+  left_sample {
+    s: 88
+    width: 1.65
+  }
+  left_sample {
+    s: 89
+    width: 1.65
+  }
+  left_sample {
+    s: 90
+    width: 1.65
+  }
+  left_sample {
+    s: 91
+    width: 1.65
+  }
+  left_sample {
+    s: 92
+    width: 1.65
+  }
+  left_sample {
+    s: 93
+    width: 1.65
+  }
+  left_sample {
+    s: 94
+    width: 1.65
+  }
+  left_sample {
+    s: 95
+    width: 1.65
+  }
+  left_sample {
+    s: 96
+    width: 1.65
+  }
+  left_sample {
+    s: 97
+    width: 1.65
+  }
+  left_sample {
+    s: 98
+    width: 1.65
+  }
+  left_sample {
+    s: 99
+    width: 1.65
+  }
+  left_sample {
+    s: 100
+    width: 1.65
+  }
+  right_sample {
+    s: 1
+    width: 1.65
+  }
+  right_sample {
+    s: 2
+    width: 1.65
+  }
+  right_sample {
+    s: 3
+    width: 1.65
+  }
+  right_sample {
+    s: 4
+    width: 1.65
+  }
+  right_sample {
+    s: 5
+    width: 1.65
+  }
+  right_sample {
+    s: 6
+    width: 1.65
+  }
+  right_sample {
+    s: 7
+    width: 1.65
+  }
+  right_sample {
+    s: 8
+    width: 1.65
+  }
+  right_sample {
+    s: 9
+    width: 1.65
+  }
+  right_sample {
+    s: 10
+    width: 1.65
+  }
+  right_sample {
+    s: 11
+    width: 1.65
+  }
+  right_sample {
+    s: 12
+    width: 1.65
+  }
+  right_sample {
+    s: 13
+    width: 1.65
+  }
+  right_sample {
+    s: 14
+    width: 1.65
+  }
+  right_sample {
+    s: 15
+    width: 1.65
+  }
+  right_sample {
+    s: 16
+    width: 1.65
+  }
+  right_sample {
+    s: 17
+    width: 1.65
+  }
+  right_sample {
+    s: 18
+    width: 1.65
+  }
+  right_sample {
+    s: 19
+    width: 1.65
+  }
+  right_sample {
+    s: 20
+    width: 1.65
+  }
+  right_sample {
+    s: 21
+    width: 1.65
+  }
+  right_sample {
+    s: 22
+    width: 1.65
+  }
+  right_sample {
+    s: 23
+    width: 1.65
+  }
+  right_sample {
+    s: 24
+    width: 1.65
+  }
+  right_sample {
+    s: 25
+    width: 1.65
+  }
+  right_sample {
+    s: 26
+    width: 1.65
+  }
+  right_sample {
+    s: 27
+    width: 1.65
+  }
+  right_sample {
+    s: 28
+    width: 1.65
+  }
+  right_sample {
+    s: 29
+    width: 1.65
+  }
+  right_sample {
+    s: 30
+    width: 1.65
+  }
+  right_sample {
+    s: 31
+    width: 1.65
+  }
+  right_sample {
+    s: 32
+    width: 1.65
+  }
+  right_sample {
+    s: 33
+    width: 1.65
+  }
+  right_sample {
+    s: 34
+    width: 1.65
+  }
+  right_sample {
+    s: 35
+    width: 1.65
+  }
+  right_sample {
+    s: 36
+    width: 1.65
+  }
+  right_sample {
+    s: 37
+    width: 1.65
+  }
+  right_sample {
+    s: 38
+    width: 1.65
+  }
+  right_sample {
+    s: 39
+    width: 1.65
+  }
+  right_sample {
+    s: 40
+    width: 1.65
+  }
+  right_sample {
+    s: 41
+    width: 1.65
+  }
+  right_sample {
+    s: 42
+    width: 1.65
+  }
+  right_sample {
+    s: 43
+    width: 1.65
+  }
+  right_sample {
+    s: 44
+    width: 1.65
+  }
+  right_sample {
+    s: 45
+    width: 1.65
+  }
+  right_sample {
+    s: 46
+    width: 1.65
+  }
+  right_sample {
+    s: 47
+    width: 1.65
+  }
+  right_sample {
+    s: 48
+    width: 1.65
+  }
+  right_sample {
+    s: 49
+    width: 1.65
+  }
+  right_sample {
+    s: 50
+    width: 1.65
+  }
+  right_sample {
+    s: 51
+    width: 1.65
+  }
+  right_sample {
+    s: 52
+    width: 1.65
+  }
+  right_sample {
+    s: 53
+    width: 1.65
+  }
+  right_sample {
+    s: 54
+    width: 1.65
+  }
+  right_sample {
+    s: 55
+    width: 1.65
+  }
+  right_sample {
+    s: 56
+    width: 1.65
+  }
+  right_sample {
+    s: 57
+    width: 1.65
+  }
+  right_sample {
+    s: 58
+    width: 1.65
+  }
+  right_sample {
+    s: 59
+    width: 1.65
+  }
+  right_sample {
+    s: 60
+    width: 1.65
+  }
+  right_sample {
+    s: 61
+    width: 1.65
+  }
+  right_sample {
+    s: 62
+    width: 1.65
+  }
+  right_sample {
+    s: 63
+    width: 1.65
+  }
+  right_sample {
+    s: 64
+    width: 1.65
+  }
+  right_sample {
+    s: 65
+    width: 1.65
+  }
+  right_sample {
+    s: 66
+    width: 1.65
+  }
+  right_sample {
+    s: 67
+    width: 1.65
+  }
+  right_sample {
+    s: 68
+    width: 1.65
+  }
+  right_sample {
+    s: 69
+    width: 1.65
+  }
+  right_sample {
+    s: 70
+    width: 1.65
+  }
+  right_sample {
+    s: 71
+    width: 1.65
+  }
+  right_sample {
+    s: 72
+    width: 1.65
+  }
+  right_sample {
+    s: 73
+    width: 1.65
+  }
+  right_sample {
+    s: 74
+    width: 1.65
+  }
+  right_sample {
+    s: 75
+    width: 1.65
+  }
+  right_sample {
+    s: 76
+    width: 1.65
+  }
+  right_sample {
+    s: 77
+    width: 1.65
+  }
+  right_sample {
+    s: 78
+    width: 1.65
+  }
+  right_sample {
+    s: 79
+    width: 1.65
+  }
+  right_sample {
+    s: 80
+    width: 1.65
+  }
+  right_sample {
+    s: 81
+    width: 1.65
+  }
+  right_sample {
+    s: 82
+    width: 1.65
+  }
+  right_sample {
+    s: 83
+    width: 1.65
+  }
+  right_sample {
+    s: 84
+    width: 1.65
+  }
+  right_sample {
+    s: 85
+    width: 1.65
+  }
+  right_sample {
+    s: 86
+    width: 1.65
+  }
+  right_sample {
+    s: 87
+    width: 1.65
+  }
+  right_sample {
+    s: 88
+    width: 1.65
+  }
+  right_sample {
+    s: 89
+    width: 1.65
+  }
+  right_sample {
+    s: 90
+    width: 1.65
+  }
+  right_sample {
+    s: 91
+    width: 1.65
+  }
+  right_sample {
+    s: 92
+    width: 1.65
+  }
+  right_sample {
+    s: 93
+    width: 1.65
+  }
+  right_sample {
+    s: 94
+    width: 1.65
+  }
+  right_sample {
+    s: 95
+    width: 1.65
+  }
+  right_sample {
+    s: 96
+    width: 1.65
+  }
+  right_sample {
+    s: 97
+    width: 1.65
+  }
+  right_sample {
+    s: 98
+    width: 1.65
+  }
+  right_sample {
+    s: 99
+    width: 1.65
+  }
+  right_sample {
+    s: 100
+    width: 1.65
+  }
+  direction: FORWARD
+}
+lane {
+  id {
+    id: "2"
+  }
+  central_curve {
+    segment {
+      line_segment {
+        point {
+          x: -86.0
+          y: 99.0
+        }
+        point {
+          x: -86.0
+          y: 100.0
+        }
+        point {
+          x: -86.0
+          y: 101.0
+        }
+        point {
+          x: -86.0
+          y: 102.0
+        }
+        point {
+          x: -86.0
+          y: 103.0
+        }
+        point {
+          x: -86.0
+          y: 104.0
+        }
+        point {
+          x: -86.0
+          y: 105.0
+        }
+        point {
+          x: -86.0
+          y: 106.0
+        }
+        point {
+          x: -86.0
+          y: 107.0
+        }
+        point {
+          x: -86.0
+          y: 108.0
+        }
+        point {
+          x: -86.0
+          y: 109.0
+        }
+        point {
+          x: -86.0
+          y: 110.0
+        }
+        point {
+          x: -86.0
+          y: 111.0
+        }
+        point {
+          x: -86.0
+          y: 112.0
+        }
+        point {
+          x: -86.0
+          y: 113.0
+        }
+        point {
+          x: -86.0
+          y: 114.0
+        }
+        point {
+          x: -86.0
+          y: 115.0
+        }
+        point {
+          x: -86.0
+          y: 116.0
+        }
+        point {
+          x: -86.0
+          y: 117.0
+        }
+        point {
+          x: -86.0
+          y: 118.0
+        }
+        point {
+          x: -86.0
+          y: 119.0
+        }
+        point {
+          x: -86.0
+          y: 120.0
+        }
+        point {
+          x: -86.0
+          y: 121.0
+        }
+        point {
+          x: -86.0
+          y: 122.0
+        }
+        point {
+          x: -86.0
+          y: 123.0
+        }
+        point {
+          x: -86.0
+          y: 123.99999999999999
+        }
+        point {
+          x: -86.0
+          y: 125.0
+        }
+        point {
+          x: -86.0
+          y: 125.99999999999999
+        }
+        point {
+          x: -86.0
+          y: 127.0
+        }
+        point {
+          x: -86.0
+          y: 128.0
+        }
+        point {
+          x: -86.0
+          y: 129.0
+        }
+        point {
+          x: -86.0
+          y: 130.0
+        }
+        point {
+          x: -86.0
+          y: 131.0
+        }
+        point {
+          x: -86.0
+          y: 132.0
+        }
+        point {
+          x: -86.0
+          y: 133.0
+        }
+        point {
+          x: -86.0
+          y: 134.0
+        }
+        point {
+          x: -86.0
+          y: 135.0
+        }
+        point {
+          x: -86.0
+          y: 136.0
+        }
+        point {
+          x: -86.0
+          y: 137.0
+        }
+        point {
+          x: -86.0
+          y: 138.0
+        }
+        point {
+          x: -86.0
+          y: 139.0
+        }
+        point {
+          x: -86.0
+          y: 140.0
+        }
+        point {
+          x: -86.0
+          y: 141.0
+        }
+        point {
+          x: -86.0
+          y: 142.0
+        }
+        point {
+          x: -86.0
+          y: 143.0
+        }
+        point {
+          x: -86.0
+          y: 144.0
+        }
+        point {
+          x: -86.0
+          y: 145.0
+        }
+        point {
+          x: -86.0
+          y: 146.0
+        }
+        point {
+          x: -86.0
+          y: 147.0
+        }
+        point {
+          x: -86.0
+          y: 148.0
+        }
+        point {
+          x: -86.0
+          y: 149.0
+        }
+        point {
+          x: -86.0
+          y: 150.0
+        }
+        point {
+          x: -86.0
+          y: 151.0
+        }
+        point {
+          x: -86.0
+          y: 152.0
+        }
+        point {
+          x: -86.0
+          y: 153.0
+        }
+        point {
+          x: -86.0
+          y: 154.0
+        }
+        point {
+          x: -86.0
+          y: 155.0
+        }
+        point {
+          x: -86.0
+          y: 156.0
+        }
+        point {
+          x: -86.0
+          y: 157.0
+        }
+        point {
+          x: -86.0
+          y: 158.0
+        }
+        point {
+          x: -86.0
+          y: 159.0
+        }
+        point {
+          x: -86.0
+          y: 160.0
+        }
+        point {
+          x: -86.0
+          y: 161.0
+        }
+        point {
+          x: -86.0
+          y: 162.0
+        }
+        point {
+          x: -86.0
+          y: 163.0
+        }
+        point {
+          x: -86.0
+          y: 164.0
+        }
+        point {
+          x: -86.0
+          y: 165.0
+        }
+        point {
+          x: -86.0
+          y: 166.0
+        }
+        point {
+          x: -86.0
+          y: 167.0
+        }
+        point {
+          x: -86.0
+          y: 168.0
+        }
+        point {
+          x: -86.0
+          y: 169.0
+        }
+        point {
+          x: -86.0
+          y: 170.0
+        }
+        point {
+          x: -86.0
+          y: 171.0
+        }
+        point {
+          x: -86.0
+          y: 172.0
+        }
+        point {
+          x: -86.0
+          y: 173.0
+        }
+        point {
+          x: -86.0
+          y: 174.0
+        }
+        point {
+          x: -86.0
+          y: 175.0
+        }
+        point {
+          x: -86.0
+          y: 176.0
+        }
+        point {
+          x: -86.0
+          y: 177.0
+        }
+        point {
+          x: -86.0
+          y: 178.0
+        }
+        point {
+          x: -86.0
+          y: 179.0
+        }
+        point {
+          x: -86.0
+          y: 180.0
+        }
+        point {
+          x: -86.0
+          y: 181.0
+        }
+        point {
+          x: -86.0
+          y: 182.0
+        }
+        point {
+          x: -86.0
+          y: 183.0
+        }
+        point {
+          x: -86.0
+          y: 184.0
+        }
+        point {
+          x: -86.0
+          y: 185.0
+        }
+        point {
+          x: -86.0
+          y: 186.0
+        }
+        point {
+          x: -86.0
+          y: 187.0
+        }
+        point {
+          x: -86.0
+          y: 188.0
+        }
+        point {
+          x: -86.0
+          y: 189.0
+        }
+        point {
+          x: -86.0
+          y: 190.0
+        }
+        point {
+          x: -86.0
+          y: 191.0
+        }
+        point {
+          x: -86.0
+          y: 192.0
+        }
+        point {
+          x: -86.0
+          y: 193.0
+        }
+        point {
+          x: -86.0
+          y: 194.0
+        }
+        point {
+          x: -86.0
+          y: 195.0
+        }
+        point {
+          x: -86.0
+          y: 196.0
+        }
+        point {
+          x: -86.0
+          y: 197.0
+        }
+        point {
+          x: -86.0
+          y: 198.0
+        }
+        point {
+          x: -86.0
+          y: 199.0
+        }
+      }
+      length: 100.0
+    }
+  }
+  left_boundary {
+    curve {
+      segment {
+        line_segment {
+          point {
+            x: -87.65
+            y: 99.0
+          }
+          point {
+            x: -87.65
+            y: 100.0
+          }
+          point {
+            x: -87.65
+            y: 101.0
+          }
+          point {
+            x: -87.65
+            y: 102.0
+          }
+          point {
+            x: -87.65
+            y: 103.0
+          }
+          point {
+            x: -87.65
+            y: 104.0
+          }
+          point {
+            x: -87.65
+            y: 105.0
+          }
+          point {
+            x: -87.65
+            y: 106.0
+          }
+          point {
+            x: -87.65
+            y: 107.0
+          }
+          point {
+            x: -87.65
+            y: 108.0
+          }
+          point {
+            x: -87.65
+            y: 109.0
+          }
+          point {
+            x: -87.65
+            y: 110.0
+          }
+          point {
+            x: -87.65
+            y: 111.0
+          }
+          point {
+            x: -87.65
+            y: 112.0
+          }
+          point {
+            x: -87.65
+            y: 113.0
+          }
+          point {
+            x: -87.65
+            y: 114.0
+          }
+          point {
+            x: -87.65
+            y: 115.0
+          }
+          point {
+            x: -87.65
+            y: 116.0
+          }
+          point {
+            x: -87.65
+            y: 117.0
+          }
+          point {
+            x: -87.65
+            y: 118.0
+          }
+          point {
+            x: -87.65
+            y: 119.0
+          }
+          point {
+            x: -87.65
+            y: 120.0
+          }
+          point {
+            x: -87.65
+            y: 121.0
+          }
+          point {
+            x: -87.65
+            y: 122.0
+          }
+          point {
+            x: -87.65
+            y: 123.0
+          }
+          point {
+            x: -87.65
+            y: 123.99999999999999
+          }
+          point {
+            x: -87.65
+            y: 125.0
+          }
+          point {
+            x: -87.65
+            y: 125.99999999999999
+          }
+          point {
+            x: -87.65
+            y: 127.0
+          }
+          point {
+            x: -87.65
+            y: 128.0
+          }
+          point {
+            x: -87.65
+            y: 129.0
+          }
+          point {
+            x: -87.65
+            y: 130.0
+          }
+          point {
+            x: -87.65
+            y: 131.0
+          }
+          point {
+            x: -87.65
+            y: 132.0
+          }
+          point {
+            x: -87.65
+            y: 133.0
+          }
+          point {
+            x: -87.65
+            y: 134.0
+          }
+          point {
+            x: -87.65
+            y: 135.0
+          }
+          point {
+            x: -87.65
+            y: 136.0
+          }
+          point {
+            x: -87.65
+            y: 137.0
+          }
+          point {
+            x: -87.65
+            y: 138.0
+          }
+          point {
+            x: -87.65
+            y: 139.0
+          }
+          point {
+            x: -87.65
+            y: 140.0
+          }
+          point {
+            x: -87.65
+            y: 141.0
+          }
+          point {
+            x: -87.65
+            y: 142.0
+          }
+          point {
+            x: -87.65
+            y: 143.0
+          }
+          point {
+            x: -87.65
+            y: 144.0
+          }
+          point {
+            x: -87.65
+            y: 145.0
+          }
+          point {
+            x: -87.65
+            y: 146.0
+          }
+          point {
+            x: -87.65
+            y: 147.0
+          }
+          point {
+            x: -87.65
+            y: 148.0
+          }
+          point {
+            x: -87.65
+            y: 149.0
+          }
+          point {
+            x: -87.65
+            y: 150.0
+          }
+          point {
+            x: -87.65
+            y: 151.0
+          }
+          point {
+            x: -87.65
+            y: 152.0
+          }
+          point {
+            x: -87.65
+            y: 153.0
+          }
+          point {
+            x: -87.65
+            y: 154.0
+          }
+          point {
+            x: -87.65
+            y: 155.0
+          }
+          point {
+            x: -87.65
+            y: 156.0
+          }
+          point {
+            x: -87.65
+            y: 157.0
+          }
+          point {
+            x: -87.65
+            y: 158.0
+          }
+          point {
+            x: -87.65
+            y: 159.0
+          }
+          point {
+            x: -87.65
+            y: 160.0
+          }
+          point {
+            x: -87.65
+            y: 161.0
+          }
+          point {
+            x: -87.65
+            y: 162.0
+          }
+          point {
+            x: -87.65
+            y: 163.0
+          }
+          point {
+            x: -87.65
+            y: 164.0
+          }
+          point {
+            x: -87.65
+            y: 165.0
+          }
+          point {
+            x: -87.65
+            y: 166.0
+          }
+          point {
+            x: -87.65
+            y: 167.0
+          }
+          point {
+            x: -87.65
+            y: 168.0
+          }
+          point {
+            x: -87.65
+            y: 169.0
+          }
+          point {
+            x: -87.65
+            y: 170.0
+          }
+          point {
+            x: -87.65
+            y: 171.0
+          }
+          point {
+            x: -87.65
+            y: 172.0
+          }
+          point {
+            x: -87.65
+            y: 173.0
+          }
+          point {
+            x: -87.65
+            y: 174.0
+          }
+          point {
+            x: -87.65
+            y: 175.0
+          }
+          point {
+            x: -87.65
+            y: 176.0
+          }
+          point {
+            x: -87.65
+            y: 177.0
+          }
+          point {
+            x: -87.65
+            y: 178.0
+          }
+          point {
+            x: -87.65
+            y: 179.0
+          }
+          point {
+            x: -87.65
+            y: 180.0
+          }
+          point {
+            x: -87.65
+            y: 181.0
+          }
+          point {
+            x: -87.65
+            y: 182.0
+          }
+          point {
+            x: -87.65
+            y: 183.0
+          }
+          point {
+            x: -87.65
+            y: 184.0
+          }
+          point {
+            x: -87.65
+            y: 185.0
+          }
+          point {
+            x: -87.65
+            y: 186.0
+          }
+          point {
+            x: -87.65
+            y: 187.0
+          }
+          point {
+            x: -87.65
+            y: 188.0
+          }
+          point {
+            x: -87.65
+            y: 189.0
+          }
+          point {
+            x: -87.65
+            y: 190.0
+          }
+          point {
+            x: -87.65
+            y: 191.0
+          }
+          point {
+            x: -87.65
+            y: 192.0
+          }
+          point {
+            x: -87.65
+            y: 193.0
+          }
+          point {
+            x: -87.65
+            y: 194.0
+          }
+          point {
+            x: -87.65
+            y: 195.0
+          }
+          point {
+            x: -87.65
+            y: 196.0
+          }
+          point {
+            x: -87.65
+            y: 197.0
+          }
+          point {
+            x: -87.65
+            y: 198.0
+          }
+          point {
+            x: -87.65
+            y: 199.0
+          }
+        }
+      }
+    }
+    length: 100.0
+    boundary_type {
+      s: 0
+      types: DOTTED_YELLOW
+    }
+  }
+  right_boundary {
+    curve {
+      segment {
+        line_segment {
+          point {
+            x: -84.35
+            y: 99.0
+          }
+          point {
+            x: -84.35
+            y: 100.0
+          }
+          point {
+            x: -84.35
+            y: 101.0
+          }
+          point {
+            x: -84.35
+            y: 102.0
+          }
+          point {
+            x: -84.35
+            y: 103.0
+          }
+          point {
+            x: -84.35
+            y: 104.0
+          }
+          point {
+            x: -84.35
+            y: 105.0
+          }
+          point {
+            x: -84.35
+            y: 106.0
+          }
+          point {
+            x: -84.35
+            y: 107.0
+          }
+          point {
+            x: -84.35
+            y: 108.0
+          }
+          point {
+            x: -84.35
+            y: 109.0
+          }
+          point {
+            x: -84.35
+            y: 110.0
+          }
+          point {
+            x: -84.35
+            y: 111.0
+          }
+          point {
+            x: -84.35
+            y: 112.0
+          }
+          point {
+            x: -84.35
+            y: 113.0
+          }
+          point {
+            x: -84.35
+            y: 114.0
+          }
+          point {
+            x: -84.35
+            y: 115.0
+          }
+          point {
+            x: -84.35
+            y: 116.0
+          }
+          point {
+            x: -84.35
+            y: 117.0
+          }
+          point {
+            x: -84.35
+            y: 118.0
+          }
+          point {
+            x: -84.35
+            y: 119.0
+          }
+          point {
+            x: -84.35
+            y: 120.0
+          }
+          point {
+            x: -84.35
+            y: 121.0
+          }
+          point {
+            x: -84.35
+            y: 122.0
+          }
+          point {
+            x: -84.35
+            y: 123.0
+          }
+          point {
+            x: -84.35
+            y: 123.99999999999999
+          }
+          point {
+            x: -84.35
+            y: 125.0
+          }
+          point {
+            x: -84.35
+            y: 125.99999999999999
+          }
+          point {
+            x: -84.35
+            y: 127.0
+          }
+          point {
+            x: -84.35
+            y: 128.0
+          }
+          point {
+            x: -84.35
+            y: 129.0
+          }
+          point {
+            x: -84.35
+            y: 130.0
+          }
+          point {
+            x: -84.35
+            y: 131.0
+          }
+          point {
+            x: -84.35
+            y: 132.0
+          }
+          point {
+            x: -84.35
+            y: 133.0
+          }
+          point {
+            x: -84.35
+            y: 134.0
+          }
+          point {
+            x: -84.35
+            y: 135.0
+          }
+          point {
+            x: -84.35
+            y: 136.0
+          }
+          point {
+            x: -84.35
+            y: 137.0
+          }
+          point {
+            x: -84.35
+            y: 138.0
+          }
+          point {
+            x: -84.35
+            y: 139.0
+          }
+          point {
+            x: -84.35
+            y: 140.0
+          }
+          point {
+            x: -84.35
+            y: 141.0
+          }
+          point {
+            x: -84.35
+            y: 142.0
+          }
+          point {
+            x: -84.35
+            y: 143.0
+          }
+          point {
+            x: -84.35
+            y: 144.0
+          }
+          point {
+            x: -84.35
+            y: 145.0
+          }
+          point {
+            x: -84.35
+            y: 146.0
+          }
+          point {
+            x: -84.35
+            y: 147.0
+          }
+          point {
+            x: -84.35
+            y: 148.0
+          }
+          point {
+            x: -84.35
+            y: 149.0
+          }
+          point {
+            x: -84.35
+            y: 150.0
+          }
+          point {
+            x: -84.35
+            y: 151.0
+          }
+          point {
+            x: -84.35
+            y: 152.0
+          }
+          point {
+            x: -84.35
+            y: 153.0
+          }
+          point {
+            x: -84.35
+            y: 154.0
+          }
+          point {
+            x: -84.35
+            y: 155.0
+          }
+          point {
+            x: -84.35
+            y: 156.0
+          }
+          point {
+            x: -84.35
+            y: 157.0
+          }
+          point {
+            x: -84.35
+            y: 158.0
+          }
+          point {
+            x: -84.35
+            y: 159.0
+          }
+          point {
+            x: -84.35
+            y: 160.0
+          }
+          point {
+            x: -84.35
+            y: 161.0
+          }
+          point {
+            x: -84.35
+            y: 162.0
+          }
+          point {
+            x: -84.35
+            y: 163.0
+          }
+          point {
+            x: -84.35
+            y: 164.0
+          }
+          point {
+            x: -84.35
+            y: 165.0
+          }
+          point {
+            x: -84.35
+            y: 166.0
+          }
+          point {
+            x: -84.35
+            y: 167.0
+          }
+          point {
+            x: -84.35
+            y: 168.0
+          }
+          point {
+            x: -84.35
+            y: 169.0
+          }
+          point {
+            x: -84.35
+            y: 170.0
+          }
+          point {
+            x: -84.35
+            y: 171.0
+          }
+          point {
+            x: -84.35
+            y: 172.0
+          }
+          point {
+            x: -84.35
+            y: 173.0
+          }
+          point {
+            x: -84.35
+            y: 174.0
+          }
+          point {
+            x: -84.35
+            y: 175.0
+          }
+          point {
+            x: -84.35
+            y: 176.0
+          }
+          point {
+            x: -84.35
+            y: 177.0
+          }
+          point {
+            x: -84.35
+            y: 178.0
+          }
+          point {
+            x: -84.35
+            y: 179.0
+          }
+          point {
+            x: -84.35
+            y: 180.0
+          }
+          point {
+            x: -84.35
+            y: 181.0
+          }
+          point {
+            x: -84.35
+            y: 182.0
+          }
+          point {
+            x: -84.35
+            y: 183.0
+          }
+          point {
+            x: -84.35
+            y: 184.0
+          }
+          point {
+            x: -84.35
+            y: 185.0
+          }
+          point {
+            x: -84.35
+            y: 186.0
+          }
+          point {
+            x: -84.35
+            y: 187.0
+          }
+          point {
+            x: -84.35
+            y: 188.0
+          }
+          point {
+            x: -84.35
+            y: 189.0
+          }
+          point {
+            x: -84.35
+            y: 190.0
+          }
+          point {
+            x: -84.35
+            y: 191.0
+          }
+          point {
+            x: -84.35
+            y: 192.0
+          }
+          point {
+            x: -84.35
+            y: 193.0
+          }
+          point {
+            x: -84.35
+            y: 194.0
+          }
+          point {
+            x: -84.35
+            y: 195.0
+          }
+          point {
+            x: -84.35
+            y: 196.0
+          }
+          point {
+            x: -84.35
+            y: 197.0
+          }
+          point {
+            x: -84.35
+            y: 198.0
+          }
+          point {
+            x: -84.35
+            y: 199.0
+          }
+        }
+      }
+    }
+    length: 100.0
+    boundary_type {
+      s: 0
+      types: DOTTED_YELLOW
+    }
+  }
+  length: 100.0
+  speed_limit: 20.0
+  predecessor_id {
+    id: "1"
+  }
+  successor_id {
+    id: "3"
+  }
+  type: CITY_DRIVING
+  turn: NO_TURN
+  left_sample {
+    s: 0
+    width: 1.65
+  }
+  left_sample {
+    s: 1
+    width: 1.65
+  }
+  left_sample {
+    s: 2
+    width: 1.65
+  }
+  left_sample {
+    s: 3
+    width: 1.65
+  }
+  left_sample {
+    s: 4
+    width: 1.65
+  }
+  left_sample {
+    s: 5
+    width: 1.65
+  }
+  left_sample {
+    s: 6
+    width: 1.65
+  }
+  left_sample {
+    s: 7
+    width: 1.65
+  }
+  left_sample {
+    s: 8
+    width: 1.65
+  }
+  left_sample {
+    s: 9
+    width: 1.65
+  }
+  left_sample {
+    s: 10
+    width: 1.65
+  }
+  left_sample {
+    s: 11
+    width: 1.65
+  }
+  left_sample {
+    s: 12
+    width: 1.65
+  }
+  left_sample {
+    s: 13
+    width: 1.65
+  }
+  left_sample {
+    s: 14
+    width: 1.65
+  }
+  left_sample {
+    s: 15
+    width: 1.65
+  }
+  left_sample {
+    s: 16
+    width: 1.65
+  }
+  left_sample {
+    s: 17
+    width: 1.65
+  }
+  left_sample {
+    s: 18
+    width: 1.65
+  }
+  left_sample {
+    s: 19
+    width: 1.65
+  }
+  left_sample {
+    s: 20
+    width: 1.65
+  }
+  left_sample {
+    s: 21
+    width: 1.65
+  }
+  left_sample {
+    s: 22
+    width: 1.65
+  }
+  left_sample {
+    s: 23
+    width: 1.65
+  }
+  left_sample {
+    s: 24
+    width: 1.65
+  }
+  left_sample {
+    s: 25
+    width: 1.65
+  }
+  left_sample {
+    s: 26
+    width: 1.65
+  }
+  left_sample {
+    s: 27
+    width: 1.65
+  }
+  left_sample {
+    s: 28
+    width: 1.65
+  }
+  left_sample {
+    s: 29
+    width: 1.65
+  }
+  left_sample {
+    s: 30
+    width: 1.65
+  }
+  left_sample {
+    s: 31
+    width: 1.65
+  }
+  left_sample {
+    s: 32
+    width: 1.65
+  }
+  left_sample {
+    s: 33
+    width: 1.65
+  }
+  left_sample {
+    s: 34
+    width: 1.65
+  }
+  left_sample {
+    s: 35
+    width: 1.65
+  }
+  left_sample {
+    s: 36
+    width: 1.65
+  }
+  left_sample {
+    s: 37
+    width: 1.65
+  }
+  left_sample {
+    s: 38
+    width: 1.65
+  }
+  left_sample {
+    s: 39
+    width: 1.65
+  }
+  left_sample {
+    s: 40
+    width: 1.65
+  }
+  left_sample {
+    s: 41
+    width: 1.65
+  }
+  left_sample {
+    s: 42
+    width: 1.65
+  }
+  left_sample {
+    s: 43
+    width: 1.65
+  }
+  left_sample {
+    s: 44
+    width: 1.65
+  }
+  left_sample {
+    s: 45
+    width: 1.65
+  }
+  left_sample {
+    s: 46
+    width: 1.65
+  }
+  left_sample {
+    s: 47
+    width: 1.65
+  }
+  left_sample {
+    s: 48
+    width: 1.65
+  }
+  left_sample {
+    s: 49
+    width: 1.65
+  }
+  left_sample {
+    s: 50
+    width: 1.65
+  }
+  left_sample {
+    s: 51
+    width: 1.65
+  }
+  left_sample {
+    s: 52
+    width: 1.65
+  }
+  left_sample {
+    s: 53
+    width: 1.65
+  }
+  left_sample {
+    s: 54
+    width: 1.65
+  }
+  left_sample {
+    s: 55
+    width: 1.65
+  }
+  left_sample {
+    s: 56
+    width: 1.65
+  }
+  left_sample {
+    s: 57
+    width: 1.65
+  }
+  left_sample {
+    s: 58
+    width: 1.65
+  }
+  left_sample {
+    s: 59
+    width: 1.65
+  }
+  left_sample {
+    s: 60
+    width: 1.65
+  }
+  left_sample {
+    s: 61
+    width: 1.65
+  }
+  left_sample {
+    s: 62
+    width: 1.65
+  }
+  left_sample {
+    s: 63
+    width: 1.65
+  }
+  left_sample {
+    s: 64
+    width: 1.65
+  }
+  left_sample {
+    s: 65
+    width: 1.65
+  }
+  left_sample {
+    s: 66
+    width: 1.65
+  }
+  left_sample {
+    s: 67
+    width: 1.65
+  }
+  left_sample {
+    s: 68
+    width: 1.65
+  }
+  left_sample {
+    s: 69
+    width: 1.65
+  }
+  left_sample {
+    s: 70
+    width: 1.65
+  }
+  left_sample {
+    s: 71
+    width: 1.65
+  }
+  left_sample {
+    s: 72
+    width: 1.65
+  }
+  left_sample {
+    s: 73
+    width: 1.65
+  }
+  left_sample {
+    s: 74
+    width: 1.65
+  }
+  left_sample {
+    s: 75
+    width: 1.65
+  }
+  left_sample {
+    s: 76
+    width: 1.65
+  }
+  left_sample {
+    s: 77
+    width: 1.65
+  }
+  left_sample {
+    s: 78
+    width: 1.65
+  }
+  left_sample {
+    s: 79
+    width: 1.65
+  }
+  left_sample {
+    s: 80
+    width: 1.65
+  }
+  left_sample {
+    s: 81
+    width: 1.65
+  }
+  left_sample {
+    s: 82
+    width: 1.65
+  }
+  left_sample {
+    s: 83
+    width: 1.65
+  }
+  left_sample {
+    s: 84
+    width: 1.65
+  }
+  left_sample {
+    s: 85
+    width: 1.65
+  }
+  left_sample {
+    s: 86
+    width: 1.65
+  }
+  left_sample {
+    s: 87
+    width: 1.65
+  }
+  left_sample {
+    s: 88
+    width: 1.65
+  }
+  left_sample {
+    s: 89
+    width: 1.65
+  }
+  left_sample {
+    s: 90
+    width: 1.65
+  }
+  left_sample {
+    s: 91
+    width: 1.65
+  }
+  left_sample {
+    s: 92
+    width: 1.65
+  }
+  left_sample {
+    s: 93
+    width: 1.65
+  }
+  left_sample {
+    s: 94
+    width: 1.65
+  }
+  left_sample {
+    s: 95
+    width: 1.65
+  }
+  left_sample {
+    s: 96
+    width: 1.65
+  }
+  left_sample {
+    s: 97
+    width: 1.65
+  }
+  left_sample {
+    s: 98
+    width: 1.65
+  }
+  left_sample {
+    s: 99
+    width: 1.65
+  }
+  left_sample {
+    s: 100
+    width: 1.65
+  }
+  right_sample {
+    s: 0
+    width: 1.65
+  }
+  right_sample {
+    s: 1
+    width: 1.65
+  }
+  right_sample {
+    s: 2
+    width: 1.65
+  }
+  right_sample {
+    s: 3
+    width: 1.65
+  }
+  right_sample {
+    s: 4
+    width: 1.65
+  }
+  right_sample {
+    s: 5
+    width: 1.65
+  }
+  right_sample {
+    s: 6
+    width: 1.65
+  }
+  right_sample {
+    s: 7
+    width: 1.65
+  }
+  right_sample {
+    s: 8
+    width: 1.65
+  }
+  right_sample {
+    s: 9
+    width: 1.65
+  }
+  right_sample {
+    s: 10
+    width: 1.65
+  }
+  right_sample {
+    s: 11
+    width: 1.65
+  }
+  right_sample {
+    s: 12
+    width: 1.65
+  }
+  right_sample {
+    s: 13
+    width: 1.65
+  }
+  right_sample {
+    s: 14
+    width: 1.65
+  }
+  right_sample {
+    s: 15
+    width: 1.65
+  }
+  right_sample {
+    s: 16
+    width: 1.65
+  }
+  right_sample {
+    s: 17
+    width: 1.65
+  }
+  right_sample {
+    s: 18
+    width: 1.65
+  }
+  right_sample {
+    s: 19
+    width: 1.65
+  }
+  right_sample {
+    s: 20
+    width: 1.65
+  }
+  right_sample {
+    s: 21
+    width: 1.65
+  }
+  right_sample {
+    s: 22
+    width: 1.65
+  }
+  right_sample {
+    s: 23
+    width: 1.65
+  }
+  right_sample {
+    s: 24
+    width: 1.65
+  }
+  right_sample {
+    s: 25
+    width: 1.65
+  }
+  right_sample {
+    s: 26
+    width: 1.65
+  }
+  right_sample {
+    s: 27
+    width: 1.65
+  }
+  right_sample {
+    s: 28
+    width: 1.65
+  }
+  right_sample {
+    s: 29
+    width: 1.65
+  }
+  right_sample {
+    s: 30
+    width: 1.65
+  }
+  right_sample {
+    s: 31
+    width: 1.65
+  }
+  right_sample {
+    s: 32
+    width: 1.65
+  }
+  right_sample {
+    s: 33
+    width: 1.65
+  }
+  right_sample {
+    s: 34
+    width: 1.65
+  }
+  right_sample {
+    s: 35
+    width: 1.65
+  }
+  right_sample {
+    s: 36
+    width: 1.65
+  }
+  right_sample {
+    s: 37
+    width: 1.65
+  }
+  right_sample {
+    s: 38
+    width: 1.65
+  }
+  right_sample {
+    s: 39
+    width: 1.65
+  }
+  right_sample {
+    s: 40
+    width: 1.65
+  }
+  right_sample {
+    s: 41
+    width: 1.65
+  }
+  right_sample {
+    s: 42
+    width: 1.65
+  }
+  right_sample {
+    s: 43
+    width: 1.65
+  }
+  right_sample {
+    s: 44
+    width: 1.65
+  }
+  right_sample {
+    s: 45
+    width: 1.65
+  }
+  right_sample {
+    s: 46
+    width: 1.65
+  }
+  right_sample {
+    s: 47
+    width: 1.65
+  }
+  right_sample {
+    s: 48
+    width: 1.65
+  }
+  right_sample {
+    s: 49
+    width: 1.65
+  }
+  right_sample {
+    s: 50
+    width: 1.65
+  }
+  right_sample {
+    s: 51
+    width: 1.65
+  }
+  right_sample {
+    s: 52
+    width: 1.65
+  }
+  right_sample {
+    s: 53
+    width: 1.65
+  }
+  right_sample {
+    s: 54
+    width: 1.65
+  }
+  right_sample {
+    s: 55
+    width: 1.65
+  }
+  right_sample {
+    s: 56
+    width: 1.65
+  }
+  right_sample {
+    s: 57
+    width: 1.65
+  }
+  right_sample {
+    s: 58
+    width: 1.65
+  }
+  right_sample {
+    s: 59
+    width: 1.65
+  }
+  right_sample {
+    s: 60
+    width: 1.65
+  }
+  right_sample {
+    s: 61
+    width: 1.65
+  }
+  right_sample {
+    s: 62
+    width: 1.65
+  }
+  right_sample {
+    s: 63
+    width: 1.65
+  }
+  right_sample {
+    s: 64
+    width: 1.65
+  }
+  right_sample {
+    s: 65
+    width: 1.65
+  }
+  right_sample {
+    s: 66
+    width: 1.65
+  }
+  right_sample {
+    s: 67
+    width: 1.65
+  }
+  right_sample {
+    s: 68
+    width: 1.65
+  }
+  right_sample {
+    s: 69
+    width: 1.65
+  }
+  right_sample {
+    s: 70
+    width: 1.65
+  }
+  right_sample {
+    s: 71
+    width: 1.65
+  }
+  right_sample {
+    s: 72
+    width: 1.65
+  }
+  right_sample {
+    s: 73
+    width: 1.65
+  }
+  right_sample {
+    s: 74
+    width: 1.65
+  }
+  right_sample {
+    s: 75
+    width: 1.65
+  }
+  right_sample {
+    s: 76
+    width: 1.65
+  }
+  right_sample {
+    s: 77
+    width: 1.65
+  }
+  right_sample {
+    s: 78
+    width: 1.65
+  }
+  right_sample {
+    s: 79
+    width: 1.65
+  }
+  right_sample {
+    s: 80
+    width: 1.65
+  }
+  right_sample {
+    s: 81
+    width: 1.65
+  }
+  right_sample {
+    s: 82
+    width: 1.65
+  }
+  right_sample {
+    s: 83
+    width: 1.65
+  }
+  right_sample {
+    s: 84
+    width: 1.65
+  }
+  right_sample {
+    s: 85
+    width: 1.65
+  }
+  right_sample {
+    s: 86
+    width: 1.65
+  }
+  right_sample {
+    s: 87
+    width: 1.65
+  }
+  right_sample {
+    s: 88
+    width: 1.65
+  }
+  right_sample {
+    s: 89
+    width: 1.65
+  }
+  right_sample {
+    s: 90
+    width: 1.65
+  }
+  right_sample {
+    s: 91
+    width: 1.65
+  }
+  right_sample {
+    s: 92
+    width: 1.65
+  }
+  right_sample {
+    s: 93
+    width: 1.65
+  }
+  right_sample {
+    s: 94
+    width: 1.65
+  }
+  right_sample {
+    s: 95
+    width: 1.65
+  }
+  right_sample {
+    s: 96
+    width: 1.65
+  }
+  right_sample {
+    s: 97
+    width: 1.65
+  }
+  right_sample {
+    s: 98
+    width: 1.65
+  }
+  right_sample {
+    s: 99
+    width: 1.65
+  }
+  right_sample {
+    s: 100
+    width: 1.65
+  }
+  direction: FORWARD
+}
+lane {
+  id {
+    id: "3"
+  }
+  central_curve {
+    segment {
+      line_segment {
+        point {
+          x: -86.0
+          y: 199.0
+        }
+        point {
+          x: -86.0
+          y: 200.0
+        }
+        point {
+          x: -86.0
+          y: 201.0
+        }
+        point {
+          x: -86.0
+          y: 202.0
+        }
+        point {
+          x: -86.0
+          y: 203.0
+        }
+        point {
+          x: -86.0
+          y: 204.0
+        }
+        point {
+          x: -86.0
+          y: 205.0
+        }
+        point {
+          x: -86.0
+          y: 206.0
+        }
+        point {
+          x: -86.0
+          y: 207.0
+        }
+        point {
+          x: -86.0
+          y: 208.0
+        }
+        point {
+          x: -86.0
+          y: 209.0
+        }
+        point {
+          x: -86.0
+          y: 210.0
+        }
+        point {
+          x: -86.0
+          y: 211.0
+        }
+        point {
+          x: -86.0
+          y: 212.0
+        }
+        point {
+          x: -86.0
+          y: 213.0
+        }
+        point {
+          x: -86.0
+          y: 214.0
+        }
+        point {
+          x: -86.0
+          y: 215.0
+        }
+        point {
+          x: -86.0
+          y: 216.0
+        }
+        point {
+          x: -86.0
+          y: 217.0
+        }
+        point {
+          x: -86.0
+          y: 218.0
+        }
+        point {
+          x: -86.0
+          y: 219.0
+        }
+        point {
+          x: -86.0
+          y: 220.0
+        }
+        point {
+          x: -86.0
+          y: 221.0
+        }
+        point {
+          x: -86.0
+          y: 222.0
+        }
+        point {
+          x: -86.0
+          y: 223.0
+        }
+        point {
+          x: -86.0
+          y: 224.0
+        }
+        point {
+          x: -86.0
+          y: 225.0
+        }
+        point {
+          x: -86.0
+          y: 226.0
+        }
+        point {
+          x: -86.0
+          y: 227.0
+        }
+        point {
+          x: -86.0
+          y: 228.0
+        }
+        point {
+          x: -86.0
+          y: 229.0
+        }
+        point {
+          x: -86.0
+          y: 230.0
+        }
+        point {
+          x: -86.0
+          y: 231.0
+        }
+        point {
+          x: -86.0
+          y: 232.0
+        }
+        point {
+          x: -86.0
+          y: 233.0
+        }
+        point {
+          x: -86.0
+          y: 234.0
+        }
+        point {
+          x: -86.0
+          y: 235.0
+        }
+        point {
+          x: -86.0
+          y: 236.0
+        }
+        point {
+          x: -86.0
+          y: 237.0
+        }
+        point {
+          x: -86.0
+          y: 238.0
+        }
+        point {
+          x: -86.0
+          y: 239.0
+        }
+        point {
+          x: -86.0
+          y: 240.0
+        }
+        point {
+          x: -86.0
+          y: 241.0
+        }
+        point {
+          x: -86.0
+          y: 242.0
+        }
+        point {
+          x: -86.0
+          y: 243.0
+        }
+        point {
+          x: -86.0
+          y: 244.0
+        }
+        point {
+          x: -86.0
+          y: 245.0
+        }
+        point {
+          x: -85.92906800683521
+          y: 245.99748115387996
+        }
+        point {
+          x: -85.85813601367042
+          y: 246.9949623077599
+        }
+        point {
+          x: -85.69658181088269
+          y: 247.98037040754184
+        }
+        point {
+          x: -85.50389785828631
+          y: 248.96163127724563
+        }
+        point {
+          x: -85.31121390568993
+          y: 249.94289214694942
+        }
+        point {
+          x: -84.8386245505896
+          y: 250.821049858897
+        }
+        point {
+          x: -84.34873849645109
+          y: 251.69283633158435
+        }
+        point {
+          x: -83.8588524423126
+          y: 252.56462280427166
+        }
+        point {
+          x: -83.34576667227942
+          y: 253.42020507818168
+        }
+        point {
+          x: -82.69588287925873
+          y: 254.1802386666296
+        }
+        point {
+          x: -82.04599908623804
+          y: 254.94027225507756
+        }
+        point {
+          x: -81.31177485807721
+          y: 255.60199867950143
+        }
+        point {
+          x: -80.46176495163543
+          y: 256.1287653820851
+        }
+        point {
+          x: -79.61175504519365
+          y: 256.6555320846687
+        }
+        point {
+          x: -78.75284336287658
+          y: 257.1622433548464
+        }
+        point {
+          x: -77.7919754524688
+          y: 257.43925032000897
+        }
+        point {
+          x: -76.83110754206103
+          y: 257.7162572851716
+        }
+        point {
+          x: -75.87023963165326
+          y: 257.9932642503342
+        }
+        point {
+          x: -74.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -73.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -72.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -71.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -70.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -69.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -68.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -67.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -66.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -65.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -64.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -63.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -62.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -61.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -60.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -59.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -58.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -57.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -56.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -55.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -54.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -53.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -52.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -51.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -50.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -49.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -48.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -47.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -46.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -45.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -44.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -43.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -42.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -41.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -40.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -39.88531792730612
+          y: 258.1
+        }
+      }
+      length: 100.0
+    }
+  }
+  left_boundary {
+    curve {
+      segment {
+        line_segment {
+          point {
+            x: -87.65
+            y: 199.0
+          }
+          point {
+            x: -87.65
+            y: 200.0
+          }
+          point {
+            x: -87.65
+            y: 201.0
+          }
+          point {
+            x: -87.65
+            y: 202.0
+          }
+          point {
+            x: -87.65
+            y: 203.0
+          }
+          point {
+            x: -87.65
+            y: 204.0
+          }
+          point {
+            x: -87.65
+            y: 205.0
+          }
+          point {
+            x: -87.65
+            y: 206.0
+          }
+          point {
+            x: -87.65
+            y: 207.0
+          }
+          point {
+            x: -87.65
+            y: 208.0
+          }
+          point {
+            x: -87.65
+            y: 209.0
+          }
+          point {
+            x: -87.65
+            y: 210.0
+          }
+          point {
+            x: -87.65
+            y: 211.0
+          }
+          point {
+            x: -87.65
+            y: 212.0
+          }
+          point {
+            x: -87.65
+            y: 213.0
+          }
+          point {
+            x: -87.65
+            y: 214.0
+          }
+          point {
+            x: -87.65
+            y: 215.0
+          }
+          point {
+            x: -87.65
+            y: 216.0
+          }
+          point {
+            x: -87.65
+            y: 217.0
+          }
+          point {
+            x: -87.65
+            y: 218.0
+          }
+          point {
+            x: -87.65
+            y: 219.0
+          }
+          point {
+            x: -87.65
+            y: 220.0
+          }
+          point {
+            x: -87.65
+            y: 221.0
+          }
+          point {
+            x: -87.65
+            y: 222.0
+          }
+          point {
+            x: -87.65
+            y: 223.0
+          }
+          point {
+            x: -87.65
+            y: 224.0
+          }
+          point {
+            x: -87.65
+            y: 225.0
+          }
+          point {
+            x: -87.65
+            y: 226.0
+          }
+          point {
+            x: -87.65
+            y: 227.0
+          }
+          point {
+            x: -87.65
+            y: 228.0
+          }
+          point {
+            x: -87.65
+            y: 229.0
+          }
+          point {
+            x: -87.65
+            y: 230.0
+          }
+          point {
+            x: -87.65
+            y: 231.0
+          }
+          point {
+            x: -87.65
+            y: 232.0
+          }
+          point {
+            x: -87.65
+            y: 233.0
+          }
+          point {
+            x: -87.65
+            y: 234.0
+          }
+          point {
+            x: -87.65
+            y: 235.0
+          }
+          point {
+            x: -87.65
+            y: 236.0
+          }
+          point {
+            x: -87.65
+            y: 237.0
+          }
+          point {
+            x: -87.65
+            y: 238.0
+          }
+          point {
+            x: -87.65
+            y: 239.0
+          }
+          point {
+            x: -87.65
+            y: 240.0
+          }
+          point {
+            x: -87.65
+            y: 241.0
+          }
+          point {
+            x: -87.65
+            y: 242.0
+          }
+          point {
+            x: -87.65
+            y: 243.0
+          }
+          point {
+            x: -87.65
+            y: 244.0
+          }
+          point {
+            x: -87.6458439039019
+            y: 245.11703778872192
+          }
+          point {
+            x: -87.57491191073711
+            y: 246.1145189426019
+          }
+          point {
+            x: -87.49398856511147
+            y: 247.21056942717814
+          }
+          point {
+            x: -87.31566224589395
+            y: 248.29829892932585
+          }
+          point {
+            x: -87.12297829329756
+            y: 249.27955979902964
+          }
+          point {
+            x: -86.77827422369495
+            y: 250.69803056031148
+          }
+          point {
+            x: -86.27707223052369
+            y: 251.62936184822553
+          }
+          point {
+            x: -85.78718617638518
+            y: 252.50114832091288
+          }
+          point {
+            x: -85.29730012224671
+            y: 253.37293479360014
+          }
+          point {
+            x: -84.59982209321852
+            y: 254.4925133366658
+          }
+          point {
+            x: -83.9499383001978
+            y: 255.25254692511376
+          }
+          point {
+            x: -83.30005450717711
+            y: 256.0125805135617
+          }
+          point {
+            x: -82.18093991734023
+            y: 257.0045150251304
+          }
+          point {
+            x: -81.33093001089837
+            y: 257.53128172771403
+          }
+          point {
+            x: -80.48092010445659
+            y: 258.0580484302977
+          }
+          point {
+            x: -79.20990485539491
+            y: 258.7476754070192
+          }
+          point {
+            x: -78.24903694498714
+            y: 259.02468237218176
+          }
+          point {
+            x: -77.28816903457935
+            y: 259.3016893373444
+          }
+          point {
+            x: -76.22492948263753
+            y: 259.6046906711207
+          }
+          point {
+            x: -74.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -73.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -72.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -71.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -70.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -69.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -68.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -67.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -66.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -65.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -64.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -63.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -62.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -61.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -60.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -59.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -58.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -57.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -56.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -55.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -54.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -53.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -52.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -51.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -50.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -49.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -48.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -47.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -46.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -45.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -44.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -43.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -42.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -41.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -40.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -39.88531792730612
+            y: 259.75
+          }
+        }
+      }
+    }
+    length: 100.0
+    boundary_type {
+      s: 0
+      types: DOTTED_YELLOW
+    }
+  }
+  right_boundary {
+    curve {
+      segment {
+        line_segment {
+          point {
+            x: -84.35
+            y: 199.0
+          }
+          point {
+            x: -84.35
+            y: 200.0
+          }
+          point {
+            x: -84.35
+            y: 201.0
+          }
+          point {
+            x: -84.35
+            y: 202.0
+          }
+          point {
+            x: -84.35
+            y: 203.0
+          }
+          point {
+            x: -84.35
+            y: 204.0
+          }
+          point {
+            x: -84.35
+            y: 205.0
+          }
+          point {
+            x: -84.35
+            y: 206.0
+          }
+          point {
+            x: -84.35
+            y: 207.0
+          }
+          point {
+            x: -84.35
+            y: 208.0
+          }
+          point {
+            x: -84.35
+            y: 209.0
+          }
+          point {
+            x: -84.35
+            y: 210.0
+          }
+          point {
+            x: -84.35
+            y: 211.0
+          }
+          point {
+            x: -84.35
+            y: 212.0
+          }
+          point {
+            x: -84.35
+            y: 213.0
+          }
+          point {
+            x: -84.35
+            y: 214.0
+          }
+          point {
+            x: -84.35
+            y: 215.0
+          }
+          point {
+            x: -84.35
+            y: 216.0
+          }
+          point {
+            x: -84.35
+            y: 217.0
+          }
+          point {
+            x: -84.35
+            y: 218.0
+          }
+          point {
+            x: -84.35
+            y: 219.0
+          }
+          point {
+            x: -84.35
+            y: 220.0
+          }
+          point {
+            x: -84.35
+            y: 221.0
+          }
+          point {
+            x: -84.35
+            y: 222.0
+          }
+          point {
+            x: -84.35
+            y: 223.0
+          }
+          point {
+            x: -84.35
+            y: 224.0
+          }
+          point {
+            x: -84.35
+            y: 225.0
+          }
+          point {
+            x: -84.35
+            y: 226.0
+          }
+          point {
+            x: -84.35
+            y: 227.0
+          }
+          point {
+            x: -84.35
+            y: 228.0
+          }
+          point {
+            x: -84.35
+            y: 229.0
+          }
+          point {
+            x: -84.35
+            y: 230.0
+          }
+          point {
+            x: -84.35
+            y: 231.0
+          }
+          point {
+            x: -84.35
+            y: 232.0
+          }
+          point {
+            x: -84.35
+            y: 233.0
+          }
+          point {
+            x: -84.35
+            y: 234.0
+          }
+          point {
+            x: -84.35
+            y: 235.0
+          }
+          point {
+            x: -84.35
+            y: 236.0
+          }
+          point {
+            x: -84.35
+            y: 237.0
+          }
+          point {
+            x: -84.35
+            y: 238.0
+          }
+          point {
+            x: -84.35
+            y: 239.0
+          }
+          point {
+            x: -84.35
+            y: 240.0
+          }
+          point {
+            x: -84.35
+            y: 241.0
+          }
+          point {
+            x: -84.35
+            y: 242.0
+          }
+          point {
+            x: -84.35
+            y: 243.0
+          }
+          point {
+            x: -84.35
+            y: 244.0
+          }
+          point {
+            x: -84.3541560960981
+            y: 244.88296221127808
+          }
+          point {
+            x: -84.2832241029333
+            y: 245.88044336515802
+          }
+          point {
+            x: -84.22228346222937
+            y: 246.77935518834164
+          }
+          point {
+            x: -84.07750137587144
+            y: 247.66244188575783
+          }
+          point {
+            x: -83.88481742327505
+            y: 248.64370275546162
+          }
+          point {
+            x: -83.8441535876849
+            y: 249.18775373358736
+          }
+          point {
+            x: -83.40017687065551
+            y: 250.01273786956847
+          }
+          point {
+            x: -82.910290816517
+            y: 250.88452434225582
+          }
+          point {
+            x: -82.42040476237848
+            y: 251.7563108149432
+          }
+          point {
+            x: -82.09171125134033
+            y: 252.34789681969755
+          }
+          point {
+            x: -81.44182745831966
+            y: 253.10793040814545
+          }
+          point {
+            x: -80.79194366529897
+            y: 253.8679639965934
+          }
+          point {
+            x: -80.4426097988142
+            y: 254.1994823338725
+          }
+          point {
+            x: -79.59259989237249
+            y: 254.7262490364561
+          }
+          point {
+            x: -78.7425899859307
+            y: 255.25301573903974
+          }
+          point {
+            x: -78.29578187035824
+            y: 255.57681130267358
+          }
+          point {
+            x: -77.33491395995047
+            y: 255.85381826783615
+          }
+          point {
+            x: -76.37404604954271
+            y: 256.1308252329988
+          }
+          point {
+            x: -75.51554978066899
+            y: 256.38183782954775
+          }
+          point {
+            x: -74.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -73.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -72.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -71.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -70.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -69.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -68.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -67.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -66.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -65.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -64.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -63.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -62.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -61.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -60.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -59.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -58.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -57.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -56.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -55.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -54.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -53.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -52.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -51.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -50.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -49.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -48.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -47.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -46.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -45.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -44.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -43.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -42.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -41.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -40.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -39.88531792730612
+            y: 256.45000000000005
+          }
+        }
+      }
+    }
+    length: 100.0
+    boundary_type {
+      s: 0
+      types: DOTTED_YELLOW
+    }
+  }
+  length: 100.0
+  speed_limit: 20.0
+  predecessor_id {
+    id: "2"
+  }
+  successor_id {
+    id: "4"
+  }
+  type: CITY_DRIVING
+  turn: NO_TURN
+  left_sample {
+    s: 0
+    width: 1.65
+  }
+  left_sample {
+    s: 1
+    width: 1.65
+  }
+  left_sample {
+    s: 2
+    width: 1.65
+  }
+  left_sample {
+    s: 3
+    width: 1.65
+  }
+  left_sample {
+    s: 4
+    width: 1.65
+  }
+  left_sample {
+    s: 5
+    width: 1.65
+  }
+  left_sample {
+    s: 6
+    width: 1.65
+  }
+  left_sample {
+    s: 7
+    width: 1.65
+  }
+  left_sample {
+    s: 8
+    width: 1.65
+  }
+  left_sample {
+    s: 9
+    width: 1.65
+  }
+  left_sample {
+    s: 10
+    width: 1.65
+  }
+  left_sample {
+    s: 11
+    width: 1.65
+  }
+  left_sample {
+    s: 12
+    width: 1.65
+  }
+  left_sample {
+    s: 13
+    width: 1.65
+  }
+  left_sample {
+    s: 14
+    width: 1.65
+  }
+  left_sample {
+    s: 15
+    width: 1.65
+  }
+  left_sample {
+    s: 16
+    width: 1.65
+  }
+  left_sample {
+    s: 17
+    width: 1.65
+  }
+  left_sample {
+    s: 18
+    width: 1.65
+  }
+  left_sample {
+    s: 19
+    width: 1.65
+  }
+  left_sample {
+    s: 20
+    width: 1.65
+  }
+  left_sample {
+    s: 21
+    width: 1.65
+  }
+  left_sample {
+    s: 22
+    width: 1.65
+  }
+  left_sample {
+    s: 23
+    width: 1.65
+  }
+  left_sample {
+    s: 24
+    width: 1.65
+  }
+  left_sample {
+    s: 25
+    width: 1.65
+  }
+  left_sample {
+    s: 26
+    width: 1.65
+  }
+  left_sample {
+    s: 27
+    width: 1.65
+  }
+  left_sample {
+    s: 28
+    width: 1.65
+  }
+  left_sample {
+    s: 29
+    width: 1.65
+  }
+  left_sample {
+    s: 30
+    width: 1.65
+  }
+  left_sample {
+    s: 31
+    width: 1.65
+  }
+  left_sample {
+    s: 32
+    width: 1.65
+  }
+  left_sample {
+    s: 33
+    width: 1.65
+  }
+  left_sample {
+    s: 34
+    width: 1.65
+  }
+  left_sample {
+    s: 35
+    width: 1.65
+  }
+  left_sample {
+    s: 36
+    width: 1.65
+  }
+  left_sample {
+    s: 37
+    width: 1.65
+  }
+  left_sample {
+    s: 38
+    width: 1.65
+  }
+  left_sample {
+    s: 39
+    width: 1.65
+  }
+  left_sample {
+    s: 40
+    width: 1.65
+  }
+  left_sample {
+    s: 41
+    width: 1.65
+  }
+  left_sample {
+    s: 42
+    width: 1.65
+  }
+  left_sample {
+    s: 43
+    width: 1.65
+  }
+  left_sample {
+    s: 44
+    width: 1.65
+  }
+  left_sample {
+    s: 45
+    width: 1.65
+  }
+  left_sample {
+    s: 46
+    width: 1.65
+  }
+  left_sample {
+    s: 47
+    width: 1.65
+  }
+  left_sample {
+    s: 48
+    width: 1.65
+  }
+  left_sample {
+    s: 49
+    width: 1.65
+  }
+  left_sample {
+    s: 50
+    width: 1.65
+  }
+  left_sample {
+    s: 51
+    width: 1.65
+  }
+  left_sample {
+    s: 52
+    width: 1.65
+  }
+  left_sample {
+    s: 53
+    width: 1.65
+  }
+  left_sample {
+    s: 54
+    width: 1.65
+  }
+  left_sample {
+    s: 55
+    width: 1.65
+  }
+  left_sample {
+    s: 56
+    width: 1.65
+  }
+  left_sample {
+    s: 57
+    width: 1.65
+  }
+  left_sample {
+    s: 58
+    width: 1.65
+  }
+  left_sample {
+    s: 59
+    width: 1.65
+  }
+  left_sample {
+    s: 60
+    width: 1.65
+  }
+  left_sample {
+    s: 61
+    width: 1.65
+  }
+  left_sample {
+    s: 62
+    width: 1.65
+  }
+  left_sample {
+    s: 63
+    width: 1.65
+  }
+  left_sample {
+    s: 64
+    width: 1.65
+  }
+  left_sample {
+    s: 65
+    width: 1.65
+  }
+  left_sample {
+    s: 66
+    width: 1.65
+  }
+  left_sample {
+    s: 67
+    width: 1.65
+  }
+  left_sample {
+    s: 68
+    width: 1.65
+  }
+  left_sample {
+    s: 69
+    width: 1.65
+  }
+  left_sample {
+    s: 70
+    width: 1.65
+  }
+  left_sample {
+    s: 71
+    width: 1.65
+  }
+  left_sample {
+    s: 72
+    width: 1.65
+  }
+  left_sample {
+    s: 73
+    width: 1.65
+  }
+  left_sample {
+    s: 74
+    width: 1.65
+  }
+  left_sample {
+    s: 75
+    width: 1.65
+  }
+  left_sample {
+    s: 76
+    width: 1.65
+  }
+  left_sample {
+    s: 77
+    width: 1.65
+  }
+  left_sample {
+    s: 78
+    width: 1.65
+  }
+  left_sample {
+    s: 79
+    width: 1.65
+  }
+  left_sample {
+    s: 80
+    width: 1.65
+  }
+  left_sample {
+    s: 81
+    width: 1.65
+  }
+  left_sample {
+    s: 82
+    width: 1.65
+  }
+  left_sample {
+    s: 83
+    width: 1.65
+  }
+  left_sample {
+    s: 84
+    width: 1.65
+  }
+  left_sample {
+    s: 85
+    width: 1.65
+  }
+  left_sample {
+    s: 86
+    width: 1.65
+  }
+  left_sample {
+    s: 87
+    width: 1.65
+  }
+  left_sample {
+    s: 88
+    width: 1.65
+  }
+  left_sample {
+    s: 89
+    width: 1.65
+  }
+  left_sample {
+    s: 90
+    width: 1.65
+  }
+  left_sample {
+    s: 91
+    width: 1.65
+  }
+  left_sample {
+    s: 92
+    width: 1.65
+  }
+  left_sample {
+    s: 93
+    width: 1.65
+  }
+  left_sample {
+    s: 94
+    width: 1.65
+  }
+  left_sample {
+    s: 95
+    width: 1.65
+  }
+  left_sample {
+    s: 96
+    width: 1.65
+  }
+  left_sample {
+    s: 97
+    width: 1.65
+  }
+  left_sample {
+    s: 98
+    width: 1.65
+  }
+  left_sample {
+    s: 99
+    width: 1.65
+  }
+  left_sample {
+    s: 100
+    width: 1.65
+  }
+  right_sample {
+    s: 0
+    width: 1.65
+  }
+  right_sample {
+    s: 1
+    width: 1.65
+  }
+  right_sample {
+    s: 2
+    width: 1.65
+  }
+  right_sample {
+    s: 3
+    width: 1.65
+  }
+  right_sample {
+    s: 4
+    width: 1.65
+  }
+  right_sample {
+    s: 5
+    width: 1.65
+  }
+  right_sample {
+    s: 6
+    width: 1.65
+  }
+  right_sample {
+    s: 7
+    width: 1.65
+  }
+  right_sample {
+    s: 8
+    width: 1.65
+  }
+  right_sample {
+    s: 9
+    width: 1.65
+  }
+  right_sample {
+    s: 10
+    width: 1.65
+  }
+  right_sample {
+    s: 11
+    width: 1.65
+  }
+  right_sample {
+    s: 12
+    width: 1.65
+  }
+  right_sample {
+    s: 13
+    width: 1.65
+  }
+  right_sample {
+    s: 14
+    width: 1.65
+  }
+  right_sample {
+    s: 15
+    width: 1.65
+  }
+  right_sample {
+    s: 16
+    width: 1.65
+  }
+  right_sample {
+    s: 17
+    width: 1.65
+  }
+  right_sample {
+    s: 18
+    width: 1.65
+  }
+  right_sample {
+    s: 19
+    width: 1.65
+  }
+  right_sample {
+    s: 20
+    width: 1.65
+  }
+  right_sample {
+    s: 21
+    width: 1.65
+  }
+  right_sample {
+    s: 22
+    width: 1.65
+  }
+  right_sample {
+    s: 23
+    width: 1.65
+  }
+  right_sample {
+    s: 24
+    width: 1.65
+  }
+  right_sample {
+    s: 25
+    width: 1.65
+  }
+  right_sample {
+    s: 26
+    width: 1.65
+  }
+  right_sample {
+    s: 27
+    width: 1.65
+  }
+  right_sample {
+    s: 28
+    width: 1.65
+  }
+  right_sample {
+    s: 29
+    width: 1.65
+  }
+  right_sample {
+    s: 30
+    width: 1.65
+  }
+  right_sample {
+    s: 31
+    width: 1.65
+  }
+  right_sample {
+    s: 32
+    width: 1.65
+  }
+  right_sample {
+    s: 33
+    width: 1.65
+  }
+  right_sample {
+    s: 34
+    width: 1.65
+  }
+  right_sample {
+    s: 35
+    width: 1.65
+  }
+  right_sample {
+    s: 36
+    width: 1.65
+  }
+  right_sample {
+    s: 37
+    width: 1.65
+  }
+  right_sample {
+    s: 38
+    width: 1.65
+  }
+  right_sample {
+    s: 39
+    width: 1.65
+  }
+  right_sample {
+    s: 40
+    width: 1.65
+  }
+  right_sample {
+    s: 41
+    width: 1.65
+  }
+  right_sample {
+    s: 42
+    width: 1.65
+  }
+  right_sample {
+    s: 43
+    width: 1.65
+  }
+  right_sample {
+    s: 44
+    width: 1.65
+  }
+  right_sample {
+    s: 45
+    width: 1.65
+  }
+  right_sample {
+    s: 46
+    width: 1.65
+  }
+  right_sample {
+    s: 47
+    width: 1.65
+  }
+  right_sample {
+    s: 48
+    width: 1.65
+  }
+  right_sample {
+    s: 49
+    width: 1.65
+  }
+  right_sample {
+    s: 50
+    width: 1.65
+  }
+  right_sample {
+    s: 51
+    width: 1.65
+  }
+  right_sample {
+    s: 52
+    width: 1.65
+  }
+  right_sample {
+    s: 53
+    width: 1.65
+  }
+  right_sample {
+    s: 54
+    width: 1.65
+  }
+  right_sample {
+    s: 55
+    width: 1.65
+  }
+  right_sample {
+    s: 56
+    width: 1.65
+  }
+  right_sample {
+    s: 57
+    width: 1.65
+  }
+  right_sample {
+    s: 58
+    width: 1.65
+  }
+  right_sample {
+    s: 59
+    width: 1.65
+  }
+  right_sample {
+    s: 60
+    width: 1.65
+  }
+  right_sample {
+    s: 61
+    width: 1.65
+  }
+  right_sample {
+    s: 62
+    width: 1.65
+  }
+  right_sample {
+    s: 63
+    width: 1.65
+  }
+  right_sample {
+    s: 64
+    width: 1.65
+  }
+  right_sample {
+    s: 65
+    width: 1.65
+  }
+  right_sample {
+    s: 66
+    width: 1.65
+  }
+  right_sample {
+    s: 67
+    width: 1.65
+  }
+  right_sample {
+    s: 68
+    width: 1.65
+  }
+  right_sample {
+    s: 69
+    width: 1.65
+  }
+  right_sample {
+    s: 70
+    width: 1.65
+  }
+  right_sample {
+    s: 71
+    width: 1.65
+  }
+  right_sample {
+    s: 72
+    width: 1.65
+  }
+  right_sample {
+    s: 73
+    width: 1.65
+  }
+  right_sample {
+    s: 74
+    width: 1.65
+  }
+  right_sample {
+    s: 75
+    width: 1.65
+  }
+  right_sample {
+    s: 76
+    width: 1.65
+  }
+  right_sample {
+    s: 77
+    width: 1.65
+  }
+  right_sample {
+    s: 78
+    width: 1.65
+  }
+  right_sample {
+    s: 79
+    width: 1.65
+  }
+  right_sample {
+    s: 80
+    width: 1.65
+  }
+  right_sample {
+    s: 81
+    width: 1.65
+  }
+  right_sample {
+    s: 82
+    width: 1.65
+  }
+  right_sample {
+    s: 83
+    width: 1.65
+  }
+  right_sample {
+    s: 84
+    width: 1.65
+  }
+  right_sample {
+    s: 85
+    width: 1.65
+  }
+  right_sample {
+    s: 86
+    width: 1.65
+  }
+  right_sample {
+    s: 87
+    width: 1.65
+  }
+  right_sample {
+    s: 88
+    width: 1.65
+  }
+  right_sample {
+    s: 89
+    width: 1.65
+  }
+  right_sample {
+    s: 90
+    width: 1.65
+  }
+  right_sample {
+    s: 91
+    width: 1.65
+  }
+  right_sample {
+    s: 92
+    width: 1.65
+  }
+  right_sample {
+    s: 93
+    width: 1.65
+  }
+  right_sample {
+    s: 94
+    width: 1.65
+  }
+  right_sample {
+    s: 95
+    width: 1.65
+  }
+  right_sample {
+    s: 96
+    width: 1.65
+  }
+  right_sample {
+    s: 97
+    width: 1.65
+  }
+  right_sample {
+    s: 98
+    width: 1.65
+  }
+  right_sample {
+    s: 99
+    width: 1.65
+  }
+  right_sample {
+    s: 100
+    width: 1.65
+  }
+  direction: FORWARD
+}
+lane {
+  id {
+    id: "4"
+  }
+  central_curve {
+    segment {
+      line_segment {
+        point {
+          x: -39.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -38.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -37.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -36.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -35.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -34.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -33.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -32.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -31.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -30.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -29.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -28.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -27.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -26.88531792730611
+          y: 258.1
+        }
+        point {
+          x: -25.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -24.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -23.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -22.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -21.885317927306126
+          y: 258.1
+        }
+        point {
+          x: -20.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -19.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -18.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -17.88531792730612
+          y: 258.1
+        }
+        point {
+          x: -16.885317927306126
+          y: 258.1
+        }
+        point {
+          x: -15.885317927306119
+          y: 258.1
+        }
+        point {
+          x: -14.885317927306119
+          y: 258.1
+        }
+        point {
+          x: -13.885317927306119
+          y: 258.1
+        }
+        point {
+          x: -12.885317927306119
+          y: 258.1
+        }
+        point {
+          x: -11.885317927306119
+          y: 258.1
+        }
+        point {
+          x: -10.885317927306119
+          y: 258.1
+        }
+        point {
+          x: -9.885317927306119
+          y: 258.1
+        }
+        point {
+          x: -8.885317927306119
+          y: 258.1
+        }
+        point {
+          x: -7.885317927306119
+          y: 258.1
+        }
+        point {
+          x: -6.885317927306119
+          y: 258.1
+        }
+        point {
+          x: -5.885317927306119
+          y: 258.1
+        }
+        point {
+          x: -4.885317927306119
+          y: 258.1
+        }
+        point {
+          x: -3.8853179273061187
+          y: 258.1
+        }
+        point {
+          x: -2.8853179273061187
+          y: 258.1
+        }
+      }
+      length: 100.0
+    }
+  }
+  left_boundary {
+    curve {
+      segment {
+        line_segment {
+          point {
+            x: -39.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -38.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -37.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -36.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -35.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -34.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -33.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -32.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -31.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -30.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -29.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -28.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -27.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -26.88531792730611
+            y: 259.75
+          }
+          point {
+            x: -25.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -24.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -23.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -22.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -21.885317927306126
+            y: 259.75
+          }
+          point {
+            x: -20.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -19.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -18.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -17.88531792730612
+            y: 259.75
+          }
+          point {
+            x: -16.885317927306126
+            y: 259.75
+          }
+          point {
+            x: -15.885317927306119
+            y: 259.75
+          }
+          point {
+            x: -14.885317927306119
+            y: 259.75
+          }
+          point {
+            x: -13.885317927306119
+            y: 259.75
+          }
+          point {
+            x: -12.885317927306119
+            y: 259.75
+          }
+          point {
+            x: -11.885317927306119
+            y: 259.75
+          }
+          point {
+            x: -10.885317927306119
+            y: 259.75
+          }
+          point {
+            x: -9.885317927306119
+            y: 259.75
+          }
+          point {
+            x: -8.885317927306119
+            y: 259.75
+          }
+          point {
+            x: -7.885317927306119
+            y: 259.75
+          }
+          point {
+            x: -6.885317927306119
+            y: 259.75
+          }
+          point {
+            x: -5.885317927306119
+            y: 259.75
+          }
+          point {
+            x: -4.885317927306119
+            y: 259.75
+          }
+          point {
+            x: -3.8853179273061187
+            y: 259.75
+          }
+          point {
+            x: -2.8853179273061187
+            y: 259.75
+          }
+        }
+      }
+    }
+    length: 100.0
+    boundary_type {
+      s: 0
+      types: DOTTED_YELLOW
+    }
+  }
+  right_boundary {
+    curve {
+      segment {
+        line_segment {
+          point {
+            x: -39.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -38.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -37.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -36.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -35.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -34.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -33.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -32.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -31.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -30.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -29.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -28.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -27.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -26.88531792730611
+            y: 256.45000000000005
+          }
+          point {
+            x: -25.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -24.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -23.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -22.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -21.885317927306126
+            y: 256.45000000000005
+          }
+          point {
+            x: -20.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -19.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -18.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -17.88531792730612
+            y: 256.45000000000005
+          }
+          point {
+            x: -16.885317927306126
+            y: 256.45000000000005
+          }
+          point {
+            x: -15.885317927306119
+            y: 256.45000000000005
+          }
+          point {
+            x: -14.885317927306119
+            y: 256.45000000000005
+          }
+          point {
+            x: -13.885317927306119
+            y: 256.45000000000005
+          }
+          point {
+            x: -12.885317927306119
+            y: 256.45000000000005
+          }
+          point {
+            x: -11.885317927306119
+            y: 256.45000000000005
+          }
+          point {
+            x: -10.885317927306119
+            y: 256.45000000000005
+          }
+          point {
+            x: -9.885317927306119
+            y: 256.45000000000005
+          }
+          point {
+            x: -8.885317927306119
+            y: 256.45000000000005
+          }
+          point {
+            x: -7.885317927306119
+            y: 256.45000000000005
+          }
+          point {
+            x: -6.885317927306119
+            y: 256.45000000000005
+          }
+          point {
+            x: -5.885317927306119
+            y: 256.45000000000005
+          }
+          point {
+            x: -4.885317927306119
+            y: 256.45000000000005
+          }
+          point {
+            x: -3.8853179273061187
+            y: 256.45000000000005
+          }
+          point {
+            x: -2.8853179273061187
+            y: 256.45000000000005
+          }
+        }
+      }
+    }
+    length: 100.0
+    boundary_type {
+      s: 0
+      types: DOTTED_YELLOW
+    }
+  }
+  length: 100.0
+  speed_limit: 20.0
+  predecessor_id {
+    id: "3"
+  }
+  type: CITY_DRIVING
+  turn: NO_TURN
+  left_sample {
+    s: 0
+    width: 1.65
+  }
+  left_sample {
+    s: 1
+    width: 1.65
+  }
+  left_sample {
+    s: 2
+    width: 1.65
+  }
+  left_sample {
+    s: 3
+    width: 1.65
+  }
+  left_sample {
+    s: 4
+    width: 1.65
+  }
+  left_sample {
+    s: 5
+    width: 1.65
+  }
+  left_sample {
+    s: 6
+    width: 1.65
+  }
+  left_sample {
+    s: 7
+    width: 1.65
+  }
+  left_sample {
+    s: 8
+    width: 1.65
+  }
+  left_sample {
+    s: 9
+    width: 1.65
+  }
+  left_sample {
+    s: 10
+    width: 1.65
+  }
+  left_sample {
+    s: 11
+    width: 1.65
+  }
+  left_sample {
+    s: 12
+    width: 1.65
+  }
+  left_sample {
+    s: 13
+    width: 1.65
+  }
+  left_sample {
+    s: 14
+    width: 1.65
+  }
+  left_sample {
+    s: 15
+    width: 1.65
+  }
+  left_sample {
+    s: 16
+    width: 1.65
+  }
+  left_sample {
+    s: 17
+    width: 1.65
+  }
+  left_sample {
+    s: 18
+    width: 1.65
+  }
+  left_sample {
+    s: 19
+    width: 1.65
+  }
+  left_sample {
+    s: 20
+    width: 1.65
+  }
+  left_sample {
+    s: 21
+    width: 1.65
+  }
+  left_sample {
+    s: 22
+    width: 1.65
+  }
+  left_sample {
+    s: 23
+    width: 1.65
+  }
+  left_sample {
+    s: 24
+    width: 1.65
+  }
+  left_sample {
+    s: 25
+    width: 1.65
+  }
+  left_sample {
+    s: 26
+    width: 1.65
+  }
+  left_sample {
+    s: 27
+    width: 1.65
+  }
+  left_sample {
+    s: 28
+    width: 1.65
+  }
+  left_sample {
+    s: 29
+    width: 1.65
+  }
+  left_sample {
+    s: 30
+    width: 1.65
+  }
+  left_sample {
+    s: 31
+    width: 1.65
+  }
+  left_sample {
+    s: 32
+    width: 1.65
+  }
+  left_sample {
+    s: 33
+    width: 1.65
+  }
+  left_sample {
+    s: 34
+    width: 1.65
+  }
+  left_sample {
+    s: 35
+    width: 1.65
+  }
+  left_sample {
+    s: 36
+    width: 1.65
+  }
+  left_sample {
+    s: 37
+    width: 1.65
+  }
+  right_sample {
+    s: 0
+    width: 1.65
+  }
+  right_sample {
+    s: 1
+    width: 1.65
+  }
+  right_sample {
+    s: 2
+    width: 1.65
+  }
+  right_sample {
+    s: 3
+    width: 1.65
+  }
+  right_sample {
+    s: 4
+    width: 1.65
+  }
+  right_sample {
+    s: 5
+    width: 1.65
+  }
+  right_sample {
+    s: 6
+    width: 1.65
+  }
+  right_sample {
+    s: 7
+    width: 1.65
+  }
+  right_sample {
+    s: 8
+    width: 1.65
+  }
+  right_sample {
+    s: 9
+    width: 1.65
+  }
+  right_sample {
+    s: 10
+    width: 1.65
+  }
+  right_sample {
+    s: 11
+    width: 1.65
+  }
+  right_sample {
+    s: 12
+    width: 1.65
+  }
+  right_sample {
+    s: 13
+    width: 1.65
+  }
+  right_sample {
+    s: 14
+    width: 1.65
+  }
+  right_sample {
+    s: 15
+    width: 1.65
+  }
+  right_sample {
+    s: 16
+    width: 1.65
+  }
+  right_sample {
+    s: 17
+    width: 1.65
+  }
+  right_sample {
+    s: 18
+    width: 1.65
+  }
+  right_sample {
+    s: 19
+    width: 1.65
+  }
+  right_sample {
+    s: 20
+    width: 1.65
+  }
+  right_sample {
+    s: 21
+    width: 1.65
+  }
+  right_sample {
+    s: 22
+    width: 1.65
+  }
+  right_sample {
+    s: 23
+    width: 1.65
+  }
+  right_sample {
+    s: 24
+    width: 1.65
+  }
+  right_sample {
+    s: 25
+    width: 1.65
+  }
+  right_sample {
+    s: 26
+    width: 1.65
+  }
+  right_sample {
+    s: 27
+    width: 1.65
+  }
+  right_sample {
+    s: 28
+    width: 1.65
+  }
+  right_sample {
+    s: 29
+    width: 1.65
+  }
+  right_sample {
+    s: 30
+    width: 1.65
+  }
+  right_sample {
+    s: 31
+    width: 1.65
+  }
+  right_sample {
+    s: 32
+    width: 1.65
+  }
+  right_sample {
+    s: 33
+    width: 1.65
+  }
+  right_sample {
+    s: 34
+    width: 1.65
+  }
+  right_sample {
+    s: 35
+    width: 1.65
+  }
+  right_sample {
+    s: 36
+    width: 1.65
+  }
+  right_sample {
+    s: 37
+    width: 1.65
+  }
+  direction: FORWARD
+}
+road {
+  id {
+    id: "1"
+  }
+  section {
+    id {
+      id: "2"
+    }
+    lane_id {
+      id: "1"
+    }
+    lane_id {
+      id: "2"
+    }
+    lane_id {
+      id: "3"
+    }
+    lane_id {
+      id: "4"
+    }
+    boundary {
+      outer_polygon {
+        edge {
+          curve {
+            segment {
+              line_segment {
+                point {
+                  x: -87.65
+                  y: 2.0206672185931328e-16
+                }
+                point {
+                  x: -87.65
+                  y: 1.0000000000000002
+                }
+                point {
+                  x: -87.65
+                  y: 2.0
+                }
+                point {
+                  x: -87.65
+                  y: 3.0
+                }
+                point {
+                  x: -87.65
+                  y: 4.0
+                }
+                point {
+                  x: -87.65
+                  y: 5.0
+                }
+                point {
+                  x: -87.65
+                  y: 6.0
+                }
+                point {
+                  x: -87.65
+                  y: 7.0
+                }
+                point {
+                  x: -87.65
+                  y: 8.0
+                }
+                point {
+                  x: -87.65
+                  y: 9.0
+                }
+                point {
+                  x: -87.65
+                  y: 10.0
+                }
+                point {
+                  x: -87.65
+                  y: 11.0
+                }
+                point {
+                  x: -87.65
+                  y: 12.0
+                }
+                point {
+                  x: -87.65
+                  y: 13.0
+                }
+                point {
+                  x: -87.65
+                  y: 14.0
+                }
+                point {
+                  x: -87.65
+                  y: 15.0
+                }
+                point {
+                  x: -87.65
+                  y: 16.0
+                }
+                point {
+                  x: -87.65
+                  y: 17.0
+                }
+                point {
+                  x: -87.65
+                  y: 18.0
+                }
+                point {
+                  x: -87.65
+                  y: 19.0
+                }
+                point {
+                  x: -87.65
+                  y: 20.0
+                }
+                point {
+                  x: -87.65
+                  y: 21.0
+                }
+                point {
+                  x: -87.65
+                  y: 22.0
+                }
+                point {
+                  x: -87.65
+                  y: 23.0
+                }
+                point {
+                  x: -87.65
+                  y: 24.0
+                }
+                point {
+                  x: -87.65
+                  y: 25.0
+                }
+                point {
+                  x: -87.65
+                  y: 26.0
+                }
+                point {
+                  x: -87.65
+                  y: 27.0
+                }
+                point {
+                  x: -87.65
+                  y: 28.0
+                }
+                point {
+                  x: -87.65
+                  y: 29.0
+                }
+                point {
+                  x: -87.65
+                  y: 30.0
+                }
+                point {
+                  x: -87.65
+                  y: 30.999999999999996
+                }
+                point {
+                  x: -87.65
+                  y: 32.0
+                }
+                point {
+                  x: -87.65
+                  y: 33.0
+                }
+                point {
+                  x: -87.65
+                  y: 34.0
+                }
+                point {
+                  x: -87.65
+                  y: 35.0
+                }
+                point {
+                  x: -87.65
+                  y: 36.0
+                }
+                point {
+                  x: -87.65
+                  y: 37.0
+                }
+                point {
+                  x: -87.65
+                  y: 38.0
+                }
+                point {
+                  x: -87.65
+                  y: 39.0
+                }
+                point {
+                  x: -87.65
+                  y: 40.0
+                }
+                point {
+                  x: -87.65
+                  y: 41.0
+                }
+                point {
+                  x: -87.65
+                  y: 42.0
+                }
+                point {
+                  x: -87.65
+                  y: 43.0
+                }
+                point {
+                  x: -87.65
+                  y: 44.0
+                }
+                point {
+                  x: -87.65
+                  y: 45.0
+                }
+                point {
+                  x: -87.65
+                  y: 46.0
+                }
+                point {
+                  x: -87.65
+                  y: 47.0
+                }
+                point {
+                  x: -87.65
+                  y: 48.0
+                }
+                point {
+                  x: -87.65
+                  y: 49.0
+                }
+                point {
+                  x: -87.65
+                  y: 50.0
+                }
+                point {
+                  x: -87.65
+                  y: 51.0
+                }
+                point {
+                  x: -87.65
+                  y: 52.0
+                }
+                point {
+                  x: -87.65
+                  y: 53.0
+                }
+                point {
+                  x: -87.65
+                  y: 54.0
+                }
+                point {
+                  x: -87.65
+                  y: 55.0
+                }
+                point {
+                  x: -87.65
+                  y: 56.0
+                }
+                point {
+                  x: -87.65
+                  y: 57.0
+                }
+                point {
+                  x: -87.65
+                  y: 58.0
+                }
+                point {
+                  x: -87.65
+                  y: 59.0
+                }
+                point {
+                  x: -87.65
+                  y: 60.0
+                }
+                point {
+                  x: -87.65
+                  y: 61.0
+                }
+                point {
+                  x: -87.65
+                  y: 61.99999999999999
+                }
+                point {
+                  x: -87.65
+                  y: 62.99999999999999
+                }
+                point {
+                  x: -87.65
+                  y: 64.0
+                }
+                point {
+                  x: -87.65
+                  y: 65.0
+                }
+                point {
+                  x: -87.65
+                  y: 66.0
+                }
+                point {
+                  x: -87.65
+                  y: 67.0
+                }
+                point {
+                  x: -87.65
+                  y: 68.0
+                }
+                point {
+                  x: -87.65
+                  y: 69.0
+                }
+                point {
+                  x: -87.65
+                  y: 70.0
+                }
+                point {
+                  x: -87.65
+                  y: 71.0
+                }
+                point {
+                  x: -87.65
+                  y: 72.0
+                }
+                point {
+                  x: -87.65
+                  y: 73.0
+                }
+                point {
+                  x: -87.65
+                  y: 74.0
+                }
+                point {
+                  x: -87.65
+                  y: 75.0
+                }
+                point {
+                  x: -87.65
+                  y: 76.0
+                }
+                point {
+                  x: -87.65
+                  y: 77.0
+                }
+                point {
+                  x: -87.65
+                  y: 78.0
+                }
+                point {
+                  x: -87.65
+                  y: 79.0
+                }
+                point {
+                  x: -87.65
+                  y: 80.0
+                }
+                point {
+                  x: -87.65
+                  y: 81.0
+                }
+                point {
+                  x: -87.65
+                  y: 82.0
+                }
+                point {
+                  x: -87.65
+                  y: 83.0
+                }
+                point {
+                  x: -87.65
+                  y: 84.0
+                }
+                point {
+                  x: -87.65
+                  y: 85.0
+                }
+                point {
+                  x: -87.65
+                  y: 86.0
+                }
+                point {
+                  x: -87.65
+                  y: 87.0
+                }
+                point {
+                  x: -87.65
+                  y: 88.0
+                }
+                point {
+                  x: -87.65
+                  y: 89.0
+                }
+                point {
+                  x: -87.65
+                  y: 90.0
+                }
+                point {
+                  x: -87.65
+                  y: 91.0
+                }
+                point {
+                  x: -87.65
+                  y: 92.0
+                }
+                point {
+                  x: -87.65
+                  y: 93.0
+                }
+                point {
+                  x: -87.65
+                  y: 94.0
+                }
+                point {
+                  x: -87.65
+                  y: 95.0
+                }
+                point {
+                  x: -87.65
+                  y: 96.0
+                }
+                point {
+                  x: -87.65
+                  y: 97.0
+                }
+                point {
+                  x: -87.65
+                  y: 98.0
+                }
+                point {
+                  x: -87.65
+                  y: 99.0
+                }
+              }
+            }
+          }
+          type: LEFT_BOUNDARY
+        }
+        edge {
+          curve {
+            segment {
+              line_segment {
+                point {
+                  x: -84.35
+                  y: 0.0
+                }
+                point {
+                  x: -84.35
+                  y: 1.0
+                }
+                point {
+                  x: -84.35
+                  y: 2.0
+                }
+                point {
+                  x: -84.35
+                  y: 3.0
+                }
+                point {
+                  x: -84.35
+                  y: 4.0
+                }
+                point {
+                  x: -84.35
+                  y: 5.0
+                }
+                point {
+                  x: -84.35
+                  y: 6.0
+                }
+                point {
+                  x: -84.35
+                  y: 7.0
+                }
+                point {
+                  x: -84.35
+                  y: 8.0
+                }
+                point {
+                  x: -84.35
+                  y: 9.0
+                }
+                point {
+                  x: -84.35
+                  y: 10.0
+                }
+                point {
+                  x: -84.35
+                  y: 11.0
+                }
+                point {
+                  x: -84.35
+                  y: 12.0
+                }
+                point {
+                  x: -84.35
+                  y: 13.0
+                }
+                point {
+                  x: -84.35
+                  y: 14.0
+                }
+                point {
+                  x: -84.35
+                  y: 15.0
+                }
+                point {
+                  x: -84.35
+                  y: 16.0
+                }
+                point {
+                  x: -84.35
+                  y: 17.0
+                }
+                point {
+                  x: -84.35
+                  y: 18.0
+                }
+                point {
+                  x: -84.35
+                  y: 19.0
+                }
+                point {
+                  x: -84.35
+                  y: 20.0
+                }
+                point {
+                  x: -84.35
+                  y: 21.0
+                }
+                point {
+                  x: -84.35
+                  y: 22.0
+                }
+                point {
+                  x: -84.35
+                  y: 23.0
+                }
+                point {
+                  x: -84.35
+                  y: 24.0
+                }
+                point {
+                  x: -84.35
+                  y: 25.0
+                }
+                point {
+                  x: -84.35
+                  y: 26.0
+                }
+                point {
+                  x: -84.35
+                  y: 27.0
+                }
+                point {
+                  x: -84.35
+                  y: 28.0
+                }
+                point {
+                  x: -84.35
+                  y: 29.0
+                }
+                point {
+                  x: -84.35
+                  y: 30.0
+                }
+                point {
+                  x: -84.35
+                  y: 30.999999999999996
+                }
+                point {
+                  x: -84.35
+                  y: 32.0
+                }
+                point {
+                  x: -84.35
+                  y: 33.0
+                }
+                point {
+                  x: -84.35
+                  y: 34.0
+                }
+                point {
+                  x: -84.35
+                  y: 35.0
+                }
+                point {
+                  x: -84.35
+                  y: 36.0
+                }
+                point {
+                  x: -84.35
+                  y: 37.0
+                }
+                point {
+                  x: -84.35
+                  y: 38.0
+                }
+                point {
+                  x: -84.35
+                  y: 39.0
+                }
+                point {
+                  x: -84.35
+                  y: 40.0
+                }
+                point {
+                  x: -84.35
+                  y: 41.0
+                }
+                point {
+                  x: -84.35
+                  y: 42.0
+                }
+                point {
+                  x: -84.35
+                  y: 43.0
+                }
+                point {
+                  x: -84.35
+                  y: 44.0
+                }
+                point {
+                  x: -84.35
+                  y: 45.0
+                }
+                point {
+                  x: -84.35
+                  y: 46.0
+                }
+                point {
+                  x: -84.35
+                  y: 47.0
+                }
+                point {
+                  x: -84.35
+                  y: 48.0
+                }
+                point {
+                  x: -84.35
+                  y: 49.0
+                }
+                point {
+                  x: -84.35
+                  y: 50.0
+                }
+                point {
+                  x: -84.35
+                  y: 51.0
+                }
+                point {
+                  x: -84.35
+                  y: 52.0
+                }
+                point {
+                  x: -84.35
+                  y: 53.0
+                }
+                point {
+                  x: -84.35
+                  y: 54.0
+                }
+                point {
+                  x: -84.35
+                  y: 55.0
+                }
+                point {
+                  x: -84.35
+                  y: 56.0
+                }
+                point {
+                  x: -84.35
+                  y: 57.0
+                }
+                point {
+                  x: -84.35
+                  y: 58.0
+                }
+                point {
+                  x: -84.35
+                  y: 59.0
+                }
+                point {
+                  x: -84.35
+                  y: 60.0
+                }
+                point {
+                  x: -84.35
+                  y: 61.0
+                }
+                point {
+                  x: -84.35
+                  y: 61.99999999999999
+                }
+                point {
+                  x: -84.35
+                  y: 62.99999999999999
+                }
+                point {
+                  x: -84.35
+                  y: 64.0
+                }
+                point {
+                  x: -84.35
+                  y: 65.0
+                }
+                point {
+                  x: -84.35
+                  y: 66.0
+                }
+                point {
+                  x: -84.35
+                  y: 67.0
+                }
+                point {
+                  x: -84.35
+                  y: 68.0
+                }
+                point {
+                  x: -84.35
+                  y: 69.0
+                }
+                point {
+                  x: -84.35
+                  y: 70.0
+                }
+                point {
+                  x: -84.35
+                  y: 71.0
+                }
+                point {
+                  x: -84.35
+                  y: 72.0
+                }
+                point {
+                  x: -84.35
+                  y: 73.0
+                }
+                point {
+                  x: -84.35
+                  y: 74.0
+                }
+                point {
+                  x: -84.35
+                  y: 75.0
+                }
+                point {
+                  x: -84.35
+                  y: 76.0
+                }
+                point {
+                  x: -84.35
+                  y: 77.0
+                }
+                point {
+                  x: -84.35
+                  y: 78.0
+                }
+                point {
+                  x: -84.35
+                  y: 79.0
+                }
+                point {
+                  x: -84.35
+                  y: 80.0
+                }
+                point {
+                  x: -84.35
+                  y: 81.0
+                }
+                point {
+                  x: -84.35
+                  y: 82.0
+                }
+                point {
+                  x: -84.35
+                  y: 83.0
+                }
+                point {
+                  x: -84.35
+                  y: 84.0
+                }
+                point {
+                  x: -84.35
+                  y: 85.0
+                }
+                point {
+                  x: -84.35
+                  y: 86.0
+                }
+                point {
+                  x: -84.35
+                  y: 87.0
+                }
+                point {
+                  x: -84.35
+                  y: 88.0
+                }
+                point {
+                  x: -84.35
+                  y: 89.0
+                }
+                point {
+                  x: -84.35
+                  y: 90.0
+                }
+                point {
+                  x: -84.35
+                  y: 91.0
+                }
+                point {
+                  x: -84.35
+                  y: 92.0
+                }
+                point {
+                  x: -84.35
+                  y: 93.0
+                }
+                point {
+                  x: -84.35
+                  y: 94.0
+                }
+                point {
+                  x: -84.35
+                  y: 95.0
+                }
+                point {
+                  x: -84.35
+                  y: 96.0
+                }
+                point {
+                  x: -84.35
+                  y: 97.0
+                }
+                point {
+                  x: -84.35
+                  y: 98.0
+                }
+                point {
+                  x: -84.35
+                  y: 99.0
+                }
+              }
+            }
+          }
+          type: RIGHT_BOUNDARY
+        }
+        edge {
+          curve {
+            segment {
+              line_segment {
+                point {
+                  x: -88.65
+                  y: 99.0
+                }
+                point {
+                  x: -87.65
+                  y: 100.0
+                }
+                point {
+                  x: -87.65
+                  y: 101.0
+                }
+                point {
+                  x: -87.65
+                  y: 102.0
+                }
+                point {
+                  x: -87.65
+                  y: 103.0
+                }
+                point {
+                  x: -87.65
+                  y: 104.0
+                }
+                point {
+                  x: -87.65
+                  y: 105.0
+                }
+                point {
+                  x: -87.65
+                  y: 106.0
+                }
+                point {
+                  x: -87.65
+                  y: 107.0
+                }
+                point {
+                  x: -87.65
+                  y: 108.0
+                }
+                point {
+                  x: -87.65
+                  y: 109.0
+                }
+                point {
+                  x: -87.65
+                  y: 110.0
+                }
+                point {
+                  x: -87.65
+                  y: 111.0
+                }
+                point {
+                  x: -87.65
+                  y: 112.0
+                }
+                point {
+                  x: -87.65
+                  y: 113.0
+                }
+                point {
+                  x: -87.65
+                  y: 114.0
+                }
+                point {
+                  x: -87.65
+                  y: 115.0
+                }
+                point {
+                  x: -87.65
+                  y: 116.0
+                }
+                point {
+                  x: -87.65
+                  y: 117.0
+                }
+                point {
+                  x: -87.65
+                  y: 118.0
+                }
+                point {
+                  x: -87.65
+                  y: 119.0
+                }
+                point {
+                  x: -87.65
+                  y: 120.0
+                }
+                point {
+                  x: -87.65
+                  y: 121.0
+                }
+                point {
+                  x: -87.65
+                  y: 122.0
+                }
+                point {
+                  x: -87.65
+                  y: 123.0
+                }
+                point {
+                  x: -87.65
+                  y: 123.99999999999999
+                }
+                point {
+                  x: -87.65
+                  y: 125.0
+                }
+                point {
+                  x: -87.65
+                  y: 125.99999999999999
+                }
+                point {
+                  x: -87.65
+                  y: 127.0
+                }
+                point {
+                  x: -87.65
+                  y: 128.0
+                }
+                point {
+                  x: -87.65
+                  y: 129.0
+                }
+                point {
+                  x: -87.65
+                  y: 130.0
+                }
+                point {
+                  x: -87.65
+                  y: 131.0
+                }
+                point {
+                  x: -87.65
+                  y: 132.0
+                }
+                point {
+                  x: -87.65
+                  y: 133.0
+                }
+                point {
+                  x: -87.65
+                  y: 134.0
+                }
+                point {
+                  x: -87.65
+                  y: 135.0
+                }
+                point {
+                  x: -87.65
+                  y: 136.0
+                }
+                point {
+                  x: -87.65
+                  y: 137.0
+                }
+                point {
+                  x: -87.65
+                  y: 138.0
+                }
+                point {
+                  x: -87.65
+                  y: 139.0
+                }
+                point {
+                  x: -87.65
+                  y: 140.0
+                }
+                point {
+                  x: -87.65
+                  y: 141.0
+                }
+                point {
+                  x: -87.65
+                  y: 142.0
+                }
+                point {
+                  x: -87.65
+                  y: 143.0
+                }
+                point {
+                  x: -87.65
+                  y: 144.0
+                }
+                point {
+                  x: -87.65
+                  y: 145.0
+                }
+                point {
+                  x: -87.65
+                  y: 146.0
+                }
+                point {
+                  x: -87.65
+                  y: 147.0
+                }
+                point {
+                  x: -87.65
+                  y: 148.0
+                }
+                point {
+                  x: -87.65
+                  y: 149.0
+                }
+                point {
+                  x: -87.65
+                  y: 150.0
+                }
+                point {
+                  x: -87.65
+                  y: 151.0
+                }
+                point {
+                  x: -87.65
+                  y: 152.0
+                }
+                point {
+                  x: -87.65
+                  y: 153.0
+                }
+                point {
+                  x: -87.65
+                  y: 154.0
+                }
+                point {
+                  x: -87.65
+                  y: 155.0
+                }
+                point {
+                  x: -87.65
+                  y: 156.0
+                }
+                point {
+                  x: -87.65
+                  y: 157.0
+                }
+                point {
+                  x: -87.65
+                  y: 158.0
+                }
+                point {
+                  x: -87.65
+                  y: 159.0
+                }
+                point {
+                  x: -87.65
+                  y: 160.0
+                }
+                point {
+                  x: -87.65
+                  y: 161.0
+                }
+                point {
+                  x: -87.65
+                  y: 162.0
+                }
+                point {
+                  x: -87.65
+                  y: 163.0
+                }
+                point {
+                  x: -87.65
+                  y: 164.0
+                }
+                point {
+                  x: -87.65
+                  y: 165.0
+                }
+                point {
+                  x: -87.65
+                  y: 166.0
+                }
+                point {
+                  x: -87.65
+                  y: 167.0
+                }
+                point {
+                  x: -87.65
+                  y: 168.0
+                }
+                point {
+                  x: -87.65
+                  y: 169.0
+                }
+                point {
+                  x: -87.65
+                  y: 170.0
+                }
+                point {
+                  x: -87.65
+                  y: 171.0
+                }
+                point {
+                  x: -87.65
+                  y: 172.0
+                }
+                point {
+                  x: -87.65
+                  y: 173.0
+                }
+                point {
+                  x: -87.65
+                  y: 174.0
+                }
+                point {
+                  x: -87.65
+                  y: 175.0
+                }
+                point {
+                  x: -87.65
+                  y: 176.0
+                }
+                point {
+                  x: -87.65
+                  y: 177.0
+                }
+                point {
+                  x: -87.65
+                  y: 178.0
+                }
+                point {
+                  x: -87.65
+                  y: 179.0
+                }
+                point {
+                  x: -87.65
+                  y: 180.0
+                }
+                point {
+                  x: -87.65
+                  y: 181.0
+                }
+                point {
+                  x: -87.65
+                  y: 182.0
+                }
+                point {
+                  x: -87.65
+                  y: 183.0
+                }
+                point {
+                  x: -87.65
+                  y: 184.0
+                }
+                point {
+                  x: -87.65
+                  y: 185.0
+                }
+                point {
+                  x: -87.65
+                  y: 186.0
+                }
+                point {
+                  x: -87.65
+                  y: 187.0
+                }
+                point {
+                  x: -87.65
+                  y: 188.0
+                }
+                point {
+                  x: -87.65
+                  y: 189.0
+                }
+                point {
+                  x: -87.65
+                  y: 190.0
+                }
+                point {
+                  x: -87.65
+                  y: 191.0
+                }
+                point {
+                  x: -87.65
+                  y: 192.0
+                }
+                point {
+                  x: -87.65
+                  y: 193.0
+                }
+                point {
+                  x: -87.65
+                  y: 194.0
+                }
+                point {
+                  x: -87.65
+                  y: 195.0
+                }
+                point {
+                  x: -87.65
+                  y: 196.0
+                }
+                point {
+                  x: -87.65
+                  y: 197.0
+                }
+                point {
+                  x: -87.65
+                  y: 198.0
+                }
+                point {
+                  x: -87.65
+                  y: 199.0
+                }
+              }
+            }
+          }
+          type: LEFT_BOUNDARY
+        }
+        edge {
+          curve {
+            segment {
+              line_segment {
+                point {
+                  x: -83.35
+                  y: 99.0
+                }
+                point {
+                  x: -84.35
+                  y: 100.0
+                }
+                point {
+                  x: -84.35
+                  y: 101.0
+                }
+                point {
+                  x: -84.35
+                  y: 102.0
+                }
+                point {
+                  x: -84.35
+                  y: 103.0
+                }
+                point {
+                  x: -84.35
+                  y: 104.0
+                }
+                point {
+                  x: -84.35
+                  y: 105.0
+                }
+                point {
+                  x: -84.35
+                  y: 106.0
+                }
+                point {
+                  x: -84.35
+                  y: 107.0
+                }
+                point {
+                  x: -84.35
+                  y: 108.0
+                }
+                point {
+                  x: -84.35
+                  y: 109.0
+                }
+                point {
+                  x: -84.35
+                  y: 110.0
+                }
+                point {
+                  x: -84.35
+                  y: 111.0
+                }
+                point {
+                  x: -84.35
+                  y: 112.0
+                }
+                point {
+                  x: -84.35
+                  y: 113.0
+                }
+                point {
+                  x: -84.35
+                  y: 114.0
+                }
+                point {
+                  x: -84.35
+                  y: 115.0
+                }
+                point {
+                  x: -84.35
+                  y: 116.0
+                }
+                point {
+                  x: -84.35
+                  y: 117.0
+                }
+                point {
+                  x: -84.35
+                  y: 118.0
+                }
+                point {
+                  x: -84.35
+                  y: 119.0
+                }
+                point {
+                  x: -84.35
+                  y: 120.0
+                }
+                point {
+                  x: -84.35
+                  y: 121.0
+                }
+                point {
+                  x: -84.35
+                  y: 122.0
+                }
+                point {
+                  x: -84.35
+                  y: 123.0
+                }
+                point {
+                  x: -84.35
+                  y: 123.99999999999999
+                }
+                point {
+                  x: -84.35
+                  y: 125.0
+                }
+                point {
+                  x: -84.35
+                  y: 125.99999999999999
+                }
+                point {
+                  x: -84.35
+                  y: 127.0
+                }
+                point {
+                  x: -84.35
+                  y: 128.0
+                }
+                point {
+                  x: -84.35
+                  y: 129.0
+                }
+                point {
+                  x: -84.35
+                  y: 130.0
+                }
+                point {
+                  x: -84.35
+                  y: 131.0
+                }
+                point {
+                  x: -84.35
+                  y: 132.0
+                }
+                point {
+                  x: -84.35
+                  y: 133.0
+                }
+                point {
+                  x: -84.35
+                  y: 134.0
+                }
+                point {
+                  x: -84.35
+                  y: 135.0
+                }
+                point {
+                  x: -84.35
+                  y: 136.0
+                }
+                point {
+                  x: -84.35
+                  y: 137.0
+                }
+                point {
+                  x: -84.35
+                  y: 138.0
+                }
+                point {
+                  x: -84.35
+                  y: 139.0
+                }
+                point {
+                  x: -84.35
+                  y: 140.0
+                }
+                point {
+                  x: -84.35
+                  y: 141.0
+                }
+                point {
+                  x: -84.35
+                  y: 142.0
+                }
+                point {
+                  x: -84.35
+                  y: 143.0
+                }
+                point {
+                  x: -84.35
+                  y: 144.0
+                }
+                point {
+                  x: -84.35
+                  y: 145.0
+                }
+                point {
+                  x: -84.35
+                  y: 146.0
+                }
+                point {
+                  x: -84.35
+                  y: 147.0
+                }
+                point {
+                  x: -84.35
+                  y: 148.0
+                }
+                point {
+                  x: -84.35
+                  y: 149.0
+                }
+                point {
+                  x: -84.35
+                  y: 150.0
+                }
+                point {
+                  x: -84.35
+                  y: 151.0
+                }
+                point {
+                  x: -84.35
+                  y: 152.0
+                }
+                point {
+                  x: -84.35
+                  y: 153.0
+                }
+                point {
+                  x: -84.35
+                  y: 154.0
+                }
+                point {
+                  x: -84.35
+                  y: 155.0
+                }
+                point {
+                  x: -84.35
+                  y: 156.0
+                }
+                point {
+                  x: -84.35
+                  y: 157.0
+                }
+                point {
+                  x: -84.35
+                  y: 158.0
+                }
+                point {
+                  x: -84.35
+                  y: 159.0
+                }
+                point {
+                  x: -84.35
+                  y: 160.0
+                }
+                point {
+                  x: -84.35
+                  y: 161.0
+                }
+                point {
+                  x: -84.35
+                  y: 162.0
+                }
+                point {
+                  x: -84.35
+                  y: 163.0
+                }
+                point {
+                  x: -84.35
+                  y: 164.0
+                }
+                point {
+                  x: -84.35
+                  y: 165.0
+                }
+                point {
+                  x: -84.35
+                  y: 166.0
+                }
+                point {
+                  x: -84.35
+                  y: 167.0
+                }
+                point {
+                  x: -84.35
+                  y: 168.0
+                }
+                point {
+                  x: -84.35
+                  y: 169.0
+                }
+                point {
+                  x: -84.35
+                  y: 170.0
+                }
+                point {
+                  x: -84.35
+                  y: 171.0
+                }
+                point {
+                  x: -84.35
+                  y: 172.0
+                }
+                point {
+                  x: -84.35
+                  y: 173.0
+                }
+                point {
+                  x: -84.35
+                  y: 174.0
+                }
+                point {
+                  x: -84.35
+                  y: 175.0
+                }
+                point {
+                  x: -84.35
+                  y: 176.0
+                }
+                point {
+                  x: -84.35
+                  y: 177.0
+                }
+                point {
+                  x: -84.35
+                  y: 178.0
+                }
+                point {
+                  x: -84.35
+                  y: 179.0
+                }
+                point {
+                  x: -84.35
+                  y: 180.0
+                }
+                point {
+                  x: -84.35
+                  y: 181.0
+                }
+                point {
+                  x: -84.35
+                  y: 182.0
+                }
+                point {
+                  x: -84.35
+                  y: 183.0
+                }
+                point {
+                  x: -84.35
+                  y: 184.0
+                }
+                point {
+                  x: -84.35
+                  y: 185.0
+                }
+                point {
+                  x: -84.35
+                  y: 186.0
+                }
+                point {
+                  x: -84.35
+                  y: 187.0
+                }
+                point {
+                  x: -84.35
+                  y: 188.0
+                }
+                point {
+                  x: -84.35
+                  y: 189.0
+                }
+                point {
+                  x: -84.35
+                  y: 190.0
+                }
+                point {
+                  x: -84.35
+                  y: 191.0
+                }
+                point {
+                  x: -84.35
+                  y: 192.0
+                }
+                point {
+                  x: -84.35
+                  y: 193.0
+                }
+                point {
+                  x: -84.35
+                  y: 194.0
+                }
+                point {
+                  x: -84.35
+                  y: 195.0
+                }
+                point {
+                  x: -84.35
+                  y: 196.0
+                }
+                point {
+                  x: -84.35
+                  y: 197.0
+                }
+                point {
+                  x: -84.35
+                  y: 198.0
+                }
+                point {
+                  x: -84.35
+                  y: 199.0
+                }
+              }
+            }
+          }
+          type: RIGHT_BOUNDARY
+        }
+        edge {
+          curve {
+            segment {
+              line_segment {
+                point {
+                  x: -88.65
+                  y: 199.0
+                }
+                point {
+                  x: -87.65
+                  y: 200.0
+                }
+                point {
+                  x: -87.65
+                  y: 201.0
+                }
+                point {
+                  x: -87.65
+                  y: 202.0
+                }
+                point {
+                  x: -87.65
+                  y: 203.0
+                }
+                point {
+                  x: -87.65
+                  y: 204.0
+                }
+                point {
+                  x: -87.65
+                  y: 205.0
+                }
+                point {
+                  x: -87.65
+                  y: 206.0
+                }
+                point {
+                  x: -87.65
+                  y: 207.0
+                }
+                point {
+                  x: -87.65
+                  y: 208.0
+                }
+                point {
+                  x: -87.65
+                  y: 209.0
+                }
+                point {
+                  x: -87.65
+                  y: 210.0
+                }
+                point {
+                  x: -87.65
+                  y: 211.0
+                }
+                point {
+                  x: -87.65
+                  y: 212.0
+                }
+                point {
+                  x: -87.65
+                  y: 213.0
+                }
+                point {
+                  x: -87.65
+                  y: 214.0
+                }
+                point {
+                  x: -87.65
+                  y: 215.0
+                }
+                point {
+                  x: -87.65
+                  y: 216.0
+                }
+                point {
+                  x: -87.65
+                  y: 217.0
+                }
+                point {
+                  x: -87.65
+                  y: 218.0
+                }
+                point {
+                  x: -87.65
+                  y: 219.0
+                }
+                point {
+                  x: -87.65
+                  y: 220.0
+                }
+                point {
+                  x: -87.65
+                  y: 221.0
+                }
+                point {
+                  x: -87.65
+                  y: 222.0
+                }
+                point {
+                  x: -87.65
+                  y: 223.0
+                }
+                point {
+                  x: -87.65
+                  y: 224.0
+                }
+                point {
+                  x: -87.65
+                  y: 225.0
+                }
+                point {
+                  x: -87.65
+                  y: 226.0
+                }
+                point {
+                  x: -87.65
+                  y: 227.0
+                }
+                point {
+                  x: -87.65
+                  y: 228.0
+                }
+                point {
+                  x: -87.65
+                  y: 229.0
+                }
+                point {
+                  x: -87.65
+                  y: 230.0
+                }
+                point {
+                  x: -87.65
+                  y: 231.0
+                }
+                point {
+                  x: -87.65
+                  y: 232.0
+                }
+                point {
+                  x: -87.65
+                  y: 233.0
+                }
+                point {
+                  x: -87.65
+                  y: 234.0
+                }
+                point {
+                  x: -87.65
+                  y: 235.0
+                }
+                point {
+                  x: -87.65
+                  y: 236.0
+                }
+                point {
+                  x: -87.65
+                  y: 237.0
+                }
+                point {
+                  x: -87.65
+                  y: 238.0
+                }
+                point {
+                  x: -87.65
+                  y: 239.0
+                }
+                point {
+                  x: -87.65
+                  y: 240.0
+                }
+                point {
+                  x: -87.65
+                  y: 241.0
+                }
+                point {
+                  x: -87.65
+                  y: 242.0
+                }
+                point {
+                  x: -87.65
+                  y: 243.0
+                }
+                point {
+                  x: -87.65
+                  y: 244.0
+                }
+                point {
+                  x: -87.6458439039019
+                  y: 245.11703778872192
+                }
+                point {
+                  x: -87.57491191073711
+                  y: 246.1145189426019
+                }
+                point {
+                  x: -87.49398856511147
+                  y: 247.21056942717814
+                }
+                point {
+                  x: -87.31566224589395
+                  y: 248.29829892932585
+                }
+                point {
+                  x: -87.12297829329756
+                  y: 249.27955979902964
+                }
+                point {
+                  x: -86.77827422369495
+                  y: 250.69803056031148
+                }
+                point {
+                  x: -86.27707223052369
+                  y: 251.62936184822553
+                }
+                point {
+                  x: -85.78718617638518
+                  y: 252.50114832091288
+                }
+                point {
+                  x: -85.29730012224671
+                  y: 253.37293479360014
+                }
+                point {
+                  x: -84.59982209321852
+                  y: 254.4925133366658
+                }
+                point {
+                  x: -83.9499383001978
+                  y: 255.25254692511376
+                }
+                point {
+                  x: -83.30005450717711
+                  y: 256.0125805135617
+                }
+                point {
+                  x: -82.18093991734023
+                  y: 257.0045150251304
+                }
+                point {
+                  x: -81.33093001089837
+                  y: 257.53128172771403
+                }
+                point {
+                  x: -80.48092010445659
+                  y: 258.0580484302977
+                }
+                point {
+                  x: -79.20990485539491
+                  y: 258.7476754070192
+                }
+                point {
+                  x: -78.24903694498714
+                  y: 259.02468237218176
+                }
+                point {
+                  x: -77.28816903457935
+                  y: 259.3016893373444
+                }
+                point {
+                  x: -76.22492948263753
+                  y: 259.6046906711207
+                }
+                point {
+                  x: -74.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -73.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -72.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -71.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -70.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -69.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -68.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -67.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -66.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -65.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -64.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -63.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -62.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -61.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -60.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -59.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -58.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -57.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -56.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -55.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -54.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -53.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -52.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -51.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -50.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -49.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -48.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -47.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -46.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -45.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -44.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -43.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -42.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -41.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -40.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -39.88531792730612
+                  y: 259.75
+                }
+              }
+            }
+          }
+          type: LEFT_BOUNDARY
+        }
+        edge {
+          curve {
+            segment {
+              line_segment {
+                point {
+                  x: -83.35
+                  y: 199.0
+                }
+                point {
+                  x: -84.35
+                  y: 200.0
+                }
+                point {
+                  x: -84.35
+                  y: 201.0
+                }
+                point {
+                  x: -84.35
+                  y: 202.0
+                }
+                point {
+                  x: -84.35
+                  y: 203.0
+                }
+                point {
+                  x: -84.35
+                  y: 204.0
+                }
+                point {
+                  x: -84.35
+                  y: 205.0
+                }
+                point {
+                  x: -84.35
+                  y: 206.0
+                }
+                point {
+                  x: -84.35
+                  y: 207.0
+                }
+                point {
+                  x: -84.35
+                  y: 208.0
+                }
+                point {
+                  x: -84.35
+                  y: 209.0
+                }
+                point {
+                  x: -84.35
+                  y: 210.0
+                }
+                point {
+                  x: -84.35
+                  y: 211.0
+                }
+                point {
+                  x: -84.35
+                  y: 212.0
+                }
+                point {
+                  x: -84.35
+                  y: 213.0
+                }
+                point {
+                  x: -84.35
+                  y: 214.0
+                }
+                point {
+                  x: -84.35
+                  y: 215.0
+                }
+                point {
+                  x: -84.35
+                  y: 216.0
+                }
+                point {
+                  x: -84.35
+                  y: 217.0
+                }
+                point {
+                  x: -84.35
+                  y: 218.0
+                }
+                point {
+                  x: -84.35
+                  y: 219.0
+                }
+                point {
+                  x: -84.35
+                  y: 220.0
+                }
+                point {
+                  x: -84.35
+                  y: 221.0
+                }
+                point {
+                  x: -84.35
+                  y: 222.0
+                }
+                point {
+                  x: -84.35
+                  y: 223.0
+                }
+                point {
+                  x: -84.35
+                  y: 224.0
+                }
+                point {
+                  x: -84.35
+                  y: 225.0
+                }
+                point {
+                  x: -84.35
+                  y: 226.0
+                }
+                point {
+                  x: -84.35
+                  y: 227.0
+                }
+                point {
+                  x: -84.35
+                  y: 228.0
+                }
+                point {
+                  x: -84.35
+                  y: 229.0
+                }
+                point {
+                  x: -84.35
+                  y: 230.0
+                }
+                point {
+                  x: -84.35
+                  y: 231.0
+                }
+                point {
+                  x: -84.35
+                  y: 232.0
+                }
+                point {
+                  x: -84.35
+                  y: 233.0
+                }
+                point {
+                  x: -84.35
+                  y: 234.0
+                }
+                point {
+                  x: -84.35
+                  y: 235.0
+                }
+                point {
+                  x: -84.35
+                  y: 236.0
+                }
+                point {
+                  x: -84.35
+                  y: 237.0
+                }
+                point {
+                  x: -84.35
+                  y: 238.0
+                }
+                point {
+                  x: -84.35
+                  y: 239.0
+                }
+                point {
+                  x: -84.35
+                  y: 240.0
+                }
+                point {
+                  x: -84.35
+                  y: 241.0
+                }
+                point {
+                  x: -84.35
+                  y: 242.0
+                }
+                point {
+                  x: -84.35
+                  y: 243.0
+                }
+                point {
+                  x: -84.35
+                  y: 244.0
+                }
+                point {
+                  x: -84.3541560960981
+                  y: 244.88296221127808
+                }
+                point {
+                  x: -84.2832241029333
+                  y: 245.88044336515802
+                }
+                point {
+                  x: -84.22228346222937
+                  y: 246.77935518834164
+                }
+                point {
+                  x: -84.07750137587144
+                  y: 247.66244188575783
+                }
+                point {
+                  x: -83.88481742327505
+                  y: 248.64370275546162
+                }
+                point {
+                  x: -83.8441535876849
+                  y: 249.18775373358736
+                }
+                point {
+                  x: -83.40017687065551
+                  y: 250.01273786956847
+                }
+                point {
+                  x: -82.910290816517
+                  y: 250.88452434225582
+                }
+                point {
+                  x: -82.42040476237848
+                  y: 251.7563108149432
+                }
+                point {
+                  x: -82.09171125134033
+                  y: 252.34789681969755
+                }
+                point {
+                  x: -81.44182745831966
+                  y: 253.10793040814545
+                }
+                point {
+                  x: -80.79194366529897
+                  y: 253.8679639965934
+                }
+                point {
+                  x: -80.4426097988142
+                  y: 254.1994823338725
+                }
+                point {
+                  x: -79.59259989237249
+                  y: 254.7262490364561
+                }
+                point {
+                  x: -78.7425899859307
+                  y: 255.25301573903974
+                }
+                point {
+                  x: -78.29578187035824
+                  y: 255.57681130267358
+                }
+                point {
+                  x: -77.33491395995047
+                  y: 255.85381826783615
+                }
+                point {
+                  x: -76.37404604954271
+                  y: 256.1308252329988
+                }
+                point {
+                  x: -75.51554978066899
+                  y: 256.38183782954775
+                }
+                point {
+                  x: -74.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -73.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -72.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -71.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -70.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -69.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -68.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -67.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -66.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -65.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -64.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -63.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -62.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -61.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -60.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -59.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -58.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -57.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -56.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -55.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -54.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -53.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -52.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -51.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -50.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -49.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -48.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -47.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -46.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -45.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -44.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -43.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -42.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -41.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -40.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -39.88531792730612
+                  y: 256.45000000000005
+                }
+              }
+            }
+          }
+          type: RIGHT_BOUNDARY
+        }
+        edge {
+          curve {
+            segment {
+              line_segment {
+                point {
+                  x: -39.88531792730612
+                  y: 260.75
+                }
+                point {
+                  x: -38.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -37.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -36.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -35.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -34.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -33.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -32.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -31.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -30.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -29.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -28.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -27.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -26.88531792730611
+                  y: 259.75
+                }
+                point {
+                  x: -25.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -24.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -23.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -22.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -21.885317927306126
+                  y: 259.75
+                }
+                point {
+                  x: -20.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -19.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -18.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -17.88531792730612
+                  y: 259.75
+                }
+                point {
+                  x: -16.885317927306126
+                  y: 259.75
+                }
+                point {
+                  x: -15.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -14.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -13.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -12.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -11.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -10.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -9.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -8.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -7.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -6.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -5.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -4.885317927306119
+                  y: 259.75
+                }
+                point {
+                  x: -3.8853179273061187
+                  y: 259.75
+                }
+                point {
+                  x: -2.8853179273061187
+                  y: 259.75
+                }
+              }
+            }
+          }
+          type: LEFT_BOUNDARY
+        }
+        edge {
+          curve {
+            segment {
+              line_segment {
+                point {
+                  x: -39.88531792730612
+                  y: 255.45000000000002
+                }
+                point {
+                  x: -38.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -37.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -36.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -35.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -34.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -33.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -32.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -31.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -30.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -29.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -28.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -27.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -26.88531792730611
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -25.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -24.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -23.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -22.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -21.885317927306126
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -20.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -19.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -18.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -17.88531792730612
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -16.885317927306126
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -15.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -14.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -13.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -12.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -11.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -10.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -9.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -8.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -7.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -6.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -5.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -4.885317927306119
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -3.8853179273061187
+                  y: 256.45000000000005
+                }
+                point {
+                  x: -2.8853179273061187
+                  y: 256.45000000000005
+                }
+              }
+            }
+          }
+          type: RIGHT_BOUNDARY
+        }
+      }
+    }
+  }
+}
+stop_sign {
+  id {
+    id: "2"
+  }
+  stop_line {
+    segment {
+      line_segment {
+        point {
+          x: -88
+          y: 15
+        }
+        point {
+          x: -80
+          y: 15
+        }
+      }
+    }
+  }
+  overlap_id {
+    id: "1_-1_and_2"
+  }
+}
