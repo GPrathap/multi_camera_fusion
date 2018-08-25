@@ -29,6 +29,10 @@
 #include "modules/perception/obstacle/onboard/pylon_camera_shared_data.h"
 #include "modules/perception/obstacle/onboard/pylon_camera_right_side_shared_data.h"
 #include "modules/perception/obstacle/onboard/pylon_camera_left_side_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_right_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_left_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_right_backwards_side_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_left_backwards_side_shared_data.h"
 #include "modules/perception/obstacle/onboard/cipv_subnode.h"
 #include "modules/perception/obstacle/onboard/fusion_shared_data.h"
 #include "modules/perception/obstacle/onboard/fusion_subnode.h"
@@ -54,6 +58,12 @@ using apollo::common::ErrorCode;
 std::string Perception::Name() const { return "perception"; }
 
 Status Perception::Init() {
+
+  if (!glfwInit()) {
+    std::cerr << "Failed to initialize glfw !\n";
+    return Status(ErrorCode::PERCEPTION_ERROR, "failed to init glfw");
+  }
+
   AdapterManager::Init(FLAGS_perception_adapter_config_filename);
 
   RegistAllOnboardClass();
@@ -85,9 +95,18 @@ void Perception::RegistAllOnboardClass() {
   RegisterFactoryPylonCameraObjectData();
   RegisterFactoryPylonCameraRightSideObjectData();
   RegisterFactoryPylonCameraLeftSideObjectData();
+  RegisterFactoryPylonCameraRightObjectData();
+  RegisterFactoryPylonCameraLeftObjectData();
+  RegisterFactoryPylonCameraLeftBackwardsSideObjectData();
+  RegisterFactoryPylonCameraRightBackwardsSideObjectData();
+
   RegisterFactoryPylonCameraSharedData();
   RegisterFactoryPylonCameraRightSideSharedData();
   RegisterFactoryPylonCameraLeftSideSharedData();
+  RegisterFactoryPylonCameraRightSharedData();
+  RegisterFactoryPylonCameraLeftSharedData();
+  RegisterFactoryPylonCameraLeftBackwardsSideSharedData();
+  RegisterFactoryPylonCameraRightBackwardsSideSharedData();
 
   /// register subnode
   RegisterFactoryLidar64ProcessSubnode();

@@ -309,6 +309,11 @@ class AdapterManager {
   REGISTER_ADAPTER(UnityCarState);
   REGISTER_ADAPTER(ImageFrontLeftSide);
   REGISTER_ADAPTER(ImageFrontRightSide);
+  REGISTER_ADAPTER(ImageRight);
+  REGISTER_ADAPTER(ImageLeft);
+  REGISTER_ADAPTER(ImageRightBackwardsSide);
+  REGISTER_ADAPTER(ImageLeftBackwardsSide);
+  REGISTER_ADAPTER(ImageFrontCamera);
 
   DECLARE_SINGLETON(AdapterManager);
 };

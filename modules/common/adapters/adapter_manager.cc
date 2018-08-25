@@ -253,6 +253,21 @@ void AdapterManager::Init(const AdapterManagerConfig &configs) {
       case AdapterConfig::IMAGE_FRONT_RIGHT_SIDE:
         EnableImageFrontRightSide(FLAGS_image_front_right_side_topic, config);
             break;
+      case AdapterConfig::IMAGE_LEFT:
+        EnableImageLeft(FLAGS_image_left_topic, config);
+            break;
+      case AdapterConfig::IMAGE_RIGHT:
+        EnableImageRight(FLAGS_image_right_topic, config);
+            break;
+      case AdapterConfig::IMAGE_LEFT_BACKWARDS:
+        EnableImageLeftBackwardsSide(FLAGS_image_left_backwards_topic, config);
+            break;
+      case AdapterConfig::IMAGE_RIGHT_BACKWARDS:
+        EnableImageRightBackwardsSide(FLAGS_image_right_backwards_topic, config);
+            break;
+      case AdapterConfig::IMAGE_FRONT_CAMERA:
+        EnableImageFrontCamera(FLAGS_image_front_camera_topic, config);
+            break;
       default:
         AERROR << "Unknown adapter config type!";
         break;

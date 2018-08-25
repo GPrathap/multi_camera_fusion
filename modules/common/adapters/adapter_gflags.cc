@@ -146,3 +146,13 @@ DEFINE_string(image_front_left_side_topic, "/apollo/sensor/camera/perception/ima
               "front left side view camera");
 DEFINE_string(image_front_right_side_topic, "/apollo/sensor/camera/perception/image_front_right_side",
               "front right side view camera");
+DEFINE_string(image_left_topic, "/apollo/sensor/camera/perception/image_left",
+              "left  view camera");
+DEFINE_string(image_right_topic, "/apollo/sensor/camera/perception/image_right",
+              "right view camera");
+DEFINE_string(image_left_backwards_topic, "/apollo/sensor/camera/perception/image_left_backwards",
+              "image_left_backwards  view camera");
+DEFINE_string(image_right_backwards_topic, "/apollo/sensor/camera/perception/image_right_backwards",
+              "image_right_backwards_topic view camera");
+DEFINE_string(image_front_camera_topic, "/apollo/sensor/camera/perception/image_front_camera",
+              "image_front_camera view camera");

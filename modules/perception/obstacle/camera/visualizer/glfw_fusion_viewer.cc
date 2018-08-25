@@ -29,6 +29,7 @@
 #include <string>
 #include <vector>
 
+
 #include "gflags/gflags.h"
 #include "modules/common/util/file.h"
 #include "modules/perception/lib/config_manager/calibration_config_manager.h"
@@ -160,17 +161,15 @@ bool GLFWFusionViewer::initialize() {
     AINFO << " GLFWFusionViewer is already initialized !" << std::endl;
     return false;
   }
-
+  AINFO << "GLFWFusionViewer::next" << std::endl;
   if (!window_init()) {
     AERROR << " Failed to initialize the window !" << std::endl;
     return false;
   }
-
   if (!camera_init()) {
     AERROR << " Failed to initialize the camera !" << std::endl;
     return false;
   }
-
   if (!opengl_init()) {
     AERROR << " Failed to initialize opengl !" << std::endl;
     return false;
@@ -267,11 +266,10 @@ void GLFWFusionViewer::set_camera_para(Eigen::Vector3d i_position,
 }
 
 bool GLFWFusionViewer::window_init() {
-  if (!glfwInit()) {
-    std::cerr << "Failed to initialize glfw !\n";
-    return false;
-  }
-
+//    if (!glfwInit()) {
+//      std::cerr << "Failed to initialize glfw !\n";
+//      return false;
+//    }
   // window_ = glfwCreateWindow(win_width_, win_height_, "opengl_visualizer",
   // nullptr, nullptr);
   // glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
@@ -286,6 +284,7 @@ bool GLFWFusionViewer::window_init() {
     glfwTerminate();
     return false;
   }
+  AINFO << "Created glfw window!\n";
 
   glfwMakeContextCurrent(window_);
   glfwSwapInterval(1);
@@ -298,7 +297,6 @@ bool GLFWFusionViewer::window_init() {
   glfwSetMouseButtonCallback(window_, mouse_button_callback);
   glfwSetCursorPosCallback(window_, mouse_cursor_position_callback);
   glfwSetScrollCallback(window_, mouse_scroll_callback);
-  AINFO << "Befor show GL window!";
   glfwShowWindow(window_);
   AINFO << "GL window initialization is done!";
   return true;
@@ -2204,7 +2202,7 @@ void GLFWFusionViewer::draw_objects2d(
     std::string name, int offset_x, int offset_y, int image_width,
     int image_height) {
   if (name == "radar") {
-    // LOG(INFO)<<objects.size();
+    // LOG(AINFO)<<objects.size();
     for (auto obj : objects) {
       const auto& center = obj->center;
       Eigen::Vector2d center2d;
