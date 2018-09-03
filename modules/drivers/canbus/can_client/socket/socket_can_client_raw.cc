@@ -79,16 +79,18 @@ ErrorCode SocketCanClientRaw::Start() {
     filter[i].can_mask = CAN_SFF_MASK;
   }
 
+  /*
   int ret = setsockopt(dev_handler_, SOL_CAN_RAW, CAN_RAW_FILTER, &filter,
                        sizeof(filter));
   if (ret < 0) {
     AERROR << "add receive msg id filter error code: " << ret;
     return ErrorCode::CAN_CLIENT_ERROR_BASE;
   }
+  */
 
   // 2. enable reception of can frames.
   int enable = 1;
-  ret = ::setsockopt(dev_handler_, SOL_CAN_RAW, CAN_RAW_FD_FRAMES, &enable,
+  int ret = ::setsockopt(dev_handler_, SOL_CAN_RAW, CAN_RAW_FD_FRAMES, &enable,
                      sizeof(enable));
   if (ret < 0) {
     AERROR << "enable reception of can frame error code: " << ret;

@@ -47,6 +47,7 @@ cc_library(
     deps = [
         "//modules/canbus/vehicle/lincoln:lincoln_vehicle_factory",
         "//modules/canbus/vehicle/gem:gem_vehicle_factory",
+        "//modules/canbus/vehicle/kia_soul_ev:kia_soul_ev_vehicle_factory",
         "//modules/common/util:factory",
     ],
 )
