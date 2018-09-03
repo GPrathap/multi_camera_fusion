@@ -55,6 +55,10 @@
 #include "modules/perception/obstacle/onboard/pylon_camera_shared_data.h"
 #include "modules/perception/obstacle/onboard/pylon_camera_right_side_shared_data.h"
 #include "modules/perception/obstacle/onboard/pylon_camera_left_side_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_right_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_left_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_right_backwards_side_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_left_backwards_side_shared_data.h"
 #include "modules/perception/obstacle/onboard/object_shared_data.h"
 #include "modules/perception/onboard/subnode.h"
 #include "modules/perception/onboard/subnode_helper.h"
@@ -106,10 +110,18 @@ namespace apollo {
             // Shared Data
             PylonCameraObjectData* cam_obj_data_;
             PylonCameraSharedData* cam_shared_data_;
-            PylonCameraRightSideObjectData* camera_object_right_side_data_ = nullptr;
-            PylonCameraRightSideSharedData* camera_shared_right_side_data_ = nullptr;
             PylonCameraLeftSideObjectData* camera_object_left_side_data_ = nullptr;
             PylonCameraLeftSideSharedData* camera_shared_left_side_data_ = nullptr;
+            PylonCameraRightSideObjectData* camera_object_right_side_data_ = nullptr;
+            PylonCameraRightSideSharedData* camera_shared_right_side_data_ = nullptr;
+            PylonCameraLeftObjectData* camera_object_left_data_ = nullptr;
+            PylonCameraLeftSharedData* camera_shared_left_data_ = nullptr;
+            PylonCameraRightObjectData* camera_object_right_data_ = nullptr;
+            PylonCameraRightSharedData* camera_shared_right_data_ = nullptr;
+            PylonCameraLeftBackwardsSideObjectData* camera_object_left_backwards_side_data_ = nullptr;
+            PylonCameraLeftBackwardsSideSharedData* camera_shared_left__backwards_side_data_ = nullptr;
+            PylonCameraRightBackwardsSideObjectData* camera_object_right_backwards_side_data_ = nullptr;
+            PylonCameraRightBackwardsSideSharedData* camera_shared_right__backwards_side_data_ = nullptr;
 
             // Calibration
             int32_t image_height_ = 1080;

@@ -14,40 +14,10 @@
  * limitations under the License.
  *****************************************************************************/
 
-/**
- * @file
- */
+#include "modules/perception/obstacle/onboard/pylon_camera_right_backwards_side_shared_data.h"
 
-#ifndef MODULES_PERCEPTION_PERCEPTION_H_
-#define MODULES_PERCEPTION_PERCEPTION_H_
-
-#include <string>
-#include "GL/glew.h"
-#include "GLFW/glfw3.h"
-
-#include "modules/common/apollo_app.h"
-#include "modules/perception/onboard/dag_streaming.h"
-
-/**
- * @namespace apollo::perception
- * @brief apollo::perception
- */
 namespace apollo {
-namespace perception {
+    namespace perception {
 
-class Perception : public common::ApolloApp {
- public:
-  std::string Name() const override;
-  common::Status Init() override;
-  common::Status Start() override;
-  void Stop() override;
-
- private:
-  DAGStreaming dag_streaming_;
-  void RegistAllOnboardClass();
-};
-
-}  // namespace perception
+    }  // namespace perception
 }  // namespace apollo
-
-#endif  // MODULES_PERCEPTION_PERCEPTION_H_

@@ -188,6 +188,7 @@ function local_volumes() {
     case "$(uname -s)" in
         Linux)
             volumes="${volumes} -v /dev:/dev \
+                                -v /dataset:/dataset \
                                 -v /media:/media \
                                 -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
                                 -v /etc/localtime:/etc/localtime:ro \

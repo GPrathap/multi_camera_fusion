@@ -70,7 +70,11 @@ message AdapterConfig {
     UNITY_CAR_STATE = 63;
     IMAGE_FRONT_LEFT_SIDE = 64;
     IMAGE_FRONT_RIGHT_SIDE = 65;
-
+    IMAGE_LEFT = 66;
+    IMAGE_RIGHT = 67;
+    IMAGE_LEFT_BACKWARDS = 68;
+    IMAGE_RIGHT_BACKWARDS = 69;
+    IMAGE_FRONT_CAMERA = 70;
   }
   enum Mode {
     RECEIVE_ONLY = 0;

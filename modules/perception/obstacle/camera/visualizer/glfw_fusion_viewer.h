@@ -23,6 +23,8 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <thread>
+#include <mutex>
 
 #include "Eigen/Dense"
 #include "GL/glew.h"
@@ -37,6 +39,7 @@
 //  #include "modules/perception/obstacle/camera/visualizer/common/camera.h"
 #include "modules/perception/obstacle/camera/visualizer/common/gl_raster_text.h"
 #include "modules/perception/obstacle/camera/visualizer/frame_content.h"
+
 
 namespace apollo {
 namespace perception {
@@ -248,6 +251,8 @@ class GLFWFusionViewer {
   bool show_text;
   bool show_help_text;
   std::string help_str;
+  std::mutex window_initializer_lock;
+  bool is_glfw_initialized = false;
 
   void get_class_color(int cls, float rgb[3]);
 

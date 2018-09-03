@@ -470,6 +470,31 @@ function build_pylon_cam() {
   rm -rf modules/devel_isolated/
 }
 
+function build_ros_image_transport() {
+
+  CURRENT_PATH=$(pwd)
+  if [ -d "${ROS_ROOT}" ]; then
+    ROS_PATH="${ROS_ROOT}/../.."
+  else
+    warning "ROS not found. Run apolllo.sh build first."
+    exit 1
+  fi
+
+  source "${ROS_PATH}/setup.bash"
+
+  cd modules
+  catkin_make_isolated --install --source additional_ros_packages \
+    --install-space "${ROS_PATH}" -DCMAKE_BUILD_TYPE=Release \
+    --cmake-args --no-warn-unused-cli
+  find "${ROS_PATH}" -name "*.pyc" -print0 | xargs -0 rm -rf
+  cd -
+
+  rm -rf modules/.catkin_workspace
+  rm -rf modules/build_isolated/
+  rm -rf modules/devel_isolated/
+}
+
+
 
 function build_lslidar() {
   CURRENT_PATH=$(pwd)
@@ -563,6 +588,7 @@ function print_usage() {
   ${BLUE}build_rslidar${NONE}: build rslidar driver
   ${BLUE}build_usbcam${NONE}: build usb camera driver
   ${BLUE}build_pylon_cam${NONE}: build pylon_cam driver
+  ${BLUE}build_ros_image_transport${NONE}: build build ros image transport
   ${BLUE}build_opt_gpu${NONE}: build optimized binary with Caffe GPU mode support
   ${BLUE}build_fe${NONE}: compile frontend javascript code, this requires all the node_modules to be installed already
   ${BLUE}build_no_perception [dbg|opt]${NONE}: run build build skip building perception module, useful when some perception dependencies are not satisified, e.g., CUDA, CUDNN, LIDAR, etc.
@@ -660,6 +686,9 @@ function main() {
       ;;
     build_pylon_cam)
       build_pylon_cam
+      ;;
+    build_ros_image_transport)
+      build_ros_image_transport
       ;;
     build_usbcam)
       build_usbcam

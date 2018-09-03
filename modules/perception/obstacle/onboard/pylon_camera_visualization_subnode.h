@@ -24,8 +24,13 @@
 #include "modules/perception/obstacle/camera/visualizer/frame_content.h"
 #include "modules/perception/obstacle/camera/visualizer/gl_fusion_visualizer.h"
 #include "modules/perception/obstacle/onboard/pylon_camera_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_shared_data.h"
 #include "modules/perception/obstacle/onboard/pylon_camera_right_side_shared_data.h"
 #include "modules/perception/obstacle/onboard/pylon_camera_left_side_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_right_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_left_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_right_backwards_side_shared_data.h"
+#include "modules/perception/obstacle/onboard/pylon_camera_left_backwards_side_shared_data.h"
 #include "modules/perception/obstacle/onboard/fusion_shared_data.h"
 #include "modules/perception/obstacle/onboard/lane_shared_data.h"
 #include "modules/perception/obstacle/onboard/motion_service.h"
@@ -70,12 +75,22 @@ class TrackVisualizationSubnode : public Subnode {
 
   RadarObjectData* radar_object_data_ = nullptr;
   CIPVObjectData* cipv_object_data_ = nullptr;
-  PylonCameraSharedData* camera_shared_data_ = nullptr;
-  PylonCameraObjectData* camera_object_data_ = nullptr;
-  PylonCameraRightSideObjectData* camera_object_right_side_data_ = nullptr;
-  PylonCameraRightSideSharedData* camera_shared_right_side_data_ = nullptr;
+  // Shared Data
+  PylonCameraObjectData* cam_obj_data_;
+  PylonCameraSharedData* cam_shared_data_;
   PylonCameraLeftSideObjectData* camera_object_left_side_data_ = nullptr;
   PylonCameraLeftSideSharedData* camera_shared_left_side_data_ = nullptr;
+  PylonCameraRightSideObjectData* camera_object_right_side_data_ = nullptr;
+  PylonCameraRightSideSharedData* camera_shared_right_side_data_ = nullptr;
+  PylonCameraLeftObjectData* camera_object_left_data_ = nullptr;
+  PylonCameraLeftSharedData* camera_shared_left_data_ = nullptr;
+  PylonCameraRightObjectData* camera_object_right_data_ = nullptr;
+  PylonCameraRightSharedData* camera_shared_right_data_ = nullptr;
+  PylonCameraLeftBackwardsSideObjectData* camera_object_left_backwards_side_data_ = nullptr;
+  PylonCameraLeftBackwardsSideSharedData* camera_shared_left__backwards_side_data_ = nullptr;
+  PylonCameraRightBackwardsSideObjectData* camera_object_right_backwards_side_data_ = nullptr;
+  PylonCameraRightBackwardsSideSharedData* camera_shared_right__backwards_side_data_ = nullptr;
+
   LaneSharedData* lane_shared_data_ = nullptr;
   FusionSharedData* fusion_data_ = nullptr;
   std::unique_ptr<apollo::perception::lowcostvisualizer::BaseVisualizer> frame_visualizer_;
