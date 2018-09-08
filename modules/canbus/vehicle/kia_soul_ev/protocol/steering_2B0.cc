@@ -14,7 +14,7 @@
  * limitations under the License.
  *****************************************************************************/
 
-#include "modules/canbus/vehicle/kia_soul_ev/protocol/steering_83.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/steering_2B0.h"
 
 #include "modules/drivers/canbus/common/byte.h"
 
@@ -24,22 +24,15 @@ namespace kia_soul_ev {
 
 using ::apollo::drivers::canbus::Byte;
 
-const int32_t Steering83::ID = 0x83;
+const int32_t Steering2B0::ID = 0x2B0;
 
-void Steering83::Parse(const std::uint8_t *bytes, int32_t length,
+void Steering2B0::Parse(const std::uint8_t *bytes, int32_t length,
                        ChassisDetail *chassis_detail) const {
   chassis_detail->mutable_eps()->set_steering_angle(
       steering_angle(bytes, length));
-  // no steering angle speed
-  chassis_detail->mutable_eps()->set_steering_enabled(
-      is_enabled(bytes, length));
-  chassis_detail->mutable_eps()->set_driver_override(
-      is_driver_override(bytes, length));
-  chassis_detail->mutable_check_response()->set_is_eps_online(
-      !is_driver_override(bytes, length));
 }
 
-void Steering83::Parse(const std::uint8_t *bytes, int32_t length,
+void Steering2B0::Parse(const std::uint8_t *bytes, int32_t length,
                        const struct timeval &timestamp,
                        ChassisDetail *chassis_detail) const {
   chassis_detail->mutable_eps()->set_timestamp_65(
@@ -47,22 +40,12 @@ void Steering83::Parse(const std::uint8_t *bytes, int32_t length,
   Parse(bytes, length, chassis_detail);
 }
 
-double Steering83::steering_angle(const std::uint8_t *bytes,
+double Steering2B0::steering_angle(const std::uint8_t *bytes,
                                   int32_t length) const {
-  //в этом сообщении угла нет
-  return 0;
+  
+    double curr_angle = bytes[0] | bytes[1] << 8;
+    return -0.1 * 37 / 520;
 }
-
-
-bool Steering83::is_enabled(const std::uint8_t *bytes, int32_t length) const {
-  return bytes[2]>0;
-}
-
-bool Steering83::is_driver_override(const std::uint8_t *bytes,
-                                    int32_t length) const {
-  return bytes[3]>0;
-}
-
 
 }  // namespace kia_soul_ev
 }  // namespace canbus

@@ -58,13 +58,15 @@ Brake72 *Brake72::set_disable() {
 
 void Brake72::set_pedal_p(uint8_t *data, double pedal) {
 
-    oscc_brake_command_s brake_cmd;
-    brake_cmd.magic[0] = (uint8_t) OSCC_MAGIC_BYTE_0;
-    brake_cmd.magic[1] = (uint8_t) OSCC_MAGIC_BYTE_1;
+    float pedal_command = (float) pedal;
 
-    brake_cmd.pedal_command = (float) pedal;
+    data[0] = (uint8_t) OSCC_MAGIC_BYTE_0;
+    data[1] = (uint8_t) OSCC_MAGIC_BYTE_1;
 
-    memcpy(data, (void *) &brake_cmd, sizeof(brake_cmd));
+    memcpy(data+2, &pedal_command , sizeof(pedal_command));
+
+    data[6] = (uint8_t) 0;
+    data[7] = (uint8_t) 0;
 
 }
 

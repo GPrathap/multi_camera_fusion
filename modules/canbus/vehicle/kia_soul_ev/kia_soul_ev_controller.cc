@@ -21,6 +21,8 @@
 #include "modules/canbus/vehicle/kia_soul_ev/kia_soul_ev_message_manager.h"
 #include "modules/canbus/vehicle/kia_soul_ev/protocol/brake_72.h"
 #include "modules/canbus/vehicle/kia_soul_ev/protocol/steering_84.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/steering_enable.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/steering_disable.h"
 #include "modules/canbus/vehicle/kia_soul_ev/protocol/throttle_92.h"
 #include "modules/canbus/vehicle/vehicle_controller.h"
 #include "modules/common/kv_db/kv_db.h"
@@ -93,10 +95,57 @@ ErrorCode KiaSoulEvController::Init(
     return ErrorCode::CANBUS_ERROR;
   }
 
+  steering_enable_ = dynamic_cast<SteeringEnable *>(
+      message_manager_->GetMutableProtocolDataById(SteeringEnable::ID));
+  if (steering_enable_ == nullptr) {
+    AERROR << "SteeringEnable does not exist in the KiaSoulEvMessageManager!";
+    return ErrorCode::CANBUS_ERROR;
+  }
+
+  steering_disable_ = dynamic_cast<SteeringDisable *>(
+      message_manager_->GetMutableProtocolDataById(SteeringDisable::ID));
+  if (steering_disable_ == nullptr) {
+    AERROR << "SteeringDisable does not exist in the KiaSoulEvMessageManager!";
+    return ErrorCode::CANBUS_ERROR;
+  }
+
+  throttle_enable_ = dynamic_cast<ThrottleEnable *>(
+      message_manager_->GetMutableProtocolDataById(ThrottleEnable::ID));
+  if (throttle_enable_ == nullptr) {
+    AERROR << "ThrottleEnable does not exist in the KiaSoulEvMessageManager!";
+    return ErrorCode::CANBUS_ERROR;
+  }
+
+  throttle_disable_ = dynamic_cast<ThrottleDisable *>(
+      message_manager_->GetMutableProtocolDataById(ThrottleDisable::ID));
+  if (throttle_disable_ == nullptr) {
+    AERROR << "ThrottleDisable does not exist in the KiaSoulEvMessageManager!";
+    return ErrorCode::CANBUS_ERROR;
+  }
+
+  brake_enable_ = dynamic_cast<BrakeEnable *>(
+      message_manager_->GetMutableProtocolDataById(BrakeEnable::ID));
+  if (brake_enable_ == nullptr) {
+    AERROR << "BrakeEnable does not exist in the KiaSoulEvMessageManager!";
+    return ErrorCode::CANBUS_ERROR;
+  }
+
+  brake_disable_ = dynamic_cast<BrakeDisable *>(
+      message_manager_->GetMutableProtocolDataById(BrakeDisable::ID));
+  if (brake_disable_ == nullptr) {
+    AERROR << "BrakeDisable does not exist in the KiaSoulEvMessageManager!";
+    return ErrorCode::CANBUS_ERROR;
+  }  
 
   can_sender_->AddMessage(Brake72::ID, brake_72_, false);
   can_sender_->AddMessage(Throttle92::ID, throttle_92_, false);
   can_sender_->AddMessage(Steering84::ID, steering_84_, false);
+  can_sender_->AddMessage(SteeringEnable::ID, steering_enable_, false);
+  can_sender_->AddMessage(SteeringDisable::ID, steering_disable_, false);
+  can_sender_->AddMessage(ThrottleEnable::ID, throttle_enable_, false);
+  can_sender_->AddMessage(ThrottleDisable::ID, throttle_disable_, false);
+  can_sender_->AddMessage(BrakeEnable::ID, brake_enable_, false);
+  can_sender_->AddMessage(BrakeDisable::ID, brake_disable_, false);
 
   // need sleep to ensure all messages received
   AINFO << "Controller is initialized.";
@@ -367,9 +416,12 @@ ErrorCode KiaSoulEvController::EnableAutoMode() {
     AINFO << "already in COMPLETE_AUTO_DRIVE mode";
     return ErrorCode::OK;
   }
-  brake_72_->set_enable();
-  throttle_92_->set_enable();
-  steering_84_->set_enable();
+  
+  AINFO << "Trying to send steering enable";
+
+  steering_enable_->send_once();
+  throttle_enable_->send_once();
+  brake_enable_->send_once();
 
   can_sender_->Update();
   const int32_t flag =
@@ -386,6 +438,12 @@ ErrorCode KiaSoulEvController::EnableAutoMode() {
 }
 
 ErrorCode KiaSoulEvController::DisableAutoMode() {
+
+  AINFO << "Trying to send steering disable";
+  steering_disable_->send_once();
+  throttle_disable_->send_once();
+  brake_disable_->send_once();
+
   ResetProtocol();
   can_sender_->Update();
   set_driving_mode(Chassis::COMPLETE_MANUAL);
@@ -401,9 +459,8 @@ ErrorCode KiaSoulEvController::EnableSteeringOnlyMode() {
     AINFO << "Already in AUTO_STEER_ONLY mode";
     return ErrorCode::OK;
   }
-  brake_72_->set_disable();
-  throttle_92_->set_disable();
-  steering_84_->set_enable();
+
+  steering_enable_->send_once();
 
   can_sender_->Update();
   if (CheckResponse(CHECK_RESPONSE_STEER_UNIT_FLAG, true) == false) {
@@ -424,9 +481,9 @@ ErrorCode KiaSoulEvController::EnableSpeedOnlyMode() {
     AINFO << "Already in AUTO_SPEED_ONLY mode";
     return ErrorCode::OK;
   }
-  brake_72_->set_enable();
-  throttle_92_->set_enable();
-  steering_84_->set_disable();
+
+  throttle_enable_->send_once();
+  brake_enable_->send_once();
 
   can_sender_->Update();
   if (CheckResponse(CHECK_RESPONSE_SPEED_UNIT_FLAG, true) == false) {

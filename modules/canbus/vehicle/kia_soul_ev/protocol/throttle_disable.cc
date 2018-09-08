@@ -14,7 +14,7 @@
  * limitations under the License.
  *****************************************************************************/
 
-#include "modules/canbus/vehicle/kia_soul_ev/protocol/throttle_92.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/throttle_disable.h"
 
 #include "modules/drivers/canbus/common/byte.h"
 
@@ -24,53 +24,34 @@ namespace kia_soul_ev {
 
 using ::apollo::drivers::canbus::Byte;
 
-// public
+const int32_t ThrottleDisable::ID = 0x91;
 
-const int32_t Throttle92::ID = 0x92;
-
-uint32_t Throttle92::GetPeriod() const {
+uint32_t ThrottleDisable::GetPeriod() const {
+  // receive rate??
+  // receive timeout would trigger fault, letting en=0 and etc.
   static const uint32_t PERIOD = 20 * 1000;
   return PERIOD;
 }
 
-void Throttle92::UpdateData(uint8_t *data) {
-  set_pedal_p(data, pedal_cmd_);
+bool ThrottleDisable::NeedSend() {
+  bool tmp = send_once_;
+  send_once_ = false;
+  return tmp;
 }
 
-void Throttle92::Reset() {
-  pedal_cmd_ = 0.0;
-  pedal_enable_ = false;
+void ThrottleDisable::UpdateData(uint8_t *data) {
+
+    oscc_throttle_disable_s disable_cmd;
+    disable_cmd.magic[0] = (uint8_t) OSCC_MAGIC_BYTE_0;
+    disable_cmd.magic[1] = (uint8_t) OSCC_MAGIC_BYTE_1;
+
+    memcpy(data, (void *) &disable_cmd, sizeof(disable_cmd));
+
 }
 
-Throttle92 *Throttle92::set_pedal(double pedal) {
-  pedal_cmd_ = pedal;
-  return this;
-}
-
-Throttle92 *Throttle92::set_enable() {
-  pedal_enable_ = true;
-  return this;
-}
-
-Throttle92 *Throttle92::set_disable() {
-  pedal_enable_ = false;
-  return this;
-}
-
-// private
-
-void Throttle92::set_pedal_p(uint8_t *data, double pedal) {
-
-    float torque_request = (float) pedal;
-
-    data[0] = (uint8_t) OSCC_MAGIC_BYTE_0;
-    data[1] = (uint8_t) OSCC_MAGIC_BYTE_1;
-
-    memcpy(data+2, &torque_request , sizeof(torque_request ));
-
-    data[6] = (uint8_t) 0;
-    data[7] = (uint8_t) 0;
-
+void ThrottleDisable::send_once(){
+  AINFO << "Set send_once in true (enable)";
+  send_once_ = true;
 }
 
 

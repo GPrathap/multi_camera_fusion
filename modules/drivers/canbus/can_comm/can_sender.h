@@ -111,12 +111,15 @@ class SenderMessage {
    */
   int32_t curr_period() const;
 
+  bool need_send() const;
+
  private:
   uint32_t message_id_ = 0;
   ProtocolData<SensorType> *protocol_data_ = nullptr;
 
   int32_t period_ = 0;
   int32_t curr_period_ = 0;
+  
 
  private:
   static std::mutex mutex_;
@@ -270,6 +273,12 @@ int32_t SenderMessage<SensorType>::curr_period() const {
 }
 
 template <typename SensorType>
+bool SenderMessage<SensorType>::need_send() const {
+  return protocol_data_->NeedSend();
+}
+
+
+template <typename SensorType>
 void CanSender<SensorType>::PowerSendThreadFunc() {
   CHECK_NOTNULL(can_client_);
 
@@ -289,6 +298,7 @@ void CanSender<SensorType>::PowerSendThreadFunc() {
     new_delta_period = INIT_PERIOD;
 
     for (auto &message : send_messages_) {
+      
       bool need_send = NeedSend(message, delta_period);
       message.UpdateCurrPeriod(delta_period);
       new_delta_period = std::min(new_delta_period, message.curr_period());
@@ -296,6 +306,13 @@ void CanSender<SensorType>::PowerSendThreadFunc() {
       if (!need_send) {
         continue;
       }
+
+      bool need_send_once = message.need_send();
+      //AINFO << "Send msg: " << message.CanFrame().CanFrameString() << "need_send_: "<<need_send_once;
+      if (!need_send_once) {
+        continue;
+      }
+
       std::vector<CanFrame> can_frames;
       CanFrame can_frame = message.CanFrame();
       can_frames.push_back(can_frame);

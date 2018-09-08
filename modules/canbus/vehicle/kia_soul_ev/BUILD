@@ -55,19 +55,6 @@ cc_library(
 )
 
 cc_test(
-    name = "kia_soul_ev_controller_test",
-    size = "small",
-    srcs = [
-        "kia_soul_ev_controller_test.cc",
-    ],
-    data = ["//modules/canbus:canbus_testdata"],
-    deps = [
-        "//modules/canbus/vehicle/kia_soul_ev:kia_soul_ev_controller",
-        "@gtest//:main",
-    ],
-)
-
-cc_test(
     name = "kia_soul_ev_vehicle_factory_test",
     size = "small",
     srcs = ["kia_soul_ev_vehicle_factory_test.cc"],

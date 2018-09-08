@@ -16,11 +16,11 @@
 
 /**
  * @file steering_64.h
- * @brief the class of Steering84 (for kia_soul_ev vehicle)
+ * @brief the class of ThrottleDisable (for kia_soul_ev vehicle)
  */
 
-#ifndef MODULES_CANBUS_VEHICL_KIASOULEV_PROTOCOL_STEERING_84_H_
-#define MODULES_CANBUS_VEHICL_KIASOULEV_PROTOCOL_STEERING_84_H_
+#ifndef MODULES_CANBUS_VEHICL_KIASOULEV_PROTOCOL_THROTTLE_DISABLE_H_
+#define MODULES_CANBUS_VEHICL_KIASOULEV_PROTOCOL_THROTTLE_DISABLE_H_
 
 #include "modules/drivers/canbus/can_comm/protocol_data.h"
 #include "modules/canbus/proto/chassis_detail.pb.h"
@@ -34,12 +34,20 @@ namespace apollo {
 namespace canbus {
 namespace kia_soul_ev {
 
+typedef struct {
+    uint8_t magic[2]; /*!< Magic number identifying CAN frame as from OSCC.
+                       *   Byte 0 should be \ref OSCC_MAGIC_BYTE_0.
+                       *   Byte 1 should be \ref OSCC_MAGIC_BYTE_1. */
+
+    uint8_t reserved[6]; /*!< Reserved. */
+} oscc_throttle_disable_s;
+
 /**
- * @class Steering84
+ * @class ThrottleDisable
  *
  * @brief one of the protocol data of kia_soul_ev vehicle
  */
-class Steering84 : public ::apollo::drivers::canbus::ProtocolData<
+class ThrottleDisable : public ::apollo::drivers::canbus::ProtocolData<
                     ::apollo::canbus::ChassisDetail> {
  public:
   static const int32_t ID;
@@ -50,6 +58,8 @@ class Steering84 : public ::apollo::drivers::canbus::ProtocolData<
    */
   virtual uint32_t GetPeriod() const;
 
+  virtual bool NeedSend();
+
   /**
    * @brief update the data
    * @param data a pointer to the data to be updated
@@ -57,26 +67,13 @@ class Steering84 : public ::apollo::drivers::canbus::ProtocolData<
   virtual void UpdateData(uint8_t *data);
 
   /**
-   * @brief reset the private variables
-   */
-  virtual void Reset();
-
-  /**
-   * @brief set steering angle
+   * @brief set steering request enable to true
    * @return a this pointer to the instance itself
    */
-  Steering84 *set_steering_angle(double angle);
+  void send_once();
 
  private:
-  /**
-   * config detail: {'name': 'scmd', 'offset': 0.0, 'precision': 0.1, 'len': 16,
-   * 'f_type': 'value', 'is_signed_var': True, 'physical_range': '[-470|470]',
-   * 'bit': 0, 'type': 'double', 'order': 'intel', 'physical_unit': '"degrees"'}
-   */
-  void set_steering_angle_p(uint8_t *data, double angle);
-
- private:
-  double steering_angle_ = 0.0;
+  bool send_once_ = false;
 };
 
 }  // namespace kia_soul_ev

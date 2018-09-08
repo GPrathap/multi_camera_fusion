@@ -34,26 +34,16 @@ uint32_t Steering84::GetPeriod() const {
 }
 
 void Steering84::UpdateData(uint8_t *data) {
+  AINFO_EVERY(100) << "UpdateData Steering84 steering angle: " << steering_angle_;
   set_steering_angle_p(data, steering_angle_);
 }
 
 void Steering84::Reset() {
   steering_angle_ = 0.0;
-  steering_enable_ = false;
 }
 
 Steering84 *Steering84::set_steering_angle(double angle) {
   steering_angle_ = angle;
-  return this;
-}
-
-Steering84 *Steering84::set_enable() {
-  steering_enable_ = true;
-  return this;
-}
-
-Steering84 *Steering84::set_disable() {
-  steering_enable_ = false;
   return this;
 }
 
@@ -62,19 +52,15 @@ Steering84 *Steering84::set_disable() {
 // positive for left, negative for right
 void Steering84::set_steering_angle_p(uint8_t *data, double angle) {
 
-    oscc_steering_angle_command_s steering_cmd;
-    steering_cmd.magic[0] = (uint8_t) OSCC_MAGIC_BYTE_0;
-    steering_cmd.magic[1] = (uint8_t) OSCC_MAGIC_BYTE_1;
+    float steering_angle = (float) angle;
 
-    steering_cmd.angle = (float) angle;
+    data[0] = (uint8_t) OSCC_MAGIC_BYTE_0;
+    data[1] = (uint8_t) OSCC_MAGIC_BYTE_1;
 
-    memcpy(data, (void *) &steering_cmd, sizeof(steering_cmd));
+    memcpy(data+2, &steering_angle, sizeof(steering_angle));
 
-}
-
-void Steering84::set_enable_p(uint8_t *bytes, bool enable) {
-
-
+    data[6] = (uint8_t) 0;
+    data[7] = (uint8_t) 0;
 
 }
 

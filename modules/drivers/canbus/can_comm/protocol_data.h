@@ -69,6 +69,12 @@ class ProtocolData {
   virtual uint32_t GetPeriod() const;
 
   /*
+   * @brief get a flag need or not to send a message
+   * @return the bool value
+   */
+  virtual bool NeedSend();
+
+  /*
    * @brief get the length of protocol data. The length is usually 8.
    * @return the length of protocol data.
    */
@@ -129,6 +135,12 @@ template <typename SensorType>
 uint32_t ProtocolData<SensorType>::GetPeriod() const {
   const uint32_t CONST_PERIOD = 100 * 1000;
   return CONST_PERIOD;
+}
+
+//по умолчанию все классы отправляют сообщения с определенной периодичностью
+template <typename SensorType>
+bool ProtocolData<SensorType>::NeedSend(){
+  return true;
 }
 
 template <typename SensorType>

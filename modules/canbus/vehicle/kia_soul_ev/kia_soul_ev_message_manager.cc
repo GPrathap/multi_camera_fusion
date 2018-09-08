@@ -18,8 +18,15 @@
 
 #include "modules/canbus/vehicle/kia_soul_ev/protocol/brake_72.h"
 #include "modules/canbus/vehicle/kia_soul_ev/protocol/brake_73.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/brake_enable.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/brake_disable.h"
 #include "modules/canbus/vehicle/kia_soul_ev/protocol/steering_83.h"
 #include "modules/canbus/vehicle/kia_soul_ev/protocol/steering_84.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/steering_2B0.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/steering_enable.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/steering_disable.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/throttle_enable.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/throttle_disable.h"
 #include "modules/canbus/vehicle/kia_soul_ev/protocol/throttle_92.h"
 #include "modules/canbus/vehicle/kia_soul_ev/protocol/throttle_93.h"
 
@@ -32,10 +39,17 @@ KiaSoulEvMessageManager::KiaSoulEvMessageManager() {
   AddSendProtocolData<Brake72, true>();
   AddSendProtocolData<Throttle92, true>();
   AddSendProtocolData<Steering84, true>();
+  AddSendProtocolData<SteeringEnable, true>();
+  AddSendProtocolData<SteeringDisable, true>();
+  AddSendProtocolData<ThrottleEnable, true>();
+  AddSendProtocolData<ThrottleDisable, true>();
+  AddSendProtocolData<BrakeEnable, true>();
+  AddSendProtocolData<BrakeDisable, true>();
 
   AddRecvProtocolData<Brake73, true>();
   AddRecvProtocolData<Throttle93, true>();
   AddRecvProtocolData<Steering83, true>();
+  AddRecvProtocolData<Steering2B0, true>();
 }
 
 KiaSoulEvMessageManager::~KiaSoulEvMessageManager() {}

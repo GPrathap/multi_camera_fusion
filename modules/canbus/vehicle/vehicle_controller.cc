@@ -37,6 +37,8 @@ void VehicleController::set_driving_mode(
 
 ErrorCode VehicleController::SetDrivingMode(
     const Chassis::DrivingMode &driving_mode) {
+
+  AINFO << "Trying to set mode: " << driving_mode;
   if (driving_mode == Chassis::EMERGENCY_MODE) {
     AINFO << "Can't set vehicle to EMERGENCY_MODE driving mode.";
     return ErrorCode::CANBUS_ERROR;
@@ -99,7 +101,7 @@ ErrorCode VehicleController::Update(const ControlCommand &command) {
 
   ControlCommand control_command;
   control_command.CopyFrom(command);
-
+  
   // execute action to tranform driving mode
   if (control_command.has_pad_msg() && control_command.pad_msg().has_action()) {
     AINFO << "Canbus received pad msg:"

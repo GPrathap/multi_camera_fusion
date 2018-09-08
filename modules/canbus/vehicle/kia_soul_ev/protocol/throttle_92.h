@@ -34,23 +34,6 @@ namespace apollo {
 namespace canbus {
 namespace kia_soul_ev {
 
-/**
- * @brief Throttle command message.
- *
- * CAN frame ID: \ref OSCC_THROTTLE_COMMAND_CAN_ID
- *
- */
-
-typedef struct {
-    uint8_t magic[2]; /*!< Magic number identifying CAN frame as from OSCC.
-                       *   Byte 0 should be \ref OSCC_MAGIC_BYTE_0.
-                       *   Byte 1 should be \ref OSCC_MAGIC_BYTE_1. */
-
-    float torque_request; /* Torque request from 0.0 to 1.0 where 1.0 is 100% */
-
-    uint8_t reserved[2]; /*!< Reserved. */
-} oscc_throttle_command_s;
-
 
 /**
  * @class Throttle92

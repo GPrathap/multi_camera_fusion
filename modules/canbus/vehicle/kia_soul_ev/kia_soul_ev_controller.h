@@ -36,6 +36,12 @@
 #include "modules/canbus/vehicle/kia_soul_ev/protocol/brake_72.h"
 #include "modules/canbus/vehicle/kia_soul_ev/protocol/steering_84.h"
 #include "modules/canbus/vehicle/kia_soul_ev/protocol/throttle_92.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/steering_enable.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/steering_disable.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/throttle_enable.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/throttle_disable.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/brake_enable.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/brake_disable.h"
 #include "modules/common/macro.h"
 #include "modules/common/proto/error_code.pb.h"
 #include "modules/control/proto/control_cmd.pb.h"
@@ -138,6 +144,13 @@ class KiaSoulEvController final : public VehicleController {
   Brake72 *brake_72_ = nullptr;
   Throttle92 *throttle_92_ = nullptr;
   Steering84 *steering_84_ = nullptr;
+  SteeringEnable *steering_enable_ = nullptr;
+  SteeringDisable *steering_disable_ = nullptr;
+  ThrottleEnable *throttle_enable_ = nullptr;
+  ThrottleDisable *throttle_disable_ = nullptr;
+  BrakeEnable *brake_enable_ = nullptr;
+  BrakeDisable *brake_disable_ = nullptr;
+
 
   Chassis chassis_;
   std::unique_ptr<std::thread> thread_;
