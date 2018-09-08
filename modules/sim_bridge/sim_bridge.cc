@@ -20,6 +20,7 @@
 #include "modules/common/util/file.h"
 #include "modules/sim_bridge/common/sim_bridge_gflags.h"
 #include "modules/sim_bridge/unity_sim_bridge/unity_sim_bridge.h"
+#include "modules/sim_bridge/ros_localization_bridge/ros_localization_bridge.h"
 
 namespace apollo {
 namespace sim_bridge {
@@ -35,6 +36,9 @@ void SimBridge::RegisterSimBridgeMethods() {
   sim_bridge_factory_.Register(
       SimBridgeConfig::Unity,
       []() -> SimBridgeBase* { return new UnitySimBridge(); });
+  sim_bridge_factory_.Register(
+      SimBridgeConfig::ROSLocalization,
+      []() -> SimBridgeBase* { return new RosLocalizationBridge(); });    
 }
 
 Status SimBridge::Init() {

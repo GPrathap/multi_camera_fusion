@@ -5,6 +5,7 @@ package apollo.sim_bridge;
 message SimBridgeConfig {
   enum SimBridgeType {
     Unity = 0;
+    ROSLocalization = 1;
   };
   optional SimBridgeType sim_bridge_type = 1 [default = Unity];
 }

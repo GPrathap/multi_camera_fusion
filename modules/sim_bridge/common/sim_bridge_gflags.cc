@@ -24,5 +24,5 @@ DEFINE_string(sim_bridge_adapter_config_file,
               "unity_sim_bridge adapter configuration");
 
 DEFINE_string(sim_bridge_config_file,
-              "modules/sim_bridge/conf/sim_bridge_config.pb.txt",
+              "modules/sim_bridge/conf/unity_sim_bridge_config.pb.txt",
               "sim_bridge config file");

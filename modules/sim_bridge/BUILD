@@ -35,6 +35,7 @@ cc_library(
         "//modules/localization/proto:imu_proto",
         "//modules/sim_bridge/proto:sim_bridge_config_proto",
         "//modules/sim_bridge/unity_sim_bridge:unity_sim_bridge",
+        "//modules/sim_bridge/ros_localization_bridge:ros_localization_bridge",
         "//modules/sim_bridge:sim_bridge_base",
     ],
 )
