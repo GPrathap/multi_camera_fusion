@@ -22,9 +22,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "${DIR}/apollo_base.sh"
 
 function start() {
-  decide_task_dir $@
+  local TASK_DIR=/apollo/data/bag
   cd "${TASK_DIR}"
-
+  echo "${TASK_DIR}"
   # Start recording.
   record_bag_env_log
   LOG="/tmp/apollo_record.out"
@@ -61,6 +61,8 @@ function start() {
         /apollo/navigation \
         /apollo/relative_map \
         /apollo/drive_event \
+        /gnss_odometry \
+        /imu/data \
         /tf \
         /tf_static \
         /apollo/monitor \
