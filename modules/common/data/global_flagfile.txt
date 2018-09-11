@@ -5,7 +5,8 @@
 # 3. To override the flag values, you must set it after this file, as all Flags
 #    are evaluated strictly in order.
 
---vehicle_config_path=/apollo/modules/common/data/unity_config.pb.txt
+--vehicle_config_path=/apollo/modules/common/data/kia_config.pb.txt
+--enable_map_reference_unify=true
 
 --map_dir=/apollo/modules/map/data/sunnyvale_big_loop
 
@@ -23,3 +24,45 @@
 --map_dir=/apollo/modules/map/data/unity_turn_right
 
 
+
+--map_dir=/apollo/modules/map/data/testMap
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line
+
+--map_dir=/apollo/modules/map/data/unity_turn_right
+
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line
+
+--map_dir=/apollo/modules/map/data/demo
+
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line
+
+--map_dir=/apollo/modules/map/data/unity_turn_right
+
+--map_dir=/apollo/modules/map/data/straight_line
+--map_dir=/apollo/modules/map/data/straight_line2
+
+--map_dir=/apollo/modules/map/data/straight_line
+
+--map_dir=/apollo/modules/map/data/unity_turn_right
+
+--map_dir=/apollo/modules/map/data/straight_line
+
+--map_dir=/apollo/modules/map/data/straight_line2
+
+--map_dir=/apollo/modules/map/data/straight_line
