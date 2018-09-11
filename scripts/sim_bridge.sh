@@ -23,4 +23,5 @@ source "${DIR}/apollo_base.sh"
 
 # run function from apollo_base.sh
 # run command_name module_name
-run sim_bridge "$@"
+run sim_bridge "$@" --sim_bridge_adapter_config_file=/apollo/modules/sim_bridge/conf/unity_sim_bridge_adapter.conf \
+--sim_bridge_config_file=/apollo/modules/sim_bridge/conf/unity_sim_bridge_config.pb.txt

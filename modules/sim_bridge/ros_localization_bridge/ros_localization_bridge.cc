@@ -38,7 +38,8 @@ RosLocalizationBridge::~RosLocalizationBridge() {}
 
 Status RosLocalizationBridge::Start() {
   AdapterManager::Init(FLAGS_sim_bridge_adapter_config_file);
-
+  has_imu = false;
+  AdapterManager::AddImuRosCallback(&RosLocalizationBridge::OnImu, this);
   AdapterManager::AddOdometryRosCallback(&RosLocalizationBridge::OnOdometry, this);
   return Status::OK();
 }
@@ -52,10 +53,14 @@ void RosLocalizationBridge::OnOdometry(const nav_msgs::Odometry &msg)
 {
   localization::LocalizationEstimate loc_msg;
 
-  FillLocalizationMsg(msg, &loc_msg);
-  // publish localization messages
-  AdapterManager::PublishLocalization(loc_msg);
-  //AINFO << "[OnOdometry]: Gps message publish success!";
+  if (has_imu)
+  {
+    FillLocalizationMsg(msg, &loc_msg);
+    // publish localization messages
+    AdapterManager::PublishLocalization(loc_msg);
+    //AINFO << "[OnOdometry]: Gps message publish success!";
+  }
+  
 }
 
 void RosLocalizationBridge::FillLocalizationMsg(const nav_msgs::Odometry &msg, localization::LocalizationEstimate *loc_msg)
@@ -65,7 +70,7 @@ void RosLocalizationBridge::FillLocalizationMsg(const nav_msgs::Odometry &msg, l
                                          loc_msg);
 
   auto mutable_loc = loc_msg->mutable_pose();
-  float corrAngle = 1.5708f; //90 degrees in radians
+  float corrAngle = 0.0; //1.5708f; //90 degrees in radians
 
   double pos_x, pos_y;
 
@@ -87,8 +92,25 @@ void RosLocalizationBridge::FillLocalizationMsg(const nav_msgs::Odometry &msg, l
   mutable_loc->mutable_orientation()->set_qz(msg.pose.pose.orientation.z);
   mutable_loc->mutable_orientation()->set_qw(msg.pose.pose.orientation.w);
 
+  mutable_loc->mutable_linear_acceleration_vrf()->set_x(last_imu.linear_acceleration.x);
+  mutable_loc->mutable_linear_acceleration_vrf()->set_y(last_imu.linear_acceleration.y);
+  mutable_loc->mutable_linear_acceleration_vrf()->set_z(last_imu.linear_acceleration.z);
+
+  mutable_loc->mutable_angular_velocity_vrf()->set_x(last_imu.angular_velocity.x);
+  mutable_loc->mutable_angular_velocity_vrf()->set_y(last_imu.angular_velocity.y);
+  mutable_loc->mutable_angular_velocity_vrf()->set_z(last_imu.angular_velocity.z);
+
+  auto heading = apollo::common::math::QuaternionToHeading(
+      msg.pose.pose.orientation.w, msg.pose.pose.orientation.x, msg.pose.pose.orientation.y,
+      msg.pose.pose.orientation.z);
+
+  mutable_loc->set_heading(heading);
 }
 
+void RosLocalizationBridge::OnImu(const sensor_msgs::Imu &msg) {
+  last_imu = msg;
+  has_imu = true;
+}
 
 }  // namespace sim_bridge
 }  // namespace apollo

@@ -37,6 +37,7 @@
 #include "modules/common/status/status.h"
 #include "modules/sim_bridge/sim_bridge_base.h"
 #include "nav_msgs/Odometry.h"
+#include "sensor_msgs/Imu.h"
 
 /**
  * @namespace apollo::sim_bridge
@@ -72,9 +73,12 @@ class RosLocalizationBridge : public SimBridgeBase {
 
   void OnOdometry(const nav_msgs::Odometry &msg);
   void FillLocalizationMsg(const nav_msgs::Odometry &msg, localization::LocalizationEstimate *loc_msg);
+  void OnImu(const sensor_msgs::Imu &msg);
 
  private:
 
+  sensor_msgs::Imu last_imu;
+  bool has_imu;
 };
 
 }  // namespace sim_bridge
