@@ -558,7 +558,7 @@ void KiaSoulEvController::Brake(double pedal) {
     AINFO << "The current drive mode does not need to set acceleration.";
     return;
   }
-  brake_72_->set_pedal(pedal);
+  brake_72_->set_pedal(pedal / 100.0);
 }
 
 // drive with old acceleration
@@ -569,7 +569,7 @@ void KiaSoulEvController::Throttle(double pedal) {
     AINFO << "The current drive mode does not need to set acceleration.";
     return;
   }
-  throttle_92_->set_pedal(pedal);
+  throttle_92_->set_pedal(pedal / 100.0);
 }
 
 // kia_soul_ev default, -470 ~ 470, left:+, right:-
