@@ -569,7 +569,9 @@ void KiaSoulEvController::Throttle(double pedal) {
     AINFO << "The current drive mode does not need to set acceleration.";
     return;
   }
-  throttle_92_->set_pedal(pedal / 100.0);
+  double throttle = pedal / 100.0;
+  throttle = 0.8 * throttle;
+  throttle_92_->set_pedal(throttle);
 }
 
 // kia_soul_ev default, -470 ~ 470, left:+, right:-

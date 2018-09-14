@@ -43,7 +43,7 @@ void Steering84::Reset() {
 }
 
 Steering84 *Steering84::set_steering_angle(double angle) {
-  steering_angle_ = angle;
+  steering_angle_ = -angle; //Invert steering angle because KIA steerwheel has plus to right
   return this;
 }
 

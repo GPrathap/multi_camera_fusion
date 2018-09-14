@@ -50,7 +50,7 @@ void BrakeDisable::UpdateData(uint8_t *data) {
 }
 
 void BrakeDisable::send_once(){
-  AINFO << "Set send_once in true (enable)";
+  AINFO << "Set send_once in true (disable)";
   send_once_ = true;
 }
 
