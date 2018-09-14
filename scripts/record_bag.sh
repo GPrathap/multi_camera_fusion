@@ -63,6 +63,7 @@ function start() {
         /apollo/drive_event \
         /gnss_odometry \
         /imu/data \
+        /ardulog \
         /tf \
         /tf_static \
         /apollo/monitor \
