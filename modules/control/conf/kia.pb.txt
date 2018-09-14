@@ -25,7 +25,7 @@ lat_controller_conf {
   eps: 0.01
   matrix_q: 0.05
   matrix_q: 0.0
-  matrix_q: 1.0
+  matrix_q: 0.5
   matrix_q: 0.0
   cutoff_freq: 10
   mean_filter_window_size: 10
@@ -33,8 +33,12 @@ lat_controller_conf {
   max_lateral_acceleration: 5.0
   lat_err_gain_scheduler {
     scheduler {
-      speed: 4.0
+      speed: 3.0
       ratio: 1.0
+    }
+    scheduler {
+      speed: 4.0
+      ratio: 0.8
     }
     scheduler {
       speed: 8.0
@@ -55,8 +59,12 @@ lat_controller_conf {
   }
   heading_err_gain_scheduler {
     scheduler {
-      speed: 4.0
+      speed: 3.0
       ratio: 1.0
+    }
+    scheduler {
+      speed: 4.0
+      ratio: 0.8
     }
     scheduler {
       speed: 8.0
@@ -78,8 +86,8 @@ lat_controller_conf {
 }
 lon_controller_conf {
   ts: 0.01
-  brake_deadzone: 15.5
-  throttle_deadzone: 18.0
+  brake_deadzone: 2.0
+  throttle_deadzone: 2.0
   speed_controller_input_limit: 2.0
   station_error_limit: 2.0
   preview_window: 20.0
