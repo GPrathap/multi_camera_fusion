@@ -65,13 +65,13 @@ em_planner_config {
 
         st_boundary_config {
             boundary_buffer: 0.1
-            high_speed_centric_acceleration_limit: 0.8
-            low_speed_centric_acceleration_limit: 1.2
+            high_speed_centric_acceleration_limit: 0.6
+            low_speed_centric_acceleration_limit: 1.0
             high_speed_threshold: 12.58
             low_speed_threshold: 7.5
             minimal_kappa: 0.00001
             point_extension: 1.0
-            lowest_speed: 2.5
+            lowest_speed: 2.0
             num_points_to_avg_kappa: 2
             static_obs_nudge_speed_ratio: 0.6
             dynamic_obs_nudge_speed_ratio: 0.8
@@ -134,13 +134,13 @@ em_planner_config {
         }
         st_boundary_config {
             boundary_buffer: 0.1
-            high_speed_centric_acceleration_limit: 0.8
-            low_speed_centric_acceleration_limit: 1.2
+            high_speed_centric_acceleration_limit: 0.6
+            low_speed_centric_acceleration_limit: 1.0
             high_speed_threshold: 12.58
             low_speed_threshold: 7.5
             minimal_kappa: 0.00001
             point_extension: 1.0
-            lowest_speed: 2.5
+            lowest_speed: 2.0
             num_points_to_avg_kappa: 2
             static_obs_nudge_speed_ratio: 0.6
             dynamic_obs_nudge_speed_ratio: 0.8
