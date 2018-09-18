@@ -1,0 +1,3 @@
+[submodule "modules/additional_ros_packages/geo2loc"]
+	path = modules/additional_ros_packages/geo2loc
+	url = http://cordelia.university.innopolis.ru/kia/geo2loc.git
