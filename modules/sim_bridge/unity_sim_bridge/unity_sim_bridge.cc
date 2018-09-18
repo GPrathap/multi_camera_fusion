@@ -60,7 +60,7 @@ void UnitySimBridge::OnUnityCarState(const car_unity_simulator::CarState &msg) {
 
   chassis.set_error_code(canbus::Chassis::NO_ERROR);
   chassis.set_driving_mode(canbus::Chassis::COMPLETE_AUTO_DRIVE);
-  chassis.set_gear_location(canbus::Chassis::GEAR_DRIVE);
+  chassis.set_gear_location((canbus::Chassis::GearPosition)msg.gear);
   chassis.set_engine_started(true);
   double vel = sqrt(msg.vel.x*msg.vel.x + msg.vel.y*msg.vel.y);
   if (vel < 0.1)
@@ -69,7 +69,6 @@ void UnitySimBridge::OnUnityCarState(const car_unity_simulator::CarState &msg) {
   chassis.set_steering_percentage (msg.steering/ (vehicle_param.max_steer_angle() / M_PI * 180) * 100);
 
   AdapterManager::PublishChassis(chassis);
-  AINFO << "[OnChassis]: Chassis message publish success!";
 }
 
 void UnitySimBridge::OnImu(const sensor_msgs::Imu &msg) {
@@ -79,7 +78,6 @@ void UnitySimBridge::OnImu(const sensor_msgs::Imu &msg) {
 
   // publish imu messages
   AdapterManager::PublishImu(imu_msg);
-  AINFO << "[OnImu]: Imu message publish success!";
 }
 
 
@@ -113,7 +111,6 @@ void UnitySimBridge::OnOdometry(const nav_msgs::Odometry &msg)
   FillGpsMsg(msg, &gps_msg);
   // publish gps messages
   AdapterManager::PublishGps(gps_msg);
-  AINFO << "[OnGps]: Gps message publish success!";
 }
 
 void UnitySimBridge::FillGpsMsg(const nav_msgs::Odometry &msg, localization::Gps *gps_msg)
@@ -129,7 +126,6 @@ void UnitySimBridge::FillGpsMsg(const nav_msgs::Odometry &msg, localization::Gps
 
   pos_x = msg.pose.pose.position.x;
   pos_y = msg.pose.pose.position.y;
-  AINFO << "[OLD COORDS]: x: " << pos_x << ", y: " << pos_y;
   double new_pos_x, new_pos_y;
   new_pos_x = pos_x * cos(corrAngle) - pos_y * sin(corrAngle);
   new_pos_y = pos_x * sin(corrAngle) + pos_y * cos(corrAngle);
@@ -153,19 +149,15 @@ void UnitySimBridge::FillUnityCarControlMsg(const control::ControlCommand &contr
 {
   const auto &vehicle_param = VehicleConfigHelper::GetConfig().vehicle_param();
   
-  //In Unity we use accel command from [-1 +1]
-  double accel = 0;
-  if (control_cmd.brake() > 0)
-    accel = - control_cmd.brake() / 100.0;
-  else if (control_cmd.throttle() > 0)
-    accel = control_cmd.throttle() / 100.0;
-  control_msg->throttle = accel;
+  control_msg->throttle = control_cmd.throttle() / 100.0;
+  control_msg->brake = control_cmd.brake() / 100.0;
+  control_msg->gear = control_cmd.gear_location();
 
   double steering_angle =
       control_cmd.steering_target() / 100.0 * vehicle_param.max_steer_angle() / M_PI * 180;
 
   control_msg->steering = steering_angle;
-  AINFO << "[CONTROL] Throttle: " << control_msg->throttle << " Steering: "<< control_msg->steering;
+  AINFO << "[CONTROL] Throttle: " << control_msg->throttle << " Brake: " << control_msg->brake << " Steering: "<< control_msg->steering << " Gear: " << control_msg->gear;
 
 }
 
