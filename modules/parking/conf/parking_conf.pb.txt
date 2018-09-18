@@ -1,0 +1,11 @@
+control_period: 0.01
+chassis_period: 0.01
+localization_period: 0.01
+start_parking_x: 92.7991
+start_parking_y: -25.4333
+stop_parking_x: 103.44
+stop_parking_y: -23.44
+parking_heading: -108
+parking_steering_angle: -90
+parking_speed: 3
+reverse_speed: 1.5

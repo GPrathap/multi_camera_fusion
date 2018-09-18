@@ -1,0 +1,20 @@
+syntax = "proto2";
+
+package apollo.parking;
+
+message ParkingConf {
+
+  optional double control_period = 1;
+  optional double start_parking_x = 2;
+  optional double start_parking_y = 3;
+
+  optional double parking_speed = 4;
+  optional double reverse_speed = 5;
+  optional double parking_heading = 6;
+  optional double parking_steering_angle = 7;
+
+  optional double stop_parking_x = 8;
+  optional double stop_parking_y = 9;
+  optional double localization_period = 10;
+  optional double chassis_period = 11;
+}

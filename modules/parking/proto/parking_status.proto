@@ -1,0 +1,21 @@
+syntax = "proto2";
+package apollo.parking;
+
+import "modules/common/proto/header.proto";
+
+enum ParkingStatus {
+  WAITING_START = 0;
+  SEEKING_PLACE = 1;
+  WAITING_R_GEAR = 2;
+  REVERSE_TURN = 3;
+  REVERSE_STRAIGHT = 4;
+  STOP = 5;
+}
+
+
+message ParkingState {
+  optional apollo.common.Header header = 1;
+
+  optional ParkingStatus status = 2;
+}
+
