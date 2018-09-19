@@ -1,3 +1,6 @@
 [submodule "modules/additional_ros_packages/geo2loc"]
 	path = modules/additional_ros_packages/geo2loc
 	url = http://cordelia.university.innopolis.ru/kia/geo2loc.git
+[submodule "modules/additional_ros_packages/nmea_navsat_driver"]
+	path = modules/additional_ros_packages/nmea_navsat_driver
+	url = http://cordelia.university.innopolis.ru/kia/nmea_navsat_driver.git
