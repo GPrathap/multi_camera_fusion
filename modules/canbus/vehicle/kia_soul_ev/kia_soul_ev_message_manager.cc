@@ -30,6 +30,7 @@
 #include "modules/canbus/vehicle/kia_soul_ev/protocol/throttle_92.h"
 #include "modules/canbus/vehicle/kia_soul_ev/protocol/throttle_93.h"
 #include "modules/canbus/vehicle/kia_soul_ev/protocol/wheels_4B0.h"
+#include "modules/canbus/vehicle/kia_soul_ev/protocol/gear_200.h"
 
 namespace apollo {
 namespace canbus {
@@ -52,6 +53,7 @@ KiaSoulEvMessageManager::KiaSoulEvMessageManager() {
   AddRecvProtocolData<Steering83, true>();
   AddRecvProtocolData<Steering2B0, true>();
   AddRecvProtocolData<Wheels4B0, true>();
+  AddRecvProtocolData<Gear200, true>();
 }
 
 KiaSoulEvMessageManager::~KiaSoulEvMessageManager() {}

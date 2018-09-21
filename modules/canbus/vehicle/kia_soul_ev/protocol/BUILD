@@ -19,6 +19,7 @@ cc_library(
         "throttle_enable.cc",
         "throttle_disable.cc",
         "wheels_4B0.cc",
+        "gear_200.cc",
     ],
     hdrs = [
         "brake_72.h",
@@ -36,6 +37,7 @@ cc_library(
         "throttle_enable.h",
         "throttle_disable.h",
         "wheels_4B0.h",
+        "gear_200.h",
     ],
     deps = [
         "//modules/canbus/proto:canbus_proto",
