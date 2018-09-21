@@ -120,6 +120,7 @@ void CameraProcessSubnode::ImgCallback(const sensor_msgs::Image &message) {
   } else {
     img = cv::imread(FLAGS_image_file_path, CV_LOAD_IMAGE_COLOR);
   }
+  ADEBUG << "Received message height: " << message.height << " width: " << message.width;
   cv::resize(img, img, cv::Size(1920, 1080), 0, 0);
   std::vector<std::shared_ptr<VisualObject>> objects;
   cv::Mat mask;
@@ -196,7 +197,8 @@ void CameraProcessSubnode::ImgCompressCallback(const sensor_msgs::CompressedImag
   } else {
     img = cv::imread(FLAGS_image_file_path, CV_LOAD_IMAGE_COLOR);
   }
-  cv::resize(img, img, cv::Size(1920, 1080), 0, 0);
+  ADEBUG << "Received message height: " << img.rows << " width: " << img.cols;
+  //cv::resize(img, img, cv::Size(1920, 1080), 0, 0);
   std::vector<std::shared_ptr<VisualObject>> objects;
   cv::Mat mask;
 
