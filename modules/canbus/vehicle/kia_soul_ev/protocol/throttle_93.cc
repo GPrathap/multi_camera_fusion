@@ -44,13 +44,6 @@ void Throttle93::Parse(const std::uint8_t *bytes, int32_t length,
   chassis_detail->mutable_gas()->set_connector_fault(false);
   chassis_detail->mutable_check_response()->set_is_vcu_online(true);
 
-  //это сделано чтобы посылать фейковые данные о положении коробки передач
-  //потом это нужно перенести в отдельный тип для Gear
-  chassis_detail->mutable_gear()->set_gear_state(Chassis::GEAR_DRIVE);
-  chassis_detail->mutable_gear()->set_is_shift_position_valid(true);
-  chassis_detail->mutable_gear()->set_driver_override(false);
-  chassis_detail->mutable_gear()->set_gear_cmd(Chassis::GEAR_DRIVE);
-  chassis_detail->mutable_gear()->set_canbus_fault(false);
 }
 
 
