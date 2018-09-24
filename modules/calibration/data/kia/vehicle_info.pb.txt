@@ -1,0 +1,6 @@
+name : "KIA Soul EV"
+brand : KIA
+model : Soul EV
+license {
+    vin : "<VIN>"
+}
