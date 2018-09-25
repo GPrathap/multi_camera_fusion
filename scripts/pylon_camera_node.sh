@@ -9,8 +9,10 @@ source "${DIR}/apollo_base.sh"
 function start() {
     LOG="${APOLLO_ROOT_DIR}/data/log/pylon_camera.out"
     CMD="roslaunch pylon_camera pylon_camera_node.launch"
-    NUM_PROCESSES="$(pgrep -c -f "pylon_camera_node")"
+    NUM_PROCESSES="$(pgrep -c -f "pylon_camera_node.launch")"
+    echo $NUM_PROCESSES
     if [ "${NUM_PROCESSES}" -eq 0 ]; then
+        echo "Start pylon camera"
        eval "nohup ${CMD} </dev/null >${LOG} 2>&1 &"
     fi
 }

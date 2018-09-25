@@ -9,10 +9,10 @@ source "${DIR}/apollo_base.sh"
 function start() {
     LOG="${APOLLO_ROOT_DIR}/data/log/geo2loc.out"
     CMD="roslaunch geo2loc geo2loc_rtk.launch"
-    NUM_PROCESSES_G2L="$(pgrep -c -f "geo2loc")"
-    echo "NUM_PROCESSES" ${NUM_PROCESSES_G2L}
-    if [ "${NUM_PROCESSES_G2L}" -eq 1 ]; then
-        echo "Start geo2loc"
+    NUM_PROCESSES_G2L="$(pgrep -c -f "geo2loc.launch")"
+    #echo "NUM_PROCESSES" ${NUM_PROCESSES_G2L}
+    if [ "${NUM_PROCESSES_G2L}" -eq 0 ]; then
+        #echo "Start geo2loc"
         eval "nohup ${CMD} </dev/null >${LOG} 2>&1 &"
     fi
 }
