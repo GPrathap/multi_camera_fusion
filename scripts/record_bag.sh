@@ -68,6 +68,7 @@ function start() {
         /tf_static \
         /apollo/monitor \
         /apollo/monitor/system_status \
+        /pylon_camera_node/image_raw/compressed \
         /apollo/monitor/static_info </dev/null >"${LOG}" 2>&1 &
     fi
 }
