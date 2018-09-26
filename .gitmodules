@@ -10,3 +10,12 @@
 [submodule "modules/additional_ros_packages/robot_localization"]
 	path = modules/additional_ros_packages/robot_localization
 	url = http://cordelia.university.innopolis.ru/kia/robot_localization.git
+[submodule "modules/additional_ros_packages/geographic_info"]
+	path = modules/additional_ros_packages/geographic_info
+	url = https://github.com/ros-geographic-info/geographic_info.git
+[submodule "modules/additional_ros_packages/unique_identifier"]
+	path = modules/additional_ros_packages/unique_identifier
+	url = https://github.com/ros-geographic-info/unique_identifier.git
+[submodule "modules/additional_ros_packages/roslint"]
+	path = modules/additional_ros_packages/roslint
+	url = https://github.com/ros/roslint.git
