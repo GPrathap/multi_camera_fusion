@@ -4,3 +4,9 @@
 [submodule "modules/additional_ros_packages/nmea_navsat_driver"]
 	path = modules/additional_ros_packages/nmea_navsat_driver
 	url = http://cordelia.university.innopolis.ru/kia/nmea_navsat_driver.git
+[submodule "modules/additional_ros_packages/ethzasl_xsens_driver"]
+	path = modules/additional_ros_packages/ethzasl_xsens_driver
+	url = http://cordelia.university.innopolis.ru/kia/ethzasl_xsens_driver
+[submodule "modules/additional_ros_packages/robot_localization"]
+	path = modules/additional_ros_packages/robot_localization
+	url = http://cordelia.university.innopolis.ru/kia/robot_localization.git
