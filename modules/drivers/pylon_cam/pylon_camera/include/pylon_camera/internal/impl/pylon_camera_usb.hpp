@@ -74,6 +74,8 @@ bool PylonUSBCamera::applyCamSpecificStartupSettings(const PylonCameraParameter&
         cam_->TriggerSource.SetValue(Basler_UsbCameraParams::TriggerSource_Software);
         cam_->TriggerMode.SetValue(Basler_UsbCameraParams::TriggerMode_On);
 
+        cam_->ReverseX.SetValue(true);
+        cam_->ReverseY.SetValue(true);
          /* Thresholds for the AutoExposure Functions:
           *  - lower limit can be used to get rid of changing light conditions
           *    due to 50Hz lamps (-> 20ms cycle duration)
