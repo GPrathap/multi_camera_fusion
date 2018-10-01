@@ -49,8 +49,8 @@ void Velodyne16Driver::init(ros::NodeHandle &node) {
   // raw data output topic
   output_ =
       node.advertise<velodyne_msgs::VelodyneScanUnified>(config_.topic, 10);
-  std::thread thread(&Velodyne16Driver::poll_positioning_packet, this);
-  thread.detach();
+  //std::thread thread(&Velodyne16Driver::poll_positioning_packet, this);
+  //thread.detach();
 }
 
 /** poll the device
@@ -84,10 +84,10 @@ bool Velodyne16Driver::poll(void) {
   scan->header.frame_id = config_.frame_id;
   // we use first packet gps time update gps base hour
   // in cloud nodelet, will update base time packet by packet
-  uint32_t current_secs =
+  /*uint32_t current_secs =
       *((uint32_t *)(&scan->packets.front().data[0] + 1200));
   update_gps_top_hour(current_secs);
-  scan->basetime = basetime_;
+  scan->basetime = basetime_;*/
   output_.publish(scan);
 
   return true;
