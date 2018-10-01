@@ -33,26 +33,32 @@ void Gear200::Parse(const std::uint8_t *bytes, int32_t length,
     case 0x00:
       chassis_detail->mutable_gear()->set_gear_state(Chassis::GEAR_PARKING);
       chassis_detail->mutable_gear()->set_gear_cmd(Chassis::GEAR_PARKING);
+      ADEBUG << "Parking gear";
       break;
     case 0x38:
       chassis_detail->mutable_gear()->set_gear_state(Chassis::GEAR_REVERSE);
       chassis_detail->mutable_gear()->set_gear_cmd(Chassis::GEAR_REVERSE);
+      ADEBUG << "Reverse gear";
       break;
     case 0x30:
       chassis_detail->mutable_gear()->set_gear_state(Chassis::GEAR_NEUTRAL);
       chassis_detail->mutable_gear()->set_gear_cmd(Chassis::GEAR_NEUTRAL);
+      ADEBUG << "Neutral gear";
       break;
     case 0x28:
       chassis_detail->mutable_gear()->set_gear_state(Chassis::GEAR_DRIVE);
       chassis_detail->mutable_gear()->set_gear_cmd(Chassis::GEAR_DRIVE);
+      ADEBUG << "Drive gear";
       break;
     case 0x08:
       chassis_detail->mutable_gear()->set_gear_state(Chassis::GEAR_LOW);
       chassis_detail->mutable_gear()->set_gear_cmd(Chassis::GEAR_LOW);
+      ADEBUG << "Low gear";
       break;
     default:
       chassis_detail->mutable_gear()->set_gear_state(Chassis::GEAR_INVALID);
       chassis_detail->mutable_gear()->set_gear_cmd(Chassis::GEAR_INVALID);
+      ADEBUG << "Invalid gear";
       break;
   }
 
