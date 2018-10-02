@@ -12,6 +12,12 @@ device_user_id: ""
 #  1_1CameraInfoManager.html#details
 camera_info_url: "file:///apollo/modules/calibration/data/kia/camera_info/camera.yaml"
 
+width: 1280
+height: 512
+offset_x: 0
+offset_y: 300
+
+
 #  The encoding of the pixels -- channel meaning, ordering, size
 #  taken from the list of strings in include/sensor_msgs/image_encodings.h
 #  The supported encodings are 'mono8', 'bgr8', 'rgb8', 'bayer_bggr8',

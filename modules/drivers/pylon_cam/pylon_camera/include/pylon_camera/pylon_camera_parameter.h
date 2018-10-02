@@ -123,6 +123,11 @@ public:
     size_t binning_x_;
     size_t binning_y_;
 
+    int width_;
+    int height_;
+    int offset_x_;
+    int offset_y_;
+
     /**
      * Flags which indicate if the binning factors are provided and hence
      * should be set during startup

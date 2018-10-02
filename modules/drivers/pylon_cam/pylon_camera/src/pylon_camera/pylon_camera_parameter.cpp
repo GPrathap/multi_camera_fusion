@@ -36,6 +36,10 @@ namespace pylon_camera
 PylonCameraParameter::PylonCameraParameter() :
         camera_frame_("pylon_camera"),
         device_user_id_(""),
+        width_(1280),
+        height_(1024),
+        offset_x_(0),
+        offset_y_(0),
         frame_rate_(5.0),
         camera_info_url_(""),
         image_encoding_(""),
@@ -75,6 +79,22 @@ void PylonCameraParameter::readFromRosParameterServer(const ros::NodeHandle& nh)
     nh.param<std::string>("camera_frame", camera_frame_, "pylon_camera");
 
     nh.param<std::string>("device_user_id", device_user_id_, "");
+
+    if (nh.hasParam("width")) {
+        nh.getParam("width", width_);
+    }
+
+    if (nh.hasParam("height")) {
+        nh.getParam("height", height_);
+    }
+
+    if (nh.hasParam("offset_x")) {
+        nh.getParam("offset_x", offset_x_);
+    }
+
+    if (nh.hasParam("offset_y")) {
+        nh.getParam("offset_y", offset_y_);
+    }
 
     if ( nh.hasParam("frame_rate") )
     {
