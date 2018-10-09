@@ -123,7 +123,7 @@ void YoloCameraDetector::load_intrinsic(
   // inference input shape
   if (options.intrinsic == nullptr) {
     AWARN << "YoloCameraDetector options.intrinsic is nullptr. Use default";
-    image_height_ = 1024; //1080;
+    image_height_ = 512; //1080;
     image_width_ = 1280; //1920;
   } else {
     image_height_ = options.intrinsic->get_height();
@@ -421,7 +421,7 @@ bool YoloCameraDetector::Detect(
   int roi_w = frame.cols;
   //В оригинале получалось изображение 1920х768, которое уменьшалось в 2 раза т.к. размер сетки 960х384
   //У нас исходное изображение 1280х1024 и мы вырезаем так, чтобы было 1280x512 и затем уменьшим в 1.33 раза до размера сетки
-  int roi_h = 512; //frame.rows - offset_y_; 
+  int roi_h = frame.rows - offset_y_; 
   cv::Rect roi(0, offset_y_, roi_w, roi_h);
   ADEBUG << "ROI x: " << 0 << " y: " << offset_y_ << " w: " << roi_w << " h: " << roi_h;
   auto input_blob =
