@@ -60,10 +60,19 @@ void Brake72::set_pedal_p(uint8_t *data, double pedal) {
 
     float pedal_command = (float) pedal;
 
+    ADEBUG << "Brake cmd: " << pedal_command;
+
     data[0] = (uint8_t) OSCC_MAGIC_BYTE_0;
     data[1] = (uint8_t) OSCC_MAGIC_BYTE_1;
 
-    memcpy(data+2, &pedal_command , sizeof(pedal_command));
+    if (pedal_command>=0 && pedal_command<=1){
+      memcpy(data+2, &pedal_command , sizeof(pedal_command));
+    } else{
+      data[2] = (uint8_t) 0;
+      data[3] = (uint8_t) 0;
+      data[4] = (uint8_t) 0;
+      data[5] = (uint8_t) 0;
+    }
 
     data[6] = (uint8_t) 0;
     data[7] = (uint8_t) 0;
