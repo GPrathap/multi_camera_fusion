@@ -14,4 +14,4 @@ header:
   stamp:
     secs: 1512689414
     nsecs: 0
-  frame_id: novatel
+  frame_id: localization
