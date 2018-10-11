@@ -39,6 +39,8 @@ RosLocalizationBridge::~RosLocalizationBridge() {}
 Status RosLocalizationBridge::Start() {
   AdapterManager::Init(FLAGS_sim_bridge_adapter_config_file);
   has_imu = false;
+  tf2_broadcaster_.reset(new tf2_ros::TransformBroadcaster);
+
   AdapterManager::AddImuRosCallback(&RosLocalizationBridge::OnImu, this);
   AdapterManager::AddOdometryRosCallback(&RosLocalizationBridge::OnOdometry, this);
   return Status::OK();
@@ -53,14 +55,42 @@ void RosLocalizationBridge::OnOdometry(const nav_msgs::Odometry &msg)
 {
   localization::LocalizationEstimate loc_msg;
 
+  //AINFO << "OnOdometry";
   if (has_imu)
   {
     FillLocalizationMsg(msg, &loc_msg);
     // publish localization messages
+    loc_msg.set_measurement_time(msg.header.stamp.toSec());
     AdapterManager::PublishLocalization(loc_msg);
-    //AINFO << "[OnOdometry]: Gps message publish success!";
+    PublishPoseBroadcastTF(loc_msg);
+    AINFO << "[OnOdometry]: Gps message publish success!";
   }
   
+}
+
+void RosLocalizationBridge::PublishPoseBroadcastTF(
+    const localization::LocalizationEstimate &localization) {
+  if (!tf2_broadcaster_) {
+    AERROR << "tf broadcaster is not created.";
+    return;
+  }
+
+  // broadcast tf message
+  geometry_msgs::TransformStamped tf2_msg;
+  tf2_msg.header.stamp = ros::Time(localization.measurement_time());
+  tf2_msg.header.frame_id = FLAGS_localization_tf2_frame_id;
+  tf2_msg.child_frame_id = FLAGS_localization_tf2_child_frame_id;
+
+  tf2_msg.transform.translation.x = localization.pose().position().x();
+  tf2_msg.transform.translation.y = localization.pose().position().y();
+  tf2_msg.transform.translation.z = localization.pose().position().z();
+
+  tf2_msg.transform.rotation.x = localization.pose().orientation().qx();
+  tf2_msg.transform.rotation.y = localization.pose().orientation().qy();
+  tf2_msg.transform.rotation.z = localization.pose().orientation().qz();
+  tf2_msg.transform.rotation.w = localization.pose().orientation().qw();
+
+  tf2_broadcaster_->sendTransform(tf2_msg);
 }
 
 void RosLocalizationBridge::FillLocalizationMsg(const nav_msgs::Odometry &msg, localization::LocalizationEstimate *loc_msg)
@@ -87,10 +117,25 @@ void RosLocalizationBridge::FillLocalizationMsg(const nav_msgs::Odometry &msg, l
   mutable_loc->mutable_linear_velocity()->set_y(msg.twist.twist.linear.y);
   mutable_loc->mutable_linear_velocity()->set_z(msg.twist.twist.linear.z);
 
+
+  tf2::Quaternion orientation_quat;
+  tf2::fromMsg(msg.pose.pose.orientation, orientation_quat);
+  double roll, pitch, yaw;
+  tf2::Matrix3x3 orTmp(orientation_quat);
+  orTmp.getRPY(roll, pitch, yaw);
+
+  tf2::Quaternion q_fin;
+  q_fin.setRPY(roll, pitch, yaw+M_PI_2);
+/*
   mutable_loc->mutable_orientation()->set_qx(msg.pose.pose.orientation.x);
   mutable_loc->mutable_orientation()->set_qy(msg.pose.pose.orientation.y);
   mutable_loc->mutable_orientation()->set_qz(msg.pose.pose.orientation.z);
   mutable_loc->mutable_orientation()->set_qw(msg.pose.pose.orientation.w);
+*/
+  mutable_loc->mutable_orientation()->set_qx((double)q_fin.x());
+  mutable_loc->mutable_orientation()->set_qy((double)q_fin.y());
+  mutable_loc->mutable_orientation()->set_qz((double)q_fin.z());
+  mutable_loc->mutable_orientation()->set_qw((double)q_fin.w());
 
   mutable_loc->mutable_linear_acceleration_vrf()->set_x(last_imu.linear_acceleration.x);
   mutable_loc->mutable_linear_acceleration_vrf()->set_y(last_imu.linear_acceleration.y);
@@ -110,6 +155,7 @@ void RosLocalizationBridge::FillLocalizationMsg(const nav_msgs::Odometry &msg, l
 void RosLocalizationBridge::OnImu(const sensor_msgs::Imu &msg) {
   last_imu = msg;
   has_imu = true;
+  //AINFO << "OnImu";
 }
 
 }  // namespace sim_bridge
