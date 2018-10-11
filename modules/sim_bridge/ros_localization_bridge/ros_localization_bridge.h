@@ -38,6 +38,10 @@
 #include "modules/sim_bridge/sim_bridge_base.h"
 #include "nav_msgs/Odometry.h"
 #include "sensor_msgs/Imu.h"
+#include "tf2_ros/transform_broadcaster.h"
+#include <tf2/LinearMath/Transform.h>
+#include <tf2/LinearMath/Quaternion.h>
+#include <tf2/utils.h>
 
 /**
  * @namespace apollo::sim_bridge
@@ -69,11 +73,15 @@ class RosLocalizationBridge : public SimBridgeBase {
    */
   apollo::common::Status Stop() override;
 
+ protected:
+  std::unique_ptr<tf2_ros::TransformBroadcaster> tf2_broadcaster_;
+
  private:
 
   void OnOdometry(const nav_msgs::Odometry &msg);
   void FillLocalizationMsg(const nav_msgs::Odometry &msg, localization::LocalizationEstimate *loc_msg);
   void OnImu(const sensor_msgs::Imu &msg);
+  void PublishPoseBroadcastTF(const localization::LocalizationEstimate &localization);
 
  private:
 

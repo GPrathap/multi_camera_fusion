@@ -57,9 +57,11 @@ bool CNNSegmentation::Init() {
   }
 
 /// Instantiate Caffe net
-#ifndef USE_CAFFE_GPU
+#ifndef USE_GPU
+  AINFO << "using Caffe CPU mode";
   caffe::Caffe::set_mode(caffe::Caffe::CPU);
 #else
+  AINFO << "using Caffe GPU mode";
   int gpu_id =
       cnnseg_param_.has_gpu_id() ? static_cast<int>(cnnseg_param_.gpu_id()) : 0;
   CHECK_GE(gpu_id, 0);
@@ -70,12 +72,6 @@ bool CNNSegmentation::Init() {
 
   caffe_net_.reset(new caffe::Net<float>(config_.proto_file(), caffe::TEST));
   caffe_net_->CopyTrainedLayersFrom(config_.weight_file());
-
-#ifndef USE_CAFFE_GPU
-  AINFO << "using Caffe CPU mode";
-#else
-  AINFO << "using Caffe GPU mode";
-#endif
 
   /// set related Caffe blobs
   // center offset prediction
@@ -149,6 +145,10 @@ bool CNNSegmentation::Segment(pcl_util::PointCloudPtr pc_ptr,
       (cnnseg_param_.has_use_full_cloud() ? cnnseg_param_.use_full_cloud()
                                           : false) &&
       (options.origin_cloud != nullptr);
+  float filter_thresh = static_cast<float>(cnnseg_param_.filter_thresh());
+  float enable_filter_thresh =
+      static_cast<float>(cnnseg_param_.enable_filter_thresh());
+
   PERF_BLOCK_START();
 
   // generate raw features
@@ -160,7 +160,7 @@ bool CNNSegmentation::Segment(pcl_util::PointCloudPtr pc_ptr,
   PERF_BLOCK_END("[CNNSeg] feature generation");
 
 // network forward process
-#ifdef USE_CAFFE_GPU
+#ifdef USE_GPU
   caffe::Caffe::set_mode(caffe::Caffe::GPU);
 #endif
   caffe_net_->Forward();
@@ -179,7 +179,12 @@ bool CNNSegmentation::Segment(pcl_util::PointCloudPtr pc_ptr,
                       use_all_grids_for_clustering);
   PERF_BLOCK_END("[CNNSeg] clustering");
 
-  cluster2d_->Filter(*confidence_pt_blob_, *height_pt_blob_);
+  caffe::Blob<float>* input_data_blob = feature_blob_.get();
+  const float* input_data = input_data_blob->cpu_data();
+  const float* input_count_data = input_data + input_data_blob->offset(0, 2);
+
+  cluster2d_->Filter(*confidence_pt_blob_, *height_pt_blob_, input_count_data,
+                     filter_thresh, enable_filter_thresh);
 
   cluster2d_->Classify(*class_pt_blob_);
 
@@ -191,8 +196,8 @@ bool CNNSegmentation::Segment(pcl_util::PointCloudPtr pc_ptr,
   int min_pts_num = cnnseg_param_.has_min_pts_num()
                         ? static_cast<int>(cnnseg_param_.min_pts_num())
                         : 3;
-  cluster2d_->GetObjects(confidence_thresh, height_thresh, min_pts_num,
-                         objects);
+  cluster2d_->GetObjects(confidence_thresh, height_thresh, min_pts_num, objects,
+                         input_count_data);
   PERF_BLOCK_END("[CNNSeg] post-processing");
 
   return true;

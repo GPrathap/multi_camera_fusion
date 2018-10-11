@@ -28,9 +28,6 @@ const int32_t Steering83::ID = 0x83;
 
 void Steering83::Parse(const std::uint8_t *bytes, int32_t length,
                        ChassisDetail *chassis_detail) const {
-  chassis_detail->mutable_eps()->set_steering_angle(
-      steering_angle(bytes, length));
-  // no steering angle speed
   chassis_detail->mutable_eps()->set_steering_enabled(
       is_enabled(bytes, length));
   chassis_detail->mutable_eps()->set_driver_override(
