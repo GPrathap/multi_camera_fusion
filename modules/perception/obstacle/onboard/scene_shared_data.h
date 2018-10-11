@@ -14,36 +14,39 @@
  * limitations under the License.
  *****************************************************************************/
 
-#ifndef MODULES_PERCEPTION_OBSTACLE_ONBOARD_CAMERA_LEFT_SHARED_DATA_H_
-#define MODULES_PERCEPTION_OBSTACLE_ONBOARD_CAMERA_LEFT_SHARED_DATA_H_
+#ifndef MODULES_PERCEPTION_OBSTACLE_ONBOARD_SCENE_SHARED_DATA_H_
+#define MODULES_PERCEPTION_OBSTACLE_ONBOARD_SCENE_SHARED_DATA_H_
 
-#include <boost/circular_buffer.hpp>
-#include <opencv2/opencv.hpp>
+#include <memory>
 #include <string>
+#include <vector>
+
 #include "modules/perception/obstacle/base/object.h"
-#include "modules/perception/obstacle/base/object_supplement.h"
 #include "modules/perception/onboard/common_shared_data.h"
-#include "modules/perception/obstacle/onboard/common_camera_shared_data.h"
 
 namespace apollo {
-    namespace perception {
+namespace perception {
 
-        class PylonCameraLeftSharedData : public CommonSharedData<CameraItem> {
-        public:
-            PylonCameraLeftSharedData() = default;
-            virtual ~PylonCameraLeftSharedData() = default;
+struct SceneItem {
+  double timestamp = 0.0;
+  pcl_util::PointCloudPtr cloud;
+  Eigen::Matrix4d pose;
+};
 
-            std::string name() const override {
-                return "PylonCameraLeftSharedData";
-            }
+class SceneSharedData : public CommonSharedData<SceneItem> {
+ public:
+  SceneSharedData() = default;
+  virtual ~SceneSharedData() = default;
 
-        private:
-            DISALLOW_COPY_AND_ASSIGN(PylonCameraLeftSharedData);
-        };
+  std::string name() const override { return "SceneSharedData"; }
 
-        REGISTER_SHAREDDATA(PylonCameraLeftSharedData);
+ private:
+  DISALLOW_COPY_AND_ASSIGN(SceneSharedData);
+};
 
-    }  // namespace perception
+REGISTER_SHAREDDATA(SceneSharedData);
+
+}  // namespace perception
 }  // namespace apollo
 
-#endif  // MODULES_PERCEPTION_OBSTACLE_ONBOARD_CAMERA_LEFT_SHARED_DATA_H_
+#endif  // MODULES_PERCEPTION_OBSTACLE_ONBOARD_FUSION_SHARED_DATA_H_

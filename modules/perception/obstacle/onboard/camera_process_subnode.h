@@ -35,8 +35,8 @@
 #include "modules/canbus/proto/chassis.pb.h"
 #include "modules/common/adapters/adapter_manager.h"
 #include "modules/common/log.h"
-#include "modules/common/time/timer.h"
 #include "modules/common/time/time_util.h"
+#include "modules/common/time/timer.h"
 #include "modules/perception/common/perception_gflags.h"
 #include "modules/perception/cuda_util/util.h"
 #include "modules/perception/lib/base/singleton.h"
@@ -82,25 +82,23 @@ class CameraProcessSubnode : public Subnode {
   void ImgCompressCallback(const sensor_msgs::CompressedImage &message);
   void ChassisCallback(const apollo::canbus::Chassis& message);
 
+  void ProcessImage(cv::Mat &img, double timestamp, std_msgs::Header msg_header);
   bool MessageToMat(const sensor_msgs::Image& msg, cv::Mat* img);
   bool CompMessageToMat(const sensor_msgs::CompressedImage &msg, cv::Mat *img);
-  bool MatToMessage(const cv::Mat& img, sensor_msgs::Image *msg);
+  bool MatToMessage(const cv::Mat& img, sensor_msgs::Image* msg);
 
   void VisualObjToSensorObj(
       const std::vector<std::shared_ptr<VisualObject>>& objects,
-      SharedDataPtr<SensorObjects>* sensor_objects);
+      SharedDataPtr<SensorObjects>* sensor_objects, FilterOptions options);
 
   void PublishDataAndEvent(const double timestamp,
                            const SharedDataPtr<SensorObjects>& sensor_objects,
                            const SharedDataPtr<CameraItem>& camera_item);
 
-  void PublishPerceptionPbObj(const SharedDataPtr<SensorObjects>&
-                              sensor_objects);
+  void PublishPerceptionPbObj(
+      const SharedDataPtr<SensorObjects>& sensor_objects);
   void PublishPerceptionPbLnMsk(const cv::Mat& mask,
-                                const sensor_msgs::Image &message);
-  void PublishPerceptionPbLnMsk(const cv::Mat& mask,
-                                const sensor_msgs::CompressedImage &message);
-
+                                std_msgs::Header msg_header);
   // General
   std::string device_id_ = "camera";
   SeqId seq_num_ = 0;
@@ -120,12 +118,14 @@ class CameraProcessSubnode : public Subnode {
   // Always available, but retreat to static one if flag is false
   bool adjusted_extrinsics_ = false;
   Eigen::Matrix4d camera_to_car_adj_;
+  Eigen::Matrix4d camera_to_world_;
 
-  // Publish to Peception Protobuf and ROS topic
+  // Publish to Perception Protobuf and ROS topic
   bool pb_obj_ = false;  // Objects
   apollo::canbus::Chassis chassis_;
   bool pb_ln_msk_ = false;  // Lane marking mask
-  const float ln_msk_threshold_ = 0.95f;
+  float ln_msk_threshold_ = 0.95f;
+  const int num_lines = 13;
 
   // Modules
   std::unique_ptr<BaseCameraDetector> detector_;

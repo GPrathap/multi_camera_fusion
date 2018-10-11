@@ -22,8 +22,6 @@
 #define MODULES_PERCEPTION_PERCEPTION_H_
 
 #include <string>
-#include "GL/glew.h"
-#include "GLFW/glfw3.h"
 
 #include "modules/common/apollo_app.h"
 #include "modules/perception/onboard/dag_streaming.h"

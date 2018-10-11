@@ -90,10 +90,11 @@ bool EventManager::Subscribe(EventID event_id, Event *event, bool nonblocking) {
   if (nonblocking) {
     return queue->try_pop(event);
   }
-
-  ADEBUG << "EVENT_ID: " << event_id << "QUEUE LENGTH:" << queue->size();
+  
   if (queue->size() == 0)
     return true;
+
+  ADEBUG << "EVENT_ID: " << event_id << "QUEUE LENGTH:" << queue->size();
   queue->pop(event);
   return true;
 }

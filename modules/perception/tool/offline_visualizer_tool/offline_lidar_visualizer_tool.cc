@@ -33,7 +33,6 @@
 
 DECLARE_string(flagfile);
 DECLARE_bool(enable_visualization);
-DECLARE_string(config_manager_path);
 DEFINE_string(pcd_path, "./pcd/", "pcd path");
 DEFINE_string(pose_path, "./pose/", "pose path");
 DEFINE_string(output_path, "./output/", "output path");
@@ -213,7 +212,7 @@ int main(int argc, char* argv[]) {
   FLAGS_flagfile =
       "./modules/perception/tool/offline_visualizer_tool/conf/"
       "offline_lidar_perception_test.flag";
-  gflags::ParseCommandLineFlags(&argc, &argv, true);
+  google::ParseCommandLineFlags(&argc, &argv, true);
   apollo::perception::OfflineLidarPerceptionTool tool;
   tool.Init(FLAGS_enable_visualization);
   tool.Run(FLAGS_pcd_path, FLAGS_pose_path, FLAGS_output_path);

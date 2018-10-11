@@ -2,12 +2,12 @@ model_param {
   model_name: "yolo3d_1128"
   proto_file: "deploy.pt"
   weight_file: "deploy.md"
-  offset_ratio:0.341796875
+  offset_ratio:0.0
   confidence_threshold: 0.8 # 0.5
   min_2d_height: 17
   min_3d_height: 0.5
   model_type: Caffe
-  cropped_ratio: 0.5
+  cropped_ratio: 1.0
   resized_width: 960
   aligned_pixel: 32
 }

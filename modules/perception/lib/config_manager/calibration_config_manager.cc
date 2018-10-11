@@ -211,7 +211,6 @@ bool CameraCoeffient::init_camera_intrinsic_matrix_and_distort_params(
 
 CalibrationConfigManager::CalibrationConfigManager()
     : camera_calibration_(new CameraCalibration()) {
-  work_root_ = FLAGS_work_root;
   camera_extrinsic_path_ = FLAGS_front_camera_extrinsics_file;
   camera_intrinsic_path_ = FLAGS_front_camera_intrinsics_file;
   init();
@@ -282,6 +281,7 @@ bool CameraCalibration::init(const std::string &intrinsic_path,
 }
 
 void CameraCalibration::calculate_homographic() {
+  std::lock_guard<std::mutex> lock(adj_mtx_);
   auto camera_intrinsic_inverse = camera_intrinsic_.block(0, 0, 3, 3).inverse();
   auto car2camera_3_4 = (*_car2camera_pose).block(0, 0, 3, 4);
   Eigen::Matrix3d camera_2car_stripped;
