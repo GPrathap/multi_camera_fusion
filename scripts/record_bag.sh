@@ -30,7 +30,7 @@ function start() {
   LOG="/tmp/apollo_record.out"
   NUM_PROCESSES="$(pgrep -c -f "rosbag record")"
   if [ "${NUM_PROCESSES}" -eq 0 ]; then
-    nohup rosbag record --split --duration=1m -b 2048  \
+    nohup rosbag record --split --duration=10m -b 2048  \
         /apollo/sensor/camera/obstacle/front_6mm \
         /apollo/sensor/conti_radar \
         /apollo/sensor/delphi_esr \
@@ -62,6 +62,7 @@ function start() {
         /apollo/relative_map \
         /apollo/drive_event \
         /gnss_odometry \
+        /odometry/filtered \
         /imu/data \
         /ardulog \
         /tf \
@@ -69,6 +70,8 @@ function start() {
         /apollo/monitor \
         /apollo/monitor/system_status \
         /pylon_camera_node/image_raw/compressed \
+        /apollo/sensor/velodyne16/PointCloud2 \
+        /velodyne_points \
         /apollo/monitor/static_info </dev/null >"${LOG}" 2>&1 &
     fi
 }
