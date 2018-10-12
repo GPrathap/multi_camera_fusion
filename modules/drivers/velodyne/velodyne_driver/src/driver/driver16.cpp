@@ -47,6 +47,8 @@ void Velodyne16Driver::init(ros::NodeHandle &node) {
   positioning_input_->init(config_.positioning_data_port);
 
   // raw data output topic
+  ROS_INFO_STREAM("The lidar topic is:");
+  ROS_INFO_STREAM(config_.topic);
   output_ =
       node.advertise<velodyne_msgs::VelodyneScanUnified>(config_.topic, 10);
   //std::thread thread(&Velodyne16Driver::poll_positioning_packet, this);
@@ -62,10 +64,11 @@ bool Velodyne16Driver::poll(void) {
   velodyne_msgs::VelodyneScanUnifiedPtr scan(
       new velodyne_msgs::VelodyneScanUnified);
 
-  if (basetime_ == 0) {
-    usleep(100);  // waiting for positioning data
-    return true;
-  }
+  // if (basetime_ == 0) {
+    // usleep(100);  // waiting for positioning data
+    // ROS_INFO_STREAM("waiting for positioning data");
+    // return true;
+  // }
 
   int poll_result = poll_standard(scan);
 
@@ -79,7 +82,7 @@ bool Velodyne16Driver::poll(void) {
   }
 
   // publish message using time of last packet read
-  ROS_DEBUG("Publishing a full Velodyne scan.");
+  ROS_DEBUG_STREAM("Publishing a full Velodyne scan.");
   scan->header.stamp = ros::Time().now();
   scan->header.frame_id = config_.frame_id;
   // we use first packet gps time update gps base hour

@@ -29,13 +29,15 @@ const int32_t Gear200::ID = 0x200;
 void Gear200::Parse(const std::uint8_t *bytes, int32_t length,
                        ChassisDetail *chassis_detail) const {
   int32_t gear = gear_state(bytes, length);
+
+  // ADEBUG << "Gear byte: " << gear;
   switch (gear) {
-    case 0x00:
+    case 0x80: case 0x00:
       chassis_detail->mutable_gear()->set_gear_state(Chassis::GEAR_PARKING);
       chassis_detail->mutable_gear()->set_gear_cmd(Chassis::GEAR_PARKING);
       ADEBUG << "Parking gear";
       break;
-    case 0x38:
+    case 0xB8: case 0x38:
       chassis_detail->mutable_gear()->set_gear_state(Chassis::GEAR_REVERSE);
       chassis_detail->mutable_gear()->set_gear_cmd(Chassis::GEAR_REVERSE);
       ADEBUG << "Reverse gear";
@@ -45,7 +47,7 @@ void Gear200::Parse(const std::uint8_t *bytes, int32_t length,
       chassis_detail->mutable_gear()->set_gear_cmd(Chassis::GEAR_NEUTRAL);
       ADEBUG << "Neutral gear";
       break;
-    case 0x28:
+    case 0x28: case 0xA8:
       chassis_detail->mutable_gear()->set_gear_state(Chassis::GEAR_DRIVE);
       chassis_detail->mutable_gear()->set_gear_cmd(Chassis::GEAR_DRIVE);
       ADEBUG << "Drive gear";
