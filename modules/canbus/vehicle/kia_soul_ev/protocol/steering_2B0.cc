@@ -43,7 +43,8 @@ void Steering2B0::Parse(const std::uint8_t *bytes, int32_t length,
 double Steering2B0::steering_angle(const std::uint8_t *bytes,
                                   int32_t length) const {
   
-    double curr_angle = bytes[0] | bytes[1] << 8;
+    int16_t curr_angle;
+    memcpy(&curr_angle, bytes, 2);
     double steer_angle = curr_angle * -0.1 * 37 / 520;
     ADEBUG << "Steer angle: " << steer_angle;
     return steer_angle;
