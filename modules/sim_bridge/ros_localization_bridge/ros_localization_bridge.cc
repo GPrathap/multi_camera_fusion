@@ -85,10 +85,20 @@ void RosLocalizationBridge::PublishPoseBroadcastTF(
   tf2_msg.transform.translation.y = localization.pose().position().y();
   tf2_msg.transform.translation.z = localization.pose().position().z();
 
-  tf2_msg.transform.rotation.x = localization.pose().orientation().qx();
-  tf2_msg.transform.rotation.y = localization.pose().orientation().qy();
-  tf2_msg.transform.rotation.z = localization.pose().orientation().qz();
-  tf2_msg.transform.rotation.w = localization.pose().orientation().qw();
+
+  tf2::Quaternion orientation_quat(localization.pose().orientation().qx(),localization.pose().orientation().qy(),localization.pose().orientation().qz(),localization.pose().orientation().qw());
+
+  double roll, pitch, yaw;
+  tf2::Matrix3x3 orTmp(orientation_quat);
+  orTmp.getRPY(roll, pitch, yaw);
+
+  tf2::Quaternion q_fin;
+  q_fin.setRPY(roll, pitch, yaw+M_PI_2); //
+
+  tf2_msg.transform.rotation.x = q_fin.x();
+  tf2_msg.transform.rotation.y = q_fin.y();
+  tf2_msg.transform.rotation.z = q_fin.z();
+  tf2_msg.transform.rotation.w = q_fin.w();
 
   tf2_broadcaster_->sendTransform(tf2_msg);
 }
@@ -117,25 +127,10 @@ void RosLocalizationBridge::FillLocalizationMsg(const nav_msgs::Odometry &msg, l
   mutable_loc->mutable_linear_velocity()->set_y(msg.twist.twist.linear.y);
   mutable_loc->mutable_linear_velocity()->set_z(msg.twist.twist.linear.z);
 
-
-  tf2::Quaternion orientation_quat;
-  tf2::fromMsg(msg.pose.pose.orientation, orientation_quat);
-  double roll, pitch, yaw;
-  tf2::Matrix3x3 orTmp(orientation_quat);
-  orTmp.getRPY(roll, pitch, yaw);
-
-  tf2::Quaternion q_fin;
-  q_fin.setRPY(roll, pitch, yaw+M_PI_2);
-/*
   mutable_loc->mutable_orientation()->set_qx(msg.pose.pose.orientation.x);
   mutable_loc->mutable_orientation()->set_qy(msg.pose.pose.orientation.y);
   mutable_loc->mutable_orientation()->set_qz(msg.pose.pose.orientation.z);
   mutable_loc->mutable_orientation()->set_qw(msg.pose.pose.orientation.w);
-*/
-  mutable_loc->mutable_orientation()->set_qx((double)q_fin.x());
-  mutable_loc->mutable_orientation()->set_qy((double)q_fin.y());
-  mutable_loc->mutable_orientation()->set_qz((double)q_fin.z());
-  mutable_loc->mutable_orientation()->set_qw((double)q_fin.w());
 
   mutable_loc->mutable_linear_acceleration_vrf()->set_x(last_imu.linear_acceleration.x);
   mutable_loc->mutable_linear_acceleration_vrf()->set_y(last_imu.linear_acceleration.y);
