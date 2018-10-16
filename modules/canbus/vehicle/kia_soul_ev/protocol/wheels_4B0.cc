@@ -48,6 +48,7 @@ void Wheels4B0::Parse(const std::uint8_t *bytes, int32_t length,
   chassis_detail->mutable_vehicle_spd()->set_is_wheel_spd_rr_valid(true);
 
   double vel = (rl_ws+rr_ws) / 2.0;
+  ADEBUG << "Vel: " << vel;
   chassis_detail->mutable_vehicle_spd()->set_vehicle_spd(vel);
   chassis_detail->mutable_vehicle_spd()->set_is_vehicle_spd_valid(true);
 }
@@ -91,7 +92,6 @@ double Wheels4B0::parse_two_frames(const std::uint8_t low_byte,
   Byte low_frame(&low_byte);
   int32_t low = low_frame.get_byte(0, 8);
   int32_t value = (high << 8) | low;
-  AINFO << "Wheel speed: " << value * 0.020000 * 0.44704;
   return value * 0.020000 * 0.44704;
 }
 
