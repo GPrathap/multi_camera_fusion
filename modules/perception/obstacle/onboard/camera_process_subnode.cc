@@ -51,10 +51,34 @@ bool CameraProcessSubnode::InitInternal() {
 
   InitModules();
 
-  AdapterManager::AddImageFrontCallback(&CameraProcessSubnode::ImgCallback,
-                                        this);
-  AdapterManager::AddCompressedImageCallback(&CameraProcessSubnode::ImgCompressCallback,
-                                        this);     
+  if (device_id_=="camera"){ //standard Apollo camera ID
+    AdapterManager::AddImageFrontCallback(&CameraProcessSubnode::ImgCallback,
+                                          this);
+    AdapterManager::AddCompressedImageCallback(&CameraProcessSubnode::ImgCompressCallback,
+                                          this);   
+  } else if (device_id_=="front_right_side_camera") {
+    AdapterManager::AddImageFrontRightSideCallback(&CameraProcessSubnode::ImgCallback,
+                                                           this);
+  } else if (device_id_=="front_left_side_camera") {
+    AdapterManager::AddImageFrontLeftSideCallback(&CameraProcessSubnode::ImgCallback,
+                                                           this);
+  } else if (device_id_=="right_camera") {
+    AdapterManager::AddImageRightCallback(&CameraProcessSubnode::ImgCallback,
+                                                           this);
+  } else if (device_id_=="left_camera") {
+    AdapterManager::AddImageRightCallback(&CameraProcessSubnode::ImgCallback,
+                                                           this);
+  } else if (device_id_=="backwards_right_side_camera") {
+    AdapterManager::AddImageRightBackwardsSideCallback(&CameraProcessSubnode::ImgCallback,
+                                                           this);
+  } else if (device_id_=="backwards_left_side_camera") {
+    AdapterManager::AddImageLeftBackwardsSideCallback(&CameraProcessSubnode::ImgCallback,
+                                                           this);
+  } else if (device_id_=="front_camera") {
+    AdapterManager::AddImageFrontCameraCallback(&CameraProcessSubnode::ImgCallback,
+                                                           this);
+  }  
+  
   if (pb_obj_) {
     AdapterManager::AddChassisCallback(&CameraProcessSubnode::ChassisCallback,
                                        this);
