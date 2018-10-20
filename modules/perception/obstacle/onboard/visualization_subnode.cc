@@ -237,7 +237,7 @@ bool VisualizationSubnode::InitStream() {
 
   iter = reserve_field_map.find("camera_device_id");
   if (iter == reserve_field_map.end()) {
-        AWARN << "Failed to find camera_device_id_: " << reserve_;
+        AWARN << "Failed to find camera_device_id: " << reserve_;
       camera_device_id_ = "";
   } else {
       camera_device_id_ = iter->second;
