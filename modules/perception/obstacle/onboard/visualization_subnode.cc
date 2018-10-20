@@ -155,11 +155,11 @@ bool VisualizationSubnode::InitInternal() {
   content_.set_pose_type(FrameContent::IMAGE_CONTINUOUS);
   AINFO << "visualize according to continuous image: ";
 
-  CalibrationConfigManager* config_manager =
+  CalibrationConfigManager* calibration_config_manager =
       Singleton<CalibrationConfigManager>::get();
   //TODO for the now it uses default camera if camera id is not provided
   calibration_config_manager->set_device_id_and_calibration_config_manager_init("");
-  CameraCalibrationPtr calibrator = config_manager->get_camera_calibration();
+  CameraCalibrationPtr calibrator = calibration_config_manager->get_camera_calibration();
   camera_to_car_pose_ = calibrator->get_camera_extrinsics();
   AINFO << "Init camera to car transform successfully.";
   content_.set_camera2car_pose(camera_to_car_pose_);
