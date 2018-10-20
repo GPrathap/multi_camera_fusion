@@ -75,6 +75,13 @@ bool RadarProcessSubnode::InitInternal() {
   }
   device_id_ = reserve_field_map["device_id"];
 
+  if (reserve_field_map.find("camera_device_id") == reserve_field_map.end()) {
+    AERROR << "Failed to find field camera_device_id, reserve: " << reserve_;
+    return false;
+  }
+
+  camera_device_id_ = reserve_field_map["camera_device_id"];
+
   CHECK(AdapterManager::GetContiRadar()) << "Radar is not initialized.";
   AdapterManager::AddContiRadarCallback(&RadarProcessSubnode::OnRadar, this);
   CHECK(AdapterManager::GetLocalization()) << "Localiztion is not initialized.";
@@ -155,8 +162,7 @@ void RadarProcessSubnode::OnRadar(const ContiRadar &radar_obs) {
   } else {
     CalibrationConfigManager *calibration_config_manager =
         Singleton<CalibrationConfigManager>::get();
-    //TODO for the now it uses default camera if camera id is not provided
-    calibration_config_manager->set_device_id_and_calibration_config_manager_init("");
+    calibration_config_manager->set_device_id_and_calibration_config_manager_init(camera_device_id_);
     CameraCalibrationPtr calibrator = calibration_config_manager->get_camera_calibration();
     // Eigen::Matrix4d camera_to_car = calibrator->get_camera_extrinsics();
     *radar2car_pose = radar_extrinsic_;
