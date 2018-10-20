@@ -89,7 +89,7 @@ bool CameraProcessSubnode::InitInternal() {
 bool CameraProcessSubnode::InitCalibration() {
   auto calibration_config_manager = Singleton<CalibrationConfigManager>::get();
   calibration_config_manager->set_device_id_and_calibration_config_manager_init(device_id_);
-  CameraCalibrationPtr calibrator = ccm->get_camera_calibration();
+  CameraCalibrationPtr calibrator = calibration_config_manager->get_camera_calibration();
 
   calibrator->get_image_height_width(&image_height_, &image_width_);
   camera_to_car_ = calibrator->get_camera_extrinsics();
