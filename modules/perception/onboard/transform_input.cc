@@ -156,7 +156,7 @@ bool GetRadarTrans(const double query_time, Eigen::Matrix4d* trans) {
   return true;
 }
 
-bool GetCameraTrans(const double query_time, Eigen::Matrix4d* trans) {
+bool GetCameraTrans(const double query_time, Eigen::Matrix4d* trans, std::string device_id) {
   if (!trans) {
     AERROR << "failed to get trans, the trans ptr can not be NULL";
     return false;
@@ -168,10 +168,10 @@ bool GetCameraTrans(const double query_time, Eigen::Matrix4d* trans) {
   const double kTf2BuffSize = FLAGS_tf2_buff_in_ms / 1000.0;
   std::string err_msg;
   if (!tf2_buffer.canTransform(FLAGS_camera_tf2_frame_id,
-                               FLAGS_camera_tf2_child_frame_id, query_stamp,
+                               device_id, query_stamp,
                                ros::Duration(kTf2BuffSize), &err_msg)) {
     AERROR << "Cannot transform to: " << FLAGS_camera_tf2_frame_id
-           << " from frame " << FLAGS_camera_tf2_child_frame_id
+           << " from frame " << device_id
            << " , err: " << err_msg
            << ". Frames: " << tf2_buffer.allFramesAsString();
     return false;
@@ -180,7 +180,7 @@ bool GetCameraTrans(const double query_time, Eigen::Matrix4d* trans) {
   geometry_msgs::TransformStamped transform_stamped;
   try {
     transform_stamped = tf2_buffer.lookupTransform(
-        FLAGS_camera_tf2_frame_id, FLAGS_camera_tf2_child_frame_id,
+        FLAGS_camera_tf2_frame_id, device_id,
         query_stamp);
   } catch (tf2::TransformException& ex) {
     AERROR << "Exception: " << ex.what();

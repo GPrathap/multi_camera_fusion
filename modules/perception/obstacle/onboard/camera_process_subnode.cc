@@ -55,7 +55,7 @@ bool CameraProcessSubnode::InitInternal() {
     AdapterManager::AddImageFrontCallback(&CameraProcessSubnode::ImgCallback,
                                           this);
     AdapterManager::AddCompressedImageCallback(&CameraProcessSubnode::ImgCompressCallback,
-                                          this);   
+                                          this);
   } else if (device_id_=="front_right_side_camera") {
     AdapterManager::AddImageFrontRightSideCallback(&CameraProcessSubnode::ImgCallback,
                                                            this);
@@ -77,8 +77,8 @@ bool CameraProcessSubnode::InitInternal() {
   } else if (device_id_=="front_camera") {
     AdapterManager::AddImageFrontCameraCallback(&CameraProcessSubnode::ImgCallback,
                                                            this);
-  }  
-  
+  }
+
   if (pb_obj_) {
     AdapterManager::AddChassisCallback(&CameraProcessSubnode::ChassisCallback,
                                        this);
@@ -133,7 +133,7 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
   PERF_BLOCK_START();
 
   ADEBUG << "Received message height: " << img.rows << " width: " << img.cols;
-  //cv::resize(img, img, cv::Size(1920, 1080), 0, 0);
+  cv::resize(img, img, cv::Size(1280, 512), 0, 0);
   std::vector<std::shared_ptr<VisualObject>> objects;
   cv::Mat mask;
 
@@ -188,11 +188,13 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
     options.camera_trans = std::make_shared<Eigen::Matrix4d>();
     options.camera_trans->setIdentity();
   } else {
-    options.camera_trans = std::make_shared<Eigen::Matrix4d>();
-    if (!GetCameraTrans(timestamp, options.camera_trans.get())) {
+    /*options.camera_trans = std::make_shared<Eigen::Matrix4d>();
+    if (!GetCameraTrans(timestamp, options.camera_trans.get(), device_id_)) {
       AERROR << "failed to get trans at timestamp: " << timestamp;
       return;
-    }
+    }*/
+    options.camera_trans = std::make_shared<Eigen::Matrix4d>();
+    options.camera_trans->setIdentity();
   }
 
   camera_to_world_ = *(options.camera_trans);
@@ -247,7 +249,7 @@ void CameraProcessSubnode::ImgCallback(const sensor_msgs::Image &message) {
   }
 
   ProcessImage(img, timestamp, message.header);
-  
+
 }
 
 void CameraProcessSubnode::ImgCompressCallback(const sensor_msgs::CompressedImage &message) {
@@ -316,11 +318,11 @@ bool CameraProcessSubnode::CompMessageToMat(const sensor_msgs::CompressedImage &
   cv_ptr->image = cv::imdecode(cv::Mat(msg.data), CV_LOAD_IMAGE_UNCHANGED);
 
   cv_ptr->encoding = sensor_msgs::image_encodings::BGR8;
-                                   
+
 
   *img = cv::Mat(cv_ptr->image.rows, cv_ptr->image.cols, CV_8UC3);
   *img = cv_ptr->image;
-  
+
 
   return true;
 }
