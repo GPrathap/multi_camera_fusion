@@ -157,6 +157,8 @@ bool VisualizationSubnode::InitInternal() {
 
   CalibrationConfigManager* config_manager =
       Singleton<CalibrationConfigManager>::get();
+  //TODO for the now it uses default camera if camera id is not provided
+  calibration_config_manager->set_device_id_and_calibration_config_manager_init("");
   CameraCalibrationPtr calibrator = config_manager->get_camera_calibration();
   camera_to_car_pose_ = calibrator->get_camera_extrinsics();
   AINFO << "Init camera to car transform successfully.";

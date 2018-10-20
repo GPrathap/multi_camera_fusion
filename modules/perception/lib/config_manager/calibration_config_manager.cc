@@ -159,6 +159,7 @@ bool CameraCoeffient::init_camera_extrinsic_matrix(
 
 bool CameraCoeffient::init_camera_intrinsic_matrix_and_distort_params(
     const std::string &file_name) {
+
   YAML::Node config = YAML::LoadFile(file_name);
   if (config["K"]) {
     camera_intrinsic(0, 0) = config["K"][0].as<double>();
@@ -209,11 +210,26 @@ bool CameraCoeffient::init_camera_intrinsic_matrix_and_distort_params(
   return true;
 }
 
+
+
 CalibrationConfigManager::CalibrationConfigManager()
     : camera_calibration_(new CameraCalibration()) {
-  camera_extrinsic_path_ = FLAGS_front_camera_extrinsics_file;
-  camera_intrinsic_path_ = FLAGS_front_camera_intrinsics_file;
+}
+
+void CalibrationConfigManager::set_device_id_and_calibration_config_manager_init(std::string device_id){
+  if(!device_id.empty()){
+    camera_extrinsic_path_ = FLAGS_camera_extrinsics_and_intrinsics_file_location + device_id + "_extrinsics.yaml";
+    camera_intrinsic_path_ = FLAGS_camera_extrinsics_and_intrinsics_file_location + device_id + "_intrinsics.yaml";
+  }else{
+    camera_extrinsic_path_ = FLAGS_front_camera_extrinsics_file;
+    camera_intrinsic_path_ = FLAGS_front_camera_intrinsics_file;
+    device_id_ = device_id;
+  }
   init();
+}
+
+std::get_device_id(){
+  return device_id_;
 }
 
 bool CalibrationConfigManager::init() {

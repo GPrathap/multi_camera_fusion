@@ -166,6 +166,8 @@ bool Projector<T>::Init(const cv::Rect &roi, const T &max_distance,
   // read transformation matrix from calibration config manager
   CalibrationConfigManager *calibration_config_manager =
       Singleton<CalibrationConfigManager>::get();
+  //TODO for the now it uses default camera if camera id is not provided
+  calibration_config_manager->set_device_id_and_calibration_config_manager_init("");
 
   const CameraCalibrationPtr camera_calibration =
       calibration_config_manager->get_camera_calibration();
@@ -465,9 +467,14 @@ bool Projector<T>::Project(const T &u, const T &v,
     return false;
   }
 
-  auto trans_mat = Singleton<CalibrationConfigManager>::get()
-                       ->get_camera_calibration()
-                       ->get_camera2car_homography_mat();
+  CalibrationConfigManager *calibration_config_manager =
+          Singleton<CalibrationConfigManager>::get();
+  //TODO for the now it uses default camera if camera id is not provided
+  calibration_config_manager->set_device_id_and_calibration_config_manager_init("");
+  const CameraCalibrationPtr camera_calibration =
+          calibration_config_manager->get_camera_calibration();
+
+  auto trans_mat = camera_calibration->get_camera2car_homography_mat();
 
   Eigen::Matrix<double, 3, 1> uv_point(u, v, 1.0);
   Eigen::Matrix<double, 3, 1> xy_p = trans_mat * uv_point;

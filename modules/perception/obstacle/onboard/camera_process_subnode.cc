@@ -62,10 +62,10 @@ bool CameraProcessSubnode::InitInternal() {
   } else if (device_id_=="front_left_side_camera") {
     AdapterManager::AddImageFrontLeftSideCallback(&CameraProcessSubnode::ImgCallback,
                                                            this);
-  } else if (device_id_=="right_camera") {
+  } else if (device_id_=="right_side_camera") {
     AdapterManager::AddImageRightCallback(&CameraProcessSubnode::ImgCallback,
                                                            this);
-  } else if (device_id_=="left_camera") {
+  } else if (device_id_=="left_side_camera") {
     AdapterManager::AddImageRightCallback(&CameraProcessSubnode::ImgCallback,
                                                            this);
   } else if (device_id_=="backwards_right_side_camera") {
@@ -87,7 +87,8 @@ bool CameraProcessSubnode::InitInternal() {
 }
 
 bool CameraProcessSubnode::InitCalibration() {
-  auto ccm = Singleton<CalibrationConfigManager>::get();
+  auto calibration_config_manager = Singleton<CalibrationConfigManager>::get();
+  calibration_config_manager->set_device_id_and_calibration_config_manager_init(device_id_);
   CameraCalibrationPtr calibrator = ccm->get_camera_calibration();
 
   calibrator->get_image_height_width(&image_height_, &image_width_);
@@ -203,7 +204,9 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
   filter_->Filter(timestamp, &objects, options);
   PERF_BLOCK_END("CameraProcessSubnode_filter_");
 
-  auto ccm = Singleton<CalibrationConfigManager>::get();
+  auto calibration_config_manager = Singleton<CalibrationConfigManager>::get();
+  //TODO for the now it uses default camera if camera id is not provided
+  calibration_config_manager->set_device_id_and_calibration_config_manager_init(device_id_);
   auto calibrator = ccm->get_camera_calibration();
   calibrator->SetCar2CameraExtrinsicsAdj(camera_to_car_adj_,
                                          adjusted_extrinsics_);

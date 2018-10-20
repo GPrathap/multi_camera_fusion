@@ -108,7 +108,9 @@ class CalibrationConfigManager {
     return camera_calibration_;
   }
 
+  void set_device_id_and_calibration_config_manager_init(std::string device_id);
  private:
+
   CalibrationConfigManager();
   ~CalibrationConfigManager();
 
@@ -120,6 +122,7 @@ class CalibrationConfigManager {
   bool inited_ = false;
   std::string camera_extrinsic_path_;
   std::string camera_intrinsic_path_;
+  std::string device_id_;
   std::string radar_extrinsic_path_;
   CameraCalibrationPtr camera_calibration_;
   RadarCalibrationPtr radar_calibration_;

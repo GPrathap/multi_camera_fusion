@@ -43,7 +43,6 @@ int main(int argc, char** argv)
 
 
     ros::Rate loop_rate(10);
-    ros::Rate loop_rate(0.001);
     unsigned int i=0;
     while (nh.ok()) {
         std::cout<< files_left.at(i) << std::endl;

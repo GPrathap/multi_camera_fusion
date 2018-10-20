@@ -165,7 +165,8 @@ bool PbfTrack::IsInCameraView(const Eigen::Vector3d &center, double timestamp) {
   // read transformation matrix from calibration config manager
   CalibrationConfigManager *calibration_config_manager =
       Singleton<CalibrationConfigManager>::get();
-
+  //TODO for the now it uses default camera if camera id is not provided
+  calibration_config_manager->set_device_id_and_calibration_config_manager_init("");
   const CameraCalibrationPtr camera_calibration =
       calibration_config_manager->get_camera_calibration();
 
