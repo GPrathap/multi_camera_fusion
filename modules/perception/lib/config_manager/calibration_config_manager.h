@@ -109,6 +109,7 @@ class CalibrationConfigManager {
   }
 
   void set_device_id_and_calibration_config_manager_init(std::string device_id);
+  std::string get_device_id();
  private:
 
   CalibrationConfigManager();

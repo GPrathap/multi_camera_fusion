@@ -228,7 +228,7 @@ void CalibrationConfigManager::set_device_id_and_calibration_config_manager_init
   init();
 }
 
-std::get_device_id(){
+std::string CalibrationConfigManager::get_device_id(){
   return device_id_;
 }
 
