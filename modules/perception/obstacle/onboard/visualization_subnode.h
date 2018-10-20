@@ -90,6 +90,8 @@ class VisualizationSubnode : public Subnode {
   EventID lane_event_id_;
   EventID lidar_event_id_;
 
+  std::string camera_device_id_;
+
   //    MotionBufferPtr motion_buffer_;
   Eigen::Matrix4d camera_to_car_pose_;
 

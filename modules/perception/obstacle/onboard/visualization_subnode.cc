@@ -157,8 +157,7 @@ bool VisualizationSubnode::InitInternal() {
 
   CalibrationConfigManager* calibration_config_manager =
       Singleton<CalibrationConfigManager>::get();
-  //TODO for the now it uses default camera if camera id is not provided
-  calibration_config_manager->set_device_id_and_calibration_config_manager_init("");
+  calibration_config_manager->set_device_id_and_calibration_config_manager_init(camera_device_id_);
   CameraCalibrationPtr calibrator = calibration_config_manager->get_camera_calibration();
   camera_to_car_pose_ = calibrator->get_camera_extrinsics();
   AINFO << "Init camera to car transform successfully.";
@@ -234,6 +233,16 @@ bool VisualizationSubnode::InitStream() {
     lidar_event_id_ = -1;
   } else {
     lidar_event_id_ = static_cast<EventID>(atoi((iter->second).c_str()));
+  }
+
+  for (auto event_meta : sub_meta_events_) {
+    AINFO << "Vis_sub: event_meta id: " << event_meta.event_id << ", device id: " << event_meta.reserve;
+    if (event_meta.event_id == camera_event_id_) {
+      camera_device_id_ = event_meta.reserve;
+    }
+  }
+  if(camera_device_id_.empty()){
+    AWARN << "Failed to find camera device id for " << camera_event_id_;
   }
 
   return true;
