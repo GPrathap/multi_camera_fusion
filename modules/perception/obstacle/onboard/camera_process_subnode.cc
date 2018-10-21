@@ -187,13 +187,13 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
 
   if (FLAGS_use_navigation_mode) {
     options.camera_trans = std::make_shared<Eigen::Matrix4d>();
-    options.camera_trans->setIdentity();
-  } else {
-    options.camera_trans = std::make_shared<Eigen::Matrix4d>();
     if (!GetCameraTrans(timestamp, options.camera_trans.get(), device_id_)) {
       AERROR << "failed to get trans at timestamp: " << timestamp;
       return;
     }
+  } else {
+    options.camera_trans = std::make_shared<Eigen::Matrix4d>();
+    options.camera_trans->setIdentity();
   }
 
   camera_to_world_ = *(options.camera_trans);
