@@ -73,7 +73,7 @@ class ProbabilisticFusion : public BaseFusion {
                               const std::vector<int> &unassigned_tracks,
                               const std::vector<double> &track_object_dist,
                               const SensorType &sensor_type,
-                              const std::string &sensor_id, double timestamp);
+                              const std::string &sensor_id, std::string& sensor_device_id, double timestamp);
 
   void CollectFusedObjects(double timestamp,
                            std::vector<std::shared_ptr<Object>> *fused_objects);
@@ -86,7 +86,7 @@ class ProbabilisticFusion : public BaseFusion {
   void FuseForegroundObjects(
       std::vector<std::shared_ptr<PbfSensorObject>> *foreground_objects,
       Eigen::Vector3d ref_point, const SensorType &sensor_type,
-      const std::string &sensor_id, double timestamp,
+      const std::string &sensor_id, std::string &sensor_device_id, double timestamp,
       const Eigen::Matrix4d &sensor_world_pose);
 
  protected:

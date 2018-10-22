@@ -38,6 +38,7 @@ PbfSensorObject::~PbfSensorObject() {}
 PbfSensorObject::PbfSensorObject(const PbfSensorObject &rhs) {
   sensor_type = rhs.sensor_type;
   sensor_id = rhs.sensor_id;
+  sensor_device_id = rhs.sensor_device_id;
   timestamp = rhs.timestamp;
   object = rhs.object;
   invisible_period = rhs.invisible_period;

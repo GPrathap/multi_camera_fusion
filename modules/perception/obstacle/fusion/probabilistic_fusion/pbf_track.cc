@@ -185,7 +185,7 @@ bool PbfTrack::IsInCameraView(const Eigen::Vector3d &center, std::string sensor_
 
 void PbfTrack::UpdateWithoutSensorObject(const SensorType &sensor_type,
                                          const std::string &sensor_id,
-                                         std::string sensor_device_id,
+                                         std::string &sensor_device_id,
                                          double min_match_dist,
                                          double timestamp) {
   AINFO << "update with sensor object with track id " << GetTrackId()

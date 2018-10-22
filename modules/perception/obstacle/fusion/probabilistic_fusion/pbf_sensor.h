@@ -31,7 +31,7 @@ namespace perception {
 
 class PbfSensor {
  public:
-  explicit PbfSensor(const std::string &sensor_id, const SensorType &type);
+  explicit PbfSensor(const std::string &sensor_id, const SensorType &type, std::string &sensor_device_id);
   ~PbfSensor();
 
   /*
@@ -64,6 +64,7 @@ class PbfSensor {
   std::deque<PbfSensorFramePtr> frames_;
 
   std::string sensor_id_;
+  std::string sensor_device_id;
   SensorType sensor_type_;
 
   /**@brief max size of frames_*/

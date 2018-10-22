@@ -23,8 +23,8 @@ namespace perception {
 
 size_t PbfSensor::s_max_cached_frame_number_ = 10;
 
-PbfSensor::PbfSensor(const std::string &sensor_id, const SensorType &type)
-    : sensor_id_(sensor_id), sensor_type_(type) {}
+PbfSensor::PbfSensor(const std::string &sensor_id, const SensorType &type, std::string &sensor_device_id_)
+    : sensor_id_(sensor_id), sensor_type_(type), sensor_device_id(sensor_device_id_) {}
 
 PbfSensor::~PbfSensor() {}
 
@@ -60,6 +60,7 @@ void PbfSensor::AddFrame(const SensorObjects &frame) {
   pbf_frame->sensor2world_pose = frame.sensor2world_pose;
   pbf_frame->sensor_type = frame.sensor_type;
   pbf_frame->sensor_id = GetSensorType(frame.sensor_type);
+  pbf_frame->sensor_device_id = frame.sensor_device_id;
   pbf_frame->seq_num = frame.seq_num;
 
   pbf_frame->objects.resize(frame.objects.size());
@@ -69,6 +70,7 @@ void PbfSensor::AddFrame(const SensorObjects &frame) {
     obj->sensor_type = frame.sensor_type;
     obj->object->clone(*(frame.objects[i]));
     obj->sensor_id = GetSensorType(frame.sensor_type);
+    obj->sensor_device_id = frame.sensor_device_id;
     pbf_frame->objects[i] = obj;
   }
   if (frames_.size() > s_max_cached_frame_number_) {

@@ -39,7 +39,7 @@ class Projector {
   Projector();
 
   bool Init(const cv::Rect &roi, const T &max_distance = 200.0,
-            bool visualize = false, std::string camera_device_id);
+            bool visualize = false, std::string camera_device_id="");
 
   bool UvToXy(const T &u, const T &v, Eigen::Matrix<T, 2, 1> *p) const;
 

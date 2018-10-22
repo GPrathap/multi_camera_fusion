@@ -53,4 +53,5 @@ message ModelConfigs {
   optional int32 start_y_pos = 48 [ default = 312];
   optional int32 lane_map_width = 49 [ default = 960];
   optional int32 lane_map_height = 50 [ default = 384];
+  optional string camera_device_id = 51;
 }

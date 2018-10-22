@@ -48,12 +48,12 @@ bool PbfSensorManager::Init() {
   std::string sensor_id = GetSensorType(SensorType::VELODYNE_64);
   SensorType type = SensorType::VELODYNE_64;
 
-  PbfSensor *velodyne_64 = new PbfSensor(sensor_id, type);
+  PbfSensor *velodyne_64 = new PbfSensor(sensor_id, type, "");
   sensors_[sensor_id] = velodyne_64;
 
   sensor_id = GetSensorType(SensorType::RADAR);
   type = SensorType::RADAR;
-  PbfSensor *radar = new PbfSensor(sensor_id, type);
+  PbfSensor *radar = new PbfSensor(sensor_id, type, "");
   if (radar == nullptr) {
     AERROR << "Fail to create PbfSensor. sensor_id = " << sensor_id;
     return false;
@@ -71,13 +71,14 @@ bool PbfSensorManager::Init() {
 void PbfSensorManager::AddSensorMeasurements(const SensorObjects &objects) {
   std::string sensor_id = GetSensorType(objects.sensor_type);
   SensorType type = objects.sensor_type;
+  std::string sensor_device_id = objects.sensor_device_id;
 
   auto it = sensors_.find(sensor_id);
   PbfSensor *sensor = nullptr;
   if (it == sensors_.end()) {
     AWARN << "Cannot find sensor " << sensor_id
           << " and create one in SensorManager";
-    sensor = new PbfSensor(sensor_id, type);
+    sensor = new PbfSensor(sensor_id, type, sensor_device_id);
     if (sensor == nullptr) {
       AERROR << "Fail to create PbfSensor. sensor_id = " << sensor_id;
       return;
