@@ -58,6 +58,7 @@ bool CCLanePostProcessor::Init() {
     AERROR << "invalid space type" << space_type;
     return false;
   }
+  string camera_device_id = config_.camera_device_id();
   options_.frame.space_type = options_.space_type;
 
   if (!config_.has_image_width() || !config_.has_image_height()) {
@@ -97,8 +98,7 @@ bool CCLanePostProcessor::Init() {
 
   CalibrationConfigManager *calibration_config_manager =
       Singleton<CalibrationConfigManager>::get();
-  //TODO for the now it uses default camera if camera id is not provided
-  calibration_config_manager->set_device_id_and_calibration_config_manager_init("");
+  calibration_config_manager->set_device_id_and_calibration_config_manager_init(camera_device_id);
   const CameraCalibrationPtr camera_calibration =
       calibration_config_manager->get_camera_calibration();
 
@@ -217,7 +217,7 @@ bool CCLanePostProcessor::Init() {
 
   if (options_.space_type == SpaceType::VEHICLECOR) {
     projector_.reset(new Projector<ScalarType>());
-    projector_->Init(roi_, max_distance_to_see_, vis_);
+    projector_->Init(roi_, max_distance_to_see_, vis_, camera_device_id);
     is_x_longitude_ = true;
   } else if (options_.space_type == SpaceType::IMAGECOR) {
     is_x_longitude_ = false;

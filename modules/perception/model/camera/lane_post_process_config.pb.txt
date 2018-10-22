@@ -56,3 +56,4 @@ lane_map_scale: 2.0
 start_y_pos: 312
 lane_map_width: 960
 lane_map_height: 384
+camera_device_id:"front_camera"

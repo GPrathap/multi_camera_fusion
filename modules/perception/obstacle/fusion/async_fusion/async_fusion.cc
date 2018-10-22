@@ -67,6 +67,7 @@ PbfSensorFramePtr AsyncFusion::ConstructFrame(const SensorObjects &frame) {
   pbf_frame->sensor2world_pose = frame.sensor2world_pose;
   pbf_frame->sensor_type = frame.sensor_type;
   pbf_frame->sensor_id = GetSensorType(frame.sensor_type);
+  pbf_frame->sensor_device_id = frame.sensor_device_id;
   pbf_frame->seq_num = frame.seq_num;
 
   pbf_frame->objects.resize(frame.objects.size());
@@ -125,7 +126,7 @@ void AsyncFusion::FuseFrame(PbfSensorFramePtr frame) {
 
   Eigen::Vector3d ref_point = frame->sensor2world_pose.topRightCorner(3, 1);
   FuseForegroundObjects(ref_point, frame->sensor_type, frame->sensor_id,
-                        frame->timestamp, &foreground_objects);
+                        frame->timestamp, frame->sensor_device_id, &foreground_objects);
   track_manager_->RemoveLostTracks();
 }
 
@@ -158,12 +159,12 @@ void AsyncFusion::UpdateAssignedTracks(
 void AsyncFusion::UpdateUnassignedTracks(
     const std::vector<int> &unassigned_tracks,
     const std::vector<double> &track_object_dist, const SensorType &sensor_type,
-    const std::string &sensor_id, const double timestamp,
+    const std::string &sensor_id, std::string sensor_device_id, const double timestamp,
     std::vector<PbfTrackPtr> *tracks) {
   for (size_t i = 0; i < unassigned_tracks.size(); ++i) {
     int local_track_index = unassigned_tracks[i];
     tracks->at(local_track_index)
-        ->UpdateWithoutSensorObject(sensor_type, sensor_id,
+        ->UpdateWithoutSensorObject(sensor_type, sensor_id, sensor_device_id,
                                     track_object_dist[local_track_index],
                                     timestamp);
   }
@@ -226,7 +227,7 @@ void AsyncFusion::DecomposeFrameObjects(
 
 void AsyncFusion::FuseForegroundObjects(
     const Eigen::Vector3d &ref_point, const SensorType &sensor_type,
-    const std::string &sensor_id, const double timestamp,
+    const std::string &sensor_id, const double timestamp, std::string sensor_device_id,
     std::vector<std::shared_ptr<PbfSensorObject>> *foreground_objects) {
   std::vector<int> unassigned_tracks;
   std::vector<int> unassigned_objects;
@@ -253,7 +254,7 @@ void AsyncFusion::FuseForegroundObjects(
                        track2measurements_dist, &tracks);
 
   UpdateUnassignedTracks(unassigned_tracks, track2measurements_dist,
-                         sensor_type, sensor_id, timestamp, &tracks);
+                         sensor_type, sensor_id, sensor_device_id, timestamp, &tracks);
 
   // fixme:zhangweide only create new track if it is camera sensor
   if (is_camera(sensor_type)) {

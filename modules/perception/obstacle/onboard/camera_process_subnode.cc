@@ -203,7 +203,6 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
   PERF_BLOCK_END("CameraProcessSubnode_filter_");
 
   auto calibration_config_manager = Singleton<CalibrationConfigManager>::get();
-  //TODO for the now it uses default camera if camera id is not provided
   calibration_config_manager->set_device_id_and_calibration_config_manager_init(device_id_);
   auto calibrator = calibration_config_manager->get_camera_calibration();
   calibrator->SetCar2CameraExtrinsicsAdj(camera_to_car_adj_,
