@@ -55,17 +55,17 @@ bool CameraProcessSubnode::InitInternal() {
     AdapterManager::AddImageFrontCallback(&CameraProcessSubnode::ImgCallback,
                                           this);
     AdapterManager::AddCompressedImageCallback(&CameraProcessSubnode::ImgCompressCallback,
-                                          this);   
+                                          this);
   } else if (device_id_=="front_right_side_camera") {
     AdapterManager::AddImageFrontRightSideCallback(&CameraProcessSubnode::ImgCallback,
                                                            this);
   } else if (device_id_=="front_left_side_camera") {
     AdapterManager::AddImageFrontLeftSideCallback(&CameraProcessSubnode::ImgCallback,
                                                            this);
-  } else if (device_id_=="right_camera") {
+  } else if (device_id_=="right_side_camera") {
     AdapterManager::AddImageRightCallback(&CameraProcessSubnode::ImgCallback,
                                                            this);
-  } else if (device_id_=="left_camera") {
+  } else if (device_id_=="left_side_camera") {
     AdapterManager::AddImageRightCallback(&CameraProcessSubnode::ImgCallback,
                                                            this);
   } else if (device_id_=="backwards_right_side_camera") {
@@ -77,8 +77,8 @@ bool CameraProcessSubnode::InitInternal() {
   } else if (device_id_=="front_camera") {
     AdapterManager::AddImageFrontCameraCallback(&CameraProcessSubnode::ImgCallback,
                                                            this);
-  }  
-  
+  }
+
   if (pb_obj_) {
     AdapterManager::AddChassisCallback(&CameraProcessSubnode::ChassisCallback,
                                        this);
@@ -87,8 +87,9 @@ bool CameraProcessSubnode::InitInternal() {
 }
 
 bool CameraProcessSubnode::InitCalibration() {
-  auto ccm = Singleton<CalibrationConfigManager>::get();
-  CameraCalibrationPtr calibrator = ccm->get_camera_calibration();
+  auto calibration_config_manager = Singleton<CalibrationConfigManager>::get();
+  calibration_config_manager->set_device_id_and_calibration_config_manager_init(device_id_);
+  CameraCalibrationPtr calibrator = calibration_config_manager->get_camera_calibration();
 
   calibrator->get_image_height_width(&image_height_, &image_width_);
   camera_to_car_ = calibrator->get_camera_extrinsics();
@@ -133,7 +134,7 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
   PERF_BLOCK_START();
 
   ADEBUG << "Received message height: " << img.rows << " width: " << img.cols;
-  //cv::resize(img, img, cv::Size(1920, 1080), 0, 0);
+  cv::resize(img, img, cv::Size(1280, 512), 0, 0);
   std::vector<std::shared_ptr<VisualObject>> objects;
   cv::Mat mask;
 
@@ -186,13 +187,13 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
 
   if (FLAGS_use_navigation_mode) {
     options.camera_trans = std::make_shared<Eigen::Matrix4d>();
-    options.camera_trans->setIdentity();
-  } else {
-    options.camera_trans = std::make_shared<Eigen::Matrix4d>();
-    if (!GetCameraTrans(timestamp, options.camera_trans.get())) {
+    if (!GetCameraTrans(timestamp, options.camera_trans.get(), device_id_)) {
       AERROR << "failed to get trans at timestamp: " << timestamp;
       return;
     }
+  } else {
+    options.camera_trans = std::make_shared<Eigen::Matrix4d>();
+    options.camera_trans->setIdentity();
   }
 
   camera_to_world_ = *(options.camera_trans);
@@ -201,8 +202,10 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
   filter_->Filter(timestamp, &objects, options);
   PERF_BLOCK_END("CameraProcessSubnode_filter_");
 
-  auto ccm = Singleton<CalibrationConfigManager>::get();
-  auto calibrator = ccm->get_camera_calibration();
+  auto calibration_config_manager = Singleton<CalibrationConfigManager>::get();
+  //TODO for the now it uses default camera if camera id is not provided
+  calibration_config_manager->set_device_id_and_calibration_config_manager_init(device_id_);
+  auto calibrator = calibration_config_manager->get_camera_calibration();
   calibrator->SetCar2CameraExtrinsicsAdj(camera_to_car_adj_,
                                          adjusted_extrinsics_);
 
@@ -247,7 +250,7 @@ void CameraProcessSubnode::ImgCallback(const sensor_msgs::Image &message) {
   }
 
   ProcessImage(img, timestamp, message.header);
-  
+
 }
 
 void CameraProcessSubnode::ImgCompressCallback(const sensor_msgs::CompressedImage &message) {
@@ -316,11 +319,11 @@ bool CameraProcessSubnode::CompMessageToMat(const sensor_msgs::CompressedImage &
   cv_ptr->image = cv::imdecode(cv::Mat(msg.data), CV_LOAD_IMAGE_UNCHANGED);
 
   cv_ptr->encoding = sensor_msgs::image_encodings::BGR8;
-                                   
+
 
   *img = cv::Mat(cv_ptr->image.rows, cv_ptr->image.cols, CV_8UC3);
   *img = cv_ptr->image;
-  
+
 
   return true;
 }

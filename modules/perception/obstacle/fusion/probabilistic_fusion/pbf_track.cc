@@ -165,7 +165,8 @@ bool PbfTrack::IsInCameraView(const Eigen::Vector3d &center, double timestamp) {
   // read transformation matrix from calibration config manager
   CalibrationConfigManager *calibration_config_manager =
       Singleton<CalibrationConfigManager>::get();
-
+  //TODO for the now it uses default camera if camera id is not provided
+  calibration_config_manager->set_device_id_and_calibration_config_manager_init("");
   const CameraCalibrationPtr camera_calibration =
       calibration_config_manager->get_camera_calibration();
 
@@ -173,7 +174,7 @@ bool PbfTrack::IsInCameraView(const Eigen::Vector3d &center, double timestamp) {
       camera_calibration->get_camera_model();
   Eigen::Matrix4d camera_trans;
 
-  if (!GetCameraTrans(timestamp, &camera_trans)) {
+  if (!GetCameraTrans(timestamp, &camera_trans, "TODO")) {
     AERROR << "failed to get trans at timestamp: " << timestamp;
     return false;
   }

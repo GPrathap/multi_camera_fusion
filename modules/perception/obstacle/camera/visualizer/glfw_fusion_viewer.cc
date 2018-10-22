@@ -211,6 +211,8 @@ bool GLFWFusionViewer::initialize() {
 
   CalibrationConfigManager* calibration_config_manager =
       Singleton<CalibrationConfigManager>::get();
+  //TODO for the now it uses default camera if camera id is not provided
+  calibration_config_manager->set_device_id_and_calibration_config_manager_init("");
   CameraCalibrationPtr calibrator =
       calibration_config_manager->get_camera_calibration();
   camera_intrinsic_ = calibrator->get_camera_intrinsic();
@@ -632,6 +634,8 @@ void GLFWFusionViewer::render() {
   if (FLAGS_use_whole_lane_line) {
     CalibrationConfigManager* calibration_config_manager =
         Singleton<CalibrationConfigManager>::get();
+    //TODO for the now it uses default camera if camera id is not provided
+    calibration_config_manager->set_device_id_and_calibration_config_manager_init("");
     CameraCalibrationPtr calibrator =
         calibration_config_manager->get_camera_calibration();
     car2camera = calibrator->get_car2camera_homography_mat();

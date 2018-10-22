@@ -83,6 +83,8 @@ DEFINE_string(front_camera_extrinsics_file,
 DEFINE_string(front_camera_intrinsics_file,
               "modules/perception/data/params/front_camera_intrinsics.yaml",
               "front_camera intrinsic file");
+DEFINE_string(camera_extrinsics_and_intrinsics_file_location,
+"modules/perception/data/params/", " camera intrinsic and extrinsic file");
 
 /// obstacle/onboard/fusion_subnode.cc
 DEFINE_string(onboard_fusion, "ProbabilisticFusion",
