@@ -85,7 +85,7 @@ class AsyncFusion : public BaseFusion {
 
   void FuseForegroundObjects(
       const Eigen::Vector3d &ref_point, const SensorType &sensor_type,
-      const std::string &sensor_id, const double timestamp, std::string frame->sensor_device_id,
+      const std::string &sensor_id, const double timestamp, std::string sensor_device_id,
       std::vector<std::shared_ptr<PbfSensorObject>> *foreground_objects);
 
   PbfSensorFramePtr ConstructFrame(const SensorObjects &obj);
