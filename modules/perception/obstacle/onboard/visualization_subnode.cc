@@ -488,12 +488,7 @@ apollo::common::Status VisualizationSubnode::ProcEvents() {
       double timestamp = events[j].timestamp;
       const std::string& device_id = events[j].reserve;
       std::string data_key;
-//        AINFO << "Vis_sub: event_meta id: " << event_meta.event_id << ", device id: " << event_meta.reserve;
-//        if (event_meta.event_id == camera_event_id_) {
-//            //camera_device_id_ = event_meta.reserve;
-//        }
-
-        camera_device_id_ = device_id;
+      camera_device_id_ = device_id;
 
       if (!SubnodeHelper::ProduceSharedDataKey(timestamp, device_id,
                                                &data_key)) {

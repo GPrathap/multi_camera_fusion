@@ -54,8 +54,6 @@ bool CameraProcessSubnode::InitInternal() {
   if (device_id_=="camera"){ //standard Apollo camera ID
     AdapterManager::AddImageFrontCallback(&CameraProcessSubnode::ImgCallback,
                                           this);
-    AdapterManager::AddCompressedImageCallback(&CameraProcessSubnode::ImgCompressCallback,
-                                          this);
   } else if (device_id_=="front_right_side_camera") {
     AdapterManager::AddImageFrontRightSideCallback(&CameraProcessSubnode::ImgCallback,
                                                            this);
@@ -78,6 +76,8 @@ bool CameraProcessSubnode::InitInternal() {
     AdapterManager::AddImageFrontCameraCallback(&CameraProcessSubnode::ImgCallback,
                                                            this);
   }
+  AdapterManager::AddCompressedImageCallback(&CameraProcessSubnode::ImgCompressCallback,
+                                             this);
 
   if (pb_obj_) {
     AdapterManager::AddChassisCallback(&CameraProcessSubnode::ChassisCallback,
