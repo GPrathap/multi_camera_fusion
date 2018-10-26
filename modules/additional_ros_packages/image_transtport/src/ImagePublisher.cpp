@@ -7,6 +7,7 @@
 #include <iostream>
 #include <glob.h>
 #include <vector>
+#include <sstream>
 
 using std::vector;
 
@@ -42,7 +43,7 @@ int main(int argc, char** argv)
     std::cout<< "Number of images to be sent: " << files_left.size() << std::endl;
 
 
-    ros::Rate loop_rate(10);
+    ros::Rate loop_rate(6);
     unsigned int i=0;
     while (nh.ok()) {
         std::cout<< files_left.at(i) << std::endl;
@@ -50,8 +51,14 @@ int main(int argc, char** argv)
 
         cv::Mat image_left = cv::imread(files_left.at(i), CV_LOAD_IMAGE_COLOR);
         cv::Mat image_right = cv::imread(files_right.at(i), CV_LOAD_IMAGE_COLOR);
-        sensor_msgs::ImagePtr msg_left = cv_bridge::CvImage(std_msgs::Header(), "bgr8", image_left).toImageMsg();
-        sensor_msgs::ImagePtr msg_right = cv_bridge::CvImage(std_msgs::Header(), "bgr8", image_right).toImageMsg();
+
+        std_msgs::Header message_header = std_msgs::Header();
+        message_header.stamp = ros::Time::now();
+        std::ostringstream ss;
+        ss<<i;
+        message_header.frame_id = ss.str();
+        sensor_msgs::ImagePtr msg_left = cv_bridge::CvImage(message_header, "bgr8", image_left).toImageMsg();
+        sensor_msgs::ImagePtr msg_right = cv_bridge::CvImage(message_header, "bgr8", image_right).toImageMsg();
 
         pub_front_left.publish(msg_left);
         pub_left.publish(msg_left);
