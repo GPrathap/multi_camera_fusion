@@ -103,7 +103,7 @@ void LidarProcessSubnode::OnPointCloud(
   out_sensor_objects->seq_num = seq_num_;
 
   PERF_BLOCK_START();
-  /// get velodyne2world transfrom
+  /// get velodyne2world transform
   std::shared_ptr<Matrix4d> velodyne_trans = std::make_shared<Matrix4d>();
   if (!GetVelodyneTrans(kTimeStamp, velodyne_trans.get())) {
     AERROR << "failed to get trans at timestamp: "

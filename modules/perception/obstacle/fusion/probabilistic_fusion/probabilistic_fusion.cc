@@ -62,8 +62,7 @@ bool ProbabilisticFusion::Init() {
   PbfTrack::SetMaxRadarInvisiblePeriod(config_.max_radar_invisible_period());
   PbfTrack::SetMaxCameraInvisiblePeriod(config_.max_camera_invisible_period());
   PbfTrack::SetMaxRadarConfidentAngle(config_.max_radar_confident_angle());
-  PbfTrack::SetMinRadarConfidentDistance(
-      config_.min_radar_confident_distance());
+  PbfTrack::SetMinRadarConfidentDistance(config_.min_radar_confident_distance());
   PbfTrack::SetPublishIfHasLidar(config_.publish_if_has_lidar());
   PbfTrack::SetPublishIfHasRadar(config_.publish_if_has_radar());
 
@@ -119,8 +118,7 @@ bool ProbabilisticFusion::Fuse(
 
       AINFO << "publish_sensor_id_" << publish_sensor_id_;
 
-      if (GetSensorType(multi_sensor_objects[i].sensor_type) ==
-          publish_sensor_id_) {
+      if (GetSensorType(multi_sensor_objects[i].sensor_type) == publish_sensor_id_) {
         need_to_fusion = true;
         fusion_time = multi_sensor_objects[i].timestamp;
         started_ = true;

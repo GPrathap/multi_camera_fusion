@@ -97,8 +97,7 @@ void FrameContent::set_camera_content(
     double timestamp, Eigen::Matrix4d pose_c2w,
     const std::vector<std::shared_ptr<Object>>& objects) {
   auto key = DoubleToMapKey(timestamp);
-  //TODO this just a workaround for testing need to figure it out why cache key not existing
-  //if (camera_caches_.count(key)) return;
+  if (camera_caches_.count(key)) return;
 
   // set_global_offset(pose_c2w);
 
