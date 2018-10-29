@@ -25,5 +25,5 @@ source "${DIR}/apollo_base.sh"
 # run command_name module_name
 run sim_bridge "$@" --sim_bridge_adapter_config_file=/apollo/modules/sim_bridge/conf/ros_localization_bridge_adapter.conf \
 --sim_bridge_config_file=/apollo/modules/sim_bridge/conf/ros_localization_bridge_config.pb.txt \
---odom_ros_topic=/gnss_odometry \
+--odom_ros_topic=/odometry/filtered \
 --imu_ros_topic=/imu/data
