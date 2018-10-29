@@ -148,19 +148,15 @@ bool FusionSubnode::InitOutputStream() {
     AWARN << "Failed to find camera_event_ids:" << reserve_;
     AINFO << "camera_event_ids list will be set empty";
   } else {
-    std::vector<int> vect;
     AINFO << "camera_event_ids list: "<< camera_iter->second;
     std::stringstream camera_event_ids(camera_iter->second);
     int i;
     while (camera_event_ids >> i)
     {
-      vect.push_back(i);
       camera_event_ids_.push_back(static_cast<EventID>(i));
       if (camera_event_ids.peek() == ',')
         camera_event_ids.ignore();
     }
-    for (i=0; i< vect.size(); i++)
-      std::cout << vect.at(i)<<std::endl;
   }
 
   auto lane_iter = reserve_field_map.find("lane_event_id");

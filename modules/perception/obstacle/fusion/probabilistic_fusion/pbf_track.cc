@@ -173,7 +173,7 @@ bool PbfTrack::IsInCameraView(const Eigen::Vector3d &center, std::string sensor_
       camera_calibration->get_camera_model();
   Eigen::Matrix4d camera_trans;
 
-  if (!GetCameraTrans(timestamp, &camera_trans, "TODO")) {
+  if (!GetCameraTrans(timestamp, &camera_trans, sensor_device_id)) {
     AERROR << "failed to get trans at timestamp: " << timestamp;
     return false;
   }

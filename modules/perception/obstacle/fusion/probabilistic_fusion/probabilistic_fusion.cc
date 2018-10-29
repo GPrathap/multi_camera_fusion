@@ -310,9 +310,10 @@ void ProbabilisticFusion::FuseForegroundObjects(
   UpdateUnassignedTracks(&tracks, unassigned_tracks, track2measurements_dist,
                          sensor_type, sensor_id, sensor_device_id, timestamp);
 
-  if (FLAGS_use_navigation_mode) {
+  if (!FLAGS_use_navigation_mode) {
     if (is_camera(sensor_type) || is_lidar(sensor_type)) {
       CreateNewTracks(*foreground_objects, unassigned_objects);
+      AINFO << "Creating new trackers for unsigned objects;
     }
   } else {
     if (is_lidar(sensor_type)) {
