@@ -366,6 +366,7 @@ void VisualizationSubnode::SetFusionContent(const std::string& data_key,
     for (int i = 0; i < ts.size(); ++i) {
       double trigger_ts = ts[i];
       std::string trigger_device_id = device_id[i];
+      std::string sensor_device_id_fused = fusion_item->fused_sensor_device_id;
       std::string data_key_sensor;
       AINFO << "trigger device id " << trigger_device_id;
       AINFO << "data key sensor " << data_key_sensor;
@@ -375,9 +376,9 @@ void VisualizationSubnode::SetFusionContent(const std::string& data_key,
         SubnodeHelper::ProduceSharedDataKey(trigger_ts, trigger_device_id,
                                             &data_key_sensor);
         SetLidarContent(data_key_sensor, content, timestamp);
-      } else if (trigger_device_id == "camera") {
+      } else if (sensor_device_id_fused.find("camera") != std::string::npos) {
         AINFO << "set camera content";
-        SubnodeHelper::ProduceSharedDataKey(trigger_ts, trigger_device_id,
+        SubnodeHelper::ProduceSharedDataKey(trigger_ts, sensor_device_id_fused,
                                             &data_key_sensor);
         SetCameraContent(data_key_sensor, content, timestamp);
         // SetLaneContent(data_key, content, timestamp);
