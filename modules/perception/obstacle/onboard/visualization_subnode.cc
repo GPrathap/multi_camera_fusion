@@ -154,10 +154,11 @@ bool VisualizationSubnode::InitInternal() {
   }
   content_.set_pose_type(FrameContent::IMAGE_CONTINUOUS);
   AINFO << "visualize according to continuous image: ";
-
-  CalibrationConfigManager* config_manager =
+  AINFO << "Loading configurations for the camera: " << camera_device_id_;
+  CalibrationConfigManager* calibration_config_manager =
       Singleton<CalibrationConfigManager>::get();
-  CameraCalibrationPtr calibrator = config_manager->get_camera_calibration();
+  calibration_config_manager->set_device_id_and_calibration_config_manager_init(camera_device_id_);
+  CameraCalibrationPtr calibrator = calibration_config_manager->get_camera_calibration();
   camera_to_car_pose_ = calibrator->get_camera_extrinsics();
   AINFO << "Init camera to car transform successfully.";
   content_.set_camera2car_pose(camera_to_car_pose_);
@@ -232,6 +233,17 @@ bool VisualizationSubnode::InitStream() {
     lidar_event_id_ = -1;
   } else {
     lidar_event_id_ = static_cast<EventID>(atoi((iter->second).c_str()));
+  }
+
+  iter = reserve_field_map.find("camera_device_id");
+  if (iter == reserve_field_map.end()) {
+        AWARN << "Failed to find camera_device_id: " << reserve_;
+      camera_device_id_ = "";
+  } else {
+      camera_device_id_ = iter->second;
+  }
+  if(camera_device_id_.empty()){
+    AWARN << "Failed to find camera device id for " << camera_event_id_;
   }
 
   return true;
@@ -476,6 +488,12 @@ apollo::common::Status VisualizationSubnode::ProcEvents() {
       double timestamp = events[j].timestamp;
       const std::string& device_id = events[j].reserve;
       std::string data_key;
+//        AINFO << "Vis_sub: event_meta id: " << event_meta.event_id << ", device id: " << event_meta.reserve;
+//        if (event_meta.event_id == camera_event_id_) {
+//            //camera_device_id_ = event_meta.reserve;
+//        }
+
+        camera_device_id_ = device_id;
 
       if (!SubnodeHelper::ProduceSharedDataKey(timestamp, device_id,
                                                &data_key)) {

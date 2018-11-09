@@ -60,6 +60,7 @@ DECLARE_bool(image_file_debug);
 /// camera config
 DECLARE_string(front_camera_extrinsics_file);
 DECLARE_string(front_camera_intrinsics_file);
+DECLARE_string(camera_extrinsics_and_intrinsics_file_location);
 
 /// obstacle/onboard/fusion_subnode.cc
 DECLARE_string(onboard_fusion);

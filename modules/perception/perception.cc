@@ -50,6 +50,13 @@ using apollo::common::ErrorCode;
 std::string Perception::Name() const { return "perception"; }
 
 Status Perception::Init() {
+
+  //This is the fix for https://github.com/ApolloAuto/apollo/issues/5453
+  if (!glfwInit()) {
+    std::cerr << "Failed to initialize glfw !\n";
+    return Status(ErrorCode::PERCEPTION_ERROR, "failed to init glfw");
+  }
+
   AdapterManager::Init(FLAGS_perception_adapter_config_filename);
 
   RegistAllOnboardClass();
