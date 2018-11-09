@@ -70,10 +70,11 @@ def update(frame_number):
 
     steering_data = compensate(STEERING_LINE_DATA)
     steering_line.set_ydata(steering_data)
+    steering_text.set_text('Steering = %.2f' % steering_data[-1])
 
     vel_data = compensate(VEL_LINE_DATA)
     vel_line.set_ydata(vel_data)
-    vel_text.set_text('velocity = %.3f' % vel_data[-1])
+    vel_text.set_text('velocity = %.5f' % vel_data[-1])
 
 
 
@@ -88,6 +89,7 @@ if __name__ == '__main__':
     Xs.sort()
     steering_line, = ax.plot(
         Xs, [0] * FLAGS.data_length, 'b', lw=3, alpha=0.5, label='Steering, %')
+    steering_text = ax.text(0.75, 0.85, '', transform=ax.transAxes)
     ax.set_ylim(-120, 120)
     ax.set_xlim(-1 * FLAGS.data_length, 10)
     ax.legend(loc="upper left")
@@ -96,7 +98,7 @@ if __name__ == '__main__':
     ax1 = fig.add_subplot(212)
     vel_line, = ax1.plot(
         Xs, [0] * FLAGS.data_length, 'b', lw=3, alpha=0.5, label='Velocity, m/s')
-    vel_text = ax1.text(0.75, 0.85, '', transform=ax.transAxes)
+    vel_text = ax1.text(0.75, 0.85, '', transform=ax1.transAxes)
     ax1.set_ylim(-10, 10)
     ax1.set_xlim(-1 * FLAGS.data_length, 10)
     ax1.legend(loc="upper left")
