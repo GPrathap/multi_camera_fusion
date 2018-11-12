@@ -96,7 +96,7 @@ class FusionSubnode : public Subnode {
   EventID pub_driven_event_id_;
   EventID lidar_event_id_;
   EventID radar_event_id_;
-  EventID camera_event_id_;
+  std::vector<EventID> camera_event_ids_;
   EventID lane_event_id_;
   EventID motion_event_id_;
   std::mutex fusion_subnode_mutex_;

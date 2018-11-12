@@ -36,6 +36,7 @@ struct PbfSensorObject {
 
   SensorType sensor_type;
   std::string sensor_id;
+  std::string sensor_device_id = "";
   double timestamp;
   std::shared_ptr<Object> object;
   double invisible_period;
@@ -45,6 +46,7 @@ struct PbfSensorFrame {
   PbfSensorFrame() { sensor2world_pose = Eigen::Matrix4d::Identity(); }
   SensorType sensor_type = SensorType::UNKNOWN_SENSOR_TYPE;
   std::string sensor_id = "unknown_sensor_type";
+  std::string sensor_device_id = "";
   /**@brief capturing timestamp*/
   double timestamp = 0.0;
   int seq_num = 0;

@@ -41,7 +41,7 @@ class PbfTrack {
                               double match_dist);
 
   void UpdateWithoutSensorObject(const SensorType &sensor_type,
-                                 const std::string &sensor_id,
+                                 const std::string &sensor_id, std::string &sensor_device_id,
                                  double min_match_dist, double timestamp);
 
   std::shared_ptr<PbfSensorObject> GetFusedObject();
@@ -152,7 +152,7 @@ class PbfTrack {
 
   BBA *GetFusedBBA() { return &_fused_bba; }
 
-  bool IsInCameraView(const Eigen::Vector3d &pt, double ts);
+  bool IsInCameraView(const Eigen::Vector3d &pt, std::string camera_device_id, double ts);
 
  protected:
   std::shared_ptr<PbfSensorObject> fused_object_;

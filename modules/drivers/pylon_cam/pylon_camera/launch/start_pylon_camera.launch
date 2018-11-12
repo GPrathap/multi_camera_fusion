@@ -12,9 +12,10 @@
               args="load pylon_camera/PylonCamNodelet camera_nodelet_manager" respawn="true" >
 
              <param name="camera_frame" value="pylon_camera" />
-             <param name="device_user_id" value="obstacle_left" />
+             <param name="device_user_id" value="front_left_side_camera" />
              <param name="frame_rate" value="$(arg frame_rate)" />
              <param name="shutter_mode" value="" />
+             <param name="image_encoding" value="rgb8" />
              <param name="exposure_search_timeout" value="5.0" />
              <param name="auto_exposure_upper_limit" value="2000000.0" />
              <param name="trigger_internal" value="$(arg trigger_internal)"/>
@@ -30,9 +31,10 @@
     <node pkg="nodelet" type="nodelet" name="sensor_camera_front_right_side" output="screen"
           args="load pylon_camera/PylonCamNodelet camera_nodelet_manager" respawn="true" >
                <param name="camera_frame" value="pylon_camera" />
-               <param name="device_user_id" value="obstacle_right" />
+               <param name="device_user_id" value="front_right_side_camera" />
                <param name="frame_rate" value="$(arg frame_rate)" />
                <param name="shutter_mode" value="" />
+               <param name="image_encoding" value="rgb8" />
                <param name="exposure_search_timeout" value="5.0" />
                <param name="auto_exposure_upper_limit" value="2000000.0" />
                <param name="trigger_internal" value="$(arg trigger_internal)"/>

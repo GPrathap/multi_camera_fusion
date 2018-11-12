@@ -142,7 +142,8 @@ TEST(PbfTrackClassFusionTest, test_pbf_type_fusion) {
   BBA* bba = track.GetFusedBBA();
   ADEBUG << "bba print data" << bba->print_bba();
   // update track with camera unknown object
-  track.UpdateWithoutSensorObject(SensorType::CAMERA, "1", 0, 0.2);
+  std::string sensor_device_id;
+  track.UpdateWithoutSensorObject(SensorType::CAMERA, "1", sensor_device_id, 0, 0.2);
   bba = track.GetFusedBBA();
   double ts = 0.3;
   for (int i = 0; i < 10; ++i) {
@@ -151,7 +152,7 @@ TEST(PbfTrackClassFusionTest, test_pbf_type_fusion) {
     bba = track.GetFusedBBA();
     ADEBUG << "bba print data" << bba->print_bba();
     ts += 0.1;
-    track.UpdateWithoutSensorObject(SensorType::CAMERA, "1", 0, ts);
+    track.UpdateWithoutSensorObject(SensorType::CAMERA, "1", sensor_device_id, 0, ts);
     bba = track.GetFusedBBA();
     ADEBUG << "bba print bba " << bba->print_bba();
     ts += 0.1;

@@ -76,6 +76,7 @@ class CCLanePostProcessor : public BaseCameraLanePostProcessor {
   void set_max_distance_to_see(ScalarType max_distance_to_see) {
     max_distance_to_see_ = max_distance_to_see;
   }
+
   void set_vis(bool vis) { vis_ = vis; }
 
   std::string name() const { return "CCLanePostProcessor"; }

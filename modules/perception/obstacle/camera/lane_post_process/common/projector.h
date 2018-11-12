@@ -39,7 +39,7 @@ class Projector {
   Projector();
 
   bool Init(const cv::Rect &roi, const T &max_distance = 200.0,
-            bool visualize = false);
+            bool visualize = false, std::string camera_device_id="");
 
   bool UvToXy(const T &u, const T &v, Eigen::Matrix<T, 2, 1> *p) const;
 
@@ -88,7 +88,7 @@ class Projector {
   }
 
  protected:
-  bool Project(const T &u, const T &v, Eigen::Matrix<T, 2, 1> *xy_point);
+  bool Project(const T &u, const T &v, Eigen::Matrix<T, 2, 1> *xy_point, std::string camera_device_id);
 
  private:
   Eigen::Matrix<T, 3, 3> trans_mat_;
@@ -160,14 +160,13 @@ Projector<T>::Projector() {
 
 template <typename T>
 bool Projector<T>::Init(const cv::Rect &roi, const T &max_distance,
-                        bool visualize) {
+                        bool visualize, std::string camera_device_id) {
   AINFO << "Initialize projector ...";
 
   // read transformation matrix from calibration config manager
   CalibrationConfigManager *calibration_config_manager =
       Singleton<CalibrationConfigManager>::get();
-  //TODO for the now it uses default camera if camera id is not provided
-  calibration_config_manager->set_device_id_and_calibration_config_manager_init("");
+  calibration_config_manager->set_device_id_and_calibration_config_manager_init(camera_device_id);
 
   const CameraCalibrationPtr camera_calibration =
       calibration_config_manager->get_camera_calibration();
@@ -229,7 +228,7 @@ bool Projector<T>::Init(const cv::Rect &roi, const T &max_distance,
       int id = i * uv_roi_cols_ + j;
 
       // transform point from image space to ego-car ground space
-      if (!Project(u, v, &(uv_2_xy_[id]))) {
+      if (!Project(u, v, &(uv_2_xy_[id]), camera_device_id)) {
         valid_xy_[id] = false;
         ++count_fail_points;
         continue;
@@ -461,7 +460,7 @@ bool Projector<T>::UvToXyImagePoint(const T &u, const T &v,
 
 template <typename T>
 bool Projector<T>::Project(const T &u, const T &v,
-                           Eigen::Matrix<T, 2, 1> *xy_point) {
+                           Eigen::Matrix<T, 2, 1> *xy_point, std::string camera_device_id) {
   if (xy_point == nullptr) {
     AERROR << "xy_point is a null pointer.";
     return false;
@@ -469,8 +468,7 @@ bool Projector<T>::Project(const T &u, const T &v,
 
   CalibrationConfigManager *calibration_config_manager =
           Singleton<CalibrationConfigManager>::get();
-  //TODO for the now it uses default camera if camera id is not provided
-  calibration_config_manager->set_device_id_and_calibration_config_manager_init("");
+  calibration_config_manager->set_device_id_and_calibration_config_manager_init(camera_device_id);
   const CameraCalibrationPtr camera_calibration =
           calibration_config_manager->get_camera_calibration();
 

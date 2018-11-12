@@ -133,6 +133,7 @@ struct SensorObjects {
 
   SensorType sensor_type = SensorType::UNKNOWN_SENSOR_TYPE;
   std::string sensor_id;
+  std::string sensor_device_id;
   double timestamp = 0.0;
   SeqId seq_num = 0;
   std::vector<std::shared_ptr<Object>> objects;

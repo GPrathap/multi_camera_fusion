@@ -62,8 +62,7 @@ bool ProbabilisticFusion::Init() {
   PbfTrack::SetMaxRadarInvisiblePeriod(config_.max_radar_invisible_period());
   PbfTrack::SetMaxCameraInvisiblePeriod(config_.max_camera_invisible_period());
   PbfTrack::SetMaxRadarConfidentAngle(config_.max_radar_confident_angle());
-  PbfTrack::SetMinRadarConfidentDistance(
-      config_.min_radar_confident_distance());
+  PbfTrack::SetMinRadarConfidentDistance(config_.min_radar_confident_distance());
   PbfTrack::SetPublishIfHasLidar(config_.publish_if_has_lidar());
   PbfTrack::SetPublishIfHasRadar(config_.publish_if_has_radar());
 
@@ -115,12 +114,11 @@ bool ProbabilisticFusion::Fuse(
       }
 
       AINFO << "GetSensorType(multi_sensor_objects[i].sensor_type)"
-            << GetSensorType(multi_sensor_objects[i].sensor_type);
+            << (multi_sensor_objects[i].sensor_type);
 
       AINFO << "publish_sensor_id_" << publish_sensor_id_;
 
-      if (GetSensorType(multi_sensor_objects[i].sensor_type) ==
-          publish_sensor_id_) {
+      if (GetSensorType(multi_sensor_objects[i].sensor_type) == publish_sensor_id_) {
         need_to_fusion = true;
         fusion_time = multi_sensor_objects[i].timestamp;
         started_ = true;
@@ -183,7 +181,7 @@ void ProbabilisticFusion::FuseFrame(PbfSensorFramePtr frame) {
 
   Eigen::Vector3d ref_point = frame->sensor2world_pose.topRightCorner(3, 1);
   FuseForegroundObjects(&foreground_objects, ref_point, frame->sensor_type,
-                        frame->sensor_id, frame->timestamp,
+                        frame->sensor_id, frame->sensor_device_id, frame->timestamp,
                         frame->sensor2world_pose);
   track_manager_->RemoveLostTracks();
 }
@@ -214,11 +212,11 @@ void ProbabilisticFusion::UpdateAssignedTracks(
 void ProbabilisticFusion::UpdateUnassignedTracks(
     std::vector<PbfTrackPtr> *tracks, const std::vector<int> &unassigned_tracks,
     const std::vector<double> &track_object_dist, const SensorType &sensor_type,
-    const std::string &sensor_id, double timestamp) {
+    const std::string &sensor_id, std::string& sensor_device_id, double timestamp) {
   for (size_t i = 0; i < unassigned_tracks.size(); i++) {
     int local_track_index = unassigned_tracks[i];
     (*tracks)[local_track_index]->UpdateWithoutSensorObject(
-        sensor_type, sensor_id, track_object_dist[local_track_index],
+        sensor_type, sensor_id, sensor_device_id, track_object_dist[local_track_index],
         timestamp);
   }
 }
@@ -282,7 +280,7 @@ void ProbabilisticFusion::DecomposeFrameObjects(
 void ProbabilisticFusion::FuseForegroundObjects(
     std::vector<std::shared_ptr<PbfSensorObject>> *foreground_objects,
     Eigen::Vector3d ref_point, const SensorType &sensor_type,
-    const std::string &sensor_id, double timestamp,
+    const std::string &sensor_id, std::string &sensor_device_id, double timestamp,
     const Eigen::Matrix4d &sensor_world_pose) {
   std::vector<int> unassigned_tracks;
   std::vector<int> unassigned_objects;
@@ -310,11 +308,12 @@ void ProbabilisticFusion::FuseForegroundObjects(
                        track2measurements_dist);
 
   UpdateUnassignedTracks(&tracks, unassigned_tracks, track2measurements_dist,
-                         sensor_type, sensor_id, timestamp);
+                         sensor_type, sensor_id, sensor_device_id, timestamp);
 
-  if (FLAGS_use_navigation_mode) {
+  if (!FLAGS_use_navigation_mode) {
     if (is_camera(sensor_type) || is_lidar(sensor_type)) {
       CreateNewTracks(*foreground_objects, unassigned_objects);
+      AINFO << "Creating new trackers for unsigned objects";
     }
   } else {
     if (is_lidar(sensor_type)) {
