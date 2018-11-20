@@ -37,6 +37,8 @@ bool DLFAffinityTracker::GetAffinityMatrix(
   for (size_t i = 0; i < selected_entry_matrix_.size(); ++i) {
     for (size_t j = 0; j < selected_entry_matrix_[0].size(); ++j) {
       float sum = 0.0f;
+      double result = CalculateDynamicTimeWarpedDistance(tracked[i].features_, detected[j].features_);
+      std::cout<<"-----------------dtw distance----------------------" << result << std::endl;
       for (size_t k = 0; k < dim; ++k) {
         sum += tracked[i].features_[k] * detected[j].features_[k];
       }

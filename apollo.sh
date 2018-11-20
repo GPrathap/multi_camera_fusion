@@ -479,20 +479,25 @@ function build_additional_ros_packages() {
     warning "ROS not found. Run apolllo.sh build first."
     exit 1
   fi
-
   source "${ROS_PATH}/setup.bash"
-
   cd modules
-  catkin_make_isolated --install --source additional_ros_packages \
+  install_packages="additional_ros_packages"
+  if [ $# -eq 1 ]
+  then
+    install_packages="$install_packages/$1"
+  fi
+  echo "Location going to search ros packages : $install_packages"
+
+  catkin_make_isolated --install --source $install_packages \
     --install-space "${ROS_PATH}" -DCMAKE_BUILD_TYPE=Release -DSETUPTOOLS_DEB_LAYOUT=OFF \
     --cmake-args --no-warn-unused-cli
   find "${ROS_PATH}" -name "*.pyc" -print0 | xargs -0 rm -rf
   cd -
-
   rm -rf modules/.catkin_workspace
   rm -rf modules/build_isolated/
   rm -rf modules/devel_isolated/
 }
+
 
 
 
@@ -688,7 +693,7 @@ function main() {
       build_pylon_cam
       ;;
     build_additional_ros_packages)
-      build_additional_ros_packages
+      build_additional_ros_packages $@
       ;;
     build_usbcam)
       build_usbcam
