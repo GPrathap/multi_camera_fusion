@@ -9,7 +9,6 @@ cc_library(
     deps = [
         "//modules/perception/obstacle/base",
         "//modules/perception/obstacle/camera/tracker:base_affinity",
-        "//modules/perception/obstacle/camera/tracker/common:tracker_common",
         "@eigen",
     ],
 )

@@ -122,7 +122,7 @@ bool CameraProcessSubnode::InitModules() {
   transformer_->SetExtrinsics(camera_to_car_);
 
   filter_.reset(
-      BaseCameraFilterRegisterer::GetInstanceByName("ObjectCameraExtendedKalmanFilter"));
+      BaseCameraFilterRegisterer::GetInstanceByName("ObjectCameraFilter"));
   filter_->Init();
 
   return true;

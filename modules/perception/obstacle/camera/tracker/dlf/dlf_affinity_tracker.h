@@ -24,7 +24,6 @@
 #include <vector>
 
 #include "modules/perception/obstacle/camera/tracker/base_affinity_tracker.h"
-#include "modules/perception/obstacle/camera/tracker/common/dtw.h"
 
 namespace apollo {
 namespace perception {

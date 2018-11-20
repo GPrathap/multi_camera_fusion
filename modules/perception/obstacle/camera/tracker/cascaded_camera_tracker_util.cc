@@ -170,7 +170,6 @@ void ManageTrackerAndID(
     const std::vector<Detected> &detected, const int frame_idx,
     const double timestamp, std::vector<Tracked> *tracked, int *next_tracked_id,
     std::unordered_map<int, std::pair<int, double>> *id_mapping) {
-
   id_mapping->clear();
   std::vector<Tracked> new_tracked;
   const int kMaxKeptFrame = 3;
