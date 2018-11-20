@@ -184,13 +184,13 @@ Status Parking::ProduceControlCommand(control::ControlCommand *control_command) 
           double speed_err = (parking_conf_.parking_speed()-chassis_.speed_mps());
           AINFO << "X: " << VehicleStateProvider::instance()->x() << " Y: " << VehicleStateProvider::instance()->y();
           AINFO << "SEEKING PLACE Distance to parking start: " << dist << " dx: "<< dx<< " dy: "<< dy << " speed err: "<< speed_err;
-          if (dist >= 1.0){
-            throttle = 0.02 * speed_err;
-          } else if (dist < 1.0 && dist > 0.3){
+          if (dist >= 1.5){
+            throttle = 0.05 * speed_err;
+          } else if (dist < 1.5 && dist > 0.9){
             throttle = 0.02 * (speed_err - 1.5);
           } else {
             throttle = 0.0;
-            brake = 0.3;
+            brake = 0.2;
             if (chassis_.speed_mps() < 0.1)
             {
               parking_state_.set_status(ParkingStatus::WAITING_R_GEAR);
@@ -224,7 +224,7 @@ Status Parking::ProduceControlCommand(control::ControlCommand *control_command) 
           double heading_err = fabs(parking_conf_.parking_heading() - yaw);
           AINFO << "REVERSE_TURN Heading err: " << heading_err << " Speed err: " << speed_err << " Yaw: " << yaw;   
           if (heading_err >= 1.0){
-            throttle = 0.02 * speed_err;
+            throttle = 0.06 * speed_err;
           }else {
             throttle = 0.0;
             brake = 0.2;
@@ -247,8 +247,8 @@ Status Parking::ProduceControlCommand(control::ControlCommand *control_command) 
           double dy = parking_conf_.stop_parking_y() - VehicleStateProvider::instance()->y();
           double dist =sqrt(dx*dx+dy*dy); //distance to stop parking point
           AINFO << "REVERSE_STRAIGHT Distance to parking start: " << dist << " dx: "<< dx<< " dy: "<< dy << " speed err: "<< speed_err;
-          if (dist >= 0.3){
-            throttle = 0.02 * speed_err;
+          if (dist >= 0.7){
+            throttle = 0.04 * speed_err;
           } else {
             throttle = 0.0;
             brake = 0.2;
