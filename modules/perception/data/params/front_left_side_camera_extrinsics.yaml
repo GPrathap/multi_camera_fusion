@@ -4,16 +4,15 @@ header:
     stamp:
         secs: 0
         nsecs: 0
-    frame_id: velodyne16
+    frame_id: localization
 child_frame_id: front_left_side_camera
 transform:
     rotation:
-        x: -0.029
-        y: -0.0006
-        z: 0.0000
-        w: 1.0
+        x: -0.5963
+        y: 0.3799
+        z: -0.3799
+        w: 0.5963
     translation:
-        x: 0
-        y: 0
-        z: 0   # when Z=0 is ground
-#        z: 1.476  # when Z=0 is the rear wheel axle
+        x: 0.20
+        y: 0.48
+        z: 1.15   # when Z=0 is ground

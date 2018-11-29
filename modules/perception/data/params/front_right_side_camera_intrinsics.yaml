@@ -3,7 +3,7 @@ header:
     stamp: 
         secs: 0
         nsecs:                 0
-    frame_id: ''
+    frame_id: white_mkz_onsemi_obstacle
 height: 512
 width: 1280
 distortion_model: plumb_bob
