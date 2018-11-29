@@ -97,6 +97,90 @@ cc_library(
 )
 
 cc_library(
+    name = "flann",
+    srcs = glob(["modules/flann/src/**/*.cpp"]),
+    hdrs = glob([
+        "modules/flann/src/**/*.hpp",
+        "modules/flann/src/**/*.h",
+        "modules/flann/include/**/*.hpp",
+        "modules/flann/include/**/*.h",
+    ]) + [
+        ":module_includes",
+    ],
+    includes = [
+        "modules/flann/include",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":core"
+    ],
+)
+
+cc_library(
+    name = "features2d",
+    srcs = glob(["modules/features2d/src/**/*.cpp"]),
+    hdrs = glob([
+        "modules/features2d/src/**/*.hpp",
+        "modules/features2d/src/**/*.h",
+        "modules/features2d/include/**/*.hpp",
+        "modules/features2d/include/**/*.h"
+    ]) + [
+        ":module_includes",
+    ],
+    includes = [
+        "modules/features2d/include",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":imgproc",
+        ":flann",
+    ],
+)
+
+cc_library(
+    name = "calib3d",
+    srcs = glob(["modules/calib3d/src/**/*.cpp"]),
+    hdrs = glob([
+        "modules/calib3d/src/**/*.hpp",
+        "modules/calib3d/src/**/*.h",
+        "modules/calib3d/include/**/*.hpp",
+        "modules/calib3d/include/**/*.h",
+    ]) + [
+        ":module_includes",
+    ],
+    includes = [
+        "modules/calib3d/include",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":imgproc",
+        ":features2d"
+    ],
+)
+
+cc_library(
+    name = "nonfree",
+    srcs = glob(["modules/nonfree/src/**/*.cpp"]),
+    hdrs = glob([
+        "modules/nonfree/src/**/*.hpp",
+        "modules/nonfree/src/**/*.h",
+        "modules/nonfree/include/**/*.hpp",
+        "modules/nonfree/include/**/*.h",
+    ]) + [
+        ":module_includes",
+    ],
+    includes = [
+        "modules/nonfree/include",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":imgproc",
+        ":features2d",
+        ":calib3d"
+    ],
+)
+
+cc_library(
     name = "highgui",
     srcs = glob(
         [
@@ -139,6 +223,11 @@ cat > $@ <<"EOF"
 #define HAVE_OPENCV_CORE
 #define HAVE_OPENCV_IMGPROC
 #define HAVE_OPENCV_ML
+#define HAVE_OPENCV_NONFREE
+#define HAVE_OPENCV_FEATURES2D
+#define HAVE_OPENCV_CALIB3D
+#define HAVE_OPENCV_FLANN
+#
 EOF""",
 )
 

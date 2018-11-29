@@ -59,7 +59,7 @@ class CascadedCameraTracker : public BaseCameraTracker {
   std::string Name() const override;
 
  private:
-  bool dl_feature_ = true;
+  bool dl_feature_ = false;
   bool use_kcf_ = false;
 
   // Trackers for different stages

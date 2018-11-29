@@ -8,6 +8,10 @@ cc_library(
     hdrs = ["base_affinity_tracker.h"],
     deps = [
         "@opencv2//:core",
+        "@opencv2//:ml",
+        "@opencv2//:highgui",
+        "@opencv2//:features2d",
+        "@opencv2//:nonfree",
         "@eigen",
     ],
 )
