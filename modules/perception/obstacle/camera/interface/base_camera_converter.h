@@ -38,7 +38,7 @@ class BaseCameraConverter {
   BaseCameraConverter() {}
   virtual ~BaseCameraConverter() {}
 
-  virtual bool Init() = 0;
+  virtual bool Init(std::string device_id) = 0;
 
   // @brief: Convert 2D detected objects into physical 3D objects
   // @param [in/out]: detected object lists, added 3D position and orientation

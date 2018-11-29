@@ -163,7 +163,7 @@ void RadarProcessSubnode::OnRadar(const ContiRadar &radar_obs) {
     CalibrationConfigManager *calibration_config_manager =
         Singleton<CalibrationConfigManager>::get();
     calibration_config_manager->set_device_id_and_calibration_config_manager_init(camera_device_id_);
-    CameraCalibrationPtr calibrator = calibration_config_manager->get_camera_calibration();
+    CameraCalibrationPtr calibrator = calibration_config_manager->get_camera_calibration(camera_device_id_);
     // Eigen::Matrix4d camera_to_car = calibrator->get_camera_extrinsics();
     *radar2car_pose = radar_extrinsic_;
     ADEBUG << "get radar trans pose succ. pose: \n" << *radar2car_pose;

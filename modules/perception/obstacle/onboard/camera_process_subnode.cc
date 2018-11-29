@@ -89,7 +89,7 @@ bool CameraProcessSubnode::InitInternal() {
 bool CameraProcessSubnode::InitCalibration() {
   auto calibration_config_manager = Singleton<CalibrationConfigManager>::get();
   calibration_config_manager->set_device_id_and_calibration_config_manager_init(device_id_);
-  CameraCalibrationPtr calibrator = calibration_config_manager->get_camera_calibration();
+  CameraCalibrationPtr calibrator = calibration_config_manager->get_camera_calibration(device_id_);
 
   calibrator->get_image_height_width(&image_height_, &image_width_);
   camera_to_car_ = calibrator->get_camera_extrinsics();
@@ -103,14 +103,16 @@ bool CameraProcessSubnode::InitModules() {
   RegisterFactoryCascadedCameraTracker();
   RegisterFactoryFlatCameraTransformer();
   RegisterFactoryObjectCameraFilter();
-
+  //TODO tobe tested soon
+  //RegisterFactoryObjectCameraExtendedKalmanFilter();
+  
   detector_.reset(
       BaseCameraDetectorRegisterer::GetInstanceByName("YoloCameraDetector"));
   detector_->Init();
 
   converter_.reset(BaseCameraConverterRegisterer::GetInstanceByName(
       "GeometryCameraConverter"));
-  converter_->Init();
+  converter_->Init(device_id_);
 
   tracker_.reset(
       BaseCameraTrackerRegisterer::GetInstanceByName("CascadedCameraTracker"));
@@ -181,6 +183,7 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
   }
 
   tracker_->Associate(img, timestamp, &objects);
+  //img_previous = img;
   PERF_BLOCK_END("CameraProcessSubnode_tracker_");
 
   FilterOptions options;
@@ -190,6 +193,7 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
       options.camera_trans->setIdentity();
   } else {
       options.camera_trans = std::make_shared<Eigen::Matrix4d>();
+      std::cout<< "device id get camera module" << device_id_ << std::endl;
       if (!GetCameraTrans(timestamp, options.camera_trans.get(), device_id_)) {
           AERROR << "Failed to get trans at timestamp: " << timestamp;
           return;
@@ -201,12 +205,6 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
   AINFO << "camera_to_world_: " << camera_to_world_;
   filter_->Filter(timestamp, &objects, options);
   PERF_BLOCK_END("CameraProcessSubnode_filter_");
-
-  auto calibration_config_manager = Singleton<CalibrationConfigManager>::get();
-  calibration_config_manager->set_device_id_and_calibration_config_manager_init(device_id_);
-  auto calibrator = calibration_config_manager->get_camera_calibration();
-  calibrator->SetCar2CameraExtrinsicsAdj(camera_to_car_adj_,
-                                         adjusted_extrinsics_);
 
   std::shared_ptr<SensorObjects> out_objs(new SensorObjects);
   out_objs->timestamp = timestamp;
@@ -365,7 +363,7 @@ void CameraProcessSubnode::VisualObjToSensorObj(
     (*sensor_objects)->sensor2world_pose_static = camera_to_car_;
     (*sensor_objects)->sensor2world_pose = camera_to_car_adj_;
   } else {
-    (*sensor_objects)->sensor2world_pose_static = *(options.camera_trans);
+    (*sensor_objects)->sensor2world_pose_static = camera_to_car_;
     (*sensor_objects)->sensor2world_pose = *(options.camera_trans);
     AINFO << "camera process sensor2world pose is "
           << (*sensor_objects)->sensor2world_pose;

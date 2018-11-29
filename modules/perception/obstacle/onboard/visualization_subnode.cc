@@ -158,7 +158,7 @@ bool VisualizationSubnode::InitInternal() {
   CalibrationConfigManager* calibration_config_manager =
       Singleton<CalibrationConfigManager>::get();
   calibration_config_manager->set_device_id_and_calibration_config_manager_init(camera_device_id_);
-  CameraCalibrationPtr calibrator = calibration_config_manager->get_camera_calibration();
+  CameraCalibrationPtr calibrator = calibration_config_manager->get_camera_calibration(camera_device_id_);
   camera_to_car_pose_ = calibrator->get_camera_extrinsics();
   AINFO << "Init camera to car transform successfully.";
   content_.set_camera2car_pose(camera_to_car_pose_);
@@ -323,13 +323,16 @@ void VisualizationSubnode::SetCameraContent(const std::string& data_key,
     return;
   }
 
-  // content->set_global_offset(objs->sensor2world_pose);
-  // AINFO << "camera sensor2world_pose is "
-  //      << objs->sensor2world_pose;
+  if (!FLAGS_use_navigation_mode) {
+      content->set_global_offset(objs->sensor2world_pose);
+  }
 
+  AINFO << "camera sensor2world_pose is " << objs->sensor2world_pose;
   content->set_camera_content(timestamp, objs->sensor2world_pose,
                               objs->sensor2world_pose_static, objs->objects,
                               (*(objs->camera_frame_supplement)));
+                              
+  content->device_id = camera_device_id_;
 }
 
 void VisualizationSubnode::SetFusionContent(const std::string& data_key,
@@ -363,7 +366,7 @@ void VisualizationSubnode::SetFusionContent(const std::string& data_key,
     const std::vector<double>& ts = fusion_item->frame_ts;
     const std::vector<std::string>& device_id = fusion_item->frame_device_id;
 
-    for (int i = 0; i < ts.size(); ++i) {
+    for (std::size_t i = 0; i < ts.size(); ++i) {
       double trigger_ts = ts[i];
       std::string trigger_device_id = device_id[i];
       std::string sensor_device_id_fused = fusion_item->fused_sensor_device_id;

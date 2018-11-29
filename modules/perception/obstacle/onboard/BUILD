@@ -121,6 +121,7 @@ cc_library(
         "//modules/perception/obstacle/camera/detector/yolo_camera_detector",
         "//modules/perception/obstacle/camera/dummy",
         "//modules/perception/obstacle/camera/filter",
+        "//modules/perception/obstacle/camera/filter:camera_extended_kalman_filter",
         "//modules/perception/obstacle/camera/tracker",
         "//modules/perception/obstacle/camera/transformer",
         "//modules/perception/onboard",

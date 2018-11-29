@@ -30,6 +30,7 @@
 #include "modules/perception/obstacle/onboard/object_shared_data.h"
 #include "modules/perception/obstacle/onboard/scene_shared_data.h"
 #include "modules/perception/onboard/subnode.h"
+#include "modules/perception/onboard/transform_input.h"
 #include "modules/perception/onboard/subnode_helper.h"
 
 namespace apollo {

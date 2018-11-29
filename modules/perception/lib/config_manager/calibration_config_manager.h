@@ -96,36 +96,45 @@ struct CameraCoeffient {
   size_t image_width;
 };
 
+struct ConfigInfo
+{
+    std::map<std::string, std::string> device_configuration;
+    bool device_config_loaded;
+};
+
 class CalibrationConfigManager {
  public:
   // thread-safe interface.
-  bool init();
+  bool init(std::string device_id);
 
   // thread-safe interface.
-  bool reset();
+  bool reset(std::string device_id);
 
-  inline CameraCalibrationPtr get_camera_calibration() {
-    return camera_calibration_;
+  inline CameraCalibrationPtr get_camera_calibration(std::string device_id) {
+    if(device_id.empty()){
+      device_id = "front_camera";
+    }
+    return  camera_calibrations_[device_id];
   }
 
   void set_device_id_and_calibration_config_manager_init(std::string device_id);
-  std::string get_device_id();
+  //std::string get_device_id();
  private:
 
   CalibrationConfigManager();
   ~CalibrationConfigManager();
 
-  bool init_internal();
+  bool init_internal(std::string device_id);
 
   friend class Singleton<CalibrationConfigManager>;
 
   Mutex mutex_;  // multi-thread init safe.
   bool inited_ = false;
-  std::string camera_extrinsic_path_;
-  std::string camera_intrinsic_path_;
-  std::string device_id_;
+  std::map<std::string, ConfigInfo> device_info;
+  
+  //std::string device_id_;
   std::string radar_extrinsic_path_;
-  CameraCalibrationPtr camera_calibration_;
+  std::map<std::string, CameraCalibrationPtr> camera_calibrations_;
   RadarCalibrationPtr radar_calibration_;
 
   DISALLOW_COPY_AND_ASSIGN(CalibrationConfigManager);
@@ -136,7 +145,7 @@ class CameraCalibration {
   CameraCalibration();
   ~CameraCalibration();
   bool init(const std::string& intrinsic_path,
-            const std::string& extrinsic_path);
+            const std::string& extrinsic_path, std::string device_id);
 
   void calculate_homographic();
 
@@ -209,6 +218,8 @@ class CameraCalibration {
 
   Eigen::Matrix<double, 3, 4> camera_intrinsic_;  // camera intrinsic
 
+  std::string camera_device_id;
+  std::map<std::string, std::string> device_config_param;
   std::shared_ptr<Eigen::Matrix<double, 4, 4>>
       _camera2car_pose;  // camera to ego car pose
   std::shared_ptr<Eigen::Matrix<double, 4, 4>>

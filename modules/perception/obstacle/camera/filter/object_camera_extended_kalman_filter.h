@@ -14,8 +14,8 @@
  * limitations under the License.
  *****************************************************************************/
 
-#ifndef MODULES_PERCEPTION_OBSTACLE_CAMERA_FILTER_OBJECT_CAMERA_KALMAN_FILTER_H_
-#define MODULES_PERCEPTION_OBSTACLE_CAMERA_FILTER_OBJECT_CAMERA_KALMAN_FILTER_H_
+#ifndef MODULES_PERCEPTION_OBSTACLE_CAMERA_EXTENDED_KALMAN_FILTER_H_
+#define MODULES_PERCEPTION_OBSTACLE_CAMERA_EXTENDED_KALMAN_FILTER_H_
 
 #include <memory>
 #include <string>
@@ -86,8 +86,10 @@ class ObjectCameraExtendedKalmanFilter : public BaseCameraFilter {
   DISALLOW_COPY_AND_ASSIGN(ObjectCameraExtendedKalmanFilter);
 };
 
+REGISTER_CAMERA_FILTER(ObjectCameraExtendedKalmanFilter);
+
 }  // namespace perception
 }  // namespace apollo
 
 #endif
-// MODULES_PERCEPTION_OBSTACLE_CAMERA_FILTER_OBJECT_CAMERA_KALMAN_FILTER_H_
+// MODULES_PERCEPTION_OBSTACLE_CAMERA_EXTENDED_KALMAN_FILTER_H_

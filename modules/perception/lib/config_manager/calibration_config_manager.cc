@@ -212,55 +212,63 @@ bool CameraCoeffient::init_camera_intrinsic_matrix_and_distort_params(
 
 
 
-CalibrationConfigManager::CalibrationConfigManager()
-    : camera_calibration_(new CameraCalibration()) {
+CalibrationConfigManager::CalibrationConfigManager(){
 }
 
 void CalibrationConfigManager::set_device_id_and_calibration_config_manager_init(std::string device_id){
-  if(!device_id.empty()){
-    camera_extrinsic_path_ = FLAGS_camera_extrinsics_and_intrinsics_file_location + device_id + "_extrinsics.yaml";
-    camera_intrinsic_path_ = FLAGS_camera_extrinsics_and_intrinsics_file_location + device_id + "_intrinsics.yaml";
-  }else{
-    camera_extrinsic_path_ = FLAGS_front_camera_extrinsics_file;
-    camera_intrinsic_path_ = FLAGS_front_camera_intrinsics_file;
-    device_id_ = device_id;
+  init(device_id);
+}
+
+bool CalibrationConfigManager::init(std::string device_id) {
+  MutexLock lock(&mutex_);
+  if(device_id.empty()){
+     device_id = "front_camera";
+     AINFO << "Loading camera config from default camera: " << device_id;
   }
-  init();
+  if(device_info.find(device_id) == device_info.end()){
+    AINFO << "Storing the camera infomation with respect to " << device_id;
+    std::string camera_extrinsic_path_ = FLAGS_camera_extrinsics_and_intrinsics_file_location 
+    + device_id + "_extrinsics.yaml";
+    std::string camera_intrinsic_path_ = FLAGS_camera_extrinsics_and_intrinsics_file_location 
+    + device_id + "_intrinsics.yaml";
+    AINFO << "Loading camera config from: " << camera_extrinsic_path_;
+    ConfigInfo config_info;
+    config_info.device_configuration["camera_extrinsic"] = camera_extrinsic_path_;
+    config_info.device_configuration["camera_intrinsic"] = camera_intrinsic_path_;
+    config_info.device_config_loaded = false;
+    device_info[device_id] = config_info;
+    camera_calibrations_[device_id] = std::make_shared<CameraCalibration>();
+  }
+  return init_internal(device_id);
 }
 
-std::string CalibrationConfigManager::get_device_id(){
-  return device_id_;
-}
-
-bool CalibrationConfigManager::init() {
+bool CalibrationConfigManager::reset(std::string device_id) {
   MutexLock lock(&mutex_);
-  return init_internal();
-}
-
-bool CalibrationConfigManager::reset() {
-  MutexLock lock(&mutex_);
-  inited_ = false;
-  return init_internal();
+  if(device_info.find(device_id) != device_info.end()){
+      device_info[device_id].device_config_loaded = false;
+  }
+  return init_internal(device_id);
 }
 
 CalibrationConfigManager::~CalibrationConfigManager() {}
 
-bool CalibrationConfigManager::init_internal() {
-  if (inited_) {
-    return true;
+bool CalibrationConfigManager::init_internal(std::string device_id) {
+  if(device_info.find(device_id) != device_info.end()){
+     if(device_info[device_id].device_config_loaded){
+       return true;
+     }
   }
 
-  if (!camera_calibration_->init(camera_intrinsic_path_,
-                                 camera_extrinsic_path_)) {
-    AERROR << "init intrinsics failure: " << camera_intrinsic_path_ << " "
-           << camera_extrinsic_path_;
+  const std::string camera_intrinsic = device_info[device_id].device_configuration["camera_intrinsic"];
+  const std::string camera_extrinsic = device_info[device_id].device_configuration["camera_extrinsic"];
+  if (!camera_calibrations_[device_id]->init(camera_intrinsic, camera_extrinsic, device_id)){
+    AERROR << "Init intrinsics failure: " << camera_intrinsic << " " << camera_extrinsic;
     return false;
   }
 
-  AINFO << "finish to load Calibration Configs.";
-
-  inited_ = true;
-  return inited_;
+  AINFO << "Finish loading calibration configs from " << camera_extrinsic;
+  device_info[device_id].device_config_loaded = true;
+  return true;
 }
 
 CameraCalibration::CameraCalibration()
@@ -272,7 +280,7 @@ CameraCalibration::CameraCalibration()
 CameraCalibration::~CameraCalibration() {}
 
 bool CameraCalibration::init(const std::string &intrinsic_path,
-                             const std::string &extrinsic_path) {
+                             const std::string &extrinsic_path, std::string device_id) {
   if (!camera_coefficient_.init("", extrinsic_path, intrinsic_path)) {
     AERROR << "init camera coefficient failed";
     return false;

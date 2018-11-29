@@ -47,6 +47,7 @@
 #include "modules/perception/obstacle/camera/detector/yolo_camera_detector/yolo_camera_detector.h"
 #include "modules/perception/obstacle/camera/dummy/dummy_algorithms.h"
 #include "modules/perception/obstacle/camera/filter/object_camera_filter.h"
+#include "modules/perception/obstacle/camera/filter/object_camera_extended_kalman_filter.h"
 #include "modules/perception/obstacle/camera/interface/base_camera_converter.h"
 #include "modules/perception/obstacle/camera/interface/base_camera_detector.h"
 #include "modules/perception/obstacle/camera/interface/base_camera_filter.h"

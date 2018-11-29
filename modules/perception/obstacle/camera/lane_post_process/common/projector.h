@@ -169,7 +169,7 @@ bool Projector<T>::Init(const cv::Rect &roi, const T &max_distance,
   calibration_config_manager->set_device_id_and_calibration_config_manager_init(camera_device_id);
 
   const CameraCalibrationPtr camera_calibration =
-      calibration_config_manager->get_camera_calibration();
+      calibration_config_manager->get_camera_calibration(camera_device_id);
 
   trans_mat_ = camera_calibration->get_camera2car_homography_mat().cast<T>();
 
@@ -470,7 +470,7 @@ bool Projector<T>::Project(const T &u, const T &v,
           Singleton<CalibrationConfigManager>::get();
   calibration_config_manager->set_device_id_and_calibration_config_manager_init(camera_device_id);
   const CameraCalibrationPtr camera_calibration =
-          calibration_config_manager->get_camera_calibration();
+          calibration_config_manager->get_camera_calibration(camera_device_id);
 
   auto trans_mat = camera_calibration->get_camera2car_homography_mat();
 
