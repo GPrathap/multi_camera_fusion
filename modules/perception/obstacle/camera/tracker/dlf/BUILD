@@ -16,8 +16,6 @@ cc_library(
         "@opencv2//:core",
         "@opencv2//:ml",
         "@opencv2//:highgui",
-        "@opencv2//:features2d",
-        "@opencv2//:nonfree",
         "@opencv2//:video",
     ],
 )

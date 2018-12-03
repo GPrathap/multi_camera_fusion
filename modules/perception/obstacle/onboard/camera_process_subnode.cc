@@ -104,7 +104,7 @@ bool CameraProcessSubnode::InitModules() {
   RegisterFactoryFlatCameraTransformer();
   RegisterFactoryObjectCameraFilter();
   //TODO tobe tested soon
-  //RegisterFactoryObjectCameraExtendedKalmanFilter();
+  RegisterFactoryObjectCameraExtendedKalmanFilter();
   
   detector_.reset(
       BaseCameraDetectorRegisterer::GetInstanceByName("YoloCameraDetector"));

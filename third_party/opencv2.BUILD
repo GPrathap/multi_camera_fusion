@@ -117,27 +117,6 @@ cc_library(
 )
 
 cc_library(
-    name = "features2d",
-    srcs = glob(["modules/features2d/src/**/*.cpp"]),
-    hdrs = glob([
-        "modules/features2d/src/**/*.hpp",
-        "modules/features2d/src/**/*.h",
-        "modules/features2d/include/**/*.hpp",
-        "modules/features2d/include/**/*.h"
-    ]) + [
-        ":module_includes",
-    ],
-    includes = [
-        "modules/features2d/include",
-    ],
-    visibility = ["//visibility:public"],
-    deps = [
-        ":imgproc",
-        ":flann",
-    ],
-)
-
-cc_library(
     name = "calib3d",
     srcs = glob(["modules/calib3d/src/**/*.cpp"]),
     hdrs = glob([
@@ -155,28 +134,6 @@ cc_library(
     deps = [
         ":imgproc",
         ":features2d"
-    ],
-)
-
-cc_library(
-    name = "nonfree",
-    srcs = glob(["modules/nonfree/src/**/*.cpp"]),
-    hdrs = glob([
-        "modules/nonfree/src/**/*.hpp",
-        "modules/nonfree/src/**/*.h",
-        "modules/nonfree/include/**/*.hpp",
-        "modules/nonfree/include/**/*.h",
-    ]) + [
-        ":module_includes",
-    ],
-    includes = [
-        "modules/nonfree/include",
-    ],
-    visibility = ["//visibility:public"],
-    deps = [
-        ":imgproc",
-        ":features2d",
-        ":calib3d"
     ],
 )
 

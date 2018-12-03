@@ -17,7 +17,6 @@
 #include "opencv2/core/core.hpp"
 #include "opencv2/features2d/features2d.hpp"
 #include "opencv2/highgui/highgui.hpp"
-#include "opencv2/nonfree/features2d.hpp"
 #include <stdio.h>
 #include <cmath>
 #include "modules/perception/obstacle/camera/tracker/dlf/dlf_affinity_tracker.h"
@@ -41,9 +40,6 @@ bool DLFAffinityTracker::GetAffinityMatrix(
       tracked.size(), std::vector<float>(detected.size(), 0.0f));
 
   int minHessian = 400;
-
-  cv::SurfFeatureDetector detector( minHessian );
-
   size_t dim = tracked[0].features_.size();
   std::vector<std::vector<cv::Point>> tempery_featureset_holder;
   std::vector<uchar> status1, status2;
