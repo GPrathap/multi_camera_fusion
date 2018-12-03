@@ -36,6 +36,9 @@
 #include <pylon_camera/internal/pylon_camera.h>
 
 #include <pylon/usb/BaslerUsbInstantCamera.h>
+#include <pylon/usb/_BaslerUsbCameraParams.h>
+
+using namespace Basler_UsbCameraParams;
 
 namespace pylon_camera
 {
@@ -74,13 +77,37 @@ bool PylonUSBCamera::applyCamSpecificStartupSettings(const PylonCameraParameter&
         cam_->TriggerSource.SetValue(Basler_UsbCameraParams::TriggerSource_Software);
         cam_->TriggerMode.SetValue(Basler_UsbCameraParams::TriggerMode_On);
 
-        cam_->ReverseX.SetValue(true);
-        cam_->ReverseY.SetValue(true);
-        
         cam_->Width.SetValue(parameters.width_);
         cam_->Height.SetValue(parameters.height_);
         cam_->OffsetX.SetValue(parameters.offset_x_);
         cam_->OffsetY.SetValue(parameters.offset_y_);
+        cam_->ReverseX.SetValue(parameters.reverse_x_);
+        cam_->ReverseY.SetValue(parameters.reverse_y_);
+
+        cam_->BlackLevelSelector.SetValue(BlackLevelSelector_All);
+        cam_->PixelFormat.SetValue(PixelFormat_RGB8);
+
+        // Image Quality Control
+        if (parameters.pgi_mode_) {
+            cam_->DemosaicingMode.SetValue(DemosaicingMode_BaslerPGI);
+            cam_->NoiseReduction.SetValue(parameters.noise_reduction_);
+            cam_->SharpnessEnhancement.SetValue(parameters.sharpness_enhancement_);
+        }
+        cam_->LightSourcePreset.SetValue(LightSourcePreset_Daylight5000K);
+        cam_->BalanceWhiteAuto.SetValue(BalanceWhiteAuto_Continuous);
+        cam_->BalanceRatioSelector.SetValue(BalanceRatioSelector_Red);
+        cam_->ColorAdjustmentSelector.SetValue(ColorAdjustmentSelector_Magenta);
+        cam_->ColorAdjustmentHue.SetValue(0.78125);
+        cam_->ColorAdjustmentSaturation.SetValue(1.04688);
+
+        // Auto Function Control
+        cam_->AutoFunctionROISelector.SetValue(AutoFunctionROISelector_ROI1);
+        cam_->AutoFunctionROIWidth.SetValue(1280);
+        cam_->AutoFunctionROIHeight.SetValue(262);
+        cam_->AutoFunctionROIOffsetX.SetValue(0);
+        cam_->AutoFunctionROIOffsetY.SetValue(250);
+        cam_->AutoFunctionROIUseWhiteBalance.SetValue(true);
+        cam_->AutoFunctionROIUseBrightness.SetValue(true);
 
          /* Thresholds for the AutoExposure Functions:
           *  - lower limit can be used to get rid of changing light conditions

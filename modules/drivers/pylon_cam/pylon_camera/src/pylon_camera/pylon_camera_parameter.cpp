@@ -40,6 +40,11 @@ PylonCameraParameter::PylonCameraParameter() :
         height_(1024),
         offset_x_(0),
         offset_y_(0),
+        reverse_x_(false),
+        reverse_y_(false),
+        pgi_mode_(false),
+        noise_reduction_(0),
+        sharpness_enhancement_(0),
         frame_rate_(5.0),
         camera_info_url_(""),
         image_encoding_(""),
@@ -96,9 +101,29 @@ void PylonCameraParameter::readFromRosParameterServer(const ros::NodeHandle& nh)
         nh.getParam("offset_y", offset_y_);
     }
 
+    if (nh.hasParam("reverse_x")) {
+        nh.getParam("reverse_x", reverse_x_);
+    }
+
+    if (nh.hasParam("reverse_y")) {
+        nh.getParam("reverse_y", reverse_y_);
+    }
+
     if ( nh.hasParam("frame_rate") )
     {
         nh.getParam("frame_rate", frame_rate_);
+    }
+
+    if (nh.hasParam("pgi_mode")) {
+        nh.getParam("pgi_mode", pgi_mode_);
+    }
+
+    if (nh.hasParam("noise_reduction")) {
+        nh.getParam("noise_reduction", noise_reduction_);
+    }
+
+    if (nh.hasParam("sharpness_enhancement")) {
+        nh.getParam("sharpness_enhancement", sharpness_enhancement_);
     }
 
     nh.param<std::string>("camera_info_url", camera_info_url_, "");
