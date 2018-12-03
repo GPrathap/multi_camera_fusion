@@ -4,7 +4,7 @@ header:
     stamp:
         secs: 0
         nsecs: 0
-    frame_id: localization
+    frame_id: base_link
 child_frame_id: front_camera
 transform:
     rotation:
