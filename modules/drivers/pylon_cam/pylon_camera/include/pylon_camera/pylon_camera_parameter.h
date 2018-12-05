@@ -127,6 +127,12 @@ public:
     int height_;
     int offset_x_;
     int offset_y_;
+    bool reverse_x_;
+    bool reverse_y_;
+
+    bool pgi_mode_;
+    double noise_reduction_;
+    double sharpness_enhancement_;
 
     /**
      * Flags which indicate if the binning factors are provided and hence
