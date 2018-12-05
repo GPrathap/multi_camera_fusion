@@ -1,7 +1,7 @@
 <launch>
     <arg name="perception_front_left_side_topic_name" default="/apollo/sensor/camera/perception/image_front_left_side" />
     <arg name="perception_front_right_side_topic_name" default="/apollo/sensor/camera/perception/image_front_right_side" />
-    <arg name="perception_obstacle" default="/apollo/perception/obstacle/camera" />
+    <arg name="perception_front_side_topic_name" default="/apollo/sensor/camera/perception/image_front_camera" />
     <arg name="frame_rate" default="20"/>
     <arg name="trigger_internal" default="0" />
     <arg name="trigger_fps" default="20" />
@@ -75,8 +75,6 @@
             <param name="offset_y" value="$(arg trigger_offset_y)" />
         </node>
     </group>
-
-
 </launch>
 
 
