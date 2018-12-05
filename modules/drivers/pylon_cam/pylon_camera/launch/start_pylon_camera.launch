@@ -2,8 +2,7 @@
     <arg name="perception_front_left_side_topic_name" default="/apollo/sensor/camera/perception/image_front_left_side" />
     <arg name="perception_front_right_side_topic_name" default="/apollo/sensor/camera/perception/image_front_right_side" />
     <arg name="perception_front_side_topic_name" default="/apollo/sensor/camera/perception/image_front_camera" />
-    <arg name="frame_rate" default="205"/>
-    <arg name="perception_front_side_topic_name" default="/apollo/sensor/camera/perception/image_front_camera" />
+
     <arg name="frame_rate" default="20"/>
     <arg name="trigger_internal" default="0" />
     <arg name="trigger_fps" default="20" />
@@ -17,21 +16,31 @@
         <node pkg="nodelet" type="nodelet" name="camera_nodelet_manager" args="manager" respawn="true" />
         <node pkg="nodelet" type="nodelet" name="sensor_camera_front_left_side" output="screen"
               args="load pylon_camera/PylonCamNodelet camera_nodelet_manager" respawn="true" >
-             <param name="camera_frame" value="pylon_camera" />
-             <param name="device_user_id" value="front_left_side_camera" />
-             <param name="frame_rate" value="$(arg frame_rate)" />
-             <param name="shutter_mode" value="" />
-             <param name="image_encoding" value="rgb8" />
-             <param name="exposure_search_timeout" value="5.0" />
-             <param name="auto_exposure_upper_limit" value="2000000.0" />
-             <param name="trigger_internal" value="$(arg trigger_internal)"/>
-             <param name="trigger_fps" value="$(arg trigger_fps)" />
-             <param name="width" value="$(arg trigger_width)" />
-             <param name="height" value="$(arg trigger_height)" />
-             <param name="offset_x" value="$(arg trigger_offset_x)" />
-             <param name="offset_y" value="$(arg trigger_offset_y)" />
-             <remap from="/camera_front_left_side/image_raw" to="$(arg perception_front_left_side_topic_name)" />
-             <remap from="/apollo/sensor/camera/traffic/camera_info" to="$(arg perception_front_left_side_topic_name)/camera_info" />
+                <param name="camera_frame" value="pylon_camera" />
+                <param name="device_user_id" value="front_left_side_camera" />
+
+                <param name="width" value="$(arg trigger_width)" />
+                <param name="height" value="$(arg trigger_height)" />
+                <param name="offset_x" value="$(arg trigger_offset_x)" />
+                <param name="offset_y" value="$(arg trigger_offset_y)" />
+                <param name="reverse_x" value="true" />
+                <param name="reverse_y" value="true" />
+
+                <param name="pgi_mode" value="true" />
+                <param name="noise_reduction" value="0" />
+                <param name="sharpness_enhancement" value="1.5" />
+
+                <param name="image_encoding" value="rgb8" />
+                <param name="frame_rate" value="$(arg frame_rate)" />
+                <param name="brightness" value="114.9999" />
+                <param name="brightness_continuous" value="true" />
+                <param name="exposure_auto" value="true" />
+                <param name="gain_auto" value="true" />
+                <param name="auto_exposure_upper_limit" value="50000" />
+
+
+                <remap from="/camera_front_left_side/image_raw" to="$(arg perception_front_left_side_topic_name)" />
+                <remap from="/apollo/sensor/camera/traffic/camera_info" to="$(arg perception_front_left_side_topic_name)/camera_info" />
         </node>
     </group>
 
@@ -39,15 +48,28 @@
     <node pkg="nodelet" type="nodelet" name="camera_nodelet_manager" args="manager" respawn="true" />
     <node pkg="nodelet" type="nodelet" name="sensor_camera_front_right_side" output="screen"
           args="load pylon_camera/PylonCamNodelet camera_nodelet_manager" respawn="true" >
-               <param name="camera_frame" value="pylon_camera" />
-               <param name="device_user_id" value="front_right_side_camera" />
-               <param name="frame_rate" value="$(arg frame_rate)" />
-               <param name="shutter_mode" value="" />
-               <param name="image_encoding" value="rgb8" />
-               <param name="exposure_search_timeout" value="5.0" />
-               <param name="auto_exposure_upper_limit" value="2000000.0" />
-               <param name="trigger_internal" value="$(arg trigger_internal)"/>
-               <param name="trigger_fps" value="$(arg trigger_fps)" />
+
+                <param name="camera_frame" value="pylon_camera" />
+                <param name="device_user_id" value="front_right_side_camera" />
+
+                <param name="width" value="$(arg trigger_width)" />
+                <param name="height" value="$(arg trigger_height)" />
+                <param name="offset_x" value="$(arg trigger_offset_x)" />
+                <param name="offset_y" value="$(arg trigger_offset_y)" />
+                <param name="reverse_x" value="true" />
+                <param name="reverse_y" value="true" />
+
+                <param name="pgi_mode" value="true" />
+                <param name="noise_reduction" value="0" />
+                <param name="sharpness_enhancement" value="1.5" />
+
+                <param name="image_encoding" value="rgb8" />
+                <param name="frame_rate" value="$(arg frame_rate)" />
+                <param name="brightness" value="114.9999" />
+                <param name="brightness_continuous" value="true" />
+                <param name="exposure_auto" value="true" />
+                <param name="gain_auto" value="true" />
+                <param name="auto_exposure_upper_limit" value="50000" />
       <remap from="/camera_front_right_side/image_raw" to="$(arg perception_front_right_side_topic_name)" />
       <remap from="/apollo/sensor/camera/traffic/camera_info" to="$(arg perception_front_right_side_topic_name)/camera_info" />
     </node>
