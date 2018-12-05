@@ -47,11 +47,8 @@ EXTRINSICS_FILES=(
  "modules/perception/data/params/front_right_side_camera_extrinsics.yaml"
  "modules/perception/data/params/left_side_camera_extrinsics.yaml"
  "modules/perception/data/params/right_side_camera_extrinsics.yaml"
- "modules/perception/data/params/radar_extrinsics.yaml"
- "modules/perception/data/params/radar_front_extrinsics.yaml"
  "modules/perception/data/params/world_to_caamera.yaml"
- "${ROS_ROOT}/../velodyne_pointcloud/params/velodyne64_novatel_extrinsics_example.yaml"
- "${ROS_ROOT}/../velodyne_pointcloud/params/velodyne16_novatel_extrinsics_example.yaml"
+ "modules/perception/data/params/velodyne16_lidar_extrinsics.yaml"
 )
 
 
