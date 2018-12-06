@@ -15,7 +15,7 @@
  *****************************************************************************/
 
 #include "velodyne_pointcloud/velodyne_parser.h"
-
+#include <pcl_conversions/pcl_conversions.h>
 #include <ros/ros.h>
 
 namespace apollo {
@@ -35,8 +35,7 @@ void Velodyne16Parser::generate_pointcloud(
   out_msg->header.frame_id = scan_msg->header.frame_id;
   out_msg->height = 1;
   out_msg->header.seq = scan_msg->header.seq;
-  out_msg->header.stamp = static_cast<uint64_t>(scan_msg->header.stamp);
-
+  pcl_conversions::toPCL(scan_msg->header.stamp, out_msg->header.stamp);
   out_msg->reserve(20000);
   gps_base_usec_ = scan_msg->basetime;
 
