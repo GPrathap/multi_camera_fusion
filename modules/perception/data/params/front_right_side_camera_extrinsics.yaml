@@ -4,15 +4,15 @@ header:
     stamp:
         secs: 0
         nsecs: 0
-    frame_id: base_link
+    frame_id: localization
 child_frame_id: front_right_side_camera
 transform:
     rotation:
-        x: -0.43045
-        y: 0.56098
-        z: -0.5609
-        w: 0.43045
+        x: -0.5609
+        y: 0.4304
+        z: -0.4304
+        w: 0.5609
     translation:
-        x: 0.2
+        x: -0.2
         y: -0.5
         z: 1.15   # when Z=0 is ground

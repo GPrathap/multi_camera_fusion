@@ -38,9 +38,10 @@
                 <param name="gain_auto" value="true" />
                 <param name="auto_exposure_upper_limit" value="50000" />
 
+                <param name="camera_info_url" value="file:///apollo/modules/calibration/data/kia/camera_info/front_left_side_camera.yaml" />
 
                 <remap from="/camera_front_left_side/image_raw" to="$(arg perception_front_left_side_topic_name)" />
-                <remap from="/apollo/sensor/camera/traffic/camera_info" to="$(arg perception_front_left_side_topic_name)/camera_info" />
+                <remap from="/camera_front_left_side/camera_info" to="$(arg perception_front_left_side_topic_name)/camera_info" />
         </node>
     </group>
 
@@ -48,7 +49,6 @@
     <node pkg="nodelet" type="nodelet" name="camera_nodelet_manager" args="manager" respawn="true" />
     <node pkg="nodelet" type="nodelet" name="sensor_camera_front_right_side" output="screen"
           args="load pylon_camera/PylonCamNodelet camera_nodelet_manager" respawn="true" >
-
                 <param name="camera_frame" value="pylon_camera" />
                 <param name="device_user_id" value="front_right_side_camera" />
 
@@ -63,6 +63,8 @@
                 <param name="noise_reduction" value="0" />
                 <param name="sharpness_enhancement" value="1.5" />
 
+                <param name="camera_info_url" value="file:///apollo/modules/calibration/data/kia/camera_info/front_right_side_camera.yaml" />
+
                 <param name="image_encoding" value="rgb8" />
                 <param name="frame_rate" value="$(arg frame_rate)" />
                 <param name="brightness" value="114.9999" />
@@ -71,7 +73,7 @@
                 <param name="gain_auto" value="true" />
                 <param name="auto_exposure_upper_limit" value="50000" />
       <remap from="/camera_front_right_side/image_raw" to="$(arg perception_front_right_side_topic_name)" />
-      <remap from="/apollo/sensor/camera/traffic/camera_info" to="$(arg perception_front_right_side_topic_name)/camera_info" />
+      <remap from="/camera_front_right_side/camera_info" to="$(arg perception_front_right_side_topic_name)/camera_info" />
     </node>
   </group>
 
@@ -101,11 +103,10 @@
             <param name="gain_auto" value="true" />
             <param name="auto_exposure_upper_limit" value="50000" />
 
-            <remap from="/camera_front_side/image_raw" to="$(arg perception_front_side_topic_name)" />
-            <remap from="/apollo/sensor/camera/traffic/camera_info" to="$(arg perception_front_side_topic_name)/camera_info" />
+            <param name="camera_info_url" value="file:///apollo/modules/calibration/data/kia/camera_info/front_side_camera.yaml" />
 
+            <remap from="/camera_front_side/image_raw" to="$(arg perception_front_side_topic_name)" />
+            <remap from="/camera_front_side/camera_info" to="$(arg perception_front_side_topic_name)/camera_info" /> 
         </node>
     </group>
-
-
 </launch>
