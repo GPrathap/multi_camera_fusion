@@ -93,4 +93,5 @@ DECLARE_string(image_right_topic);
 DECLARE_string(image_left_backwards_topic);
 DECLARE_string(image_right_backwards_topic);
 DECLARE_string(image_front_camera_topic);
+DECLARE_string(externel_obj_detection_topic);
 #endif  // MODULES_COMMON_ADAPTERS_ADAPTER_GFLAGS_H_

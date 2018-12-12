@@ -49,7 +49,8 @@
 #include "nav_msgs/Odometry.h"
 #include "car_unity_simulator/CarControl.h"
 #include "car_unity_simulator/CarState.h"
-
+#include "detection_msgs/DetectedObject.h"
+#include "detection_msgs/DetectedObjectsWithImage.h"
 /**
  * @namespace apollo::common::adapter
  * @brief apollo::common::adapter
@@ -410,6 +411,10 @@ class Adapter : public AdapterBase {
   }  
   bool FeedFile(const std::string& message_file,
                 IdentifierType<::car_unity_simulator::CarState>) {
+    return false;
+  }    
+  bool FeedFile(const std::string& message_file,
+                IdentifierType<::detection_msgs::DetectedObjectsWithImage>) {
     return false;
   }    
   bool FeedFile(const std::string& message_file,

@@ -212,3 +212,4 @@ DEFINE_string(traffic_light_recognizer, "",
               "the recognizer enabled for traffic_light");
 DEFINE_string(traffic_light_reviser, "",
               "the reviser enabled for traffic_light");
+DEFINE_bool(use_externel_detector, false, "Use externel object detector or not");

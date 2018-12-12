@@ -19,3 +19,6 @@
 [submodule "modules/additional_ros_packages/roslint"]
 	path = modules/additional_ros_packages/roslint
 	url = https://github.com/ros/roslint.git
+[submodule "modules/additional_ros_packages/detection_msgs"]
+	path = modules/additional_ros_packages/detection_msgs
+	url = http://cordelia.university.innopolis.ru/kia/detection_msgs.git
