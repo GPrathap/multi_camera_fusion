@@ -79,7 +79,7 @@ void MergeAffinityMatrix(const std::vector<std::vector<float>> &to_merge,
     for (size_t j = 0; j < (*affinity_matrix)[0].size(); ++j) {
       // For saving high confidence selection
       if ((*affinity_matrix)[i][j] < 9.0f) {
-        (*affinity_matrix)[i][j] += to_merge[i][j];
+        (*affinity_matrix)[i][j] *= to_merge[i][j];
       }
     }
   }

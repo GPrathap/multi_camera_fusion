@@ -513,10 +513,11 @@ apollo::common::Status VisualizationSubnode::ProcEvents() {
         frame_visualizer_->init();
         init_ = true;
       }
-      //if (content_.is_global_offset_init() || FLAGS_use_navigation_mode) {
+
+      if (content_.is_global_offset_init() || FLAGS_use_navigation_mode) {
         frame_visualizer_->update_camera_system(&content_);
         frame_visualizer_->render(&content_);
-      //}
+      }
     }
   }
   return Status::OK();

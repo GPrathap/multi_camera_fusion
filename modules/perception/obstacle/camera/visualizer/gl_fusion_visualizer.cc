@@ -120,15 +120,16 @@ void GLFusionVisualizer::update_camera_system(FrameContent *content) {
   Eigen::Vector4d fd_w(forward_velodyne_[0], forward_velodyne_[1],
                        forward_velodyne_[2], 0);
   fd_w = pose_v2w * fd_w;
-  forward_world_[0] = fd_w[0];
-  forward_world_[1] = fd_w[1];
+
+  double angle = 90;
+  double pi =  3.14;
+  forward_world_[0] = view_point_velodyne_[0] + cos((angle*pi)/180)*(fd_w(0)-view_point_velodyne_(0)) - sin((angle*pi)/180)*(fd_w(1)-view_point_velodyne_[1]);
+  forward_world_[1] = view_point_velodyne_[1] + sin((angle*pi)/180)*(fd_w(0)-view_point_velodyne_(0)) - cos((angle*pi)/180)*(fd_w(1)-view_point_velodyne_[1]);
   forward_world_[2] = fd_w[2];
 
   main_car_world_.resize(4);
   for (size_t i = 0; i < 4; ++i) {
-    Eigen::Vector4d main_car_w(main_car_[i][0], main_car_[i][1],
-                               main_car_[i][2], 0.0);
-
+    Eigen::Vector4d main_car_w(main_car_[i][0], main_car_[i][1], main_car_[i][2], 0.0);
     main_car_w = pose_v2w * main_car_w;
     main_car_world_[i][0] = main_car_w[0];
     main_car_world_[i][1] = main_car_w[1];

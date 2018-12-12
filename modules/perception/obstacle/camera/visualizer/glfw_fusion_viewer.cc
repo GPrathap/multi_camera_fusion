@@ -712,6 +712,8 @@ void GLFWFusionViewer::render() {
   int text_startx = 10;
   int text_starty = 40;
   glRasterPos2i(text_startx, text_starty);
+  std::string camara_name = frame_content_->get_device_id() + "  ";
+  raster_text_->print_string(camara_name);
   raster_text_->print_multiline(help_str, text_startx, text_starty);
   glFlush();
   no_frame++;
@@ -924,7 +926,7 @@ void GLFWFusionViewer::keyboard(int key) {
       break;
   }
 
-  help_str = "H: show help";
+   help_str = "\n H: show help";
   if (show_help_text) {
     help_str += " (ON)";
     help_str += "\nR: reset matrxi\nB: show box";

@@ -23,6 +23,8 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <regex>
+#include <math.h>
 
 #include "Eigen/Dense"
 #include "GL/glew.h"
