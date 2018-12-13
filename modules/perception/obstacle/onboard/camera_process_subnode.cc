@@ -18,6 +18,7 @@
 #include "eigen_conversions/eigen_msg.h"
 #include "modules/perception/common/perception_gflags.h"
 #include "modules/perception/onboard/transform_input.h"
+#include "modules/common/math/math_utils.h"
 
 namespace apollo {
 namespace perception {
@@ -51,38 +52,44 @@ bool CameraProcessSubnode::InitInternal() {
 
   InitModules();
 
-  if (device_id_=="camera"){ //standard Apollo camera ID
-    AdapterManager::AddImageFrontCallback(&CameraProcessSubnode::ImgCallback,
-                                          this);
-  } else if (device_id_=="front_right_side_camera") {
-    AdapterManager::AddImageFrontRightSideCallback(&CameraProcessSubnode::ImgCallback,
-                                                           this);
-  } else if (device_id_=="front_left_side_camera") {
-    AdapterManager::AddImageFrontLeftSideCallback(&CameraProcessSubnode::ImgCallback,
-                                                           this);
-  } else if (device_id_=="right_side_camera") {
-    AdapterManager::AddImageRightCallback(&CameraProcessSubnode::ImgCallback,
-                                                           this);
-  } else if (device_id_=="left_side_camera") {
-    AdapterManager::AddImageRightCallback(&CameraProcessSubnode::ImgCallback,
-                                                           this);
-  } else if (device_id_=="backwards_right_side_camera") {
-    AdapterManager::AddImageRightBackwardsSideCallback(&CameraProcessSubnode::ImgCallback,
-                                                           this);
-  } else if (device_id_=="backwards_left_side_camera") {
-    AdapterManager::AddImageLeftBackwardsSideCallback(&CameraProcessSubnode::ImgCallback,
-                                                           this);
-  } else if (device_id_=="front_camera") {
-    AdapterManager::AddImageFrontCameraCallback(&CameraProcessSubnode::ImgCallback,
-                                                           this);
-  } else if (device_id_=="ext_detector") {
+  if (FLAGS_use_externel_detector)
+  {
     AINFO << "AddExternelObjDetectionCallback";
     AdapterManager::AddExternelObjDetectionCallback(&CameraProcessSubnode::ExtObjDetectionCallback,
                                                            this);
+  } else {
+
+      if (device_id_=="camera"){ //standard Apollo camera ID
+    AdapterManager::AddImageFrontCallback(&CameraProcessSubnode::ImgCallback,
+                                          this);
+    } else if (device_id_=="front_right_side_camera") {
+      AdapterManager::AddImageFrontRightSideCallback(&CameraProcessSubnode::ImgCallback,
+                                                            this);
+    } else if (device_id_=="front_left_side_camera") {
+      AdapterManager::AddImageFrontLeftSideCallback(&CameraProcessSubnode::ImgCallback,
+                                                            this);
+    } else if (device_id_=="right_side_camera") {
+      AdapterManager::AddImageRightCallback(&CameraProcessSubnode::ImgCallback,
+                                                            this);
+    } else if (device_id_=="left_side_camera") {
+      AdapterManager::AddImageRightCallback(&CameraProcessSubnode::ImgCallback,
+                                                            this);
+    } else if (device_id_=="backwards_right_side_camera") {
+      AdapterManager::AddImageRightBackwardsSideCallback(&CameraProcessSubnode::ImgCallback,
+                                                            this);
+    } else if (device_id_=="backwards_left_side_camera") {
+      AdapterManager::AddImageLeftBackwardsSideCallback(&CameraProcessSubnode::ImgCallback,
+                                                            this);
+    } else if (device_id_=="front_camera") {
+      AdapterManager::AddImageFrontCameraCallback(&CameraProcessSubnode::ImgCallback,
+                                                            this);
+    } 
+
+    AdapterManager::AddCompressedImageCallback(&CameraProcessSubnode::ImgCompressCallback,
+                                              this);
   }
 
-  AdapterManager::AddCompressedImageCallback(&CameraProcessSubnode::ImgCompressCallback,
-                                             this);
+
 
   if (pb_obj_) {
     AdapterManager::AddChassisCallback(&CameraProcessSubnode::ChassisCallback,
@@ -391,12 +398,34 @@ void CameraProcessSubnode::ExtObjDetectionCallback(const detection_msgs::Detecte
       obj->length = det_obj.length;
 
       obj->object_feature.clear();
-      AINFO << "Object added! Class: " << obj->type << " x1: " << obj->upper_left[0] << "y1: " << obj->upper_left[1] << 
+
+      int feat_dim = det_obj.features.size();
+      float* feat_data = det_obj.features.data();
+      obj->object_feature.resize(feat_dim);
+      memcpy(obj->object_feature.data(), feat_data,
+            feat_dim * sizeof(feat_data[0]));
+      apollo::common::math::L2Norm(feat_dim, obj->object_feature.data());
+           
+      ADEBUG << "Object added! Class: " << obj->type << " x1: " << obj->upper_left[0] << "y1: " << obj->upper_left[1] << 
             " x2: " << obj->lower_right[0] << " y2: " << obj->lower_right[1];
       objects.push_back(obj);
   }
 
   recover_bbox(message.image_width, message.image_height, 0.0, &objects);
+
+  int det_id = 0;
+  for (auto &obj : objects) {
+    //projector_->project(&(obj->object_feature));
+
+    // Assign detection id per box and score
+    obj->id = det_id;
+    for (auto prob : obj->type_probs) {
+      obj->score = std::max(obj->score, prob);
+    }
+
+    ADEBUG << "obj-" << det_id << ": " << obj->object_feature.size();
+    det_id++;
+  }
 
   cv::Mat mask_color;
 
@@ -529,6 +558,8 @@ void CameraProcessSubnode::VisualObjToSensorObj(
     obj->camera_supplement->alpha = vobj->alpha;
     obj->camera_supplement->pts8 = vobj->pts8;
     ((*sensor_objects)->objects).emplace_back(obj.release());
+    ADEBUG << "Obj Id:"<< vobj->id << " Score: " << vobj->score << " Direction: " << vobj->direction.cast<double>()
+          << " Theta: " << vobj->theta << " Center: " << vobj->center.cast<double>();
   }
 }
 
