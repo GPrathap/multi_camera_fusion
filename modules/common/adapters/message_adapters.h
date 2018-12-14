@@ -58,6 +58,8 @@
 #include "car_unity_simulator/CarControl.h"
 #include "car_unity_simulator/CarState.h"
 #include "std_msgs/String.h"
+#include "detection_msgs/DetectedObject.h"
+#include "detection_msgs/DetectedObjectsWithImage.h"
 
 /**
  * @file message_adapters.h
@@ -144,6 +146,7 @@ using ImuRosAdapter = Adapter<::sensor_msgs::Imu>;
 using OdometryRosAdapter = Adapter<::nav_msgs::Odometry>;
 using UnityCarControlAdapter = Adapter<::car_unity_simulator::CarControl>;
 using UnityCarStateAdapter = Adapter<::car_unity_simulator::CarState>;
+using ExternelObjDetectionAdapter = Adapter<::detection_msgs::DetectedObjectsWithImage>;
 
 }  // namespace adapter
 }  // namespace common

@@ -75,6 +75,7 @@ message AdapterConfig {
     IMAGE_LEFT_BACKWARDS = 68;
     IMAGE_RIGHT_BACKWARDS = 69;
     IMAGE_FRONT_CAMERA = 70;
+    EXTERNEL_OBJ_DETECTION = 71;
   }
   enum Mode {
     RECEIVE_ONLY = 0;

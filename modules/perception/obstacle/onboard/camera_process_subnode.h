@@ -31,6 +31,8 @@
 #include <sensor_msgs/image_encodings.h>
 #include "sensor_msgs/fill_image.h"
 #include "yaml-cpp/yaml.h"
+#include "detection_msgs/DetectedObject.h"
+#include "detection_msgs/DetectedObjectsWithImage.h"
 
 #include "modules/canbus/proto/chassis.pb.h"
 #include "modules/common/adapters/adapter_manager.h"
@@ -80,9 +82,12 @@ class CameraProcessSubnode : public Subnode {
 
   void ImgCallback(const sensor_msgs::Image& message);
   void ImgCompressCallback(const sensor_msgs::CompressedImage &message);
+  void ExtObjDetectionCallback(const detection_msgs::DetectedObjectsWithImage &message);
+  void recover_bbox(int roi_w, int roi_h, int offset_y, std::vector<std::shared_ptr<VisualObject>> *objects);
   void ChassisCallback(const apollo::canbus::Chassis& message);
 
   void ProcessImage(cv::Mat &img, double timestamp, std_msgs::Header msg_header);
+  void ProcessDetectedObjects(std::vector<std::shared_ptr<VisualObject>> &objects, cv::Mat &mask_color, cv::Mat &img, double timestamp, std_msgs::Header msg_header);
   bool MessageToMat(const sensor_msgs::Image& msg, cv::Mat* img);
   bool CompMessageToMat(const sensor_msgs::CompressedImage &msg, cv::Mat *img);
   bool MatToMessage(const cv::Mat& img, sensor_msgs::Image* msg);
