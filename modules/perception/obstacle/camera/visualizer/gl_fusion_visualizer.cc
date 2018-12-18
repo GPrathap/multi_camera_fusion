@@ -125,6 +125,8 @@ void GLFusionVisualizer::update_camera_system(FrameContent *content) {
   double pi =  3.14;
   forward_world_[0] = view_point_velodyne_[0] + cos((angle*pi)/180)*(fd_w(0)-view_point_velodyne_(0)) - sin((angle*pi)/180)*(fd_w(1)-view_point_velodyne_[1]);
   forward_world_[1] = view_point_velodyne_[1] + sin((angle*pi)/180)*(fd_w(0)-view_point_velodyne_(0)) - cos((angle*pi)/180)*(fd_w(1)-view_point_velodyne_[1]);
+  // forward_world_[0] = fd_w[0];
+  // forward_world_[1] = fd_w[1];
   forward_world_[2] = fd_w[2];
 
   main_car_world_.resize(4);

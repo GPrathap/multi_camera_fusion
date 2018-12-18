@@ -40,14 +40,14 @@ source "${DIR}/apollo_base.sh"
 # )
 
 EXTRINSICS_FILES=(
- "modules/perception/data/params/backwards_left_side_camera_extrinsics.yaml"
- "modules/perception/data/params/backwards_right_side_camera_extrinsics.yaml"
+ # "modules/perception/data/params/backwards_left_side_camera_extrinsics.yaml"
+ #"modules/perception/data/params/backwards_right_side_camera_extrinsics.yaml"
  "modules/perception/data/params/front_camera_extrinsics.yaml"
  "modules/perception/data/params/front_left_side_camera_extrinsics.yaml"
  "modules/perception/data/params/front_right_side_camera_extrinsics.yaml"
- "modules/perception/data/params/left_side_camera_extrinsics.yaml"
- "modules/perception/data/params/right_side_camera_extrinsics.yaml"
- "modules/perception/data/params/world_to_caamera.yaml"
+ #"modules/perception/data/params/left_side_camera_extrinsics.yaml"
+ #"modules/perception/data/params/right_side_camera_extrinsics.yaml"
+ #"modules/perception/data/params/world_to_caamera.yaml"
  "modules/perception/data/params/velodyne16_lidar_extrinsics.yaml"
 )
 

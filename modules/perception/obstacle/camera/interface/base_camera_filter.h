@@ -35,8 +35,9 @@ namespace perception {
 
 struct FilterOptions {
   FilterOptions() = default;
-  explicit FilterOptions(Eigen::Matrix4d* pose) : camera_trans(pose) {}
+  explicit FilterOptions(Eigen::Matrix4d* pose, std::string device_id_) : camera_trans(pose), device_id(device_id_) {}
   std::shared_ptr<Eigen::Matrix4d> camera_trans;
+  std::string device_id;
 };
 
 class BaseCameraFilter {
