@@ -135,5 +135,6 @@ DECLARE_double(light_height_adjust);
 DECLARE_string(traffic_light_rectifier);
 DECLARE_string(traffic_light_recognizer);
 DECLARE_string(traffic_light_reviser);
+DECLARE_bool(use_externel_detector);
 
 #endif  // MODULES_PERCEPTION_COMMON_PERCEPTION_GFLAGS_H_

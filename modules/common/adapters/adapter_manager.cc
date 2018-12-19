@@ -268,6 +268,9 @@ void AdapterManager::Init(const AdapterManagerConfig &configs) {
       case AdapterConfig::IMAGE_FRONT_CAMERA:
         EnableImageFrontCamera(FLAGS_image_front_camera_topic, config);
             break;
+      case AdapterConfig::EXTERNEL_OBJ_DETECTION:
+        EnableExternelObjDetection(FLAGS_externel_obj_detection_topic, config);
+            break;
       default:
         AERROR << "Unknown adapter config type!";
         break;

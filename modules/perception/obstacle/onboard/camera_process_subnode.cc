@@ -18,6 +18,7 @@
 #include "eigen_conversions/eigen_msg.h"
 #include "modules/perception/common/perception_gflags.h"
 #include "modules/perception/onboard/transform_input.h"
+#include "modules/common/math/math_utils.h"
 
 namespace apollo {
 namespace perception {
@@ -51,33 +52,44 @@ bool CameraProcessSubnode::InitInternal() {
 
   InitModules();
 
-  if (device_id_=="camera"){ //standard Apollo camera ID
+  if (FLAGS_use_externel_detector)
+  {
+    AINFO << "AddExternelObjDetectionCallback";
+    AdapterManager::AddExternelObjDetectionCallback(&CameraProcessSubnode::ExtObjDetectionCallback,
+                                                           this);
+  } else {
+
+      if (device_id_=="camera"){ //standard Apollo camera ID
     AdapterManager::AddImageFrontCallback(&CameraProcessSubnode::ImgCallback,
                                           this);
-  } else if (device_id_=="front_right_side_camera") {
-    AdapterManager::AddImageFrontRightSideCallback(&CameraProcessSubnode::ImgCallback,
-                                                           this);
-  } else if (device_id_=="front_left_side_camera") {
-    AdapterManager::AddImageFrontLeftSideCallback(&CameraProcessSubnode::ImgCallback,
-                                                           this);
-  } else if (device_id_=="right_side_camera") {
-    AdapterManager::AddImageRightCallback(&CameraProcessSubnode::ImgCallback,
-                                                           this);
-  } else if (device_id_=="left_side_camera") {
-    AdapterManager::AddImageRightCallback(&CameraProcessSubnode::ImgCallback,
-                                                           this);
-  } else if (device_id_=="backwards_right_side_camera") {
-    AdapterManager::AddImageRightBackwardsSideCallback(&CameraProcessSubnode::ImgCallback,
-                                                           this);
-  } else if (device_id_=="backwards_left_side_camera") {
-    AdapterManager::AddImageLeftBackwardsSideCallback(&CameraProcessSubnode::ImgCallback,
-                                                           this);
-  } else if (device_id_=="front_camera") {
-    AdapterManager::AddImageFrontCameraCallback(&CameraProcessSubnode::ImgCallback,
-                                                           this);
+    } else if (device_id_=="front_right_side_camera") {
+      AdapterManager::AddImageFrontRightSideCallback(&CameraProcessSubnode::ImgCallback,
+                                                            this);
+    } else if (device_id_=="front_left_side_camera") {
+      AdapterManager::AddImageFrontLeftSideCallback(&CameraProcessSubnode::ImgCallback,
+                                                            this);
+    } else if (device_id_=="right_side_camera") {
+      AdapterManager::AddImageRightCallback(&CameraProcessSubnode::ImgCallback,
+                                                            this);
+    } else if (device_id_=="left_side_camera") {
+      AdapterManager::AddImageRightCallback(&CameraProcessSubnode::ImgCallback,
+                                                            this);
+    } else if (device_id_=="backwards_right_side_camera") {
+      AdapterManager::AddImageRightBackwardsSideCallback(&CameraProcessSubnode::ImgCallback,
+                                                            this);
+    } else if (device_id_=="backwards_left_side_camera") {
+      AdapterManager::AddImageLeftBackwardsSideCallback(&CameraProcessSubnode::ImgCallback,
+                                                            this);
+    } else if (device_id_=="front_camera") {
+      AdapterManager::AddImageFrontCameraCallback(&CameraProcessSubnode::ImgCallback,
+                                                            this);
+    }
+
+    AdapterManager::AddCompressedImageCallback(&CameraProcessSubnode::ImgCompressCallback,
+                                              this);
   }
-  AdapterManager::AddCompressedImageCallback(&CameraProcessSubnode::ImgCompressCallback,
-                                             this);
+
+
 
   if (pb_obj_) {
     AdapterManager::AddChassisCallback(&CameraProcessSubnode::ChassisCallback,
@@ -103,11 +115,13 @@ bool CameraProcessSubnode::InitModules() {
   RegisterFactoryCascadedCameraTracker();
   RegisterFactoryFlatCameraTransformer();
   RegisterFactoryObjectCameraFilter();
-  //TODO to be tested 
-  RegisterFactoryObjectCameraExtendedKalmanFilter();
-  
-  detector_.reset(BaseCameraDetectorRegisterer::GetInstanceByName("YoloCameraDetector"));
-  detector_->Init();
+
+  if (!FLAGS_use_externel_detector)
+  {
+    detector_.reset(
+        BaseCameraDetectorRegisterer::GetInstanceByName("YoloCameraDetector"));
+    detector_->Init();
+  }
 
   converter_.reset(BaseCameraConverterRegisterer::GetInstanceByName("GeometryCameraConverter"));
   converter_->Init(device_id_);
@@ -167,6 +181,16 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
 
   PERF_BLOCK_END("CameraProcessSubnode_detector_");
 
+  ProcessDetectedObjects(objects, mask_color, img, timestamp, msg_header);
+}
+
+void CameraProcessSubnode::ProcessDetectedObjects(std::vector<std::shared_ptr<VisualObject>> &objects, cv::Mat &mask_color, cv::Mat &img, double timestamp, std_msgs::Header msg_header)
+{
+
+
+  PERF_FUNCTION("ProcessDetectedObjects");
+  PERF_BLOCK_START();
+
   converter_->Convert(&objects);
   PERF_BLOCK_END("CameraProcessSubnode_converter_");
 
@@ -177,7 +201,6 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
   }
 
   tracker_->Associate(img, timestamp, &objects);
-  //img_previous = img;
   PERF_BLOCK_END("CameraProcessSubnode_tracker_");
 
   FilterOptions options;
@@ -191,7 +214,7 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
           return;
       }
   }
-  
+
   camera_to_world_ = *(options.camera_trans);
   // need to create camera options here for filter
   AINFO << "camera_to_world_: " << camera_to_world_;
@@ -276,6 +299,131 @@ void CameraProcessSubnode::ImgCompressCallback(const sensor_msgs::CompressedImag
 
 }
 
+void CameraProcessSubnode::recover_bbox(int roi_w, int roi_h, int offset_y,
+                  std::vector<std::shared_ptr<VisualObject>> *objects) {
+  for (auto &obj : *objects) {
+    float xmin = obj->upper_left[0];
+    float ymin = obj->upper_left[1];
+    float xmax = obj->lower_right[0];
+    float ymax = obj->lower_right[1];
+    int x = xmin * roi_w;
+    int w = (xmax - xmin) * roi_w;
+    int y = ymin * roi_h + offset_y;
+    int h = (ymax - ymin) * roi_h;
+    cv::Rect rect_det(x, y, w, h);
+    cv::Rect rect_img(0, 0, roi_w, roi_h + offset_y);
+    cv::Rect rect = rect_det & rect_img;
+    obj->upper_left[0] = rect.x;
+    obj->upper_left[1] = rect.y;
+    obj->lower_right[0] = rect.x + rect.width;
+    obj->lower_right[1] = rect.y + rect.height;
+    double eps = 1e-2;
+
+    // Truncation assignment based on bbox positions
+    if ((ymin < eps) || (ymax >= 1.0 - eps)) {
+      obj->trunc_height = 0.5;
+    } else {
+      obj->trunc_height = 0.0;
+    }
+    if ((xmin < eps) || (xmax >= 1.0 - eps)) {
+      obj->trunc_width = 0.5;
+    } else {
+      obj->trunc_width = 0.0;
+    }
+  }
+}
+
+void CameraProcessSubnode::ExtObjDetectionCallback(const detection_msgs::DetectedObjectsWithImage &message) {
+  double timestamp = message.header.stamp.toSec();
+  ADEBUG << "CameraProcessSubnode ExtObjDetectionCallback: timestamp: ";
+  ADEBUG << std::fixed << std::setprecision(64) << timestamp;
+  AINFO << "camera received image : " << GLOG_TIMESTAMP(timestamp)
+        << " at time: " << GLOG_TIMESTAMP(TimeUtil::GetCurrentTime());
+  double curr_timestamp = timestamp * 1e9;
+
+  if (FLAGS_skip_camera_frame && timestamp_ns_ > 0.0) {
+    if ((curr_timestamp - timestamp_ns_) < (1e9 / FLAGS_camera_hz) &&
+        curr_timestamp > timestamp_ns_) {
+      ADEBUG << "CameraProcessSubnode Skip frame";
+      return;
+    }
+  }
+
+  timestamp_ns_ = curr_timestamp;
+  ADEBUG << "CameraProcessSubnode Process: "
+         << " frame: " << ++seq_num_;
+
+  std::vector<std::shared_ptr<VisualObject>> objects;
+
+  std::vector<ObjectType> types_ = { apollo::perception::ObjectType::VEHICLE,  //Car
+                                apollo::perception::ObjectType::VEHICLE,  //Van
+                                apollo::perception::ObjectType::VEHICLE,  //Truck
+                                apollo::perception::ObjectType::PEDESTRIAN, //Pedestrian
+                                apollo::perception::ObjectType::UNKNOWN_UNMOVABLE, //Person_sitting
+                                apollo::perception::ObjectType::BICYCLE,  //Cyclist
+                                apollo::perception::ObjectType::VEHICLE, //Tram
+                                apollo::perception::ObjectType::UNKNOWN //Misc
+                              };
+
+
+  for (auto det_obj : message.objects)
+  {
+      std::shared_ptr<VisualObject> obj(new VisualObject);
+      obj->type = static_cast<ObjectType>(det_obj.class_id);
+      obj->type_probs.assign(static_cast<int>(ObjectType::MAX_OBJECT_TYPE),
+                             0.0f);
+      int type_k = static_cast<int>(types_[det_obj.class_id]);
+      obj->type_probs[type_k] = det_obj.confidence;
+
+      obj->upper_left[0] = det_obj.x1;
+      obj->upper_left[1] = det_obj.y1;
+      obj->lower_right[0] = det_obj.x2;
+      obj->lower_right[1] = det_obj.y2;
+
+      obj->alpha = det_obj.yaw;
+
+      obj->height = det_obj.height;
+      obj->width = det_obj.width;
+      obj->length = det_obj.length;
+
+      obj->object_feature.clear();
+
+      int feat_dim = det_obj.features.size();
+      float* feat_data = det_obj.features.data();
+      obj->object_feature.resize(feat_dim);
+      memcpy(obj->object_feature.data(), feat_data,
+            feat_dim * sizeof(feat_data[0]));
+      apollo::common::math::L2Norm(feat_dim, obj->object_feature.data());
+
+      ADEBUG << "Object added! Class: " << obj->type << " x1: " << obj->upper_left[0] << "y1: " << obj->upper_left[1] <<
+            " x2: " << obj->lower_right[0] << " y2: " << obj->lower_right[1];
+      objects.push_back(obj);
+  }
+
+  recover_bbox(message.image_width, message.image_height, 0.0, &objects);
+
+  int det_id = 0;
+  for (auto &obj : objects) {
+    //projector_->project(&(obj->object_feature));
+
+    // Assign detection id per box and score
+    obj->id = det_id;
+    for (auto prob : obj->type_probs) {
+      obj->score = std::max(obj->score, prob);
+    }
+
+    ADEBUG << "obj-" << det_id << ": " << obj->object_feature.size();
+    det_id++;
+  }
+
+  cv::Mat mask_color;
+
+  cv::Mat img;
+  CompMessageToMat(message.image, &img);
+
+  ProcessDetectedObjects(objects, mask_color, img, timestamp, message.header);
+
+}
 
 void CameraProcessSubnode::ChassisCallback(
     const apollo::canbus::Chassis &message) {
@@ -399,6 +547,8 @@ void CameraProcessSubnode::VisualObjToSensorObj(
     obj->camera_supplement->alpha = vobj->alpha;
     obj->camera_supplement->pts8 = vobj->pts8;
     ((*sensor_objects)->objects).emplace_back(obj.release());
+    ADEBUG << "Obj Id:"<< vobj->id << " Score: " << vobj->score << " Direction: " << vobj->direction.cast<double>()
+          << " Theta: " << vobj->theta << " Center: " << vobj->center.cast<double>();
   }
 }
 
