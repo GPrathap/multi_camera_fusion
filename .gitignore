@@ -65,6 +65,7 @@ data/map_visual
 modules/data/conf/task_info_template.pb.txt
 modules/tools/ota/update.ini
 modules/tools/ota/vehicle_info.pb.txt
+modules/perception/data/params
 
 # Doxygen
 docs/doxygen
@@ -74,7 +75,7 @@ third_party/can_card_library/esd_can/include
 third_party/can_card_library/esd_can/lib
 
 # Map data files
-#modules/map/data
+modules/map/data
 
 # python proto
 py_proto
@@ -88,3 +89,6 @@ modules/calibration/data/mkz056
 
 # Data bag
 docs/demo_guide/*.bag
+
+ros_pkgs/build
+ros_pkgs/devel
