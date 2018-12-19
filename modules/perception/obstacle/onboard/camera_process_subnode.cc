@@ -181,39 +181,37 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
   PERF_BLOCK_END("CameraProcessSubnode_tracker_");
 
   FilterOptions options;
+  options.camera_trans = std::make_shared<Eigen::Matrix4d>();
 
   if (FLAGS_use_navigation_mode) {
-      options.camera_trans = std::make_shared<Eigen::Matrix4d>();
       options.camera_trans->setIdentity();
-      options.device_id = device_id_;
   } else {
-      options.camera_trans = std::make_shared<Eigen::Matrix4d>();
-      options.device_id = device_id_;
-      std::cout<< "device id get camera module" << device_id_ << std::endl;
       if (!GetCameraTrans(timestamp, options.camera_trans.get(), device_id_)) {
           AERROR << "Failed to get trans at timestamp: " << timestamp;
-      }else{
-        camera_to_world_ = *(options.camera_trans);
-        // need to create camera options here for filter
-        AINFO << "camera_to_world_: " << camera_to_world_;
-        filter_->Filter(timestamp, &objects, options);
-        PERF_BLOCK_END("CameraProcessSubnode_filter_");
-
-        std::shared_ptr<SensorObjects> out_objs(new SensorObjects);
-        out_objs->timestamp = timestamp;
-        VisualObjToSensorObj(objects, &out_objs, options);
-
-        SharedDataPtr<CameraItem> camera_item_ptr(new CameraItem);
-        camera_item_ptr->image_src_mat = img;
-        mask_color.copyTo(out_objs->camera_frame_supplement->lane_map);
-        PublishDataAndEvent(timestamp, out_objs, camera_item_ptr);
-        PERF_BLOCK_END("CameraProcessSubnode publish in DAG");
-
-        if (pb_obj_) PublishPerceptionPbObj(out_objs);
-        if (pb_ln_msk_) PublishPerceptionPbLnMsk(mask_color, msg_header);
+          return;
       }
   }
-}
+  
+  camera_to_world_ = *(options.camera_trans);
+  // need to create camera options here for filter
+  AINFO << "camera_to_world_: " << camera_to_world_;
+  filter_->Filter(timestamp, &objects, options);
+  PERF_BLOCK_END("CameraProcessSubnode_filter_");
+
+  std::shared_ptr<SensorObjects> out_objs(new SensorObjects);
+  out_objs->timestamp = timestamp;
+  VisualObjToSensorObj(objects, &out_objs, options);
+
+  SharedDataPtr<CameraItem> camera_item_ptr(new CameraItem);
+  camera_item_ptr->image_src_mat = img;
+  mask_color.copyTo(out_objs->camera_frame_supplement->lane_map);
+  PublishDataAndEvent(timestamp, out_objs, camera_item_ptr);
+  PERF_BLOCK_END("CameraProcessSubnode publish in DAG");
+
+  if (pb_obj_) PublishPerceptionPbObj(out_objs);
+  if (pb_ln_msk_) PublishPerceptionPbLnMsk(mask_color, msg_header);
+
+  }
 
 void CameraProcessSubnode::ImgCallback(const sensor_msgs::Image &message) {
   double timestamp = message.header.stamp.toSec();
