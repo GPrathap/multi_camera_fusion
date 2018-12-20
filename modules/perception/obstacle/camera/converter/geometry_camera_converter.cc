@@ -26,19 +26,12 @@ namespace perception {
 
 using apollo::common::util::GetProtoFromFile;
 
-bool GeometryCameraConverter::Init() {
-  if (!GetProtoFromFile(FLAGS_geometry_camera_converter_config, &config_)) {
-    AERROR << "Cannot get config proto from file: "
-           << FLAGS_geometry_camera_converter_config;
+bool GeometryCameraConverter::Init(std::string camera_device_id_) {
+  camera_intrinsic_path_ = FLAGS_camera_extrinsics_and_intrinsics_file_location + camera_device_id_ + "_intrinsics.yaml";
+  if (!LoadCameraIntrinsics(camera_intrinsic_path_)) {
+    AERROR << "Failed to get camera intrinsics: " << camera_intrinsic_path_;
     return false;
   }
-
-  if (!LoadCameraIntrinsics(config_.camera_intrinsic_file())) {
-    AERROR << "Failed to get camera intrinsics: "
-           << config_.camera_intrinsic_file();
-    return false;
-  }
-
   return true;
 }
 

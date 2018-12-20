@@ -47,6 +47,9 @@ DEFINE_string(localization_tf2_child_frame_id, "localization",
 
 DEFINE_bool(use_navigation_mode, false,
             "Use relative position in navigation mode");
+
+DEFINE_bool(transform_into_ego_car_space, false,
+            "Use trasformtion of each object with from camera space to ego car space");
 DEFINE_string(
     navigation_mode_end_way_point_file,
     "modules/dreamview/conf/navigation_mode_default_end_way_point.txt",

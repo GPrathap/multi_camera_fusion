@@ -155,7 +155,10 @@ class FrameContent {
   Eigen::Matrix4d get_pose_v2w();
   Eigen::Matrix4d get_pose_c2w();
   cv::Mat get_camera_image();
+  std::string device_id;
 
+  std::string get_device_id(){ return device_id; }
+  
   int get_pose_type() { return continuous_type_; }
 
   void set_pose_type(int type) { continuous_type_ = type; }
