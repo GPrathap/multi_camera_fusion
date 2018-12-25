@@ -52,14 +52,36 @@ bool CameraProcessSubnode::InitInternal() {
 
   InitModules();
 
+
   if (FLAGS_use_externel_detector)
   {
     AINFO << "AddExternelObjDetectionCallback";
     AdapterManager::AddExternelObjDetectionCallback(&CameraProcessSubnode::ExtObjDetectionCallback,
                                                            this);
-  } else {
+  } else if (FLAGS_use_compressed_images)
+  {
+    std::cout << "Use compressed topics..." << std::endl;
+    ADEBUG << "Use compressed topics...";
+    if (device_id_=="camera"){ //standard Apollo camera ID
+      AdapterManager::AddCompressedImageFrontCameraCallback(&CameraProcessSubnode::ImgCompressCallback,
+                                          this);
+    } else if (device_id_=="front_right_side_camera") {
+      AdapterManager::AddCompressedImageFrontRightSideCallback(&CameraProcessSubnode::ImgCompressCallback,
+                                                            this);
+    } else if (device_id_=="front_left_side_camera") {
+      AdapterManager::AddCompressedImageFrontLeftSideCallback(&CameraProcessSubnode::ImgCompressCallback,
+                                                            this);
+    } else if (device_id_=="front_camera") {
+      AdapterManager::AddCompressedImageFrontCameraCallback(&CameraProcessSubnode::ImgCompressCallback,
+                                                            this);
+    }
 
-      if (device_id_=="camera"){ //standard Apollo camera ID
+  } else
+  {
+    std::cout << "Use images topics..." << std::endl;
+    ADEBUG << "Use images topics...";
+
+    if (device_id_=="camera"){ //standard Apollo camera ID
     AdapterManager::AddImageFrontCallback(&CameraProcessSubnode::ImgCallback,
                                           this);
     } else if (device_id_=="front_right_side_camera") {
@@ -84,9 +106,6 @@ bool CameraProcessSubnode::InitInternal() {
       AdapterManager::AddImageFrontCameraCallback(&CameraProcessSubnode::ImgCallback,
                                                             this);
     }
-    // TODO this functionality is needed only for debugging 
-    AdapterManager::AddCompressedImageCallback(&CameraProcessSubnode::ImgCompressCallback,
-                                               this);
   }
 
 

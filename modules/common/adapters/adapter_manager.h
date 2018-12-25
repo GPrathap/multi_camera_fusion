@@ -315,6 +315,9 @@ class AdapterManager {
   REGISTER_ADAPTER(ImageLeftBackwardsSide);
   REGISTER_ADAPTER(ImageFrontCamera);
   REGISTER_ADAPTER(ExternelObjDetection);
+  REGISTER_ADAPTER(CompressedImageFrontCamera);
+  REGISTER_ADAPTER(CompressedImageFrontLeftSide);
+  REGISTER_ADAPTER(CompressedImageFrontRightSide);  
 
   DECLARE_SINGLETON(AdapterManager);
 };

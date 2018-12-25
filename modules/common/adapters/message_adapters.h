@@ -147,6 +147,9 @@ using OdometryRosAdapter = Adapter<::nav_msgs::Odometry>;
 using UnityCarControlAdapter = Adapter<::car_unity_simulator::CarControl>;
 using UnityCarStateAdapter = Adapter<::car_unity_simulator::CarState>;
 using ExternelObjDetectionAdapter = Adapter<::detection_msgs::DetectedObjectsWithImage>;
+using CompressedImageFrontLeftSideAdapter = Adapter<::sensor_msgs::CompressedImage>;
+using CompressedImageFrontRightSideAdapter = Adapter<::sensor_msgs::CompressedImage>;
+using CompressedImageFrontCameraAdapter = Adapter<::sensor_msgs::CompressedImage>;
 
 }  // namespace adapter
 }  // namespace common

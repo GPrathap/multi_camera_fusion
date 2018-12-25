@@ -271,6 +271,15 @@ void AdapterManager::Init(const AdapterManagerConfig &configs) {
       case AdapterConfig::EXTERNEL_OBJ_DETECTION:
         EnableExternelObjDetection(FLAGS_externel_obj_detection_topic, config);
             break;
+      case AdapterConfig::COMPRESSED_IMAGE_FRONT_CAMERA:
+        EnableCompressedImageFrontCamera(FLAGS_image_front_camera_topic, config);
+            break;
+      case AdapterConfig::COMPRESSED_IMAGE_FRONT_LEFT_SIDE:
+        EnableCompressedImageFrontLeftSide(FLAGS_image_front_left_side_topic, config);
+            break;
+      case AdapterConfig::COMPRESSED_IMAGE_FRONT_RIGHT_SIDE:
+        EnableCompressedImageFrontRightSide(FLAGS_image_front_right_side_topic, config);
+            break;
       default:
         AERROR << "Unknown adapter config type!";
         break;
