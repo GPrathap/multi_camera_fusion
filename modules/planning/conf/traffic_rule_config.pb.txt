@@ -48,8 +48,8 @@ config: {
     enable_side_pass: true
     side_pass_s_threshold: 15.0
     side_pass_l_threshold: 1.0
-    side_pass_wait_time: 30.0
-    nudge_l_buffer: 0.5
+    side_pass_wait_time: 5.0
+    nudge_l_buffer: 1.0
   }
 }
 
