@@ -5,16 +5,16 @@ header:
         secs: 0
         nsecs: 0
     frame_id: velodyne16
-child_frame_id: front_camera
+child_frame_id: front_right_side_camera
 transform:
-# X -90 Y 90 Z 0
+# X -90 Y 120 Z 0
     rotation:
-        x: -0.5
-        y: 0.5
-        z: -0.5
-        w: 0.5
+        x: -0.354
+        y:  0.612
+        z:  -0.612
+        w:   0.354
     translation:
         x: 0.16
-        y: -0.0
+        y: -0.7
         z: -0.2   # when Z=0 is ground
 #        z: 1.476  # when Z=0 is the rear wheel axle
