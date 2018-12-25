@@ -107,7 +107,7 @@ bool ModestRadarDetector::Detect(
 
   // roi filter
   auto &filter_objects = radar_objects.objects;
-  RoiFilter(map_polygons, &filter_objects);
+  //RoiFilter(map_polygons, &filter_objects);
   // treatment
   radar_tracker_->Process(radar_objects);
   ADEBUG << "After process, object size: " << radar_objects.objects.size();
