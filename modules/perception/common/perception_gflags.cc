@@ -214,3 +214,4 @@ DEFINE_string(traffic_light_reviser, "",
               "the reviser enabled for traffic_light");
 DEFINE_bool(use_externel_detector, false, "Use externel object detector or not");
 DEFINE_bool(use_compressed_images, false, "Use compressed image topics or not");
+DEFINE_bool(use_cnn_lanes, false, "Use CNN for lanes detection or not");

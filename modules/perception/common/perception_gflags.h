@@ -137,5 +137,6 @@ DECLARE_string(traffic_light_recognizer);
 DECLARE_string(traffic_light_reviser);
 DECLARE_bool(use_externel_detector);
 DECLARE_bool(use_compressed_images);
+DECLARE_bool(use_cnn_lanes);
 
 #endif  // MODULES_PERCEPTION_COMMON_PERCEPTION_GFLAGS_H_
