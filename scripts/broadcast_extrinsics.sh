@@ -48,6 +48,7 @@ EXTRINSICS_FILES=(
  #"modules/perception/data/params/left_side_camera_extrinsics.yaml"
  #"modules/perception/data/params/right_side_camera_extrinsics.yaml"
  #"modules/perception/data/params/world_to_caamera.yaml"
+ "modules/perception/data/params/radar_extrinsics.yaml"
  "modules/perception/data/params/velodyne16_lidar_extrinsics.yaml"
 )
 

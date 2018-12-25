@@ -85,8 +85,8 @@ bool CameraProcessSubnode::InitInternal() {
                                                             this);
     }
     // TODO this functionality is needed only for debugging 
-    // AdapterManager::AddCompressedImageCallback(&CameraProcessSubnode::ImgCompressCallback,
-    //                                           this);
+    AdapterManager::AddCompressedImageCallback(&CameraProcessSubnode::ImgCompressCallback,
+                                               this);
   }
 
 

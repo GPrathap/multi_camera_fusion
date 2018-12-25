@@ -19,6 +19,9 @@
 #include "modules/common/configs/config_gflags.h"
 #include "modules/common/log.h"
 #include "modules/localization/common/localization_gflags.h"
+#include <tf2/LinearMath/Transform.h>
+#include <tf2/LinearMath/Quaternion.h>
+#include <tf2/utils.h>
 
 namespace apollo {
 namespace localization {
@@ -39,11 +42,27 @@ void LocalizationBase::PublishPoseBroadcastTF(
   tf2_msg.transform.translation.x = localization.pose().position().x();
   tf2_msg.transform.translation.y = localization.pose().position().y();
   tf2_msg.transform.translation.z = localization.pose().position().z();
+ 
+  tf2::Quaternion orientation_quat(localization.pose().orientation().qx(),localization.pose().orientation().qy(),localization.pose().orientation().qz(),localization.pose().orientation().qw());
 
+  double roll, pitch, yaw;
+  tf2::Matrix3x3 orTmp(orientation_quat);
+  orTmp.getRPY(roll, pitch, yaw);
+
+  tf2::Quaternion q_fin;
+  q_fin.setRPY(roll, pitch, yaw+M_PI_2); //
+
+  tf2_msg.transform.rotation.x = q_fin.x();
+  tf2_msg.transform.rotation.y = q_fin.y();
+  tf2_msg.transform.rotation.z = q_fin.z();
+  tf2_msg.transform.rotation.w = q_fin.w();
+  
+ /*
   tf2_msg.transform.rotation.x = localization.pose().orientation().qx();
   tf2_msg.transform.rotation.y = localization.pose().orientation().qy();
   tf2_msg.transform.rotation.z = localization.pose().orientation().qz();
   tf2_msg.transform.rotation.w = localization.pose().orientation().qw();
+*/
 
   tf2_broadcaster_->sendTransform(tf2_msg);
 }
