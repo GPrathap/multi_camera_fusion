@@ -47,7 +47,7 @@ class GeometryCameraConverter : public BaseCameraConverter {
 
   virtual ~GeometryCameraConverter() {}
 
-  bool Init() override;
+  bool Init(std::string device_id) override;
 
   // @brief: Convert 2D detected objects into physical 3D objects
   // @param [in/out] objects : detected object lists, added 3D position and
@@ -100,6 +100,8 @@ class GeometryCameraConverter : public BaseCameraConverter {
   std::vector<Eigen::Vector2f> pixel_corners_;
   static const int kMaxDistanceSearchDepth_ = 10;
   static const int kMaxCenterDirectionSearchDepth_ = 5;
+  std::string camera_device_id;
+  std::string camera_intrinsic_path_;
 
   geometry_camera_converter_config::ModelConfigs config_;
 

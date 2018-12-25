@@ -190,22 +190,21 @@ bool GetCameraTrans(const double query_time, Eigen::Matrix4d* trans, std::string
   tf::transformMsgToEigen(transform_stamped.transform, affine_camera_3d);
   Eigen::Matrix4d camera2novatel_trans = affine_camera_3d.matrix();
   AINFO << "get " << FLAGS_camera_tf2_frame_id << " to "
-        << FLAGS_camera_tf2_child_frame_id
-        << " trans: " << camera2novatel_trans;
+        << device_id << " trans: " << camera2novatel_trans;
 
   if (!tf2_buffer.canTransform(FLAGS_localization_tf2_frame_id,
-                               FLAGS_localization_tf2_child_frame_id,
+                               FLAGS_camera_tf2_frame_id,
                                query_stamp, ros::Duration(kTf2BuffSize),
                                &err_msg)) {
     AERROR << "Cannot transform frame: " << FLAGS_localization_tf2_frame_id
-           << " to frame " << FLAGS_localization_tf2_child_frame_id
+           << " to frame " << FLAGS_camera_tf2_frame_id
            << " , err: " << err_msg
            << ". Frames: " << tf2_buffer.allFramesAsString();
     return false;
   }
   try {
     transform_stamped = tf2_buffer.lookupTransform(
-        FLAGS_localization_tf2_frame_id, FLAGS_localization_tf2_child_frame_id,
+        FLAGS_localization_tf2_frame_id, FLAGS_camera_tf2_frame_id,
         query_stamp);
   } catch (tf2::TransformException& ex) {
     AERROR << "Exception: " << ex.what();
@@ -219,8 +218,8 @@ bool GetCameraTrans(const double query_time, Eigen::Matrix4d* trans, std::string
   } else {
     *trans = novatel2world_trans * camera2novatel_trans;
   }
-  ADEBUG << "get " << FLAGS_camera_tf2_frame_id << " to "
-         << FLAGS_localization_tf2_child_frame_id << " trans: " << *trans;
+  ADEBUG << "get " << FLAGS_localization_tf2_frame_id << " to "
+         << device_id << " trans: " << *trans;
   return true;
 }
 

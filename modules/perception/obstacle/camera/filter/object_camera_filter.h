@@ -75,6 +75,8 @@ class ObjectCameraFilter : public BaseCameraFilter {
   std::unordered_map<int, ObjectFilter> tracked_filters_;
   const int kMaxKeptFrameCnt = 5;
 
+  Eigen::Matrix<float, 3, 1> MakeUnit(const Eigen::Matrix<float, 3, 1> &v) const;
+
   // @brief Create filters for new track ids
   void Create(const int track_id, const double timestamp,
               const std::shared_ptr<VisualObject>& obj_ptr,

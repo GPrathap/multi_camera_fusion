@@ -3,19 +3,25 @@ camera_frame: pylon_camera
 
 #  The DeviceUserID of the camera. If empty, the first camera found in the
 #  device list will be used
-device_user_id: ""
+device_user_id: "front_side_camera"
 
 #  The CameraInfo URL (Uniform Resource Locator) where the optional intrinsic
 #  camera calibration parameters are stored. This URL string will be parsed
 #  from the ROS-CameraInfoManager:
 #  http://docs.ros.org/api/camera_info_manager/html/classcamera__info__manager_
 #  1_1CameraInfoManager.html#details
-camera_info_url: "file:///apollo/modules/calibration/data/kia/camera_info/camera.yaml"
+camera_info_url: "file:///apollo/modules/calibration/data/kia/camera_info/front_side_camera.yaml"
 
 width: 1280
 height: 512
 offset_x: 0
-offset_y: 300
+offset_y: 288
+reverse_x: true
+reverse_y: true
+pgi_mode: true
+noise_reduction: 0
+sharpness_enhancement: 1.5
+
 
 
 #  The encoding of the pixels -- channel meaning, ordering, size
@@ -37,7 +43,7 @@ image_encoding: "rgb8"
 #  The desired publisher frame rate if listening to the topics.
 #  This paramter can only be set once at startup
 #  Calling the GrabImages-Action can result in a higher framerate
-frame_rate: 205
+frame_rate: 20
 
 ##########################################################################
 ######################## Image Intensity Settings ########################
@@ -69,7 +75,7 @@ frame_rate: 205
 #  try to reach the desired brightness by only varying the exposure time. If
 #  gain AND exposure are given, it is not possible to reach the brightness,
 #  because both are assumed to be fix.
-brightness: 100
+brightness: 144.999
 
 #  Only relevant, if 'brightness' is set:
 #  The brightness_continuous flag controls the auto brightness function.
@@ -103,7 +109,7 @@ gain_auto: true
 #  The exposure search can be limited with an upper bound. This is to prevent
 #  very high exposure times and resulting timeouts.
 #  A typical value for this upper bound is ~2000000us.
-auto_exposure_upper_limit: 40000
+auto_exposure_upper_limit: 50000
 
 #  The MTU size. Only used for GigE cameras.
 #  To prevent lost frames configure the camera has to be configured

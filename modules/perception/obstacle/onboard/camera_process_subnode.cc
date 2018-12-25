@@ -83,10 +83,10 @@ bool CameraProcessSubnode::InitInternal() {
     } else if (device_id_=="front_camera") {
       AdapterManager::AddImageFrontCameraCallback(&CameraProcessSubnode::ImgCallback,
                                                             this);
-    } 
-
-    AdapterManager::AddCompressedImageCallback(&CameraProcessSubnode::ImgCompressCallback,
-                                              this);
+    }
+    // TODO this functionality is needed only for debugging 
+    // AdapterManager::AddCompressedImageCallback(&CameraProcessSubnode::ImgCompressCallback,
+    //                                           this);
   }
 
 
@@ -101,7 +101,7 @@ bool CameraProcessSubnode::InitInternal() {
 bool CameraProcessSubnode::InitCalibration() {
   auto calibration_config_manager = Singleton<CalibrationConfigManager>::get();
   calibration_config_manager->set_device_id_and_calibration_config_manager_init(device_id_);
-  CameraCalibrationPtr calibrator = calibration_config_manager->get_camera_calibration();
+  CameraCalibrationPtr calibrator = calibration_config_manager->get_camera_calibration(device_id_);
 
   calibrator->get_image_height_width(&image_height_, &image_width_);
   camera_to_car_ = calibrator->get_camera_extrinsics();
@@ -123,21 +123,17 @@ bool CameraProcessSubnode::InitModules() {
     detector_->Init();
   }
 
-  converter_.reset(BaseCameraConverterRegisterer::GetInstanceByName(
-      "GeometryCameraConverter"));
-  converter_->Init();
+  converter_.reset(BaseCameraConverterRegisterer::GetInstanceByName("GeometryCameraConverter"));
+  converter_->Init(device_id_);
 
-  tracker_.reset(
-      BaseCameraTrackerRegisterer::GetInstanceByName("CascadedCameraTracker"));
+  tracker_.reset(BaseCameraTrackerRegisterer::GetInstanceByName("CascadedCameraTracker"));
   tracker_->Init();
 
-  transformer_.reset(BaseCameraTransformerRegisterer::GetInstanceByName(
-      "FlatCameraTransformer"));
+  transformer_.reset(BaseCameraTransformerRegisterer::GetInstanceByName("FlatCameraTransformer"));
   transformer_->Init();
   transformer_->SetExtrinsics(camera_to_car_);
 
-  filter_.reset(
-      BaseCameraFilterRegisterer::GetInstanceByName("ObjectCameraFilter"));
+  filter_.reset(BaseCameraFilterRegisterer::GetInstanceByName("ObjectCameraFilter"));
   filter_->Init();
 
   return true;
@@ -182,7 +178,7 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
       }
     }
   }
-  
+
   PERF_BLOCK_END("CameraProcessSubnode_detector_");
 
   ProcessDetectedObjects(objects, mask_color, img, timestamp, msg_header);
@@ -190,7 +186,7 @@ void CameraProcessSubnode::ProcessImage(cv::Mat &img, double timestamp, std_msgs
 
 void CameraProcessSubnode::ProcessDetectedObjects(std::vector<std::shared_ptr<VisualObject>> &objects, cv::Mat &mask_color, cv::Mat &img, double timestamp, std_msgs::Header msg_header)
 {
-  
+
 
   PERF_FUNCTION("ProcessDetectedObjects");
   PERF_BLOCK_START();
@@ -200,8 +196,7 @@ void CameraProcessSubnode::ProcessDetectedObjects(std::vector<std::shared_ptr<Vi
 
   if (FLAGS_use_navigation_mode) {
     transformer_->Transform(&objects);
-    adjusted_extrinsics_ =
-        transformer_->GetAdjustedExtrinsics(&camera_to_car_adj_);
+    //adjusted_extrinsics_ = transformer_->GetAdjustedExtrinsics(&camera_to_car_adj_);
     PERF_BLOCK_END("CameraProcessSubnode_transformer_");
   }
 
@@ -209,12 +204,11 @@ void CameraProcessSubnode::ProcessDetectedObjects(std::vector<std::shared_ptr<Vi
   PERF_BLOCK_END("CameraProcessSubnode_tracker_");
 
   FilterOptions options;
+  options.camera_trans = std::make_shared<Eigen::Matrix4d>();
 
   if (FLAGS_use_navigation_mode) {
-      options.camera_trans = std::make_shared<Eigen::Matrix4d>();
       options.camera_trans->setIdentity();
   } else {
-      options.camera_trans = std::make_shared<Eigen::Matrix4d>();
       if (!GetCameraTrans(timestamp, options.camera_trans.get(), device_id_)) {
           AERROR << "Failed to get trans at timestamp: " << timestamp;
           return;
@@ -226,12 +220,6 @@ void CameraProcessSubnode::ProcessDetectedObjects(std::vector<std::shared_ptr<Vi
   AINFO << "camera_to_world_: " << camera_to_world_;
   filter_->Filter(timestamp, &objects, options);
   PERF_BLOCK_END("CameraProcessSubnode_filter_");
-
-  auto calibration_config_manager = Singleton<CalibrationConfigManager>::get();
-  calibration_config_manager->set_device_id_and_calibration_config_manager_init(device_id_);
-  auto calibrator = calibration_config_manager->get_camera_calibration();
-  calibrator->SetCar2CameraExtrinsicsAdj(camera_to_car_adj_,
-                                         adjusted_extrinsics_);
 
   std::shared_ptr<SensorObjects> out_objs(new SensorObjects);
   out_objs->timestamp = timestamp;
@@ -245,7 +233,8 @@ void CameraProcessSubnode::ProcessDetectedObjects(std::vector<std::shared_ptr<Vi
 
   if (pb_obj_) PublishPerceptionPbObj(out_objs);
   if (pb_ln_msk_) PublishPerceptionPbLnMsk(mask_color, msg_header);
-}
+
+  }
 
 void CameraProcessSubnode::ImgCallback(const sensor_msgs::Image &message) {
   double timestamp = message.header.stamp.toSec();
@@ -365,9 +354,9 @@ void CameraProcessSubnode::ExtObjDetectionCallback(const detection_msgs::Detecte
          << " frame: " << ++seq_num_;
 
   std::vector<std::shared_ptr<VisualObject>> objects;
-  
+
   std::vector<ObjectType> types_ = { apollo::perception::ObjectType::VEHICLE,  //Car
-                                apollo::perception::ObjectType::VEHICLE,  //Van 
+                                apollo::perception::ObjectType::VEHICLE,  //Van
                                 apollo::perception::ObjectType::VEHICLE,  //Truck
                                 apollo::perception::ObjectType::PEDESTRIAN, //Pedestrian
                                 apollo::perception::ObjectType::UNKNOWN_UNMOVABLE, //Person_sitting
@@ -405,8 +394,8 @@ void CameraProcessSubnode::ExtObjDetectionCallback(const detection_msgs::Detecte
       memcpy(obj->object_feature.data(), feat_data,
             feat_dim * sizeof(feat_data[0]));
       apollo::common::math::L2Norm(feat_dim, obj->object_feature.data());
-           
-      ADEBUG << "Object added! Class: " << obj->type << " x1: " << obj->upper_left[0] << "y1: " << obj->upper_left[1] << 
+
+      ADEBUG << "Object added! Class: " << obj->type << " x1: " << obj->upper_left[0] << "y1: " << obj->upper_left[1] <<
             " x2: " << obj->lower_right[0] << " y2: " << obj->lower_right[1];
       objects.push_back(obj);
   }
@@ -433,7 +422,7 @@ void CameraProcessSubnode::ExtObjDetectionCallback(const detection_msgs::Detecte
   CompMessageToMat(message.image, &img);
 
   ProcessDetectedObjects(objects, mask_color, img, timestamp, message.header);
-  
+
 }
 
 void CameraProcessSubnode::ChassisCallback(
@@ -515,7 +504,7 @@ void CameraProcessSubnode::VisualObjToSensorObj(
     (*sensor_objects)->sensor2world_pose_static = camera_to_car_;
     (*sensor_objects)->sensor2world_pose = camera_to_car_adj_;
   } else {
-    (*sensor_objects)->sensor2world_pose_static = *(options.camera_trans);
+    (*sensor_objects)->sensor2world_pose_static = camera_to_car_;
     (*sensor_objects)->sensor2world_pose = *(options.camera_trans);
     AINFO << "camera process sensor2world pose is "
           << (*sensor_objects)->sensor2world_pose;

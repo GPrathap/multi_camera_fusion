@@ -23,7 +23,13 @@
 #include <unordered_map>
 #include <vector>
 
+#include <Eigen/Core>
+#include <Eigen/Geometry>
+
+
 #include "modules/perception/obstacle/camera/tracker/base_affinity_tracker.h"
+#include "modules/perception/obstacle/camera/tracker/common/dtw.h"
+#include "modules/common/log.h"
 
 namespace apollo {
 namespace perception {
@@ -44,10 +50,17 @@ class DLFAffinityTracker : public BaseAffinityTracker {
   bool UpdateTracked(const cv::Mat &img, const std::vector<Detected> &detected,
                      std::vector<Tracked> *tracked) override;
 
+  void calculateMahalanobiasDistance(Eigen::MatrixXd object1, Eigen::MatrixXd object2, double& distance);
+  void getCovarianceMatrix(Eigen::MatrixXd input_mat, Eigen::MatrixXd& covariance_mat);
+
+  cv::Mat img_previous;
+
  private:
   //  Thresholds are fine-tuned and detector-dependant
   const float kConfThreshold_ = 1.0f;
-  const float kFilterThreshold_ = 0.0f;
+  const float kFilterThreshold_ = 0.10f;
+  const int track_len = 10;
+  
 };
 
 }  // namespace perception

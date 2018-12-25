@@ -136,18 +136,55 @@ void ObjectCameraFilter::TransformPoseGlobal2Local(const int track_id,
 
 void ObjectCameraFilter::TransformObject(std::shared_ptr<VisualObject> obj,
                                          const Eigen::Matrix4f& pose) {
-  // Transform object with given pose
-  Eigen::Vector3f& dir = obj->direction;
-  dir = (pose * Eigen::Vector4f(dir[0], dir[1], dir[2], 0)).head(3);
-  // transform center
-  Eigen::Vector3f& center = obj->center;
-  center = (pose * Eigen::Vector4f(center[0], center[1], center[2], 1)).head(3);
 
-  if (fabs(obj->direction[0]) < DBL_MIN) {
-    obj->theta = obj->direction(1) > 0 ? M_PI / 2 : -M_PI / 2;
-  } else {
-    obj->theta = atan2(obj->direction[1], obj->direction[0]);
-  }
+    if(FLAGS_transform_into_ego_car_space){
+
+      float d = obj->distance;
+      float d_v = std::abs(pose(2, 3) - obj->height / 2.0f);
+      float d_flat = sqrt(d * d - d_v * d_v);
+
+      // Get 2D vector of top down view
+      Eigen::Vector3f center = obj->center;  // Center in Camera Space
+      Eigen::Vector4f center_v(center.x(), center.y(), center.z(), 0.0f);
+      center_v = pose * center_v;
+      center_v.z() = 0.0f;
+      Eigen::Vector3f unit_v_flat = MakeUnit(center_v.head(3));
+
+      // 2D position in top-down view of ego-car space
+      Eigen::Vector3f camera2car_flat_offset_ =
+        Eigen::Matrix<float, 3, 1>(pose(0, 3), pose(1, 3), 0.0f);
+      Eigen::Vector3f pos_ground = unit_v_flat * d_flat;
+      obj->center = pos_ground + camera2car_flat_offset_;
+
+      // Transform object with given pose
+      Eigen::Vector3f& dir = obj->direction;
+      dir = (pose * Eigen::Vector4f(dir[0], dir[1], dir[2], 0)).head(3);
+
+    }else{
+      
+        // Transform object with given pose
+        Eigen::Vector3f& dir = obj->direction;
+        dir = (pose * Eigen::Vector4f(dir[0], dir[1], dir[2], 0)).head(3);
+        // transform center
+        Eigen::Vector3f& center = obj->center;
+        center = (pose * Eigen::Vector4f(center[0], center[1], center[2], 1)).head(3);
+    }
+
+    if (fabs(obj->direction[0]) < DBL_MIN) {
+      obj->theta = obj->direction(1) > 0 ? M_PI / 2 : -M_PI / 2;
+    } else {
+      obj->theta = atan2(obj->direction[1], obj->direction[0]);
+    }
+}
+
+Eigen::Matrix<float, 3, 1> ObjectCameraFilter::MakeUnit(
+    const Eigen::Matrix<float, 3, 1> &v) const {
+  Eigen::Matrix<float, 3, 1> unit_v = v;
+  float to_unit_scale =
+      std::sqrt(unit_v.x() * unit_v.x() + unit_v.y() * unit_v.y() +
+                unit_v.z() * unit_v.z());
+  unit_v /= to_unit_scale;
+  return unit_v;
 }
 
 void ObjectCameraFilter::Predict(const int track_id, const double timestamp) {

@@ -167,7 +167,7 @@ bool PbfTrack::IsInCameraView(const Eigen::Vector3d &center, std::string sensor_
       Singleton<CalibrationConfigManager>::get();
   calibration_config_manager->set_device_id_and_calibration_config_manager_init(sensor_device_id);
   const CameraCalibrationPtr camera_calibration =
-      calibration_config_manager->get_camera_calibration();
+      calibration_config_manager->get_camera_calibration(sensor_device_id);
 
   const CameraDistortPtr camera_distort =
       camera_calibration->get_camera_model();

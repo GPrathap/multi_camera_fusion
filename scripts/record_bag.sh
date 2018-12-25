@@ -71,6 +71,10 @@ function start() {
         /apollo/monitor/system_status \
         /pylon_camera_node/image_raw/compressed \
         /apollo/sensor/velodyne16/PointCloud2 \
+        /apollo/sensor/velodyne16/compensator/PointCloud2 \
+        /apollo/sensor/camera/perception/image_front_camera/compressed \
+        /apollo/sensor/camera/perception/image_front_left_side/compressed \
+        /apollo/sensor/camera/perception/image_front_right_side/compressed \
         /velodyne_points \
         /apollo/monitor/static_info </dev/null >"${LOG}" 2>&1 &
     fi

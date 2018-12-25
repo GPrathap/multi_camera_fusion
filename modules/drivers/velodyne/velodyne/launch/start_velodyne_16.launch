@@ -7,8 +7,8 @@
     <arg name="max_range_16" default="70.0" />
     <arg name="rpm" default="600"/>
     <arg name="model" default="VLP16" />
-    <arg name="firing_data_port" default="2369"/>
-    <arg name="positioning_data_port" default="8309"/>
+    <arg name="firing_data_port" default="2368"/>
+    <arg name="positioning_data_port" default="8308"/>
     <!-- 100ms -->
     <arg name="tf_query_timeout" default="0.1"/>
     <arg name="nodelet_manager_name" value="velodyne16_nodelet_manager" />

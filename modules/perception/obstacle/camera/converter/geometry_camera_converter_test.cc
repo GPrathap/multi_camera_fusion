@@ -25,7 +25,7 @@ namespace perception {
 
 TEST(GeometryCameraConverterTest, TestLoadProto) {
   GeometryCameraConverter gcc;
-  EXPECT_TRUE(gcc.Init());
+  EXPECT_TRUE(gcc.Init("front_camera"));
 }
 
 }  // namespace perception
