@@ -500,10 +500,6 @@ apollo::common::Status VisualizationSubnode::ProcEvents() {
                << " device_id:" << device_id;
         return Status(ErrorCode::PERCEPTION_ERROR, "Failed to proc events.");
       }
-      AINFO << "event: " << events[j].event_id << " device_id:" << device_id
-            << " timestamp: ";
-      AINFO << std::fixed << std::setprecision(64) << timestamp;
-
       SetFrameContent(events[j], device_id, data_key, timestamp, &content_);
     }
 
