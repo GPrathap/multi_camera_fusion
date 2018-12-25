@@ -75,13 +75,6 @@ bool RadarProcessSubnode::InitInternal() {
   }
   device_id_ = reserve_field_map["device_id"];
 
-  if (reserve_field_map.find("camera_device_id") == reserve_field_map.end()) {
-    AERROR << "Failed to find field camera_device_id, reserve: " << reserve_;
-    return false;
-  }
-
-  camera_device_id_ = reserve_field_map["camera_device_id"];
-
   CHECK(AdapterManager::GetContiRadar()) << "Radar is not initialized.";
   AdapterManager::AddContiRadarCallback(&RadarProcessSubnode::OnRadar, this);
   CHECK(AdapterManager::GetLocalization()) << "Localiztion is not initialized.";
@@ -98,6 +91,7 @@ bool RadarProcessSubnode::InitInternal() {
   radar_extrinsic_ = radar_extrinsic.matrix();
   AINFO << "get radar extrinsic succ. pose: \n" << radar_extrinsic_;
 
+  /*
   std::string short_camera_extrinsic_path = FLAGS_short_camera_extrinsic_file;
   AINFO << "short camera extrinsic path: " << short_camera_extrinsic_path;
   Eigen::Affine3d short_camera_extrinsic;
@@ -108,6 +102,7 @@ bool RadarProcessSubnode::InitInternal() {
   short_camera_extrinsic_ = short_camera_extrinsic.matrix();
   AINFO << "get short camera  extrinsic succ. pose: \n"
         << short_camera_extrinsic_;
+  */
   inited_ = true;
 
   return true;
@@ -156,13 +151,13 @@ void RadarProcessSubnode::OnRadar(const ContiRadar &radar_obs) {
 
   if (!FLAGS_use_navigation_mode) {
     *radar2world_pose =
-        *velodyne2world_pose * short_camera_extrinsic_ * radar_extrinsic_;
+        *velodyne2world_pose  * radar_extrinsic_;
     ADEBUG << "get radar trans pose succ. pose: \n" << *radar2world_pose;
 
   } else {
     CalibrationConfigManager *calibration_config_manager =
         Singleton<CalibrationConfigManager>::get();
-    calibration_config_manager->set_device_id_and_calibration_config_manager_init(camera_device_id_);
+    calibration_config_manager->set_device_id_and_calibration_config_manager_init("");
     CameraCalibrationPtr calibrator = calibration_config_manager->get_camera_calibration();
     // Eigen::Matrix4d camera_to_car = calibrator->get_camera_extrinsics();
     *radar2car_pose = radar_extrinsic_;
@@ -232,6 +227,12 @@ void RadarProcessSubnode::OnRadar(const ContiRadar &radar_obs) {
          << end_latency << "]";
   ADEBUG << "radar process succ, there are " << (radar_objects->objects).size()
          << " objects.";
+  
+  for(size_t i = 0; i < (radar_objects->objects).size(); i++)
+  {
+    ADEBUG << "Object["<<i<<"] center: " << radar_objects->objects[i]->center;
+  }
+  
   return;
 }
 

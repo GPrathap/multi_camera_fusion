@@ -81,7 +81,6 @@ class RadarProcessSubnode : public Subnode {
   common::ErrorCode error_code_ = common::OK;
   RadarObjectData *radar_data_ = nullptr;
   std::string device_id_;
-  std::string camera_device_id_;
   Eigen::Matrix4d radar_extrinsic_;
   Eigen::Matrix4d short_camera_extrinsic_;
 
