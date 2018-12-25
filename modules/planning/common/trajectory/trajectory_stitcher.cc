@@ -118,7 +118,7 @@ std::vector<TrajectoryPoint> TrajectoryStitcher::ComputeStitchingTrajectory(
     return ComputeReinitStitchingTrajectory(vehicle_state);
   }
 
-  const double veh_rel_time =
+  const double veh_rel_time = 
       current_timestamp - prev_trajectory->header_time();
 
   std::size_t matched_index = prev_trajectory->QueryNearestPoint(veh_rel_time);
@@ -134,6 +134,15 @@ std::vector<TrajectoryPoint> TrajectoryStitcher::ComputeStitchingTrajectory(
   }
 
   auto matched_point = prev_trajectory->Evaluate(veh_rel_time);
+
+  if (matched_point.v() > vehicle_state.linear_velocity() + 0.5)
+  {
+    ADEBUG << "Current velocity smaller than matched point velocity. Replan is triggered. matched_point.v: " << matched_point.v()  
+      << "  vehicle_state.linear_velocity(): " <<  vehicle_state.linear_velocity();
+    return ComputeReinitStitchingTrajectory(vehicle_state);
+  }
+
+  ADEBUG << "veh_rel_time: " << veh_rel_time << " matched_index: " << matched_index << " matched_point: " << matched_point.DebugString();
 
   if (!matched_point.has_path_point()) {
     return ComputeReinitStitchingTrajectory(vehicle_state);
