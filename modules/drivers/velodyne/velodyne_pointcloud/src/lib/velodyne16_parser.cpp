@@ -15,7 +15,6 @@
  *****************************************************************************/
 
 #include "velodyne_pointcloud/velodyne_parser.h"
-#include <pcl_conversions/pcl_conversions.h>
 #include <ros/ros.h>
 
 namespace apollo {
@@ -35,7 +34,6 @@ void Velodyne16Parser::generate_pointcloud(
   out_msg->header.frame_id = scan_msg->header.frame_id;
   out_msg->height = 1;
   out_msg->header.seq = scan_msg->header.seq;
-  pcl_conversions::toPCL(scan_msg->header.stamp, out_msg->header.stamp);
   out_msg->reserve(20000);
   gps_base_usec_ = scan_msg->basetime;
 
@@ -107,20 +105,19 @@ void Velodyne16Parser::unpack(const velodyne_msgs::VelodynePacket& pkt,
 
         // set 4th param to LOWER_BANK, only use lower_gps_base_usec_ and
         // lower_previous_packet_stamp_
-        // double timestamp = get_timestamp(
-        //     basetime,
-        //     (*inner_time_)[block][firing * VLP16_SCANS_PER_FIRING + dsr],
-        //     LOWER_BANK);
+        double timestamp = get_timestamp(
+            basetime,
+            (*inner_time_)[block][firing * VLP16_SCANS_PER_FIRING + dsr],
+            LOWER_BANK);
 
-        // if (block == BLOCKS_PER_PACKET - 1 &&
-        //     firing == VLP16_FIRINGS_PER_BLOCK - 1 &&
-        //     dsr == VLP16_SCANS_PER_FIRING - 1) {
-        //   // set header stamp before organize the poin++t cloud
-        //   pc.header.stamp = static_cast<uint64_t>(timestamp * 1e6);
-        //   std::cout<< "pc.header.stamp" << pc.header.stamp << std::endl;
-        // }
+        if (block == BLOCKS_PER_PACKET - 1 &&
+            firing == VLP16_FIRINGS_PER_BLOCK - 1 &&
+            dsr == VLP16_SCANS_PER_FIRING - 1) {
+          // set header stamp before organize the poin++t cloud
+          pc.header.stamp = static_cast<uint64_t>(timestamp * 1e6);
+          std::cout<< "pc.header.stamp" << pc.header.stamp << std::endl;
+        }
         
-        double timestamp = pc.header.stamp;
         VPoint point;
         point.timestamp = timestamp;
         float distance = raw_distance.raw_distance * DISTANCE_RESOLUTION +
