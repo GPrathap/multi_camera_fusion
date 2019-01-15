@@ -57,6 +57,7 @@ bool CNNSegmentation::Init() {
   }
 
 /// Instantiate Caffe net
+#define USE_GPU
 #ifndef USE_GPU
   AINFO << "using Caffe CPU mode";
   caffe::Caffe::set_mode(caffe::Caffe::CPU);
