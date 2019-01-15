@@ -26,7 +26,7 @@ namespace velodyne {
 struct PointXYZIT {
   PCL_ADD_POINT4D
   uint8_t intensity;
-  double timestamp;
+  pcl::uint64_t timestamp;
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW  // make sure our new allocators are aligned
 } EIGEN_ALIGN16;
 // enforce SSE padding for correct memory alignment

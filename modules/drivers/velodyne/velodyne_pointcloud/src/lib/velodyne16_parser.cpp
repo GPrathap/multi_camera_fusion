@@ -107,19 +107,19 @@ void Velodyne16Parser::unpack(const velodyne_msgs::VelodynePacket& pkt,
 
         // set 4th param to LOWER_BANK, only use lower_gps_base_usec_ and
         // lower_previous_packet_stamp_
-        double timestamp = get_timestamp(
-            basetime,
-            (*inner_time_)[block][firing * VLP16_SCANS_PER_FIRING + dsr],
-            LOWER_BANK);
+        // double timestamp = get_timestamp(
+        //     basetime,
+        //     (*inner_time_)[block][firing * VLP16_SCANS_PER_FIRING + dsr],
+        //     LOWER_BANK);
 
-        if (block == BLOCKS_PER_PACKET - 1 &&
-            firing == VLP16_FIRINGS_PER_BLOCK - 1 &&
-            dsr == VLP16_SCANS_PER_FIRING - 1) {
-          // set header stamp before organize the poin++t cloud
-          pc.header.stamp = static_cast<uint64_t>(timestamp * 1e6);
-          std::cout<< "pc.header.stamp" << pc.header.stamp << std::endl;
-        }
-        
+        // if (block == BLOCKS_PER_PACKET - 1 &&
+        //     firing == VLP16_FIRINGS_PER_BLOCK - 1 &&
+        //     dsr == VLP16_SCANS_PER_FIRING - 1) {
+        //   // set header stamp before organize the poin++t cloud
+        //   pc.header.stamp = static_cast<uint64_t>(timestamp * 1e6);
+        //   std::cout<< "pc.header.stamp" << pc.header.stamp << std::endl;
+        // }
+        double timestamp = pc.header.stamp;
         VPoint point;
         point.timestamp = timestamp;
         float distance = raw_distance.raw_distance * DISTANCE_RESOLUTION +
