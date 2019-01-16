@@ -1,0 +1,33 @@
+<launch>
+    <arg name="velodyne16_calibration_online" default="true" />
+    <!--If 'velodyne16_calibration_online' is true, 'velodyne16_calibration_file' will not use  -->
+    <arg name="velodyne16_calibration_file" default="$(find velodyne_pointcloud)/params/VLP16_calibration.yaml"/>
+    <arg name="extrinsics_velodyne16" default="$(find velodyne_pointcloud)/params/velodyne16_novatel_extrinsics_example.yaml"/>
+    <arg name="velodyne16_frame_id" default="velodyne16"/>
+    <arg name="organized" default="false"/>
+    <arg name="min_range" default="0.9" />
+    <arg name="max_range_16" default="70.0" />
+    <arg name="rpm" default="600"/>
+    <!-- 16E_S3D_STRONGEST | 16E_S3D_LATEST | 16E_S3D_DUAL -->
+    <arg name="model" default="VLP16" />
+    <!-- 100ms -->
+    <arg name="tf_query_timeout" default="0.1"/>
+    <arg name="pcd_folder" value="/apollo/data/pcd" />
+    <arg name="nodelet_manager_name" value="velodyne16_nodelet_manager"/>
+
+  <include file="$(find velodyne_pointcloud)/launch/nodelet_manager.launch">
+    <arg name="nodelet_manager_name" value="$(arg nodelet_manager_name)"/>
+  </include>
+
+  <include file="$(find velodyne_pointcloud)/launch/pcd_exporter_nodelet.launch">
+    <arg name="nodelet_manager_name" value="$(arg nodelet_manager_name)"/>
+    <arg name="pcd_folder" value="$(arg pcd_folder)"/>
+    <arg name="skip_static_frames" default="false"/>
+    <arg name="child_frame_id" default="localization"/>
+    <arg name="stamp_file" default="$(arg pcd_folder)/stamp.txt"/>
+    <arg name="pose_file" default="$(arg pcd_folder)/pose.txt"/>
+    <arg name="topic_pointcloud" default="/apollo/sensor/velodyne16/PointCloud2"/>
+    <arg name="queue_size" default="10"/>
+  </include>
+
+</launch>
