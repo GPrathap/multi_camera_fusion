@@ -37,6 +37,9 @@ DEFINE_string(control_command_topic, "/apollo/control",
 DEFINE_string(pointcloud_topic,
               "/apollo/sensor/velodyne64/compensator/PointCloud2",
               "pointcloud topic name");
+DEFINE_string(pointcloud_debug_topic,
+              "/apollo/sensor/debug/PointCloud2",
+              "pointcloud topic name");
 DEFINE_string(vlp16_pointcloud_topic,
               "/apollo/sensor/velodyne16/PointCloud2",
               "16 beam Lidar pointcloud topic name");

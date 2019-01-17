@@ -77,6 +77,9 @@ class LidarProcessSubnode : public Subnode {
                            const SharedDataPtr<SensorObjects>& data,
                            pcl_util::PointCloudPtr* cloud = nullptr);
 
+  void RemoveEgoVehicle(pcl_util::PointCloudPtr dest_cloud, pcl_util::PointCloudPtr in_cloud);
+  void PublishPointCloudDebug(pcl_util::PointCloudPtr cloud);
+
   bool inited_ = false;
   double timestamp_ = 0.0;
   SeqId seq_num_ = 0;

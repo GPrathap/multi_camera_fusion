@@ -317,7 +317,8 @@ class AdapterManager {
   REGISTER_ADAPTER(ExternelObjDetection);
   REGISTER_ADAPTER(CompressedImageFrontCamera);
   REGISTER_ADAPTER(CompressedImageFrontLeftSide);
-  REGISTER_ADAPTER(CompressedImageFrontRightSide);  
+  REGISTER_ADAPTER(CompressedImageFrontRightSide);
+  REGISTER_ADAPTER(PointCloudDebug);  
 
   DECLARE_SINGLETON(AdapterManager);
 };

@@ -84,6 +84,26 @@ bool LidarProcessSubnode::InitInternal() {
   return true;
 }
 
+void LidarProcessSubnode::RemoveEgoVehicle(pcl_util::PointCloudPtr dest_cloud, pcl_util::PointCloudPtr in_cloud)
+{
+    int count = 0;
+    for (size_t i = 0; i<in_cloud->points.size(); i++)
+    {
+        if (((in_cloud->points[i].x>2.5 || in_cloud->points[i].x<-2.5) || (in_cloud->points[i].y>1.5 || in_cloud->points[i].y<-1.5)))
+        {
+            dest_cloud->points.push_back(in_cloud->points[i]);
+            count++;
+        }
+    }
+
+    dest_cloud->header = in_cloud->header;
+    dest_cloud->width = in_cloud->width;
+    dest_cloud->height = in_cloud->height;
+    dest_cloud->is_dense = in_cloud->is_dense;
+    dest_cloud->sensor_origin_ = in_cloud->sensor_origin_;
+    dest_cloud->sensor_orientation_ = in_cloud->sensor_orientation_;
+}
+
 void LidarProcessSubnode::OnPointCloud(
     const sensor_msgs::PointCloud2& message) {
   AINFO << "process OnPointCloud.";
@@ -114,8 +134,11 @@ void LidarProcessSubnode::OnPointCloud(
   AINFO << "get lidar trans pose succ. pose: \n" << *velodyne_trans;
   PERF_BLOCK_END("lidar_get_velodyne2world_transfrom");
 
+  PointCloudPtr point_cloud_in(new PointCloud);
+  TransPointCloudToPCL(message, &point_cloud_in);
   PointCloudPtr point_cloud(new PointCloud);
-  TransPointCloudToPCL(message, &point_cloud);
+  RemoveEgoVehicle(point_cloud, point_cloud_in);
+  PublishPointCloudDebug(point_cloud);
   ADEBUG << "transform pointcloud success. points num is: "
          << point_cloud->points.size();
   PERF_BLOCK_END("lidar_transform_poindcloud");
@@ -375,6 +398,15 @@ bool LidarProcessSubnode::InitAlgorithmPlugin() {
         << type_fuser_->name();
 
   return true;
+}
+
+void LidarProcessSubnode::PublishPointCloudDebug(PointCloudPtr cloud)
+{
+    sensor_msgs::PointCloud2 output;
+    pcl::toROSMsg(*cloud, output);
+    output.header.stamp = ros::Time::now();
+    output.header.frame_id = "velodyne16";
+    common::adapter::AdapterManager::PublishPointCloudDebug(output);
 }
 
 void LidarProcessSubnode::TransPointCloudToPCL(

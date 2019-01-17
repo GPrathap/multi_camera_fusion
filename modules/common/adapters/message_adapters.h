@@ -150,6 +150,7 @@ using ExternelObjDetectionAdapter = Adapter<::detection_msgs::DetectedObjectsWit
 using CompressedImageFrontLeftSideAdapter = Adapter<::sensor_msgs::CompressedImage>;
 using CompressedImageFrontRightSideAdapter = Adapter<::sensor_msgs::CompressedImage>;
 using CompressedImageFrontCameraAdapter = Adapter<::sensor_msgs::CompressedImage>;
+using PointCloudDebugAdapter = Adapter<::sensor_msgs::PointCloud2>;
 
 }  // namespace adapter
 }  // namespace common
