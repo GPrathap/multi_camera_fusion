@@ -181,7 +181,7 @@ float PbfTrackObjectDistance::ComputeDistanceAngleMatchProb(
   static float weight_y = 0.2f;
   static float speed_diff = 5.0f;
   static float epislon = 0.1f;
-  static float angle_tolerance = 5.0f;
+  static float angle_tolerance = 15.0f;
   static float distance_tolerance_max = 5.0f;
   static float distance_tolerance_min = 2.0f;
 

@@ -89,7 +89,8 @@ void LidarProcessSubnode::RemoveEgoVehicle(pcl_util::PointCloudPtr dest_cloud, p
     int count = 0;
     for (size_t i = 0; i<in_cloud->points.size(); i++)
     {
-        if (((in_cloud->points[i].x>2.5 || in_cloud->points[i].x<-2.5) || (in_cloud->points[i].y>1.5 || in_cloud->points[i].y<-1.5)))
+        double dist = sqrt(in_cloud->points[i].x*in_cloud->points[i].x+in_cloud->points[i].y*in_cloud->points[i].y);
+        if (((in_cloud->points[i].x>2.5 || in_cloud->points[i].x<-2.5) || (in_cloud->points[i].y>1.5 || in_cloud->points[i].y<-1.5)) && dist < 25.0)
         {
             dest_cloud->points.push_back(in_cloud->points[i]);
             count++;
