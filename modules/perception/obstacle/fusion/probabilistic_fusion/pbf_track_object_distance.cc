@@ -183,7 +183,7 @@ float PbfTrackObjectDistance::ComputeDistanceAngleMatchProb(
   static float epislon = 0.1f;
   static float angle_tolerance = 15.0f;
   static float distance_tolerance_max = 5.0f;
-  static float distance_tolerance_min = 2.0f;
+  static float distance_tolerance_min = 3.0f;
 
   const std::shared_ptr<Object> &fobj = fused_object->object;
   const std::shared_ptr<Object> &sobj = sensor_object->object;

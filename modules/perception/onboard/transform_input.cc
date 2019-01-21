@@ -59,8 +59,8 @@ bool GetVelodyneTrans(const double query_time, Eigen::Matrix4d* trans) {
   Eigen::Affine3d affine_lidar_3d;
   tf::transformMsgToEigen(transform_stamped.transform, affine_lidar_3d);
   Eigen::Matrix4d lidar2novatel_trans = affine_lidar_3d.matrix();
-  AINFO << "get " << FLAGS_lidar_tf2_frame_id << " to "
-        << FLAGS_lidar_tf2_child_frame_id << " trans: " << lidar2novatel_trans;
+  //AINFO << "get " << FLAGS_lidar_tf2_frame_id << " to "
+  //      << FLAGS_lidar_tf2_child_frame_id << " trans: " << lidar2novatel_trans;
 
   if (!tf2_buffer.canTransform(FLAGS_localization_tf2_frame_id,
                                FLAGS_localization_tf2_child_frame_id,
@@ -189,8 +189,8 @@ bool GetCameraTrans(const double query_time, Eigen::Matrix4d* trans, std::string
   Eigen::Affine3d affine_camera_3d;
   tf::transformMsgToEigen(transform_stamped.transform, affine_camera_3d);
   Eigen::Matrix4d camera2novatel_trans = affine_camera_3d.matrix();
-  AINFO << "get " << FLAGS_camera_tf2_frame_id << " to "
-        << device_id << " trans: " << camera2novatel_trans;
+  //AINFO << "get " << FLAGS_camera_tf2_frame_id << " to "
+  //      << device_id << " trans: " << camera2novatel_trans;
 
   if (!tf2_buffer.canTransform(FLAGS_localization_tf2_frame_id,
                                FLAGS_camera_tf2_frame_id,
@@ -218,8 +218,8 @@ bool GetCameraTrans(const double query_time, Eigen::Matrix4d* trans, std::string
   } else {
     *trans = novatel2world_trans * camera2novatel_trans;
   }
-  ADEBUG << "get " << FLAGS_localization_tf2_frame_id << " to "
-         << device_id << " trans: " << *trans;
+  //ADEBUG << "get " << FLAGS_localization_tf2_frame_id << " to "
+  //       << device_id << " trans: " << *trans;
   return true;
 }
 

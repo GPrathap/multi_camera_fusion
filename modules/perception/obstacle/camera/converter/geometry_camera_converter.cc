@@ -46,6 +46,8 @@ bool GeometryCameraConverter::Convert(
 
     float deg_alpha = obj->alpha * 180.0f / M_PI;
 
+    ADEBUG << "Obj alpha: " << deg_alpha;
+
     Eigen::Vector2f upper_left(obj->upper_left.x(), obj->upper_left.y());
     Eigen::Vector2f lower_right(obj->lower_right.x(), obj->lower_right.y());
 
@@ -56,7 +58,7 @@ bool GeometryCameraConverter::Convert(
       // No truncation on 2D height
       ConvertSingle(obj->height, obj->width, obj->length, deg_alpha, upper_left,
                     lower_right, false, &distance, &mass_center_pixel);
-      AINFO << "no trucation on 2d height"
+      ADEBUG << "no trucation on 2d height"
             << "height:" << obj->height << " width:" << obj->width
             << " alpha:" << deg_alpha << "2d box area is "
             << std::abs(obj->upper_left.x() - obj->lower_right.x()) *
@@ -66,6 +68,9 @@ bool GeometryCameraConverter::Convert(
       // 2D height truncation and no width truncation
       ConvertSingle(obj->height, obj->width, obj->length, deg_alpha, upper_left,
                     lower_right, true, &distance, &mass_center_pixel);
+      ADEBUG << "2D height truncation and no width truncation. trunc_width: " << obj->trunc_width
+      << "trunc_height: " << obj->trunc_height
+      << " alpha:" << deg_alpha;
     } else {
       // truncation on both sides
       // Give fix values for detected box with both side and bottom truncation
@@ -391,7 +396,7 @@ void GeometryCameraConverter::DecideAngle(
     std::shared_ptr<VisualObject> obj) const {
   float beta = std::atan2(camera_ray.x(), camera_ray.z());
   // Orientation is not reliable in these cases (DL model specific issue)
-  if (obj->distance > 60.0f || obj->trunc_width > 0.25f) {
+  if (obj->distance > 60.0f || obj->trunc_width > 0.7f) {
     ADEBUG << "handle in special case";
     obj->theta = -1.0f * M_PI_2;
     obj->alpha = obj->theta - beta;

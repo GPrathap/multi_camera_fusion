@@ -492,9 +492,9 @@ void FusionSubnode::RegistAllAlgorithm() {
 }
 
 void FusionSubnode::OnChassis(const Chassis &chassis) {
-  ADEBUG << "Received chassis data: run chassis callback.";
+  //ADEBUG << "Received chassis data: run chassis callback.";
   chassis_.CopyFrom(chassis);
-  ADEBUG << "Received chassis information " << chassis_.ShortDebugString();
+  //ADEBUG << "Received chassis information " << chassis_.ShortDebugString();
   chassis_speed_mps_ = chassis_.speed_mps();
 }
 
