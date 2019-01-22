@@ -525,9 +525,9 @@ void PbfTrack::UpdateMeasurementsLifeWithoutMeasurement(
     bool *invisible_state) {
   *invisible_state = true;
   for (auto it = objects->begin(); it != objects->end();) {
-    if (sensor_id == it->first) {
+    if (sensor_id == it->first && false) {
       it->second = nullptr;
-      it = objects->erase(it);
+      it = objects->erase(it);  
     } else {
       double period = timestamp - it->second->timestamp;
       if (period > max_invisible_time) {
