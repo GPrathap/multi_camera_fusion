@@ -18,6 +18,7 @@ function start() {
 }
 
 function stop() {
+    pkill -9 -f geo2loc
     pkill -9 -f nmea_serial_driver
     pkill -9 -f mtnode.py
 }
