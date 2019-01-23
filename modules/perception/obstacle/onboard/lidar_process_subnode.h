@@ -78,6 +78,7 @@ class LidarProcessSubnode : public Subnode {
                            pcl_util::PointCloudPtr* cloud = nullptr);
 
   void RemoveEgoVehicle(pcl_util::PointCloudPtr dest_cloud, pcl_util::PointCloudPtr in_cloud);
+  void RemoveGroundPlane(pcl_util::PointCloudPtr dest_cloud, pcl_util::PointCloudPtr cloud);
   void PublishPointCloudDebug(pcl_util::PointCloudPtr cloud);
 
   bool inited_ = false;

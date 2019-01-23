@@ -20,6 +20,15 @@
 
 #include "eigen_conversions/eigen_msg.h"
 #include "pcl_conversions/pcl_conversions.h"
+#include <pcl/filters/extract_indices.h>
+#include <pcl/filters/voxel_grid.h>
+#include <pcl/features/normal_3d.h>
+#include <pcl/features/normal_3d_omp.h>
+#include <pcl/kdtree/kdtree.h>
+#include <pcl/sample_consensus/method_types.h>
+#include <pcl/sample_consensus/model_types.h>
+#include <pcl/segmentation/sac_segmentation.h>
+#include <pcl/segmentation/extract_clusters.h>
 #include "ros/include/ros/ros.h"
 
 #include "modules/common/log.h"
@@ -105,6 +114,46 @@ void LidarProcessSubnode::RemoveEgoVehicle(pcl_util::PointCloudPtr dest_cloud, p
     dest_cloud->sensor_orientation_ = in_cloud->sensor_orientation_;
 }
 
+void LidarProcessSubnode::RemoveGroundPlane(pcl_util::PointCloudPtr dest_cloud, pcl_util::PointCloudPtr cloud)
+{
+    pcl::NormalEstimation<Point, pcl::Normal> ne;
+    pcl::SACSegmentationFromNormals<Point, pcl::Normal> seg;
+    pcl::PointCloud<pcl::Normal>::Ptr cloud_normals (new pcl::PointCloud<pcl::Normal>);
+    pcl::ModelCoefficients::Ptr coefficients_plane (new pcl::ModelCoefficients);
+    pcl::PointIndices::Ptr inliers_plane (new pcl::PointIndices);
+    pcl::search::KdTree<Point>::Ptr tree (new pcl::search::KdTree<Point> ());
+    pcl::ExtractIndices<Point> extract;
+
+    // Estimate point normals
+    ne.setSearchMethod (tree);
+    ne.setInputCloud (cloud);
+    ne.setKSearch (5);
+    //ne.setRadiusSearch(0.3);
+    ne.compute (*cloud_normals);
+
+    // Create the segmentation object for the planar model and set all the parameters
+    seg.setOptimizeCoefficients (true);
+    seg.setModelType (pcl::SACMODEL_PERPENDICULAR_PLANE);
+    seg.setNormalDistanceWeight (0.1);
+    seg.setMethodType (pcl::SAC_RANSAC);
+    seg.setMaxIterations (1000);
+    seg.setDistanceThreshold (0.4);
+    seg.setInputCloud (cloud);
+    seg.setAxis(Eigen::Vector3f(0.0, 0.0, 1.0));
+    seg.setEpsAngle(0.1);
+    seg.setInputNormals (cloud_normals);
+    // Obtain the plane inliers and coefficients
+    seg.segment (*inliers_plane, *coefficients_plane);
+
+    // Extract the planar inliers from the input cloud
+    extract.setInputCloud (cloud);
+    extract.setIndices (inliers_plane);
+    extract.setNegative (false);
+
+    extract.setNegative (true);
+    extract.filter (*dest_cloud);
+}
+
 void LidarProcessSubnode::OnPointCloud(
     const sensor_msgs::PointCloud2& message) {
   AINFO << "process OnPointCloud.";
@@ -113,7 +162,7 @@ void LidarProcessSubnode::OnPointCloud(
     AERROR << "the LidarProcessSubnode has not been Init";
     return;
   }
-  const double kTimeStamp = message.header.stamp.toSec();
+  const double kTimeStamp = ros::Time::now().toSec(); //message.header.stamp.toSec();
   timestamp_ = kTimeStamp;
   ++seq_num_;
 
@@ -137,8 +186,10 @@ void LidarProcessSubnode::OnPointCloud(
 
   PointCloudPtr point_cloud_in(new PointCloud);
   TransPointCloudToPCL(message, &point_cloud_in);
+  PointCloudPtr point_cloud_wo_ego(new PointCloud);
   PointCloudPtr point_cloud(new PointCloud);
   RemoveEgoVehicle(point_cloud, point_cloud_in);
+  //RemoveGroundPlane(point_cloud, point_cloud_wo_ego);
   PublishPointCloudDebug(point_cloud);
   ADEBUG << "transform pointcloud success. points num is: "
          << point_cloud->points.size();

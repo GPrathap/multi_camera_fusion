@@ -60,7 +60,8 @@ void RosLocalizationBridge::OnOdometry(const nav_msgs::Odometry &msg)
   {
     FillLocalizationMsg(msg, &loc_msg);
     // publish localization messages
-    loc_msg.set_measurement_time(msg.header.stamp.toSec());
+    //loc_msg.set_measurement_time(msg.header.stamp.toSec());
+    loc_msg.set_measurement_time(ros::Time::now().toSec());
     AdapterManager::PublishLocalization(loc_msg);
     PublishPoseBroadcastTF(loc_msg);
     AINFO << "[OnOdometry]: Gps message publish success!";
