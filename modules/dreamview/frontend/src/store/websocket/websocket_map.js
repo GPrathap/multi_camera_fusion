@@ -53,4 +53,11 @@ export default class MapDataWebSocketEndpoint {
             elements: elements,
         }));
     }
+
+    changeMapOffset(xyOffsets){
+        this.websocket.send(JSON.stringify({
+            type: 'ChangeMapOffset',
+            offsets: xyOffsets
+        }));
+    }
 }

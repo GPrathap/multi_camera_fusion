@@ -21,6 +21,7 @@
 #include "modules/common/util/map_util.h"
 #include "modules/dreamview/backend/common/dreamview_gflags.h"
 #include "modules/map/hdmap/hdmap_util.h"
+#include "ros/include/ros/ros.h"
 
 namespace apollo {
 namespace dreamview {
@@ -85,6 +86,42 @@ void SimulationWorldUpdater::RegisterMessageHandlers() {
         {
           boost::shared_lock<boost::shared_mutex> reader_lock(mutex_);
           to_send = relative_map_string_;
+        }
+        map_ws_->SendBinaryData(conn, to_send, true);
+      });
+
+    map_ws_->RegisterMessageHandler(
+      "ChangeMapOffset",
+      [this](const Json &json, WebSocketHandler::Connection *conn) {
+        AERROR << "ChangeMapOffset\n";
+
+        std::string to_send;
+        {
+          boost::shared_lock<boost::shared_mutex> reader_lock(mutex_);
+          double lat, lon;
+          if (ros::param::get("geo2loc/lat", lat) && ros::param::get("geo2loc/lon", lon)){
+              AINFO << "GOT setting param: " << lat << lon;
+          }
+          else {
+            AERROR << "Can not get geo2loc lat/lon param";
+          }
+
+          //parsing sent value
+          try{
+            // AINFO << "Setting geo2loc lat/lon: " << json["offsets"]["lat"] << "/" << json["offsets"]["lon"];
+            ros::param::set("geo2loc/lat", atof(json["offsets"]["lat"].get<std::string>().c_str()));
+            ros::param::set("geo2loc/lon", atof(json["offsets"]["lon"].get<std::string>().c_str()));
+          }
+          catch (const std::exception& e) {
+            AERROR << "Can not set geo2loc params: " << e.what();
+          }
+
+          AINFO << "Set map offset parameters: " << lat << lon;
+          // AERROR << "Can not set geo2loc lat/lon param";
+
+          //TODO Fix to_send
+          // to_send = "{\"state": \"ok\"}";
+          to_send = "{}";
         }
         map_ws_->SendBinaryData(conn, to_send, true);
       });

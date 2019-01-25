@@ -62,6 +62,7 @@ function start() {
         /apollo/relative_map \
         /apollo/drive_event \
         /gnss_odometry \
+        /odom \
         /odometry/filtered \
         /imu/data \
         /ardulog \
