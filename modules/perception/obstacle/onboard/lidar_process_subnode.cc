@@ -212,7 +212,7 @@ void LidarProcessSubnode::OnPointCloud(
   }
 
   /// call roi_filter
-  /*
+  
   PointCloudPtr roi_cloud(new PointCloud);
   if (roi_filter_ != nullptr) {
     PointIndicesPtr roi_indices(new PointIndices);
@@ -231,8 +231,8 @@ void LidarProcessSubnode::OnPointCloud(
   ADEBUG << "call roi_filter succ. The num of roi_cloud is: "
          << roi_cloud->points.size();
   PERF_BLOCK_END("lidar_roi_filter");
-  */
-  PointCloudPtr roi_cloud = point_cloud;
+  
+  //PointCloudPtr roi_cloud = point_cloud;
   /// call segmentor
   std::vector<std::shared_ptr<Object>> objects;
   if (segmentor_ != nullptr) {

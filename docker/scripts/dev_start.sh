@@ -276,6 +276,7 @@ function main(){
         --net host \
         -w /apollo \
         --add-host in_dev_docker:127.0.0.1 \
+        --add-host detect_docker:127.0.0.1 \
         --add-host ${LOCAL_HOST}:127.0.0.1 \
         --hostname in_dev_docker \
         --shm-size 2G \
