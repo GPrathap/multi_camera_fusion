@@ -22,3 +22,6 @@
 [submodule "modules/additional_ros_packages/detection_msgs"]
 	path = modules/additional_ros_packages/detection_msgs
 	url = http://cordelia.university.innopolis.ru/kia/detection_msgs.git
+[submodule "modules/additional_ros_packages/ardulog"]
+	path = modules/additional_ros_packages/ardulog
+	url = http://cordelia.university.innopolis.ru/kia/ardulog.git
