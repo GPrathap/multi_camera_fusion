@@ -12,4 +12,9 @@ multi_camera_projection_config: {
     camera_extrinsic_file: "modules/perception/data/params/short_camera_extrinsics.yaml"
     camera_intrinsic_file: "modules/perception/data/params/short_camera_intrinsics.yaml"
   }
+  camera_focus_config: {
+    name: "camera_front_focus"
+    camera_extrinsic_file: "modules/perception/data/params/front_camera_extrinsics.yaml"
+    camera_intrinsic_file: "modules/perception/data/params/front_camera_intrinsics.yaml"
+  }
 }
