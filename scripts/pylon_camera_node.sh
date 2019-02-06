@@ -33,7 +33,7 @@ function stop_front_camera() {
 }
 
 function stop_front_and_side_cameras() {
-    pkill -9 -f  start_pylon_camera
+    pkill -9 -f start_pylon_camera && pkill -9 -f camera_nodelet_manager
 }
 
 # run command_name module_name
@@ -49,7 +49,7 @@ function run() {
             stop_front_camera
             ;;
         stop_front_and_side_cameras)
-            stop_front_camera
+            stop_front_and_side_cameras
             ;;
         *)
     esac
