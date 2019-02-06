@@ -14,7 +14,7 @@ transform:
         z: -0.354
         w: 0.612
     translation:
-        x: 0.16
-        y: 0.7
+        x: 0.76
+        y: 0.485
         z: -0.2   # when Z=0 is ground
 #        z: 1.476  # when Z=0 is the rear wheel axle

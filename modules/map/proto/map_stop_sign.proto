@@ -23,4 +23,12 @@ message StopSign {
     ALL_WAY = 5;
   };
   optional StopType type = 4;
+  enum SignDirection{
+  NORTH=0;
+  SOUTH=1;
+  WEST=2;
+  EAST=3;
+ };
+ optional SignDirection StopSignDirection=5; 
+
 }

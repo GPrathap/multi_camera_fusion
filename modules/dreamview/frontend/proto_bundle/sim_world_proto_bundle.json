@@ -3992,6 +3992,10 @@
                 "type": {
                   "type": "StopType",
                   "id": 4
+                },
+                "StopSignDirection": {
+                  "type": "SignDirection",
+                  "id": 5
                 }
               },
               "nested": {
@@ -4003,6 +4007,14 @@
                     "THREE_WAY": 3,
                     "FOUR_WAY": 4,
                     "ALL_WAY": 5
+                  }
+                },
+                "SignDirection": {
+                  "values": {
+                    "NORTH": 0,
+                    "SOUTH": 1,
+                    "WEST": 2,
+                    "EAST": 3
                   }
                 }
               }

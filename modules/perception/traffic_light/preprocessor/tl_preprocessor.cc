@@ -42,6 +42,7 @@ bool TLPreprocessor::Init() {
     AERROR << "TLPreprocessor init projection failed.";
     return false;
   }
+   AERROR << "Init Projection";
   return true;
 }
 
@@ -294,10 +295,10 @@ bool TLPreprocessor::ProjectLights(const CarPose &pose,
                                    LightPtrs *lights_on_image,
                                    LightPtrs *lights_outside_image) {
   if (signals.empty()) {
-    ADEBUG << "project_lights get empty signals.";
+    AERROR << "project_lights get empty signals.";
     return true;
   }
-
+  AERROR <<  "Into ProjectLights";
   const int cam_id = static_cast<int>(camera_id);
   if (cam_id < 0 || cam_id >= kCountCameraId) {
     AERROR << "project_lights get invalid CameraId: " << camera_id;
@@ -309,8 +310,11 @@ bool TLPreprocessor::ProjectLights(const CarPose &pose,
     light->info = signals[i];
     if (!projection_.Project(pose, ProjectOption(camera_id), light.get())) {
       lights_outside_image->push_back(light);
+      //lights_on_image->push_back(light);
+      AERROR << "outside";
     } else {
       lights_on_image->push_back(light);
+      AERROR << "inside";
     }
   }
 
