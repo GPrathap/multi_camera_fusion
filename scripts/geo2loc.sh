@@ -18,9 +18,7 @@ function start() {
 }
 
 function stop() {
-    pkill -9 -f geo2loc
-    pkill -9 -f nmea_serial_driver
-    pkill -9 -f mtnode.py
+    pkill -9 -f nmea_serial_driver && pkill -9 -f mtnode.py && pkill -9 -f ekf_localization_node && pkill -9 -f geo2loc 
 }
 
 # run command_name module_name
