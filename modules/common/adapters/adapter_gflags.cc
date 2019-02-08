@@ -141,6 +141,8 @@ DEFINE_string(imu_ros_topic, "/unity/imu",
               "imu ros topic name");
 DEFINE_string(odom_ros_topic, "/unity/odometry",
               "odometry ros topic name");
+DEFINE_string(odom_chassis_topic, "/odometry_chassis",
+              "wheels odometry ros topic name");
 DEFINE_string(unity_car_control_topic, "/unity/car_control",
               "unity_car_control topic name");
 DEFINE_string(unity_car_state_topic, "/unity/car_state",

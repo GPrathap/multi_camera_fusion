@@ -21,6 +21,7 @@
 #include "modules/common/math/quaternion.h"
 #include "modules/common/time/time.h"
 #include "modules/sim_bridge/common/sim_bridge_gflags.h"
+#include "tf/tf.h"
 
 namespace apollo {
 namespace sim_bridge {
@@ -43,6 +44,13 @@ Status RosLocalizationBridge::Start() {
 
   AdapterManager::AddImuRosCallback(&RosLocalizationBridge::OnImu, this);
   AdapterManager::AddOdometryRosCallback(&RosLocalizationBridge::OnOdometry, this);
+
+  AdapterManager::AddChassisCallback(&RosLocalizationBridge::OnChassis, this);
+
+  x = 0;
+  y = 0;
+  yaw = 0;
+
   return Status::OK();
 }
 
@@ -67,6 +75,64 @@ void RosLocalizationBridge::OnOdometry(const nav_msgs::Odometry &msg)
     AINFO << "[OnOdometry]: Gps message publish success!";
   }
   
+}
+
+void RosLocalizationBridge::OnChassis(const canbus::Chassis &msg)
+{
+  nav_msgs::Odometry wheels_odom_msg;
+
+  // msg.steering_percentage;
+  
+  // msg.wheel_speed.wheel_direction_fr;
+  // msg.wheel_speed.wheel_direction_fl;
+  // msg.wheel_speed.wheel_direction_rr;
+  // msg.wheel_speed.wheel_direction_rl;
+
+  // msg.wheel_speed.wheel_spd_fr;
+  // msg.wheel_speed.wheel_spd_fl;
+  // msg.wheel_speed.wheel_spd_rr;
+  // msg.wheel_speed.wheel_spd_rl;
+
+  float base_length = 2.570;
+  float max_steering_angle = 37 * (M_PI/180.0);
+
+  double steering_angle = (msg.steering_percentage() / 100.0) * max_steering_angle;
+  double angular_vel = msg.speed_mps() * tan(steering_angle) / base_length;
+
+  double dt = 1.0/100.0;
+  x += msg.speed_mps() * cos(yaw) * dt;
+  y += msg.speed_mps() * sin(yaw) * dt;
+  yaw += angular_vel * dt;
+
+  wheels_odom_msg.pose.pose.position.x = x;
+  wheels_odom_msg.pose.pose.position.y = -y;
+  wheels_odom_msg.pose.pose.position.z = 0.0;
+
+  tf::Quaternion q = tf::createQuaternionFromRPY(0, 0, -yaw);
+  quaternionTFToMsg(q, wheels_odom_msg.pose.pose.orientation);
+
+  wheels_odom_msg.twist.twist.linear.x = msg.speed_mps();
+  wheels_odom_msg.twist.twist.linear.y = 0.0;
+  wheels_odom_msg.twist.twist.linear.z = 0.0;
+  wheels_odom_msg.twist.twist.angular.x = 0.0;
+  wheels_odom_msg.twist.twist.angular.y = 0.0;
+  wheels_odom_msg.twist.twist.angular.z = angular_vel;
+
+  wheels_odom_msg.twist.covariance.assign(0);
+  wheels_odom_msg.twist.covariance[6 * 0 + 0] = 0.001;
+  wheels_odom_msg.twist.covariance[6 * 1 + 1] = 0.01;
+  wheels_odom_msg.twist.covariance[6 * 2 + 2] = 1.0;
+  wheels_odom_msg.twist.covariance[6 * 3 + 3] = 100.0;
+  wheels_odom_msg.twist.covariance[6 * 4 + 4] = 100.0;
+  wheels_odom_msg.twist.covariance[6 * 5 + 5] = 0.001;
+
+  wheels_odom_msg.header.stamp = ros::Time(msg.header().timestamp_sec());
+  wheels_odom_msg.header.frame_id = FLAGS_localization_tf2_frame_id;
+  wheels_odom_msg.child_frame_id = FLAGS_localization_tf2_child_frame_id;
+
+  AdapterManager::PublishOdometryChassis(wheels_odom_msg);
+  AINFO << "[OnChassis]: Odometry message publish";
+
 }
 
 void RosLocalizationBridge::PublishPoseBroadcastTF(
