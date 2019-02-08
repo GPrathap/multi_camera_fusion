@@ -6,6 +6,8 @@ cd "${DIR}/.."
 
 source "${DIR}/apollo_base.sh"
 
+source /home/tmp/ros/setup.bash
+
 function start() {
     LOG="${APOLLO_ROOT_DIR}/data/log/geo2loc.out"
     CMD="roslaunch geo2loc geo2loc_rtk.launch"

@@ -94,3 +94,8 @@ docs/demo_guide/*.bag
 
 ros_pkgs/build
 ros_pkgs/devel
+modules/common/data/global_flagfile.txt
+modules/common/data/mkz_config.pb.txt
+modules/control/conf/navigation_lincoln.pb.txt
+modules/localization/msf/params/velodyne_params/*
+modules/perception/data/params/*
