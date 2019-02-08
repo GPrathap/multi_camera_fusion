@@ -20,7 +20,7 @@ camera:
   laneWidthToViewDistanceRatio: 5
 ground:
   defaults:
-    mpp: 0.125
+    mpp: 0.2
     xres: 8192
     yres: 8192
     xorigin: 4096
@@ -33,6 +33,14 @@ ground:
     yres: 16384
     xorigin: 587392
     yorigin: 4140800
+    type: default # default or tile
+    tileRange: 4
+  polygon:
+    mpp: 0.17
+    xres: 848
+    yres: 1280
+    xorigin: -47.5
+    yorigin: -71
     type: default # default or tile
     tileRange: 4
 planning:

@@ -77,17 +77,18 @@ bool UnityRectify::Rectify(const Image &image, const RectifyOption &option,
     light->region.debug_roi_detect_scores.push_back(0.0f);
   }
 
-  cv::Rect cbox;
-  crop_->GetCropBox(ros_image.size(), lights_ref, &cbox);
+  cv::Rect cbox=cv::Rect(0, 0, ros_image.size().width, ros_image.size().height);
+  //crop_->GetCropBox(ros_image.size(), lights_ref, &cbox);
   AINFO << ros_image.size();
   AINFO << cbox;
-  if (BoxIsValid(cbox, ros_image.size())) {
+  if ( lights_ref.size()) {
+    AERROR << "detect "<<ros_image.size().width<<ros_image.size().height;
     lights_ref[0]->region.debug_roi[0] = cbox;
 
     detect_->SetCropBox(cbox);
     detect_->Perform(ros_image, &detected_bboxes);
 
-    AINFO << "detect " << detected_bboxes.size() << " lights";
+    AERROR << "detect " << detected_bboxes.size() << " lights";
     for (size_t j = 0; j < detected_bboxes.size(); ++j) {
       AINFO << detected_bboxes[j]->region.rectified_roi;
       cv::Rect &region = detected_bboxes[j]->region.rectified_roi;
@@ -124,6 +125,7 @@ bool UnityRectify::Rectify(const Image &image, const RectifyOption &option,
   }
   return true;
 }
+
 
 std::string UnityRectify::name() const { return "UnityRectify"; }
 
