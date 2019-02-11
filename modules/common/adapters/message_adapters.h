@@ -145,6 +145,7 @@ using RtcmDataAdapter = Adapter<std_msgs::String>;
 using ImuRosAdapter = Adapter<::sensor_msgs::Imu>;
 using OdometryRosAdapter = Adapter<::nav_msgs::Odometry>;
 using OdometryChassisAdapter = Adapter<::nav_msgs::Odometry>;
+using OdometryGnssAdapter = Adapter<::nav_msgs::Odometry>;
 using UnityCarControlAdapter = Adapter<::car_unity_simulator::CarControl>;
 using UnityCarStateAdapter = Adapter<::car_unity_simulator::CarState>;
 using ExternelObjDetectionAdapter = Adapter<::detection_msgs::DetectedObjectsWithImage>;

@@ -47,9 +47,14 @@ Status RosLocalizationBridge::Start() {
 
   AdapterManager::AddChassisCallback(&RosLocalizationBridge::OnChassis, this);
 
+  AdapterManager::AddOdometryGnssCallback(&RosLocalizationBridge::OnGNSSOdometry, this);
+
+
   x = 0;
   y = 0;
   yaw = 0;
+
+  origin_init = false;
 
   return Status::OK();
 }
@@ -74,7 +79,19 @@ void RosLocalizationBridge::OnOdometry(const nav_msgs::Odometry &msg)
     PublishPoseBroadcastTF(loc_msg);
     AINFO << "[OnOdometry]: Gps message publish success!";
   }
-  
+}
+
+
+void RosLocalizationBridge::OnGNSSOdometry(const nav_msgs::Odometry &msg)
+{
+  if(!origin_init)
+  {
+    x = msg.pose.pose.position.x;
+    y = -msg.pose.pose.position.y;
+    yaw = -tf2::getYaw(msg.pose.pose.orientation) - M_PI/2.0;
+    origin_init = true;
+    AINFO << "OnGNSSOdometry: Init wheel odometry origin {" << x << ", " << y << ", " << yaw << "}";
+  }  
 }
 
 void RosLocalizationBridge::OnChassis(const canbus::Chassis &msg)

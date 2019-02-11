@@ -81,6 +81,7 @@ message AdapterConfig {
     COMPRESSED_IMAGE_FRONT_CAMERA = 74;
     POINT_CLOUD_DEBUG = 75;
     ODOMETRY_CHASSIS = 76;
+    ODOMETRY_GNSS = 77;
   }
   enum Mode {
     RECEIVE_ONLY = 0;

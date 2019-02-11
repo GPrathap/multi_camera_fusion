@@ -80,12 +80,15 @@ class RosLocalizationBridge : public SimBridgeBase {
  private:
 
   void OnOdometry(const nav_msgs::Odometry &msg);
+  void OnGNSSOdometry(const nav_msgs::Odometry &msg);
   void OnChassis(const canbus::Chassis &msg);
   void FillLocalizationMsg(const nav_msgs::Odometry &msg, localization::LocalizationEstimate *loc_msg);
   void OnImu(const sensor_msgs::Imu &msg);
   void PublishPoseBroadcastTF(const localization::LocalizationEstimate &localization);
 
   double x, y, yaw;
+
+  bool origin_init;
 
  private:
 
