@@ -93,8 +93,6 @@ void SimulationWorldUpdater::RegisterMessageHandlers() {
     map_ws_->RegisterMessageHandler(
       "ChangeMapOffset",
       [this](const Json &json, WebSocketHandler::Connection *conn) {
-        AERROR << "ChangeMapOffset\n";
-
         std::string to_send;
         {
           boost::shared_lock<boost::shared_mutex> reader_lock(mutex_);
@@ -116,15 +114,39 @@ void SimulationWorldUpdater::RegisterMessageHandlers() {
             AERROR << "Can not set geo2loc params: " << e.what();
           }
 
-          AINFO << "Set map offset parameters: " << lat << lon;
-          // AERROR << "Can not set geo2loc lat/lon param";
+          //Updating to see what is the result value 
+          ros::param::get("geo2loc/lat", lat);
+          ros::param::get("geo2loc/lon", lon);
 
-          //TODO Fix to_send
-          // to_send = "{\"state": \"ok\"}";
-          to_send = "{}";
+          AINFO << "Set map offset parameters: " << lat << lon;
+          Json response;
+          response["type"] = "MapOffsetStatus";
+          response["lat"] = lat;
+          response["lon"] = lon;
+          map_ws_->SendData(conn, response.dump());
         }
-        map_ws_->SendBinaryData(conn, to_send, true);
       });
+
+  map_ws_->RegisterMessageHandler(
+    "RequestMapOffset",
+    [this](const Json &json, WebSocketHandler::Connection *conn) {
+      std::string to_send;
+      {
+        boost::shared_lock<boost::shared_mutex> reader_lock(mutex_);
+        double lat, lon;
+        if (ros::param::get("geo2loc/lat", lat) && ros::param::get("geo2loc/lon", lon)){
+          AINFO << "GOT setting param: " << lat << lon;
+          Json response;
+          response["type"] = "MapOffsetStatus";
+          response["lat"] = lat;
+          response["lon"] = lon;
+          map_ws_->SendData(conn, response.dump());
+        }
+        else {
+          AERROR << "Can not get geo2loc lat/lon param";
+        }
+      }
+    });
 
   websocket_->RegisterMessageHandler(
       "Binary",

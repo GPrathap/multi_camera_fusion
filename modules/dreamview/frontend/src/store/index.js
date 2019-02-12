@@ -52,6 +52,8 @@ class DreamviewStore {
 
     @observable moduleDelay = observable.map();
 
+    @observable mapGeoOffsets = { lat: 0, lon: 0};
+
     @computed get enableHMIButtonsOnly() {
         return !this.isInitialized;
     }
@@ -70,6 +72,10 @@ class DreamviewStore {
 
     @action updatePlanning(newPlanningData) {
         this.planning.update(newPlanningData);
+    }
+
+    @action updateMapOffsets(newOffsets) {
+        this.mapGeoOffsets = newOffsets;
     }
 
     @action setGeolocation(newGeolocation) {

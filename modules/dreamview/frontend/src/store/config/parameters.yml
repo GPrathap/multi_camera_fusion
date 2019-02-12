@@ -94,6 +94,7 @@ options:
     showMapSignal: true
     showMapStopSign: true
     cameraAngle: Default
+    showMapOffset: false
 
 navigation:
   # possible options: BaiduMap or GoogleMap
