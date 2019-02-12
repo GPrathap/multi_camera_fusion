@@ -34,6 +34,7 @@
 
 #include "modules/localization/proto/localization.pb.h"
 #include "modules/control/proto/control_cmd.pb.h"
+#include "modules/canbus/proto/chassis.pb.h"
 #include "modules/common/status/status.h"
 #include "modules/sim_bridge/sim_bridge_base.h"
 #include "nav_msgs/Odometry.h"
@@ -79,9 +80,15 @@ class RosLocalizationBridge : public SimBridgeBase {
  private:
 
   void OnOdometry(const nav_msgs::Odometry &msg);
+  void OnGNSSOdometry(const nav_msgs::Odometry &msg);
+  void OnChassis(const canbus::Chassis &msg);
   void FillLocalizationMsg(const nav_msgs::Odometry &msg, localization::LocalizationEstimate *loc_msg);
   void OnImu(const sensor_msgs::Imu &msg);
   void PublishPoseBroadcastTF(const localization::LocalizationEstimate &localization);
+
+  double x, y, yaw;
+
+  bool origin_init;
 
  private:
 
