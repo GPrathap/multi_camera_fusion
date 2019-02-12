@@ -28,6 +28,7 @@ self.addEventListener("message", event => {
                 mapMessage.decode(new Uint8Array(data)),
                 {enums: String});
             message.type = "MapData";
+            message.jsonData = (typeof data === "string") ? JSON.parse(data) : null;
             break;
         case "point_cloud":
             if (typeof data === "string") {

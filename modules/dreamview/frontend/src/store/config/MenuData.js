@@ -90,6 +90,7 @@ export default [
             mapRoad: 'Road',
             mapSignal: 'Signal',
             mapStopSign: 'Stop Sign',
+            mapOffset: 'Map offset'
         },
         supportInOfflineView: false,
     },

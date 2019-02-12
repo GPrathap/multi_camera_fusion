@@ -61,6 +61,7 @@ const MenuIdOptionMapping = {
         mapRoad: 'showMapRoad',
         mapSignal: 'showMapSignal',
         mapStopSign: 'showMapStopSign',
+        mapOffset: 'showMapOffset',
 };
 
 @observer

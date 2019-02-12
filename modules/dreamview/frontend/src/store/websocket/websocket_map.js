@@ -24,10 +24,18 @@ export default class MapDataWebSocketEndpoint {
         this.websocket.onmessage = event => {
             this.worker.postMessage({
                 source: 'map',
-                data: event.data,
+                data: event.data
             });
         };
         this.worker.onmessage = event => {
+            if (event.data.jsonData) {
+                STORE.updateMapOffsets({
+                    lat: event.data.jsonData.lat,
+                    lon: event.data.jsonData.lon
+                });
+                return; //if that contains textData - then everything is done
+            }
+
             const removeOldMap =
                 STORE.hmi.inNavigationMode || this.currentMode !== STORE.hmi.currentMode;
             this.currentMode = STORE.hmi.currentMode;
@@ -51,6 +59,19 @@ export default class MapDataWebSocketEndpoint {
         this.websocket.send(JSON.stringify({
             type: "RetrieveRelativeMapData",
             elements: elements,
+        }));
+    }
+
+    requestMapOffset(){
+        this.websocket.send(JSON.stringify({
+            type: 'RequestMapOffset'
+        }));
+    }
+
+    changeMapOffset(xyOffsets){
+        this.websocket.send(JSON.stringify({
+            type: 'ChangeMapOffset',
+            offsets: xyOffsets
         }));
     }
 }
