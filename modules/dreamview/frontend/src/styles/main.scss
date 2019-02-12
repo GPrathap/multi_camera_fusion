@@ -1458,9 +1458,17 @@ body {
         background: rgba(0, 0, 0, 0.8);
         padding: 10px 0 0 10px;
     }
+        .text > button{
+            margin: 0 0 0 5px;
+        }
+        
         .label{
             min-width: 30px;
             float: left;
+        }
+
+        input {
+            max-width: 110px;
         }
 
         button{
@@ -1471,6 +1479,17 @@ body {
             outline: none;
             color: #999999;
 
+        }
+        
+        button:focus, button:hover {
+            background: gray;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:active {
+            background: darkred;
+            color: white;
         }
             span {
                 font-family: PingFangSC-Light;
