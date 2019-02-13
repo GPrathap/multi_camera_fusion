@@ -62,6 +62,7 @@ function start() {
         /apollo/relative_map \
         /apollo/drive_event \
         /gnss_odometry \
+        /odom \
         /odometry/filtered \
         /imu/data \
         /ardulog \
@@ -76,6 +77,7 @@ function start() {
         /apollo/sensor/camera/perception/image_front_left_side/compressed \
         /apollo/sensor/camera/perception/image_front_right_side/compressed \
         /velodyne_points \
+        /fix \
         /apollo/monitor/static_info </dev/null >"${LOG}" 2>&1 &
     fi
 }
