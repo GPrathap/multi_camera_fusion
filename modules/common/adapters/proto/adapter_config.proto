@@ -80,6 +80,7 @@ message AdapterConfig {
     COMPRESSED_IMAGE_FRONT_RIGHT_SIDE = 73;
     COMPRESSED_IMAGE_FRONT_CAMERA = 74;
     POINT_CLOUD_DEBUG = 75;
+    HDMAP_PUBLISH = 76;
   }
   enum Mode {
     RECEIVE_ONLY = 0;

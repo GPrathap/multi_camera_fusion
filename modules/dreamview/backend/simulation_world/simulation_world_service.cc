@@ -984,6 +984,52 @@ Json SimulationWorldService::GetRoutePathAsJson() const {
   return response;
 }
 
+void SimulationWorldService::GetRoutePathAsJsonForUVObs() const {
+
+  hdmap::Map hd_map = GetRelativeMap();
+  auto header_ = hd_map.mutable_header();
+  auto projection = header_->mutable_projection()->proj();
+
+  auto left = header_->left();
+  auto top = header_->top();
+  auto right = header_->right();
+  auto bottom = header_->bottom();
+
+  double center_y = (top-bottom)/2;
+  double center_x = (right-left)/2;
+
+  //TODO this is just for testing purpose
+  // if(projection.empty()){
+  //   projection = "+proj=utm +zone=33 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
+  // }
+
+  std_msgs::String msg;
+  Json response;
+  response["routingTime"] = world_.routing_time();
+  response["projection"] = projection;
+  response["center"] = Json::array();
+  response["center"].push_back({{"x", center_x},
+                               {"y", center_y},
+                               {"z", 0.0}});
+  response["routePath"] = Json::array();
+  for (const auto &route_path : route_paths_) {
+    Json path;
+    path["point"] = Json::array();
+    for (const auto &route_point : route_path.point()) {
+      path["point"].push_back({{"x", route_point.x()},
+                               {"y", route_point.y()},
+                               {"z", route_point.z()}});
+    }
+    response["routePath"].push_back(path);
+  }
+  
+  msg.data = response.dump();
+  sleep(1);// Wait to make sure the connection has been established before
+          // publishing.
+  AdapterManager::PublishHDMAPPub(msg);
+  return;
+}
+
 void SimulationWorldService::ReadRoutingFromFile(
     const std::string &routing_response_file) {
   RoutingResponse routing_response;

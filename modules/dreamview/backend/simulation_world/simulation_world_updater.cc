@@ -187,6 +187,9 @@ void SimulationWorldUpdater::RegisterMessageHandlers() {
   websocket_->RegisterMessageHandler(
       "RequestRoutePath",
       [this](const Json &json, WebSocketHandler::Connection *conn) {
+        if(FLAGS_is_published_hd_map_position == "true"){
+          sim_world_service_.GetRoutePathAsJsonForUVObs();
+        }
         Json response = sim_world_service_.GetRoutePathAsJson();
         response["type"] = "RoutePath";
         websocket_->SendData(conn, response.dump());
