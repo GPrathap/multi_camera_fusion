@@ -6,7 +6,8 @@ import Notification from "components/StatusBar/Notification";
 import TrafficLightIndicator from "components/StatusBar/TrafficLightIndicator";
 import DrivingMode from "components/StatusBar/DrivingMode";
 import Wheel from "components/StatusBar/Wheel";
-
+import MapOffset from "components/MapOffset";
+import STORE from "store";
 
 @observer
 export default class StatusBar extends React.Component {
@@ -27,6 +28,7 @@ export default class StatusBar extends React.Component {
                     <DrivingMode drivingMode={meters.drivingMode}
                         isAutoMode={meters.isAutoMode} />
                 </div>
+                {STORE.options.showMapOffset && <MapOffset />}
             </div>
         );
     }

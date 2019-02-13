@@ -70,7 +70,7 @@ config: {
     stop_distance: 0.5
     max_stop_speed: 0.2
     max_valid_stop_distance: 3.0
-    buffer_to_boundary: 0.5
+    buffer_to_boundary: -0.8
     plan_distance: 55.0
     operation_length: 50.0
     max_check_distance: 60.0

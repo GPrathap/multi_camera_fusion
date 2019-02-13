@@ -65,6 +65,7 @@ export default class Options {
     // Others
     @observable showPNCMonitor = PARAMETERS.options.defaults.showPNCMonitor;
     @observable simControlEnabled = PARAMETERS.options.defaults.enableSimControl;
+    @observable showMapOffset = PARAMETERS.options.defaults.showMapOffset;
     @observable tasksPanelLocked = false;
 
     @observable hideOptionToggle = {

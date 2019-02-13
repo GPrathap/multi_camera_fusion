@@ -63,12 +63,11 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
     }
 
     cv::rectangle(*img, rect, color, 2);
-    cv::rectangle(*img, light->region.projection_roi, cv::Scalar(255, 255, 0),
-                  2);
-    auto &crop_roi = lights->at(0)->region.debug_roi[0];
-    cv::rectangle(*img, crop_roi, cv::Scalar(0, 255, 255), 2);
+    //cv::rectangle(*img, light->region.projection_roi, cv::Scalar(255, 255, 0),
+     //             2);
+    //auto &crop_roi = lights->at(0)->region.rectified_roi[0];
+    //cv::rectangle(*img, crop_roi, cv::Scalar(0, 255, 255), 2);
   }
-
   int rows = img->rows;
   int cols = img->cols;
   double pos_x = cols / 1920.0 * 30.0;
@@ -81,7 +80,6 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
   std::string ts_text = cv::format("img ts=%lf", image_lights->timestamp);
   cv::putText(*img, ts_text, cv::Point(pos_x, pos_y), cv::FONT_HERSHEY_PLAIN,
               font_scale, CV_RGB(128, 255, 0), thickness);
-
   // draw distance to stopline
   pos_y += step_y;
   double distance = light_debug->distance_to_stop_line();
@@ -91,7 +89,6 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
                 cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(128, 255, 0),
                 thickness);
   }
-
   // draw "Signals Num"
   pos_y += step_y;
   if (light_debug->valid_pos()) {
@@ -100,7 +97,6 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
                 cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0),
                 thickness);
   }
-
   // draw "No Pose info."
   pos_y += step_y;
   if (!light_debug->valid_pos()) {
@@ -108,7 +104,6 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
                 cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0),
                 thickness);
   }
-
   // if image's timestamp is too early or too old
   // draw timestamp difference between image and pose
   pos_y += step_y;
@@ -136,14 +131,12 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
   cv::putText(*img, img_border_txt, cv::Point(pos_x, kPosYOffset),
               cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0), thickness);
   //    }
-
   cv::resize(*img, *img, cv::Size(960, 540));
-
   char filename[200];
   snprintf(filename, sizeof(filename), "img/%lf_%s.jpg",
            image_lights->image->ts(),
            image_lights->image->camera_id_str().c_str());
-  cv::imwrite(filename, *img);
+  //cv::imwrite(filename, *img);
   cv::imshow("debug", *img);
   cv::waitKey(10);
 }
@@ -156,7 +149,7 @@ bool TLProcSubnode::InitInternal() {
   RegisterFactoryUnityRectify();
   RegisterFactoryUnityRecognize();
   RegisterFactoryColorReviser();
-
+  AERROR << "Start init ProcSubnode";
   if (!InitSharedData()) {
     AERROR << "TLProcSubnode init shared data failed.";
     return false;
@@ -181,58 +174,69 @@ bool TLProcSubnode::InitInternal() {
            << FLAGS_traffic_light_subnode_config;
     return false;
   }
+   AERROR << "Finish init ProcSubnode";
   return true;
 }
 
 bool TLProcSubnode::ProcEvent(const Event &event) {
+
   const double proc_subnode_handle_event_start_ts = TimeUtil::GetCurrentTime();
   PERF_FUNCTION("TLProcSubnode");
   // get up-stream data
   const double timestamp = event.timestamp;
   const std::string device_id = event.reserve;
-
-  AINFO << "Detect Start ts:" << GLOG_TIMESTAMP(timestamp);
+  
+  //AINFO << "Detect Start ts:" << GLOG_TIMESTAMP(timestamp);
   std::string key;
   if (!SubnodeHelper::ProduceSharedDataKey(timestamp, device_id, &key)) {
     AERROR << "TLProcSubnode produce_shared_data_key failed."
            << " ts:" << timestamp << " device_id:" << device_id;
     return false;
   }
-
-  SharedDataPtr<ImageLights> image_lights;
-  if (!preprocessing_data_->Get(key, &image_lights)) {
-    AERROR << "TLProcSubnode failed to get shared data,"
-           << " name:" << preprocessing_data_->name()
-           << ", time: " << GLOG_TIMESTAMP(timestamp);
-    return false;
+  if (key=="0")
+  {
+    return true;
   }
+ 
+AERROR << "Key"<<key;
+  SharedDataPtr<ImageLights> image_lights;
+  
+  if (!preprocessing_data_->Get(key, &image_lights)) {
+   AERROR << "TLProcSubnode failed to get shared data,"
+          << " name:" << preprocessing_data_->name()
+          << ", time: " << GLOG_TIMESTAMP(timestamp)
+          << "Key"<<key;
+   return false;
+  }
+  AERROR<<"Num Signals"<<image_lights->num_signals;
   AINFO << "TLProcSubnode get shared data ok,ts: " << GLOG_TIMESTAMP(timestamp);
 
   // preprocess send a msg -> proc receive a msg
-  double enter_proc_latency = (proc_subnode_handle_event_start_ts -
-                               image_lights->preprocess_send_timestamp);
-
-  if (TimeUtil::GetCurrentTime() - event.local_timestamp >
-      config_.tl_proc_subnode_config().valid_ts_interval()) {
-    AERROR << "TLProcSubnode failed to process image"
-           << "Because images are too old"
-           << ",current time: " << GLOG_TIMESTAMP(TimeUtil::GetCurrentTime())
-           << ", event time: " << GLOG_TIMESTAMP(event.local_timestamp);
-    return false;
-  }
+ // double enter_proc_latency = (proc_subnode_handle_event_start_ts -
+   //                            image_lights->preprocess_send_timestamp);
+double enter_proc_latency =0;
+  // if (TimeUtil::GetCurrentTime() - event.local_timestamp >
+  //     config_.tl_proc_subnode_config().valid_ts_interval()) {
+  //   AERROR << "TLProcSubnode failed to process image"
+  //          << "Because images are too old"
+  //          << ",current time: " << GLOG_TIMESTAMP(TimeUtil::GetCurrentTime())
+  //          << ", event time: " << GLOG_TIMESTAMP(event.local_timestamp);
+  //   return false;
+  // }
 
   // verify image_lights from cameras
+  
   RectifyOption rectify_option;
   if (!VerifyImageLights(*image_lights, &rectify_option.camera_id)) {
-    AERROR << "TLProcSubnode invalid image_lights ";
-    return false;
+   AERROR << "TLProcSubnode invalid image_lights ";
+   return false;
   }
-
   if (!image_lights->image->GenerateMat()) {
     AERROR << "TLProcSubnode failed to generate mat";
     return false;
   }
   // using rectifier to rectify the region.
+  AERROR << "Lights"<<image_lights->lights->size();
   const double before_rectify_ts = TimeUtil::GetCurrentTime();
   if (!rectifier_->Rectify(*(image_lights->image), rectify_option,
                            (image_lights->lights).get())) {
@@ -241,6 +245,7 @@ bool TLProcSubnode::ProcEvent(const Event &event) {
            << " Image:" << *(image_lights->image);
     return false;
   }
+
   const double detection_latency =
       TimeUtil::GetCurrentTime() - before_rectify_ts;
 
@@ -254,7 +259,6 @@ bool TLProcSubnode::ProcEvent(const Event &event) {
         << " ts: " << GLOG_TIMESTAMP(timestamp)
         << " CameraId: " << image_lights->camera_id;
   image_lights->offset = image_border_size[image_lights->camera_id];
-
   // recognize_status
   const double before_recognization_ts = TimeUtil::GetCurrentTime();
   if (!recognizer_->RecognizeStatus(*(image_lights->image), RecognizeOption(),
@@ -294,7 +298,6 @@ bool TLProcSubnode::ProcEvent(const Event &event) {
             image_lights->preprocess_receive_timestamp) *
                1000
         << " ms.";
-
   return true;
 }
 
@@ -569,10 +572,10 @@ bool TLProcSubnode::PublishMessage(
                                         lights->at(0)->info.stop_line());
     light_debug->set_distance_to_stop_line(distance);
   }
-  if (FLAGS_output_debug_img) {
-    OutputDebugImg(image_lights, light_debug, &img);
-  }
-
+ // if (FLAGS_output_debug_img) {
+ //   OutputDebugImg(image_lights, light_debug, &img);
+ // }
+OutputDebugImg(image_lights, light_debug, &img);
   AdapterManager::PublishTrafficLightDetection(result);
   auto process_time =
       TimeUtil::GetCurrentTime() - image_lights->preprocess_receive_timestamp;

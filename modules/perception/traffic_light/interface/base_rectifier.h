@@ -55,7 +55,7 @@ class BaseRectifier {
    * @return  bool
    */
   virtual bool Rectify(const Image &image, const RectifyOption &option,
-                       std::vector<LightPtr> *lights) = 0;
+                           std::vector<LightPtr> *lights) = 0;
 
   /**
    * @brief name

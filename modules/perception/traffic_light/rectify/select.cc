@@ -34,7 +34,6 @@ void GaussianSelect::Select(const cv::Mat &ros_image,
                          return lhs->region.rectified_roi.area() <
                                 rhs->region.rectified_roi.area();
                        });
-
   //  cv::Mat_<int> cost_matrix(hdmap_bboxes.size(), refined_bboxes.size());
   std::vector<std::vector<double>> score_matrix(
       hdmap_bboxes.size(), std::vector<double>(refined_bboxes.size(), 0));
@@ -73,7 +72,6 @@ void GaussianSelect::Select(const cv::Mat &ros_image,
            0.2 * distance_score + 0.2 * width_score + 0.2 * area_score);
     }
   }
-
   HungarianOptimizer munkres(score_matrix);
   std::vector<int> hd_index;
   std::vector<int> refined_index;

@@ -50,7 +50,7 @@ class UnityRectify : public BaseRectifier {
    * @return  bool
    */
   bool Rectify(const Image &image, const RectifyOption &option,
-               std::vector<LightPtr> *lights) override;
+                           std::vector<LightPtr> *lights) override;
 
   std::string name() const override;
 

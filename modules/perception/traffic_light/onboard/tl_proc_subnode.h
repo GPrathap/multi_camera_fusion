@@ -45,11 +45,12 @@ class TLProcSubnode : public Subnode {
  public:
   TLProcSubnode() = default;
   ~TLProcSubnode();
+  bool ProcEvent(const Event &event);
   apollo::common::Status ProcEvents() override;
 
  protected:
   bool InitInternal() override;
-  bool ProcEvent(const Event &event);
+  
 
  private:
   bool InitSharedData();

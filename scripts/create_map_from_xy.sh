@@ -81,13 +81,13 @@ generate_map() {
     dir_name="${APOLLO_ROOT_DIR}/modules/map/data/$2"
     #left_num=$3
     #right_num=$4
-    if [ -d ${dir_name} ]; then
-        rm -rf ${dir_name}.last
-        mv ${dir_name} ${dir_name}.last
-    fi
+    #if [ -d ${dir_name} ]; then
+    #    rm -rf ${dir_name}.last
+    #    mv ${dir_name} ${dir_name}.last
+    #fi
 
-    mkdir -p ${dir_name}
-    python3 ${APOLLO_ROOT_DIR}/modules/tools/map_gen/map_gen_single_lane.py $xy_file $dir_name/base_map.txt 1.0
+    #mkdir -p ${dir_name}
+    #python ${APOLLO_ROOT_DIR}/modules/tools/map_gen/map_gen_single_lane.py $xy_file $dir_name/base_map.txt 1.0
     echo "--map_dir=${dir_name}" >> modules/common/data/global_flagfile.txt
     bash ${APOLLO_ROOT_DIR}/scripts/generate_routing_topo_graph.sh 
     ${APOLLO_ROOT_DIR}/bazel-bin/modules/map/tools/sim_map_generator --map_dir=${dir_name} --output_dir=${dir_name}

@@ -75,19 +75,23 @@ class TLPreprocessorSubnode : public Subnode {
 
   bool InitHdmap();
 
+
   bool AddDataAndPublishEvent(const std::shared_ptr<ImageLights> &data,
                               const CameraId &camera_id, double timestamp);
 
   // @brief sub long focus camera
   void SubLongFocusCamera(const sensor_msgs::Image &msg);
-
+  bool CompMessageToMat(const sensor_msgs::CompressedImage &msg,
+                                       cv::Mat *img);
   // @brief sub short focus camera
   void SubShortFocusCamera(const sensor_msgs::Image &msg);
 
   void SubCameraImage(boost::shared_ptr<const sensor_msgs::Image> msg,
                       CameraId camera_id);
+  void SubCameraCompressedImage(const sensor_msgs::CompressedImage &message);
 
   void CameraSelection(double ts);
+  void ProcessImage(std::shared_ptr<Image> image,CameraId camera_id,double timestamp, double sub_camera_image_start_ts);
   bool VerifyLightsProjection(std::shared_ptr<ImageLights> image_lights);
   bool GetSignals(double ts, CarPose *pose,
                   std::vector<apollo::hdmap::Signal> *signals);

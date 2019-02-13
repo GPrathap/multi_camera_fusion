@@ -34,12 +34,14 @@ enum CameraId {
   UNKNOWN = -1,
   LONG_FOCUS = 0,   // 25mm
   SHORT_FOCUS = 1,  // 6mm
-  CAMERA_ID_COUNT = 2
+  FRONTCAMERA_FOCUS=2,
+  CAMERA_ID_COUNT = 3
 };
 
 const std::unordered_map<int, std::string> kCameraIdToStr = {
     {static_cast<int>(LONG_FOCUS), "long_focus_camera_25mm"},
-    {static_cast<int>(SHORT_FOCUS), "short_focus_camera_6mm"}};
+    {static_cast<int>(SHORT_FOCUS), "short_focus_camera_6mm"},
+    {static_cast<int>(FRONTCAMERA_FOCUS), "camera_front_focus"}};
 
 /**
  * @class Image
