@@ -998,10 +998,13 @@ void SimulationWorldService::GetRoutePathAsJsonForUVObs() const {
   double center_y = (top-bottom)/2;
   double center_x = (right-left)/2;
 
-  //TODO this is just for testing purpose
-  // if(projection.empty()){
-  //   projection = "+proj=utm +zone=33 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
-  // }
+  //TODO this is just for testing purpose since header of map is empty
+  if(projection.empty()){
+    projection = "+proj=utm +zone=39 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
+  }
+
+  center_y = 6181144.7;
+  center_x = 358177.2;
 
   std_msgs::String msg;
   Json response;
