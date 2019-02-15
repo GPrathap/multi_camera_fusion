@@ -387,6 +387,8 @@ void CameraProcessSubnode::ExtObjDetectionCallback(const detection_msgs::Detecte
 
   for (auto det_obj : message.objects)
   {
+      if (det_obj.class_id > 7) //reject signs and lights
+        continue;
       std::shared_ptr<VisualObject> obj(new VisualObject);
       obj->type = static_cast<ObjectType>(det_obj.class_id);
       obj->type_probs.assign(static_cast<int>(ObjectType::MAX_OBJECT_TYPE),
