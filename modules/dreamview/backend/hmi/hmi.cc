@@ -29,6 +29,8 @@
 #include "modules/dreamview/backend/hmi/hmi_worker.h"
 #include "modules/monitor/proto/system_status.pb.h"
 
+#include "modules/monitor/common/monitor_manager.h"
+
 namespace apollo {
 namespace dreamview {
 
@@ -149,6 +151,29 @@ void HMI::RegisterMessageHandlers() {
         }
       });
 
+  // HMI client asks for pausing the control (stop publishing to CANBUS)
+  websocket_->RegisterMessageHandler(
+      "ToggleControlPause",
+      [this](const Json &json, WebSocketHandler::Connection *conn) {
+        // json should contain {paused: true/false}.
+        bool paused = json["paused"];
+        AINFO << "Requested control pause: " << paused;
+        auto *system_status = monitor::MonitorManager::GetStatus();
+        system_status->set_passenger_msg("Control paused");
+        system_status->set_require_control_pause(true);
+        AdapterManager::PublishSystemStatus(*system_status);
+        //update system status in HMI
+        // if (Clock::NowInSeconds() - system_status->header().timestamp_sec() <
+        //     FLAGS_system_status_lifetime_seconds) {
+          HMIWorker::instance()->UpdateSystemStatus(*system_status);
+          DeferredBroadcastHMIStatus();
+        // }
+        // Json response;
+        // response["type"] = "ToggleControlPause";
+        // response["lat"] = lat;
+        // response["lon"] = lon;
+        // map_ws_->SendData(conn, response.dump());
+      });
   // HMI client asks for changing map.
   HMIWorker::instance()->RegisterChangeMapHandler(
     [this](const std::string& new_map) {

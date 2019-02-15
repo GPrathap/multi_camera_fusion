@@ -63,11 +63,15 @@ void Guardian::OnTimer(const ros::TimerEvent&) {
   bool safety_mode_triggered = false;
   if (FLAGS_guardian_enabled) {
     std::lock_guard<std::mutex> lock(mutex_);
-    safety_mode_triggered = system_status_.has_safety_mode_trigger_time();
+    safety_mode_triggered = system_status_.has_safety_mode_trigger_time() || system_status_.require_control_pause();
+    
+    if (system_status_.require_control_pause()){
+      AINFO << "Pause required! Control relay is stopped!";
+    }
   }
 
   if (safety_mode_triggered) {
-    ADEBUG << "Safety mode triggered, enable safty mode";
+    ADEBUG << "Safety mode triggered, enable safety mode";
     TriggerSafetyMode();
   } else {
     ADEBUG << "Safety mode not triggered, bypass control command";
