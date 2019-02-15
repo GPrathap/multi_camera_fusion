@@ -21,6 +21,7 @@
 #include "modules/common/util/map_util.h"
 #include "modules/dreamview/backend/common/dreamview_gflags.h"
 #include "modules/map/hdmap/hdmap_util.h"
+#include "ros/include/ros/ros.h"
 
 namespace apollo {
 namespace dreamview {
@@ -88,6 +89,64 @@ void SimulationWorldUpdater::RegisterMessageHandlers() {
         }
         map_ws_->SendBinaryData(conn, to_send, true);
       });
+
+    map_ws_->RegisterMessageHandler(
+      "ChangeMapOffset",
+      [this](const Json &json, WebSocketHandler::Connection *conn) {
+        std::string to_send;
+        {
+          boost::shared_lock<boost::shared_mutex> reader_lock(mutex_);
+          double lat, lon;
+          if (ros::param::get("geo2loc/lat", lat) && ros::param::get("geo2loc/lon", lon)){
+              AINFO << "GOT setting param: " << lat << lon;
+          }
+          else {
+            AERROR << "Can not get geo2loc lat/lon param";
+          }
+
+          //parsing sent value
+          try{
+            // AINFO << "Setting geo2loc lat/lon: " << json["offsets"]["lat"] << "/" << json["offsets"]["lon"];
+            ros::param::set("geo2loc/lat", atof(json["offsets"]["lat"].get<std::string>().c_str()));
+            ros::param::set("geo2loc/lon", atof(json["offsets"]["lon"].get<std::string>().c_str()));
+          }
+          catch (const std::exception& e) {
+            AERROR << "Can not set geo2loc params: " << e.what();
+          }
+
+          //Updating to see what is the result value 
+          ros::param::get("geo2loc/lat", lat);
+          ros::param::get("geo2loc/lon", lon);
+
+          AINFO << "Set map offset parameters: " << lat << lon;
+          Json response;
+          response["type"] = "MapOffsetStatus";
+          response["lat"] = lat;
+          response["lon"] = lon;
+          map_ws_->SendData(conn, response.dump());
+        }
+      });
+
+  map_ws_->RegisterMessageHandler(
+    "RequestMapOffset",
+    [this](const Json &json, WebSocketHandler::Connection *conn) {
+      std::string to_send;
+      {
+        boost::shared_lock<boost::shared_mutex> reader_lock(mutex_);
+        double lat, lon;
+        if (ros::param::get("geo2loc/lat", lat) && ros::param::get("geo2loc/lon", lon)){
+          AINFO << "GOT setting param: " << lat << lon;
+          Json response;
+          response["type"] = "MapOffsetStatus";
+          response["lat"] = lat;
+          response["lon"] = lon;
+          map_ws_->SendData(conn, response.dump());
+        }
+        else {
+          AERROR << "Can not get geo2loc lat/lon param";
+        }
+      }
+    });
 
   websocket_->RegisterMessageHandler(
       "Binary",

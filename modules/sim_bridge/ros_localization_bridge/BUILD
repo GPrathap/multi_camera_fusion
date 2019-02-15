@@ -16,6 +16,7 @@ cc_library(
         "//modules/common/proto:common_proto",
         "//modules/common/status",
         "//modules/common/time",
+        "//modules/canbus/proto:canbus_proto",
         "//modules/sim_bridge:sim_bridge_base",
         "//modules/sim_bridge/proto:sim_bridge_config_proto",
         "//modules/sim_bridge/common:sim_bridge_common",

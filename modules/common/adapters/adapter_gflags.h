@@ -85,6 +85,8 @@ DECLARE_string(guardian_topic);
 //for standart ros sensors messages
 DECLARE_string(imu_ros_topic);
 DECLARE_string(odom_ros_topic);
+DECLARE_string(odom_chassis_topic);
+DECLARE_string(odom_gnss_topic);
 DECLARE_string(unity_car_control_topic);
 DECLARE_string(unity_car_state_topic);
 DECLARE_string(image_front_left_side_topic);
