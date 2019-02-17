@@ -240,6 +240,15 @@ function main(){
         mkdir "$HOME/.cache"
     fi
 
+    #restart perception container
+    docker ps -a --format "{{.Names}}" | grep 'kia_perception' 1>/dev/null
+    if [ $? == 0 ]; then
+        echo "Stopping kia_perception container"
+        docker stop kia_perception 1>/dev/null
+        docker rm -f kia_perception 1>/dev/null
+    fi
+
+    echo "Starting kia_perception container"
     # FIXME: replace workspaces with user variables
     docker run -v /home/alex/workspace/kia_perceprion/ros_packages/:/root/catkin_ws/src \
         -d \
