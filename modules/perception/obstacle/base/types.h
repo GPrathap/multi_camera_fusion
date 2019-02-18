@@ -34,6 +34,7 @@ enum ObjectType {
   BICYCLE = 4,
   VEHICLE = 5,
   MAX_OBJECT_TYPE = 6,
+  LIGHT=7,
 };
 
 enum InternalObjectType {
