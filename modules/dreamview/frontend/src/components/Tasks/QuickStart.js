@@ -86,7 +86,7 @@ export default class QuickStarter extends React.Component {
 
         this.controlPlay = {
             "Play Auto": () => {
-                WS.toggleControlPause(true);
+                WS.toggleControlPause(false);
                 this.speechSynthesis('Play auto');
             },
         };
@@ -118,7 +118,7 @@ export default class QuickStarter extends React.Component {
                     {!hmi.controlPaused && <CommandGroup disabled={tasksPanelLocked}
                         commands={this.controlPause} />}
                     {hmi.controlPaused && <CommandGroup disabled={tasksPanelLocked}
-                        commands={this.controlPlay} />}
+                        commands={this.controlPlay} extraCommandClass="warning" />}
                     <CommandGroup disabled={!hmi.enableStartAuto || tasksPanelLocked}
                                   commands={this.auto}
                                   extraButtonClass="start-auto-button"

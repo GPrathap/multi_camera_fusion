@@ -102,7 +102,8 @@ void SummaryMonitor::RunOnce(const double current_time) {
       current_time - last_broadcast_ > FLAGS_broadcast_max_interval) {
     AdapterManager::FillSystemStatusHeader("SystemMonitor", system_status);
     AdapterManager::PublishSystemStatus(*system_status);
-    ADEBUG << "Published system status: " << system_status->DebugString();
+    AINFO << "Control pause is " << system_status->require_control_pause();
+    AINFO << "Published system status: " << system_status->DebugString();
     system_status_fp_ = new_fp;
     last_broadcast_ = current_time;
   }

@@ -159,12 +159,17 @@ void HMI::RegisterMessageHandlers() {
         bool paused = json["paused"];
         AINFO << "Requested control pause: " << paused;
         auto *system_status = monitor::MonitorManager::GetStatus();
-        system_status->set_passenger_msg("Control paused");
-        system_status->set_require_control_pause(true);
+        system_status->set_require_control_pause(paused);
+        system_status->set_passenger_msg("Control paused!");
+        system_status->clear_header();
+        AdapterManager::FillSystemStatusHeader("SystemMonitor", system_status);
         AdapterManager::PublishSystemStatus(*system_status);
+          AINFO << "[HMI] Published system status: " << system_status->DebugString();
+
         //update system status in HMI
         // if (Clock::NowInSeconds() - system_status->header().timestamp_sec() <
         //     FLAGS_system_status_lifetime_seconds) {
+          
           HMIWorker::instance()->UpdateSystemStatus(*system_status);
           DeferredBroadcastHMIStatus();
         // }
