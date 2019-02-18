@@ -124,10 +124,11 @@ bool TLPreprocessor::SyncImage(ImageSharedPtr image,
   bool sync_ok = false;
 
   PERF_FUNCTION();
-  if (cached_lights_.size() == 0) {
-    AINFO << "No cached light";
-    return false;
-  }
+  // if (cached_lights_.size() == 0) {
+  //   AINFO << "No cached light";
+  //   return false;
+  // }
+  AERROR<<"111";
   const int cam_id = static_cast<int>(camera_id);
   if (cam_id < 0 || cam_id >= kCountCameraId) {
     AERROR << "SyncImage failed, "
@@ -137,7 +138,7 @@ bool TLPreprocessor::SyncImage(ImageSharedPtr image,
 
   // find close enough(by timestamp difference)
   // lights projection from back to front
-
+AERROR<<"111";
   bool find_loc = false;  // if pose is found
   auto cached_lights_ptr = cached_lights_.rbegin();
   for (; cached_lights_ptr != cached_lights_.rend(); ++cached_lights_ptr) {
@@ -169,13 +170,13 @@ bool TLPreprocessor::SyncImage(ImageSharedPtr image,
       break;
     }
   }
-
+AERROR<<"111";
   if (sync_ok && cached_lights_ptr != cached_lights_.rend()) {
     *image_lights = *cached_lights_ptr;
     (*image_lights)->diff_image_pose_ts =
         image_ts - (*cached_lights_ptr)->timestamp;
     (*image_lights)->diff_image_sys_ts = image_ts - TimeUtil::GetCurrentTime();
-
+AERROR<<"111";
     (*image_lights)->image = image;
     (*image_lights)->timestamp = image_ts;
     AINFO << "TLPreprocessor sync ok ts: " << GLOG_TIMESTAMP(image_ts)
@@ -235,6 +236,7 @@ bool TLPreprocessor::SyncImage(ImageSharedPtr image,
             << ", camera_id: " << kCameraIdToStr.at(camera_id);
     }
   }
+  AERROR<<"111";
   // sync fail may because:
   // 1. image is not selected
   // 2. timestamp drift

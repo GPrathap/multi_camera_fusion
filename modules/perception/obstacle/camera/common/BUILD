@@ -10,6 +10,7 @@ cc_library(
         "camera.h",
         "lane_object.h",
         "visual_object.h",
+        "road_stuff_object.h"
     ],
     deps = [
         "//modules/perception/cuda_util",
@@ -25,7 +26,8 @@ cc_library(
     ],
     hdrs = [
         "util.h",
-        "visual_object.h",
+        "visual_object.h"
+        
     ],
     deps = [
         "//modules/perception/common:pcl_util",

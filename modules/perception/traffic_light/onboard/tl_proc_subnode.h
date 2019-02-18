@@ -46,6 +46,7 @@ class TLProcSubnode : public Subnode {
   TLProcSubnode() = default;
   ~TLProcSubnode();
   bool ProcEvent(const Event &event);
+   bool ProcEventYoloNetwork(const Event &event);
   apollo::common::Status ProcEvents() override;
 
  protected:

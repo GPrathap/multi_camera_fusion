@@ -712,24 +712,36 @@ int HDMapImpl::GetForwardNearestSignalsOnLane(
         }
       }
     }
+
     if (!min_dist_signal_ptr.empty() && unused_distance >= signal_min_dist) {
       *signals = min_dist_signal_ptr;
       break;
     }
+
     unused_distance = unused_distance - (lane_ptr->total_length() - s_start);
     if (unused_distance <= 0) {
       break;
     }
+
     LaneInfoConstPtr tmp_lane_ptr = nullptr;
     for (const auto& successor_lane_id : lane_ptr->lane().successor_id()) {
-      tmp_lane_ptr = GetLaneById(successor_lane_id);
+
+         tmp_lane_ptr = GetLaneById(successor_lane_id);
+         if (tmp_lane_ptr==nullptr)
+          {
+
+            continue;
+          }
       if (tmp_lane_ptr->lane().turn() == apollo::hdmap::Lane::NO_TURN) {
+
         break;
       }
-    }
+
+    }   
     lane_ptr = tmp_lane_ptr;
     s_start = 0;
   }
+
   return 0;
 }
 

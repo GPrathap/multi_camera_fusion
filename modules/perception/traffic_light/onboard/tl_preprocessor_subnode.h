@@ -29,8 +29,10 @@
 #include "tf/transform_listener.h"
 #include "tf2_ros/transform_listener.h"
 
+#include "modules/perception/obstacle/camera/common/road_stuff_object.h"
 #include "modules/perception/proto/traffic_light/subnode_config.pb.h"
-
+#include "detection_msgs/DetectedObject.h"
+#include "detection_msgs/DetectedObjectsWithImage.h"
 #include "modules/common/time/timer.h"
 #include "modules/perception/lib/base/mutex.h"
 #include "modules/perception/onboard/subnode.h"
@@ -89,7 +91,7 @@ class TLPreprocessorSubnode : public Subnode {
   void SubCameraImage(boost::shared_ptr<const sensor_msgs::Image> msg,
                       CameraId camera_id);
   void SubCameraCompressedImage(const sensor_msgs::CompressedImage &message);
-
+  void ExtObjDetectionCallback(const detection_msgs::DetectedObjectsWithImage &message);
   void CameraSelection(double ts);
   void ProcessImage(std::shared_ptr<Image> image,CameraId camera_id,double timestamp, double sub_camera_image_start_ts);
   bool VerifyLightsProjection(std::shared_ptr<ImageLights> image_lights);
