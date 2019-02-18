@@ -241,16 +241,16 @@ function main(){
     fi
 
     #restart perception container
-    docker ps -a --format "{{.Names}}" | grep 'kia_perception' 1>/dev/null
+    docker ps -a --format "{{.Names}}" | grep 'tensorrt_det' 1>/dev/null
     if [ $? == 0 ]; then
-        echo "Stopping kia_perception container"
-        docker stop kia_perception 1>/dev/null
-        docker rm -f kia_perception 1>/dev/null
+        echo "Stopping tensorrt_det container"
+        docker stop tensorrt_det 1>/dev/null
+        docker rm -f tensorrt_det 1>/dev/null
     fi
 
-    echo "Starting kia_perception container"
+    echo "Starting tensorrt_det container"
     # FIXME: replace workspaces with user variables
-    docker run -v /home/alex/workspace/kia_perceprion/ros_packages/:/root/catkin_ws/src \
+    docker run -v ${HOME}/workspace/kia_perception/ros_packages/:/root/catkin_ws/src \
         -d \
         -it \
         --runtime nvidia \
