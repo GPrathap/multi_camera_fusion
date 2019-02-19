@@ -78,6 +78,9 @@ function start() {
         /apollo/sensor/camera/perception/image_front_right_side/compressed \
         /velodyne_points \
         /fix \
+        /fix_gnss \
+        /string_gnss \
+        /apollo/sensor/conti_radar
         /apollo/monitor/static_info </dev/null >"${LOG}" 2>&1 &
     fi
 }
