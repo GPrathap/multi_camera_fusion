@@ -248,6 +248,13 @@ function main(){
         docker rm -f tensorrt_det 1>/dev/null
     fi
 
+    LOCALIZATION_VOLUME=apollo_localization_volume
+    docker stop ${LOCALIZATION_VOLUME} > /dev/null 2>&1
+
+    LOCALIZATION_VOLUME_IMAGE=${DOCKER_REPO}:localization_volume-${ARCH}-latest
+    docker pull ${LOCALIZATION_VOLUME_IMAGE}
+    docker run -it -d --rm --name ${LOCALIZATION_VOLUME} ${LOCALIZATION_VOLUME_IMAGE}
+
     echo "Starting tensorrt_det container"
     # FIXME: replace workspaces with user variables
     docker run -v ${HOME}/workspace/kia_perception/ros_packages/:/root/catkin_ws/src \
@@ -269,6 +276,7 @@ function main(){
         --runtime nvidia \
         --name apollo_dev \
         ${MAP_VOLUME_CONF} \
+        --volumes-from ${LOCALIZATION_VOLUME} \
         -e DISPLAY=$display \
         -e DOCKER_USER=$USER \
         -e USER=$USER \
