@@ -81,6 +81,8 @@ do
     fi
   fi
 done
+echo "Stopping tensorrt_det container"
+docker stop tensorrt_det 1>/dev/null
 }
 
 APOLLO_ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
