@@ -14,6 +14,8 @@ import "modules/planning/proto/decision.proto";
 
 message Debug {
   optional PlanningData planning_data = 2;
+  optional bool fix_trajectory = 3;
+  optional bool unfix_trajectory = 4;
 }
 
 message SpeedPlan {
