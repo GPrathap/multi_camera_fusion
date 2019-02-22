@@ -53,7 +53,6 @@ bool TLPreprocessorSubnode::InitInternal() {
     AERROR << "TLPreprocessorSubnode init failed.";
     return false;
   }
- AERROR << "Start Init Hd Map";
   // init hd_map
   if (!InitHdmap()) {
     AERROR << "TLPreprocessorSubnode Failed to init hdmap";
@@ -61,14 +60,14 @@ bool TLPreprocessorSubnode::InitInternal() {
   }
    if (FLAGS_use_externel_detector)
   {
-    AERROR << "FINISH";
+
     AdapterManager::AddExternelObjDetectionCallback(&TLPreprocessorSubnode::ExtObjDetectionCallback,
                                                            this);     
                                                                                     
   }
   else if (FLAGS_use_compressed_images)
   {
-    AERROR << "FINISH";
+
     AdapterManager::AddCompressedImageFrontCameraCallback(&TLPreprocessorSubnode::SubCameraCompressedImage,
                                                            this);        
                                                                                     
@@ -108,7 +107,7 @@ bool TLPreprocessorSubnode::InitPreprocessor() {
     AERROR << "TLPreprocessorSubnode init preprocessor failed";
     return false;
   }
-   AERROR << "Init Shared Data";
+
   return true;
 }
 
@@ -132,7 +131,7 @@ bool TLPreprocessorSubnode::AddDataAndPublishEvent(
            << GLOG_TIMESTAMP(timestamp);
     return false;
   }
-  AERROR << "Key"<<key;
+
   if (!preprocessing_data_->Add(key, data)) {
     AERROR << "TLPreprocessorSubnode push data into shared_data failed.";
     data->image.reset();
@@ -165,7 +164,7 @@ void TLPreprocessorSubnode::SubShortFocusCamera(const sensor_msgs::Image &msg) {
   PERF_FUNCTION("SubShortFocusCamera");
 }
 void TLPreprocessorSubnode::ExtObjDetectionCallback(const detection_msgs::DetectedObjectsWithImage &message) {
-  AERROR<<message.objects.size();
+  
   CameraId camera_id=CameraId::FRONTCAMERA_FOCUS;
   std::vector<std::shared_ptr<DetectedRoadStuff>> lights;
   for ( auto& detObject : message.objects)
@@ -201,6 +200,7 @@ void TLPreprocessorSubnode::ExtObjDetectionCallback(const detection_msgs::Detect
   image->Init(timestamp, camera_id, cv_img);
    const double before_sync_image_ts = TimeUtil::GetCurrentTime();
    //image->GenerateMat();
+   //CameraSelection(timestamp);
   image_lights->image=image;
 
   const double sync_image_latency =TimeUtil::GetCurrentTime() - before_sync_image_ts;
@@ -211,20 +211,21 @@ void TLPreprocessorSubnode::ExtObjDetectionCallback(const detection_msgs::Detect
           << ", camera_id: " << kCameraIdToStr.at(camera_id);
     return;
    }
+   AERROR<<"verify Last Protection:"<< (image_lights->lights).get()->size();
     std::vector<LightPtr> detected_bboxes;
     cv::Size img_size=cv_img.size();
-    for (size_t candidate_id = 0; candidate_id < (image_lights->lights).get()->size(); ++candidate_id) {
+    for (size_t candidate_id = 0; candidate_id < image_lights->num_signals; ++candidate_id) {
         if (candidate_id>=lights.size())
           break; 
         LightPtr tmp(new Light);
         tmp->region.rectified_roi.x =
-            static_cast<int>(lights[candidate_id]->upper_left[0]);
+            static_cast<int>(lights[candidate_id]->upper_left[0]*1280);
         tmp->region.rectified_roi.y =
-            static_cast<int>(lights[candidate_id]->upper_left[1]);
+            static_cast<int>(lights[candidate_id]->upper_left[1]*512);
         tmp->region.rectified_roi.width = static_cast<int>(
-            (lights[candidate_id]->lower_right[0] - lights[candidate_id]->upper_left[0] + 1));
+            (lights[candidate_id]->lower_right[0] - lights[candidate_id]->upper_left[0])*1280);
         tmp->region.rectified_roi.height = static_cast<int>(
-            (lights[candidate_id]->lower_right[1] - lights[candidate_id]->upper_left[1] + 1));
+            (lights[candidate_id]->lower_right[1] - lights[candidate_id]->upper_left[1] )*512);
         tmp->region.detect_score = lights[candidate_id]->confidence;
         if (!BoxIsValid(tmp->region.rectified_roi, img_size)) {
           AINFO << "Invalid width or height or x or y: "
@@ -241,9 +242,13 @@ void TLPreprocessorSubnode::ExtObjDetectionCallback(const detection_msgs::Detect
         lights_ref[candidate_id]->region.detect_class_id = DetectionClassId(VERTICAL_CLASS);
         lights_ref[candidate_id]->region.rectified_roi=RefinedBox(tmp->region.rectified_roi, img_size);
         lights_ref[candidate_id]->region.is_detected =true;
+         CarPose pose;
+        GetCarPose(timestamp, &pose);
+         auto light_distance = Distance2Stopline(pose.pose(), lights_ref[candidate_id]->info.stop_line());
+        AERROR<<"light_distance:" <<light_distance;
         //detected_bboxes.push_back(tmp);
     }
-
+   
 
   
 
@@ -301,13 +306,13 @@ void TLPreprocessorSubnode::SubCameraImage(
 }
 void TLPreprocessorSubnode::SubCameraCompressedImage(
     const sensor_msgs::CompressedImage &message) {
-    AERROR<<"Compressed";
+
     CameraId camera_id=CameraId::FRONTCAMERA_FOCUS;
-    AERROR<<"Compressed";
+
   // Only one image could be used in a while.
   // Ohters will be discarded
   // The pipeline turn to a single thread
-   AERROR<<"Compressed";
+
   MutexLock lock(&mutex_);
   const double sub_camera_image_start_ts = TimeUtil::GetCurrentTime();
   std::shared_ptr<Image> image(new Image);
@@ -315,7 +320,7 @@ void TLPreprocessorSubnode::SubCameraCompressedImage(
   double timestamp = message.header.stamp.toSec();
   //From compressed image
    cv::Mat cv_img;
-    AERROR<<"Compressed";
+
   CompMessageToMat(message,&cv_img);
   image->Init(timestamp, camera_id, cv_img);
    if (FLAGS_output_raw_img) {
@@ -327,7 +332,7 @@ void TLPreprocessorSubnode::SubCameraCompressedImage(
              image->camera_id_str().c_str(), timestamp);
     cv::imwrite(filename, image->mat());
   }
-   AERROR<<"Compressed";
+
   AINFO << "TLPreprocessorSubnode received a image msg"
         << ", camera_id: " << kCameraIdToStr.at(camera_id)
         << ", ts:" << GLOG_TIMESTAMP(message.header.stamp.toSec());
@@ -349,9 +354,9 @@ bool TLPreprocessorSubnode::CompMessageToMat(const sensor_msgs::CompressedImage 
 
 void TLPreprocessorSubnode::ProcessImage(std::shared_ptr<Image> image, CameraId camera_id,double timestamp, double sub_camera_image_start_ts)
 {
-   AERROR<<"Start";
-  // which camera should be used?  called in low frequence
-  CameraSelection(timestamp);
+
+  // here the lights which visible on camera 
+ // CameraSelection(timestamp);
 
   AINFO << "sub_camera_image_start_ts: "
         << GLOG_TIMESTAMP(sub_camera_image_start_ts)
@@ -360,7 +365,7 @@ void TLPreprocessorSubnode::ProcessImage(std::shared_ptr<Image> image, CameraId 
         << GLOG_TIMESTAMP(sub_camera_image_start_ts - last_proc_image_ts_);
   const float proc_interval_seconds_ =
       1.0f / config_.tl_preprocessor_subnode_config().max_process_image_fps();
-AERROR<<"Start1";
+
   if (last_proc_image_ts_ > 0.0 &&
       sub_camera_image_start_ts - last_proc_image_ts_ <
           proc_interval_seconds_) {
@@ -373,7 +378,6 @@ AERROR<<"Start1";
   const double before_sync_image_ts = TimeUtil::GetCurrentTime();
   std::shared_ptr<ImageLights> image_lights(new ImageLights);
   bool should_pub = false;
-AERROR<<"Start2";
 
   if (!preprocessor_.SyncImage(image, &image_lights, &should_pub)) {
     AINFO << "sync image failed ts: " << GLOG_TIMESTAMP(image->ts())
@@ -413,7 +417,6 @@ AERROR<<"Start2";
   // }
   // verify lights projection based on image time
 
-  AERROR<<"Before VerifyLightsProjection";
    if (!VerifyLightsProjection(image_lights)) {
     AINFO << "verify_lights_projection on image failed, ts:"
           << GLOG_TIMESTAMP(image->ts())
@@ -449,8 +452,8 @@ bool TLPreprocessorSubnode::GetSignals(double ts, CarPose *pose,
           << GLOG_TIMESTAMP(ts);
     return false;
   }
-  AERROR << "camera_selection get position\n " << std::setprecision(12)
-        << pose->pose();
+  
+
 
   // get signals
   if (!hd_map_->GetSignals(pose->pose(), signals)) {
@@ -489,7 +492,7 @@ bool TLPreprocessorSubnode::VerifyLightsProjection(
   if (!GetSignals(image_lights->timestamp, &pose, &signals)) {
     return false;
   }
-  AERROR << "VerifyLights";
+
   // TODO(ghdawn): no need to init lights before this line
   image_lights->num_signals = signals.size();
   image_lights->lights.reset(new LightPtrs);

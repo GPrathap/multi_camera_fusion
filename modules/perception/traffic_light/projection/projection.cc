@@ -52,9 +52,7 @@ bool BoundaryProjection::Project(const CameraCoeffient &camera_coeffient,
   int maxy = std::max(y[0], y[2]);
 
   cv::Rect roi(minx, miny, maxx - minx, maxy - miny);
-  AINFO << "projection get ROI:" << roi;
-  AERROR<<"Width"<<camera_coeffient.image_width;
-  AERROR<<"Height"<<camera_coeffient.image_height;
+
   if (minx < 0 || miny < 0 ||
       maxx >= static_cast<int>(camera_coeffient.image_width) ||
       maxy >= static_cast<int>(camera_coeffient.image_height)) {
