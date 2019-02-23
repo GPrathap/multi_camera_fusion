@@ -86,8 +86,9 @@ bool DPRoadGraph::FindPathTunnel(
   float accumulated_s = init_sl_point_.s();
   const float path_resolution = config_.path_resolution();
 
-  //ищем первое препятствие на нашей полосе (это будет второй барьер в задании 1)
-  double obstacle2_s = 0.0;
+  //ищем первое ближайшее препятствие на нашей полосе (это будет второй барьер в задании 1)
+  double obstacle2_s = 100.0;
+  std::string obstacle2_id;
   ADEBUG<< " accumulated_s: " << accumulated_s;
   for (const auto *ptr_path_obstacle : obstacles) {
     auto boundary = ptr_path_obstacle->PerceptionSLBoundary();
@@ -99,7 +100,10 @@ bool DPRoadGraph::FindPathTunnel(
 
     if (abs(boundary.start_l()) < 1.0 ||  abs(boundary.end_l()) < 1.0)
     {
-      obstacle2_s = boundary.start_s() - accumulated_s;
+      double cur_obstacle2_s = boundary.start_s() - accumulated_s;
+      if (cur_obstacle2_s<obstacle2_s)
+        obstacle2_s = cur_obstacle2_s;
+        obstacle2_id = ptr_path_obstacle->Id();
     }
   }
 
@@ -108,7 +112,7 @@ bool DPRoadGraph::FindPathTunnel(
   }
 
   auto first_segment = reference_line_info_.Lanes()[0];
-  if (first_segment.lane->id().id() == "road_1_0" && accumulated_s>20.0 && accumulated_s<30.0 && obstacle2_s>0) //если мы в определенной зоне и видем препятствие №2, то формируем заготовленную траекторию
+  if (first_segment.lane->id().id() == "road_1_0" && accumulated_s>20.0 && accumulated_s<30.0 && obstacle2_s>0 && obstacle2_s<50.0) //если мы в определенной зоне и видем препятствие №2, то формируем заготовленную траекторию
   {
 
     ADEBUG << "Calculate fix trajectory!!!";
