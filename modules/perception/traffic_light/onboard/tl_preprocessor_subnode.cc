@@ -165,6 +165,23 @@ void TLPreprocessorSubnode::SubShortFocusCamera(const sensor_msgs::Image &msg) {
 }
 void TLPreprocessorSubnode::ExtObjDetectionCallback(const detection_msgs::DetectedObjectsWithImage &message) {
   
+  double timestamp = message.header.stamp.toSec();
+  ADEBUG << "TLPreprocessorSubnode ExtObjDetectionCallback: timestamp: ";
+  ADEBUG << std::fixed << std::setprecision(64) << timestamp;
+  AINFO << "camera received image : " << GLOG_TIMESTAMP(timestamp)
+        << " at time: " << GLOG_TIMESTAMP(TimeUtil::GetCurrentTime());
+  double curr_timestamp = timestamp * 1e9;
+
+  if (FLAGS_skip_camera_frame && timestamp_ns_ > 0.0) {
+    if ((curr_timestamp - timestamp_ns_) < (1e9 / FLAGS_camera_hz) &&
+        curr_timestamp > timestamp_ns_) {
+      ADEBUG << "TLPreprocessorSubnode Skip frame";
+      return;
+    }
+  }
+
+  timestamp_ns_ = curr_timestamp;
+  
   CameraId camera_id=CameraId::FRONTCAMERA_FOCUS;
   std::vector<std::shared_ptr<DetectedRoadStuff>> lights;
   for ( auto& detObject : message.objects)
@@ -191,7 +208,7 @@ void TLPreprocessorSubnode::ExtObjDetectionCallback(const detection_msgs::Detect
   const double sub_camera_image_start_ts = TimeUtil::GetCurrentTime();
   std::shared_ptr<Image> image(new Image);
   cv::Mat cv_mat;
-  double timestamp = message.header.stamp.toSec();
+
   //From compressed image
   cv::Mat cv_img;
    image_lights->camera_id=camera_id;
