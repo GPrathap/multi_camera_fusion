@@ -55,12 +55,14 @@ apollo::common::Status SpeedDecider::Execute(
   init_point_ = frame_->PlanningStartPoint();
   adc_sl_boundary_ = reference_line_info_->AdcSlBoundary();
   reference_line_ = &reference_line_info_->reference_line();
-  if (!MakeObjectDecision(reference_line_info->speed_data(),
-                          reference_line_info->path_decision())
-           .ok()) {
-    const std::string msg = "Get object decision by speed profile failed.";
-    AERROR << msg;
-    return Status(ErrorCode::PLANNING_ERROR, msg);
+  if (!reference_line_info_->mutable_debug()->fix_trajectory()){
+    if (!MakeObjectDecision(reference_line_info->speed_data(),
+                            reference_line_info->path_decision())
+            .ok()) {
+      const std::string msg = "Get object decision by speed profile failed.";
+      AERROR << msg;
+      return Status(ErrorCode::PLANNING_ERROR, msg);
+    }
   }
   return Status::OK();
 }

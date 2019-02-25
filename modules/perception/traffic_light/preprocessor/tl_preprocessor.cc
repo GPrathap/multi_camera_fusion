@@ -42,7 +42,7 @@ bool TLPreprocessor::Init() {
     AERROR << "TLPreprocessor init projection failed.";
     return false;
   }
-   AERROR << "Init Projection";
+   
   return true;
 }
 
@@ -64,7 +64,7 @@ bool TLPreprocessor::CacheLightsProjections(const CarPose &pose,
   // lights projection info. to be added in cached array
   std::shared_ptr<ImageLights> image_lights(new ImageLights);
   // default select long focus camera
-  image_lights->camera_id = SHORT_FOCUS;
+  image_lights->camera_id = FRONTCAMERA_FOCUS;
   image_lights->timestamp = timestamp;
   image_lights->pose = pose;
   image_lights->is_pose_valid = true;
@@ -124,10 +124,11 @@ bool TLPreprocessor::SyncImage(ImageSharedPtr image,
   bool sync_ok = false;
 
   PERF_FUNCTION();
-  if (cached_lights_.size() == 0) {
-    AINFO << "No cached light";
-    return false;
-  }
+  // if (cached_lights_.size() == 0) {
+  //   AINFO << "No cached light";
+  //   return false;
+  // }
+
   const int cam_id = static_cast<int>(camera_id);
   if (cam_id < 0 || cam_id >= kCountCameraId) {
     AERROR << "SyncImage failed, "
@@ -235,6 +236,7 @@ bool TLPreprocessor::SyncImage(ImageSharedPtr image,
             << ", camera_id: " << kCameraIdToStr.at(camera_id);
     }
   }
+
   // sync fail may because:
   // 1. image is not selected
   // 2. timestamp drift
@@ -298,7 +300,7 @@ bool TLPreprocessor::ProjectLights(const CarPose &pose,
     AERROR << "project_lights get empty signals.";
     return true;
   }
-  AERROR <<  "Into ProjectLights";
+
   const int cam_id = static_cast<int>(camera_id);
   if (cam_id < 0 || cam_id >= kCountCameraId) {
     AERROR << "project_lights get invalid CameraId: " << camera_id;
@@ -309,12 +311,12 @@ bool TLPreprocessor::ProjectLights(const CarPose &pose,
     LightPtr light(new Light);
     light->info = signals[i];
     if (!projection_.Project(pose, ProjectOption(camera_id), light.get())) {
-      lights_outside_image->push_back(light);
-      //lights_on_image->push_back(light);
-      AERROR << "outside";
+      //lights_outside_image->push_back(light);
+      lights_on_image->push_back(light);
+
     } else {
       lights_on_image->push_back(light);
-      AERROR << "inside";
+
     }
   }
 

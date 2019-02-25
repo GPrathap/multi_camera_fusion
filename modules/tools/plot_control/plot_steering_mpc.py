@@ -58,22 +58,15 @@ def callback(data):
     if len(STEERING_LINE_DATA) > FLAGS.data_length:
         STEERING_LINE_DATA = STEERING_LINE_DATA[-FLAGS.data_length:]
         
-    STEERING_LAT_DATA.append(control_cmd_pb.debug.simple_lat_debug.steer_angle_lateral_contribution)
-    if len(STEERING_LAT_DATA) > FLAGS.data_length:
-        STEERING_LAT_DATA = STEERING_LAT_DATA[-FLAGS.data_length:]
-
-    STEERING_HEADING_DATA.append(control_cmd_pb.debug.simple_lat_debug.steer_angle_heading_contribution)
-    if len(STEERING_HEADING_DATA) > FLAGS.data_length:
-        STEERING_HEADING_DATA = STEERING_HEADING_DATA[-FLAGS.data_length:]
-    STEERING_POSITION_DATA.append(control_cmd_pb.debug.simple_lat_debug.steering_position)
+    STEERING_POSITION_DATA.append(control_cmd_pb.debug.simple_mpc_debug.steering_position)
     if len(STEERING_POSITION_DATA) > FLAGS.data_length:
         STEERING_POSITION_DATA = STEERING_POSITION_DATA[-FLAGS.data_length:]
     
-    STEERING_FEEDBACK_DATA.append(control_cmd_pb.debug.simple_lat_debug.steer_angle_feedback)
+    STEERING_FEEDBACK_DATA.append(control_cmd_pb.debug.simple_mpc_debug.steer_angle_feedback)
     if len(STEERING_FEEDBACK_DATA) > FLAGS.data_length:
         STEERING_FEEDBACK_DATA = STEERING_FEEDBACK_DATA[-FLAGS.data_length:]
 
-    STEERING_FEEDFORWARD_DATA.append(control_cmd_pb.debug.simple_lat_debug.steer_angle_feedforward)
+    STEERING_FEEDFORWARD_DATA.append(control_cmd_pb.debug.simple_mpc_debug.steer_angle_feedforward)
     if len(STEERING_FEEDFORWARD_DATA) > FLAGS.data_length:
         STEERING_FEEDFORWARD_DATA = STEERING_FEEDFORWARD_DATA[-FLAGS.data_length:]
 
@@ -99,12 +92,6 @@ def update(frame_number):
 
     steering_data = compensate(STEERING_LINE_DATA)
     steering_line.set_ydata(steering_data)
-
-    steering_lat_data = compensate(STEERING_LAT_DATA)
-    steer_angle_lateral_line.set_ydata(steering_lat_data)
-
-    steering_heading_data = compensate(STEERING_HEADING_DATA)
-    steer_angle_heading_line.set_ydata(steering_heading_data)
 
     steering_position_data = compensate(STEERING_POSITION_DATA)
     steering_position_line.set_ydata(steering_position_data)
@@ -136,10 +123,6 @@ if __name__ == '__main__':
         Xs, [0] * FLAGS.data_length, 'r', lw=3, alpha=0.5, label='steer_angle_feedback')
     steer_angle_feedforward_line, = ax.plot(
         Xs, [0] * FLAGS.data_length, 'c', lw=3, alpha=0.5, label='steer_angle_feedforward')   
-    steer_angle_lateral_line, = ax.plot(
-        Xs, [0] * FLAGS.data_length, 'y', lw=3, alpha=0.5, label='steer_angle_lateral')
-    steer_angle_heading_line, = ax.plot(
-        Xs, [0] * FLAGS.data_length, 'g', lw=3, alpha=0.5, label='steer_angle_heading')
     steering_text = ax.text(0.75, 0.95, '', transform=ax.transAxes)
     steering_pos_text = ax.text(0.75, 0.1, '', transform=ax.transAxes)
     ax.set_ylim(-100, 120)

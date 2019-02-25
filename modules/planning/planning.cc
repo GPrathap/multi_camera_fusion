@@ -390,6 +390,17 @@ void Planning::RunOnce() {
     }
   }
 
+  ADEBUG << "Current point. s: " << frame_->PlanningStartPoint().path_point().s() 
+  << " x: " << frame_->PlanningStartPoint().path_point().x()
+  << " y: " << frame_->PlanningStartPoint().path_point().y();
+
+  auto cur_point = frame_->PlanningStartPoint().path_point();
+  if (cur_point.y()>-4.4 && fixed_trajectory_)
+    fixed_trajectory_ = false;
+
+  if (fixed_trajectory_)
+    return;
+
   status = Plan(start_timestamp, stitching_trajectory, trajectory_pb);
 
   const auto time_diff_ms = (Clock::NowInSeconds() - start_timestamp) * 1000;
@@ -420,9 +431,26 @@ void Planning::RunOnce() {
     }
   }
 
-  trajectory_pb->set_is_replan(is_replan);
-  PublishPlanningPb(trajectory_pb, start_timestamp);
-  ADEBUG << "Planning pb:" << trajectory_pb->header().DebugString();
+  ADEBUG << "After fix_trajectory=" << trajectory_pb->debug().fix_trajectory() << " unfix_trajectory=" << trajectory_pb->debug().unfix_trajectory();
+
+  if (!fixed_trajectory_)
+  {
+    trajectory_pb->set_is_replan(is_replan);
+    PublishPlanningPb(trajectory_pb, start_timestamp);
+    ADEBUG << "Planning pb:" << trajectory_pb->header().DebugString();
+    fix_trajectory_.CopyFrom(*trajectory_pb);
+  } else
+  {
+    fix_trajectory_.set_is_replan(false);
+    PublishPlanningPb(&fix_trajectory_, start_timestamp);
+  }
+  
+
+  if (!fixed_trajectory_ && trajectory_pb->debug().fix_trajectory() && vehicle_state.linear_velocity()>0.2)
+    fixed_trajectory_ = true;
+
+  if (fixed_trajectory_ && trajectory_pb->debug().unfix_trajectory())
+    fixed_trajectory_ = false;
 
   auto seq_num = frame_->SequenceNum();
   FrameHistory::instance()->Add(seq_num, std::move(frame_));
