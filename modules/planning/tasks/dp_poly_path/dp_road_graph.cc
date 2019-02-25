@@ -312,7 +312,7 @@ void DPRoadGraph::UpdateNode(const std::list<DPRoadGraphNode> &prev_nodes,
   }
 
   // try to connect the current point with the first point directly
-  /*
+  
   if (level >= 2) {
     const float init_dl = init_frenet_frame_point_.dl();
     const float init_ddl = init_frenet_frame_point_.ddl();
@@ -326,7 +326,7 @@ void DPRoadGraph::UpdateNode(const std::list<DPRoadGraphNode> &prev_nodes,
         curve, init_sl_point_.s(), cur_node->sl_point.s(), level, total_level);
     cur_node->UpdateCost(front, curve, cost);
   }
-  */
+  
 }
 
 bool DPRoadGraph::SamplePathWaypoints(
@@ -455,6 +455,21 @@ bool DPRoadGraph::SamplePathWaypoints(
       common::util::uniform_slice(sample_right_boundary, sample_left_boundary,
                                   num_sample_per_level - 1, &sample_l);
     }
+    int min_idx;
+    float min_sample = 10.0;
+    for(size_t z = 0; z < sample_l.size(); z++)
+    {
+      if (min_sample>abs(sample_l[z])){
+        min_idx = z;
+        min_sample = abs(sample_l[z]);
+      }
+    }
+    
+    if (min_sample<0.5)
+    {
+      sample_l[min_idx] = 0.0;
+    } 
+
     std::vector<common::SLPoint> level_points;
     planning_internal::SampleLayerDebug sample_layer_debug;
     for (size_t j = 0; j < sample_l.size(); ++j) {
