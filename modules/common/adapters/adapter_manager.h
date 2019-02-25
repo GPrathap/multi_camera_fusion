@@ -321,6 +321,7 @@ class AdapterManager {
   REGISTER_ADAPTER(CompressedImageFrontLeftSide);
   REGISTER_ADAPTER(CompressedImageFrontRightSide);
   REGISTER_ADAPTER(PointCloudDebug);  
+  REGISTER_ADAPTER(PauseControl);
 
   DECLARE_SINGLETON(AdapterManager);
 };

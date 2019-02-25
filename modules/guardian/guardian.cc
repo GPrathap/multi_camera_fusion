@@ -49,10 +49,11 @@ Status Guardian::Start() {
   AdapterManager::AddChassisCallback(&Guardian::OnChassis, this);
   AdapterManager::AddSystemStatusCallback(&Guardian::OnSystemStatus, this);
   AdapterManager::AddControlCommandCallback(&Guardian::OnControl, this);
+  AdapterManager::AddPauseControlCallback(&Guardian::OnPauseControl, this);
   const double duration = 1.0 / FLAGS_guardian_cmd_freq;
   timer_ = AdapterManager::CreateTimer(ros::Duration(duration),
                                        &Guardian::OnTimer, this);
-
+  control_paused_ = false;
   return Status::OK();
 }
 
@@ -63,9 +64,11 @@ void Guardian::OnTimer(const ros::TimerEvent&) {
   bool safety_mode_triggered = false;
   if (FLAGS_guardian_enabled) {
     std::lock_guard<std::mutex> lock(mutex_);
-    safety_mode_triggered = system_status_.has_safety_mode_trigger_time() || system_status_.require_control_pause();
+    safety_mode_triggered = system_status_.has_safety_mode_trigger_time() || control_paused_;
     
-    if (system_status_.require_control_pause()){
+    system_status_.set_require_control_pause(control_paused_);
+
+    if (control_paused_){
       AINFO << "Pause required! Control relay is stopped!";
     }
   }
@@ -77,6 +80,7 @@ void Guardian::OnTimer(const ros::TimerEvent&) {
     ADEBUG << "Safety mode not triggered, bypass control command";
     PassThroughControlCommand();
   }
+
 
   AdapterManager::FillGuardianHeader(FLAGS_node_name, &guardian_cmd_);
   AdapterManager::PublishGuardian(guardian_cmd_);
@@ -92,12 +96,21 @@ void Guardian::OnSystemStatus(const SystemStatus& message) {
   ADEBUG << "Received monitor data: run monitor callback.";
   std::lock_guard<std::mutex> lock(mutex_);
   system_status_.CopyFrom(message);
+  // control_paused_ = control_paused_ || (bool) system_status_.require_control_pause();
 }
 
 void Guardian::OnControl(const ControlCommand& message) {
   ADEBUG << "Received control data: run control command callback.";
   std::lock_guard<std::mutex> lock(mutex_);
   control_cmd_.CopyFrom(message);
+}
+
+void Guardian::OnPauseControl(const std_msgs::String& message) {
+  AINFO << "Received pause control data: run pause control command callback.";
+  std::lock_guard<std::mutex> lock(mutex_);
+  AINFO << "Message data: " << message.data;
+  AINFO << "Compare: " << message.data.compare("CARPAUSE");
+  control_paused_ = (message.data.compare("CARPAUSE") == 0);
 }
 
 void Guardian::PassThroughControlCommand() {

@@ -47,6 +47,7 @@ cc_library(
         "//modules/dreamview/backend/handlers:websocket_handler",
         "//modules/dreamview/backend/map:map_service",
         "//modules/monitor/common:monitor_manager",
+        "@ros//:ros_common",
     ],
 )
 
@@ -64,6 +65,7 @@ cc_library(
         "//modules/dreamview/proto:hmi_config_proto",
         "//modules/dreamview/proto:hmi_status_proto",
         "@com_google_protobuf//:protobuf",
+        "@ros//:ros_common",
     ],
 )
 

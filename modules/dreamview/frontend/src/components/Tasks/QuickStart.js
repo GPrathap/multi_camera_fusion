@@ -115,9 +115,9 @@ export default class QuickStarter extends React.Component {
                 <div className="card-content-column">
                     <CommandGroup disabled={tasksPanelLocked} commands={this.setup} />
                     <CommandGroup disabled={tasksPanelLocked} commands={this.reset} />
-                    {!hmi.controlPaused && <CommandGroup disabled={tasksPanelLocked}
+                    {<CommandGroup disabled={tasksPanelLocked}
                         commands={this.controlPause} />}
-                    {hmi.controlPaused && <CommandGroup disabled={tasksPanelLocked}
+                    {<CommandGroup disabled={tasksPanelLocked}
                         commands={this.controlPlay} extraCommandClass="warning" />}
                     <CommandGroup disabled={!hmi.enableStartAuto || tasksPanelLocked}
                                   commands={this.auto}

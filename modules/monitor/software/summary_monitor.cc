@@ -96,6 +96,7 @@ void SummaryMonitor::RunOnce(const double current_time) {
   auto *system_status = MonitorManager::GetStatus();
   system_status->clear_header();
   system_status->SerializeToString(&proto_bytes);
+  // system_status->set_require_control_pause(true);
   const size_t new_fp = hash_fn(proto_bytes);
 
   if (system_status_fp_ != new_fp ||
@@ -103,7 +104,7 @@ void SummaryMonitor::RunOnce(const double current_time) {
     AdapterManager::FillSystemStatusHeader("SystemMonitor", system_status);
     AdapterManager::PublishSystemStatus(*system_status);
     AINFO << "Control pause is " << system_status->require_control_pause();
-    AINFO << "Published system status: " << system_status->DebugString();
+    // AINFO << "Published system status: " << system_status->DebugString();
     system_status_fp_ = new_fp;
     last_broadcast_ = current_time;
   }

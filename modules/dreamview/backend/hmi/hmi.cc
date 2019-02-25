@@ -158,26 +158,30 @@ void HMI::RegisterMessageHandlers() {
         // json should contain {paused: true/false}.
         bool paused = json["paused"];
         AINFO << "Requested control pause: " << paused;
-        auto *system_status = monitor::MonitorManager::GetStatus();
-        system_status->set_require_control_pause(paused);
-        system_status->set_passenger_msg("Control paused!");
-        system_status->clear_header();
-        AdapterManager::FillSystemStatusHeader("SystemMonitor", system_status);
-        AdapterManager::PublishSystemStatus(*system_status);
-          AINFO << "[HMI] Published system status: " << system_status->DebugString();
+        std_msgs::String msg;
+        // msg.header.stamp = ros::Time::now();
+        msg.data = paused ? "CARPAUSE" : "CARPLAY";
+        common::adapter::AdapterManager::PublishPauseControl(msg);
+        // auto *system_status = monitor::MonitorManager::GetStatus();
+        // monitor::MonitorManager::SetRequireControlPause(paused);
+        // system_status->set_require_control_pause(paused);
+        // system_status->set_passenger_msg("Control paused!");
+        // system_status->clear_header();
+        // AdapterManager::FillSystemStatusHeader("SystemMonitor", system_status);
+        // AdapterManager::PublishSystemStatus(*system_status);
+        //   AINFO << "[HMI] Published system status: " << system_status->DebugString();
 
-        //update system status in HMI
-        // if (Clock::NowInSeconds() - system_status->header().timestamp_sec() <
-        //     FLAGS_system_status_lifetime_seconds) {
+        // //update system status in HMI
+        // // if (Clock::NowInSeconds() - system_status->header().timestamp_sec() <
+        // //     FLAGS_system_status_lifetime_seconds) {
           
-          HMIWorker::instance()->UpdateSystemStatus(*system_status);
-          DeferredBroadcastHMIStatus();
+        //   HMIWorker::instance()->UpdateSystemStatus(*system_status);
+        //   DeferredBroadcastHMIStatus();
         // }
         // Json response;
         // response["type"] = "ToggleControlPause";
         // response["lat"] = lat;
         // response["lon"] = lon;
-        // map_ws_->SendData(conn, response.dump());
       });
   // HMI client asks for changing map.
   HMIWorker::instance()->RegisterChangeMapHandler(
