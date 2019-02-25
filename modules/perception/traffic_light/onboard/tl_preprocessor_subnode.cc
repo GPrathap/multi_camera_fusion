@@ -259,18 +259,12 @@ void TLPreprocessorSubnode::ExtObjDetectionCallback(const detection_msgs::Detect
         lights_ref[candidate_id]->region.detect_class_id = DetectionClassId(VERTICAL_CLASS);
         lights_ref[candidate_id]->region.rectified_roi=RefinedBox(tmp->region.rectified_roi, img_size);
         lights_ref[candidate_id]->region.is_detected =true;
-         CarPose pose;
-        GetCarPose(timestamp, &pose);
-         auto light_distance = Distance2Stopline(pose.pose(), lights_ref[candidate_id]->info.stop_line());
-        AERROR<<"light_distance:" <<light_distance;
+         //CarPose pose;
+        //GetCarPose(timestamp, &pose);
+         //auto light_distance = Distance2Stopline(pose.pose(), lights_ref[candidate_id]->info.stop_line());
+        //AERROR<<"light_distance:" <<light_distance;
         //detected_bboxes.push_back(tmp);
     }
-   
-
-  
-
-
-
    AINFO << "TLPreprocessorSubnode received a image msg"
         << ", camera_id: " << kCameraIdToStr.at(camera_id)
         << ", ts:" << GLOG_TIMESTAMP(message.header.stamp.toSec());
@@ -280,7 +274,6 @@ void TLPreprocessorSubnode::ExtObjDetectionCallback(const detection_msgs::Detect
 
   image_lights->preprocess_receive_timestamp = sub_camera_image_start_ts;
   image_lights->preprocess_send_timestamp = TimeUtil::GetCurrentTime();
- 
   if (AddDataAndPublishEvent(image_lights, camera_id, image->ts())) {
     preprocessor_.set_last_pub_camera_id(camera_id);
    
