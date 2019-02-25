@@ -39,8 +39,8 @@ ground:
     mpp: 0.17
     xres: 848
     yres: 1280
-    xorigin: -47.5
-    yorigin: -71
+    xorigin: -44.3
+    yorigin: -70.5
     type: default # default or tile
     tileRange: 4
 planning:

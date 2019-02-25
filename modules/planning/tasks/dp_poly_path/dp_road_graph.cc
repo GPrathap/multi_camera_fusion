@@ -86,34 +86,115 @@ bool DPRoadGraph::FindPathTunnel(
   float accumulated_s = init_sl_point_.s();
   const float path_resolution = config_.path_resolution();
 
-  for (std::size_t i = 1; i < min_cost_path.size(); ++i) {
-    const auto &prev_node = min_cost_path[i - 1];
-    const auto &cur_node = min_cost_path[i];
+  //ищем первое ближайшее препятствие на нашей полосе (это будет второй барьер в задании 1)
+  double obstacle2_s = 100.0;
+  std::string obstacle2_id;
+  ADEBUG<< " accumulated_s: " << accumulated_s;
+  for (const auto *ptr_path_obstacle : obstacles) {
+    auto boundary = ptr_path_obstacle->PerceptionSLBoundary();
+    ADEBUG << "Obstacle ID[" << ptr_path_obstacle->Id() << "] " << " start_s: " << boundary.start_s()
+    << " end_s: " << boundary.end_s() << " start_l: " << boundary.start_l() << " end_l: " << boundary.end_l(); 
 
-    const float path_length = cur_node.sl_point.s() - prev_node.sl_point.s();
-    float current_s = 0.0;
-    const auto &curve = cur_node.min_cost_curve;
-    while (current_s + path_resolution / 2.0 < path_length) {
-      const float l = curve.Evaluate(0, current_s);
-      const float dl = curve.Evaluate(1, current_s);
-      const float ddl = curve.Evaluate(2, current_s);
-      common::FrenetFramePoint frenet_frame_point;
-      frenet_frame_point.set_s(accumulated_s + current_s);
-      frenet_frame_point.set_l(l);
-      frenet_frame_point.set_dl(dl);
-      frenet_frame_point.set_ddl(ddl);
-      frenet_path.push_back(std::move(frenet_frame_point));
-      current_s += path_resolution;
-    }
-    if (i == min_cost_path.size() - 1) {
-      accumulated_s += current_s;
-    } else {
-      accumulated_s += path_length;
+    if (ptr_path_obstacle->Id() == "DEST")
+      continue;
+
+    if (abs(boundary.start_l()) < 1.0 ||  abs(boundary.end_l()) < 1.0)
+    {
+      double cur_obstacle2_s = boundary.start_s() - accumulated_s;
+      if (cur_obstacle2_s<obstacle2_s)
+        obstacle2_s = cur_obstacle2_s;
+        obstacle2_id = ptr_path_obstacle->Id();
     }
   }
-  FrenetFramePath tunnel(frenet_path);
-  path_data->SetReferenceLine(&reference_line_);
-  path_data->SetFrenetPath(tunnel);
+
+  for (const auto &segment : reference_line_info_.Lanes()) {
+    ADEBUG << "Lane ID[" << segment.lane->id().id() << "] " << " road ID[" << segment.lane->road_id().id() << "] ";
+  }
+
+  auto first_segment = reference_line_info_.Lanes()[0];
+  if (first_segment.lane->id().id() == "road_1_0" && accumulated_s>20.0 && accumulated_s<30.0 && obstacle2_s>0 && obstacle2_s<50.0) //если мы в определенной зоне и видем препятствие №2, то формируем заготовленную траекторию
+  {
+
+    ADEBUG << "Calculate fix trajectory!!!";
+    QuinticPolynomialCurve1d* curve;
+    for (std::size_t i = 0; i < 4; ++i) {
+
+      float path_length = 12.0;
+      float current_s = 0.0;
+      
+      switch (i)
+      {
+        case 0:
+          path_length = obstacle2_s - 12.0;
+          curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, path_length);
+          break;
+        case 1:
+          curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, 5.0, 0.0, 0.0, 12.0);
+          break;
+        case 2:
+          curve = new QuinticPolynomialCurve1d(5.0, 0.0, 0.0, 0.0, 0.0, 0.0, 12.0);
+          break;
+        case 3:
+          curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 12.0);
+          break;
+        default:
+          break;
+      }
+
+      while (current_s + path_resolution / 2.0 < path_length) {
+        const float l = curve->Evaluate(0, current_s);
+        const float dl = curve->Evaluate(1, current_s);
+        const float ddl = curve->Evaluate(2, current_s);
+        common::FrenetFramePoint frenet_frame_point;
+        frenet_frame_point.set_s(accumulated_s + current_s);
+        frenet_frame_point.set_l(l);
+        frenet_frame_point.set_dl(dl);
+        frenet_frame_point.set_ddl(ddl);
+        frenet_path.push_back(std::move(frenet_frame_point));
+        current_s += path_resolution;
+      }
+      accumulated_s += path_length;
+    }
+
+    FrenetFramePath tunnel(frenet_path);
+    planning_debug_->set_fix_trajectory(true);
+    path_data->SetReferenceLine(&reference_line_);
+    path_data->SetFrenetPath(tunnel);
+
+      
+  } else {
+    for (std::size_t i = 1; i < min_cost_path.size(); ++i) {
+      const auto &prev_node = min_cost_path[i - 1];
+      const auto &cur_node = min_cost_path[i];
+
+      const float path_length = cur_node.sl_point.s() - prev_node.sl_point.s();
+      float current_s = 0.0;
+      const auto &curve = cur_node.min_cost_curve;
+      while (current_s + path_resolution / 2.0 < path_length) {
+        const float l = curve.Evaluate(0, current_s);
+        const float dl = curve.Evaluate(1, current_s);
+        const float ddl = curve.Evaluate(2, current_s);
+        common::FrenetFramePoint frenet_frame_point;
+        frenet_frame_point.set_s(accumulated_s + current_s);
+        frenet_frame_point.set_l(l);
+        frenet_frame_point.set_dl(dl);
+        frenet_frame_point.set_ddl(ddl);
+        frenet_path.push_back(std::move(frenet_frame_point));
+        current_s += path_resolution;
+      }
+      if (i == min_cost_path.size() - 1) {
+        accumulated_s += current_s;
+      } else {
+        accumulated_s += path_length;
+      }
+    }
+    
+    FrenetFramePath tunnel(frenet_path);
+    path_data->SetReferenceLine(&reference_line_);
+    path_data->SetFrenetPath(tunnel);
+  }
+
+
   return true;
 }
 
@@ -231,6 +312,7 @@ void DPRoadGraph::UpdateNode(const std::list<DPRoadGraphNode> &prev_nodes,
   }
 
   // try to connect the current point with the first point directly
+  
   if (level >= 2) {
     const float init_dl = init_frenet_frame_point_.dl();
     const float init_ddl = init_frenet_frame_point_.ddl();
@@ -244,6 +326,7 @@ void DPRoadGraph::UpdateNode(const std::list<DPRoadGraphNode> &prev_nodes,
         curve, init_sl_point_.s(), cur_node->sl_point.s(), level, total_level);
     cur_node->UpdateCost(front, curve, cost);
   }
+  
 }
 
 bool DPRoadGraph::SamplePathWaypoints(
@@ -268,8 +351,8 @@ bool DPRoadGraph::SamplePathWaypoints(
   const float step_length =
       common::math::Clamp(init_point.v() * kSamplePointLookForwardTime,
                           config_.step_length_min(), config_.step_length_max());
-  const float level_distance =
-      (init_point.v() > FLAGS_max_stop_speed) ? step_length : step_length / 2.0;
+  const float level_distance =step_length;
+  //    (init_point.v() > FLAGS_max_stop_speed) ? step_length : step_length / 2.0;
   float accumulated_s = init_sl_point_.s();
   float prev_s = accumulated_s;
 
@@ -372,6 +455,21 @@ bool DPRoadGraph::SamplePathWaypoints(
       common::util::uniform_slice(sample_right_boundary, sample_left_boundary,
                                   num_sample_per_level - 1, &sample_l);
     }
+    int min_idx;
+    float min_sample = 10.0;
+    for(size_t z = 0; z < sample_l.size(); z++)
+    {
+      if (min_sample>abs(sample_l[z])){
+        min_idx = z;
+        min_sample = abs(sample_l[z]);
+      }
+    }
+    
+    if (min_sample<0.5)
+    {
+      sample_l[min_idx] = 0.0;
+    } 
+
     std::vector<common::SLPoint> level_points;
     planning_internal::SampleLayerDebug sample_layer_debug;
     for (size_t j = 0; j < sample_l.size(); ++j) {

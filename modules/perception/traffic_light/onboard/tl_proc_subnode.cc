@@ -63,11 +63,11 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
     }
 
     cv::rectangle(*img, rect, color, 2);
-    //cv::rectangle(*img, light->region.projection_roi, cv::Scalar(255, 255, 0),
-     //             2);
+    //cv::rectangle(*img, light->region.projection_roi, cv::Scalar(255, 255, 0),2);
     //auto &crop_roi = lights->at(0)->region.rectified_roi[0];
     //cv::rectangle(*img, crop_roi, cv::Scalar(0, 255, 255), 2);
   }
+
   int rows = img->rows;
   int cols = img->cols;
   double pos_x = cols / 1920.0 * 30.0;
@@ -75,13 +75,13 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
   double font_scale = rows / 1080.0 * 3.0;
   double thickness = rows / 1080.0 * 2.0;
 
-  // draw camera timestamp
-  int pos_y = step_y;
-  std::string ts_text = cv::format("img ts=%lf", image_lights->timestamp);
-  cv::putText(*img, ts_text, cv::Point(pos_x, pos_y), cv::FONT_HERSHEY_PLAIN,
-              font_scale, CV_RGB(128, 255, 0), thickness);
+  // // draw camera timestamp
+   int pos_y = step_y;
+  // std::string ts_text = cv::format("img ts=%lf", image_lights->timestamp);
+  // cv::putText(*img, ts_text, cv::Point(pos_x, pos_y), cv::FONT_HERSHEY_PLAIN,
+  //             font_scale, CV_RGB(128, 255, 0), thickness);
   // draw distance to stopline
-  pos_y += step_y;
+ 
   double distance = light_debug->distance_to_stop_line();
   if (lights->size() > 0) {
     std::string dis2sl_text = cv::format("dis2sl=%lf", distance);
@@ -97,32 +97,33 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
                 cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0),
                 thickness);
   }
-  // draw "No Pose info."
   pos_y += step_y;
-  if (!light_debug->valid_pos()) {
-    cv::putText(*img, "No Valid Pose.", cv::Point(pos_x, pos_y),
-                cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0),
-                thickness);
-  }
-  // if image's timestamp is too early or too old
-  // draw timestamp difference between image and pose
-  pos_y += step_y;
-  std::string diff_img_pose_ts_str =
-      "ts diff: " + std::to_string(light_debug->ts_diff_pos());
-  cv::putText(*img, diff_img_pose_ts_str, cv::Point(pos_x, pos_y),
-              cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0), thickness);
+  // // draw "No Pose info."
+  // pos_y += step_y;
+  // if (!light_debug->valid_pos()) {
+  //   cv::putText(*img, "No Valid Pose.", cv::Point(pos_x, pos_y),
+  //               cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0),
+  //               thickness);
+  // }
+  // // if image's timestamp is too early or too old
+  // // draw timestamp difference between image and pose
+  // pos_y += step_y;
+  // std::string diff_img_pose_ts_str =
+  //     "ts diff: " + std::to_string(light_debug->ts_diff_pos());
+  // cv::putText(*img, diff_img_pose_ts_str, cv::Point(pos_x, pos_y),
+  //             cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0), thickness);
 
-  pos_y += step_y;
-  std::string diff_img_sys_ts_str =
-      "ts diff sys: " + std::to_string(light_debug->ts_diff_sys());
-  cv::putText(*img, diff_img_sys_ts_str, cv::Point(pos_x, pos_y),
-              cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0), thickness);
+  // pos_y += step_y;
+  // std::string diff_img_sys_ts_str =
+  //     "ts diff sys: " + std::to_string(light_debug->ts_diff_sys());
+  // cv::putText(*img, diff_img_sys_ts_str, cv::Point(pos_x, pos_y),
+  //             cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0), thickness);
 
-  pos_y += step_y;
+  
   std::string signal_txt = "camera id: " + image_lights->image->camera_id_str();
   cv::putText(*img, signal_txt, cv::Point(pos_x, pos_y), cv::FONT_HERSHEY_PLAIN,
               font_scale, CV_RGB(255, 0, 0), thickness);
-
+  
   // draw image border size (offset between hdmap-box and detection-box)
   //    if (light_debug->project_error() > 100) {
   std::string img_border_txt =
@@ -131,14 +132,12 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
   cv::putText(*img, img_border_txt, cv::Point(pos_x, kPosYOffset),
               cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0), thickness);
   //    }
-  cv::resize(*img, *img, cv::Size(960, 540));
-  char filename[200];
-  snprintf(filename, sizeof(filename), "img/%lf_%s.jpg",
-           image_lights->image->ts(),
-           image_lights->image->camera_id_str().c_str());
-  //cv::imwrite(filename, *img);
+
+  //cv::resize(*img, *img, cv::Size(960, 540));
+
+  //cv::imwrite("/home/apollo/test.jpg", *img);
   cv::imshow("debug", *img);
-  cv::waitKey(10);
+  cv::waitKey(1);
 }
 
 }  // namespace
@@ -149,7 +148,6 @@ bool TLProcSubnode::InitInternal() {
   RegisterFactoryUnityRectify();
   RegisterFactoryUnityRecognize();
   RegisterFactoryColorReviser();
-  AERROR << "Start init ProcSubnode";
   if (!InitSharedData()) {
     AERROR << "TLProcSubnode init shared data failed.";
     return false;
@@ -174,7 +172,6 @@ bool TLProcSubnode::InitInternal() {
            << FLAGS_traffic_light_subnode_config;
     return false;
   }
-   AERROR << "Finish init ProcSubnode";
   return true;
 }
 
@@ -197,8 +194,7 @@ bool TLProcSubnode::ProcEvent(const Event &event) {
   {
     return true;
   }
- 
-AERROR << "Key"<<key;
+
   SharedDataPtr<ImageLights> image_lights;
   
   if (!preprocessing_data_->Get(key, &image_lights)) {
@@ -208,7 +204,7 @@ AERROR << "Key"<<key;
           << "Key"<<key;
    return false;
   }
-  AERROR<<"Num Signals"<<image_lights->num_signals;
+
   AINFO << "TLProcSubnode get shared data ok,ts: " << GLOG_TIMESTAMP(timestamp);
 
   // preprocess send a msg -> proc receive a msg
@@ -279,6 +275,7 @@ double enter_proc_latency =0;
            << "sub_event:" << event.to_string();
     return false;
   }
+
   const double revise_latency = TimeUtil::GetCurrentTime() - before_revise_ts;
   PublishMessage(image_lights);
   AINFO << "TLProcSubnode process traffic_light, "
@@ -286,6 +283,103 @@ double enter_proc_latency =0;
         << " from device_id: " << device_id << " get "
         << image_lights->lights->size() << " lights."
         << " detection_latency: " << detection_latency * 1000 << " ms."
+        << " recognization_latency: " << recognization_latency * 1000 << " ms."
+        << " revise_latency: " << revise_latency * 1000 << " ms."
+        << " TLProcSubnode::handle_event latency: "
+        << (TimeUtil::GetCurrentTime() - proc_subnode_handle_event_start_ts) *
+               1000
+        << " ms."
+        << " enter_proc_latency: " << enter_proc_latency * 1000 << " ms."
+        << " preprocess_latency: "
+        << (image_lights->preprocess_send_timestamp -
+            image_lights->preprocess_receive_timestamp) *
+               1000
+        << " ms.";
+  return true;
+}
+
+bool TLProcSubnode::ProcEventYoloNetwork(const Event &event) {
+
+  const double proc_subnode_handle_event_start_ts = TimeUtil::GetCurrentTime();
+  PERF_FUNCTION("TLProcSubnode");
+  // get up-stream data
+  const double timestamp = event.timestamp;
+  const std::string device_id = event.reserve;
+  
+  //AINFO << "Detect Start ts:" << GLOG_TIMESTAMP(timestamp);
+  std::string key;
+  if (!SubnodeHelper::ProduceSharedDataKey(timestamp, device_id, &key)) {
+    AERROR << "TLProcSubnode produce_shared_data_key failed."
+           << " ts:" << timestamp << " device_id:" << device_id;
+    return false;
+  }
+  if (key=="0")
+  {
+    return true;
+  }
+ 
+
+  SharedDataPtr<ImageLights> image_lights;
+  
+  if (!preprocessing_data_->Get(key, &image_lights)) {
+   AERROR << "TLProcSubnode failed to get shared data,"
+          << " name:" << preprocessing_data_->name()
+          << ", time: " << GLOG_TIMESTAMP(timestamp)
+          << "Key"<<key;
+   return false;
+  }
+ 
+  AINFO << "TLProcSubnode get shared data ok,ts: " << GLOG_TIMESTAMP(timestamp);
+
+  double enter_proc_latency =0;
+ 
+  RectifyOption rectify_option;
+  if (!VerifyImageLights(*image_lights, &rectify_option.camera_id)) {
+   AERROR << "TLProcSubnode invalid image_lights ";
+   return false;
+  }
+  if (!image_lights->image->GenerateMat()) {
+    AERROR << "TLProcSubnode failed to generate mat";
+    return false;
+  }
+ 
+
+  // update image_border
+  MutexLock lock(&mutex_);
+  // int cam_id = static_cast<int>(image_lights->camera_id);
+  //ComputeImageBorder(*image_lights,
+  //                   &image_border_size[image_lights->camera_id]);
+ // AERROR << "TLProcSubnode update image_border size: "
+   //     << image_border_size[image_lights->camera_id]
+   //     << " ts: " << GLOG_TIMESTAMP(timestamp)
+   //     << " CameraId: " << image_lights->camera_id;
+  image_lights->offset = image_border_size[image_lights->camera_id];
+  // recognize_status
+  const double before_recognization_ts = TimeUtil::GetCurrentTime();
+  if (!recognizer_->RecognizeStatus(*(image_lights->image), RecognizeOption(),
+                                    (image_lights->lights).get())) {
+    AERROR << "TLProcSubnode failed to recognize lights,"
+           << " ts:" << GLOG_TIMESTAMP(timestamp)
+           << " image:" << image_lights->image;
+    return false;
+  }
+  const double recognization_latency =
+      TimeUtil::GetCurrentTime() - before_recognization_ts;
+
+  // revise status
+  const double before_revise_ts = TimeUtil::GetCurrentTime();
+  if (!reviser_->Revise(ReviseOption(event.timestamp),
+                        image_lights->lights.get())) {
+    AERROR << "TLReviserSubnode revise data failed. "
+           << "sub_event:" << event.to_string();
+    return false;
+  }
+  const double revise_latency = TimeUtil::GetCurrentTime() - before_revise_ts;
+  PublishMessage(image_lights);
+  AINFO << "TLProcSubnode process traffic_light, "
+        << " msg_ts: " << GLOG_TIMESTAMP(timestamp)
+        << " from device_id: " << device_id << " get "
+        << image_lights->lights->size() << " lights."
         << " recognization_latency: " << recognization_latency * 1000 << " ms."
         << " revise_latency: " << revise_latency * 1000 << " ms."
         << " TLProcSubnode::handle_event latency: "
@@ -495,13 +589,31 @@ bool TLProcSubnode::PublishMessage(
   uint64_t img_timestamp =
       static_cast<uint64_t>(image_lights->image->ts() * 1e9);
   header->set_camera_timestamp(img_timestamp);
-
+  // FIX 
+  TrafficLight_Color bufColor=TrafficLight_Color_UNKNOWN;
+   double bufConf=-1;
   // add traffic light result
   for (const auto &light : *lights) {
     TrafficLight *light_result = result.add_traffic_light();
     light_result->set_id(light->info.id().id());
-    light_result->set_confidence(light->status.confidence);
+    
+    if (bufColor!=TrafficLight_Color_UNKNOWN)
+    {
+     light_result->set_color(bufColor);
+     light_result->set_confidence(bufConf);
+    
+    }
+    else  {
     light_result->set_color(light->status.color);
+    light_result->set_confidence(light->status.confidence);
+  
+    }
+    
+    if (light->info.id().id()=="signal_0")
+    {
+    bufColor=light->status.color;
+    bufConf=light->status.confidence;
+    }
   }
 
   // set contain_lights
@@ -572,10 +684,10 @@ bool TLProcSubnode::PublishMessage(
                                         lights->at(0)->info.stop_line());
     light_debug->set_distance_to_stop_line(distance);
   }
- // if (FLAGS_output_debug_img) {
- //   OutputDebugImg(image_lights, light_debug, &img);
- // }
-OutputDebugImg(image_lights, light_debug, &img);
+ if (FLAGS_output_debug_img) {
+   OutputDebugImg(image_lights, light_debug, &img);
+ }
+
   AdapterManager::PublishTrafficLightDetection(result);
   auto process_time =
       TimeUtil::GetCurrentTime() - image_lights->preprocess_receive_timestamp;
@@ -597,9 +709,9 @@ Status TLProcSubnode::ProcEvents() {
     AERROR << "Failed to subscribe event: " << event_meta.event_id;
     return Status(ErrorCode::PERCEPTION_ERROR, "Failed to subscribe event.");
   }
-  if (!ProcEvent(event)) {
-    AERROR << "TLProcSubnode failed to handle event. "
-           << "event:" << event.to_string();
+  if (!ProcEventYoloNetwork(event)) {
+    //AERROR << "TLProcSubnode failed to handle event. "
+    //       << "event:" << event.to_string();
     return Status(ErrorCode::PERCEPTION_ERROR,
                   "TLProcSubnode failed to handle event.");
   }
