@@ -48,31 +48,26 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
     switch (light->status.color) {
       case BLACK:
         color = cv::Scalar(0, 0, 0);
-         AERROR<<"black";
         break;
       case GREEN:
         color = cv::Scalar(0, 255, 0);
-        AERROR<<"green";
         break;
       case RED:
         color = cv::Scalar(0, 0, 255);
-        AERROR<<"red";
         break;
       case YELLOW:
         color = cv::Scalar(0, 255, 255);
-        AERROR<<"Yellow";
         break;
       default:
         color = cv::Scalar(0, 76, 153);
     }
-    AERROR<<"DEBUG cycle";
+
     cv::rectangle(*img, rect, color, 2);
-    //cv::rectangle(*img, light->region.projection_roi, cv::Scalar(255, 255, 0),
-     //             2);
+    //cv::rectangle(*img, light->region.projection_roi, cv::Scalar(255, 255, 0),2);
     //auto &crop_roi = lights->at(0)->region.rectified_roi[0];
     //cv::rectangle(*img, crop_roi, cv::Scalar(0, 255, 255), 2);
   }
-  AERROR<<"DEBUG";
+
   int rows = img->rows;
   int cols = img->cols;
   double pos_x = cols / 1920.0 * 30.0;
@@ -80,13 +75,13 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
   double font_scale = rows / 1080.0 * 3.0;
   double thickness = rows / 1080.0 * 2.0;
 
-  // draw camera timestamp
-  int pos_y = step_y;
-  std::string ts_text = cv::format("img ts=%lf", image_lights->timestamp);
-  cv::putText(*img, ts_text, cv::Point(pos_x, pos_y), cv::FONT_HERSHEY_PLAIN,
-              font_scale, CV_RGB(128, 255, 0), thickness);
+  // // draw camera timestamp
+   int pos_y = step_y;
+  // std::string ts_text = cv::format("img ts=%lf", image_lights->timestamp);
+  // cv::putText(*img, ts_text, cv::Point(pos_x, pos_y), cv::FONT_HERSHEY_PLAIN,
+  //             font_scale, CV_RGB(128, 255, 0), thickness);
   // draw distance to stopline
-  pos_y += step_y;
+ 
   double distance = light_debug->distance_to_stop_line();
   if (lights->size() > 0) {
     std::string dis2sl_text = cv::format("dis2sl=%lf", distance);
@@ -102,32 +97,33 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
                 cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0),
                 thickness);
   }
-  // draw "No Pose info."
   pos_y += step_y;
-  if (!light_debug->valid_pos()) {
-    cv::putText(*img, "No Valid Pose.", cv::Point(pos_x, pos_y),
-                cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0),
-                thickness);
-  }
-  // if image's timestamp is too early or too old
-  // draw timestamp difference between image and pose
-  pos_y += step_y;
-  std::string diff_img_pose_ts_str =
-      "ts diff: " + std::to_string(light_debug->ts_diff_pos());
-  cv::putText(*img, diff_img_pose_ts_str, cv::Point(pos_x, pos_y),
-              cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0), thickness);
-AERROR<<"DEBUG";
-  pos_y += step_y;
-  std::string diff_img_sys_ts_str =
-      "ts diff sys: " + std::to_string(light_debug->ts_diff_sys());
-  cv::putText(*img, diff_img_sys_ts_str, cv::Point(pos_x, pos_y),
-              cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0), thickness);
-AERROR<<"DEBUG";
-  pos_y += step_y;
+  // // draw "No Pose info."
+  // pos_y += step_y;
+  // if (!light_debug->valid_pos()) {
+  //   cv::putText(*img, "No Valid Pose.", cv::Point(pos_x, pos_y),
+  //               cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0),
+  //               thickness);
+  // }
+  // // if image's timestamp is too early or too old
+  // // draw timestamp difference between image and pose
+  // pos_y += step_y;
+  // std::string diff_img_pose_ts_str =
+  //     "ts diff: " + std::to_string(light_debug->ts_diff_pos());
+  // cv::putText(*img, diff_img_pose_ts_str, cv::Point(pos_x, pos_y),
+  //             cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0), thickness);
+
+  // pos_y += step_y;
+  // std::string diff_img_sys_ts_str =
+  //     "ts diff sys: " + std::to_string(light_debug->ts_diff_sys());
+  // cv::putText(*img, diff_img_sys_ts_str, cv::Point(pos_x, pos_y),
+  //             cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0), thickness);
+
+  
   std::string signal_txt = "camera id: " + image_lights->image->camera_id_str();
   cv::putText(*img, signal_txt, cv::Point(pos_x, pos_y), cv::FONT_HERSHEY_PLAIN,
               font_scale, CV_RGB(255, 0, 0), thickness);
-
+  
   // draw image border size (offset between hdmap-box and detection-box)
   //    if (light_debug->project_error() > 100) {
   std::string img_border_txt =
@@ -136,11 +132,10 @@ AERROR<<"DEBUG";
   cv::putText(*img, img_border_txt, cv::Point(pos_x, kPosYOffset),
               cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0), thickness);
   //    }
-  AERROR<<"DEBUG";
+
   //cv::resize(*img, *img, cv::Size(960, 540));
 
-  cv::imwrite("/home/apollo/test.jpg", *img);
-  AERROR<<"DEBUG "<<img->size();
+  //cv::imwrite("/home/apollo/test.jpg", *img);
   cv::imshow("debug", *img);
   cv::waitKey(1);
 }
@@ -153,7 +148,6 @@ bool TLProcSubnode::InitInternal() {
   RegisterFactoryUnityRectify();
   RegisterFactoryUnityRecognize();
   RegisterFactoryColorReviser();
-  AERROR << "Start init ProcSubnode";
   if (!InitSharedData()) {
     AERROR << "TLProcSubnode init shared data failed.";
     return false;
@@ -178,7 +172,6 @@ bool TLProcSubnode::InitInternal() {
            << FLAGS_traffic_light_subnode_config;
     return false;
   }
-   AERROR << "Finish init ProcSubnode";
   return true;
 }
 
@@ -201,8 +194,7 @@ bool TLProcSubnode::ProcEvent(const Event &event) {
   {
     return true;
   }
- 
-AERROR << "Key"<<key;
+
   SharedDataPtr<ImageLights> image_lights;
   
   if (!preprocessing_data_->Get(key, &image_lights)) {
@@ -212,7 +204,7 @@ AERROR << "Key"<<key;
           << "Key"<<key;
    return false;
   }
-  AERROR<<"Num Signals"<<image_lights->num_signals;
+
   AINFO << "TLProcSubnode get shared data ok,ts: " << GLOG_TIMESTAMP(timestamp);
 
   // preprocess send a msg -> proc receive a msg
@@ -325,7 +317,7 @@ bool TLProcSubnode::ProcEventYoloNetwork(const Event &event) {
     return true;
   }
  
-AERROR << "Key"<<key;
+
   SharedDataPtr<ImageLights> image_lights;
   
   if (!preprocessing_data_->Get(key, &image_lights)) {
@@ -335,7 +327,7 @@ AERROR << "Key"<<key;
           << "Key"<<key;
    return false;
   }
-  AERROR<<"Num Signals"<<image_lights->num_signals;
+ 
   AINFO << "TLProcSubnode get shared data ok,ts: " << GLOG_TIMESTAMP(timestamp);
 
   double enter_proc_latency =0;
@@ -351,17 +343,15 @@ AERROR << "Key"<<key;
   }
  
 
-
-  AERROR<<"2222";
   // update image_border
   MutexLock lock(&mutex_);
   // int cam_id = static_cast<int>(image_lights->camera_id);
-  ComputeImageBorder(*image_lights,
-                     &image_border_size[image_lights->camera_id]);
-  AERROR << "TLProcSubnode update image_border size: "
-        << image_border_size[image_lights->camera_id]
-        << " ts: " << GLOG_TIMESTAMP(timestamp)
-        << " CameraId: " << image_lights->camera_id;
+  //ComputeImageBorder(*image_lights,
+  //                   &image_border_size[image_lights->camera_id]);
+ // AERROR << "TLProcSubnode update image_border size: "
+   //     << image_border_size[image_lights->camera_id]
+   //     << " ts: " << GLOG_TIMESTAMP(timestamp)
+   //     << " CameraId: " << image_lights->camera_id;
   image_lights->offset = image_border_size[image_lights->camera_id];
   // recognize_status
   const double before_recognization_ts = TimeUtil::GetCurrentTime();
@@ -598,13 +588,31 @@ bool TLProcSubnode::PublishMessage(
   uint64_t img_timestamp =
       static_cast<uint64_t>(image_lights->image->ts() * 1e9);
   header->set_camera_timestamp(img_timestamp);
-
+  // FIX 
+  TrafficLight_Color bufColor=TrafficLight_Color_UNKNOWN;
+   double bufConf=-1;
   // add traffic light result
   for (const auto &light : *lights) {
     TrafficLight *light_result = result.add_traffic_light();
     light_result->set_id(light->info.id().id());
-    light_result->set_confidence(light->status.confidence);
+    
+    if (bufColor!=TrafficLight_Color_UNKNOWN)
+    {
+     light_result->set_color(bufColor);
+     light_result->set_confidence(bufConf);
+    
+    }
+    else  {
     light_result->set_color(light->status.color);
+    light_result->set_confidence(light->status.confidence);
+  
+    }
+    
+    if (light->info.id().id()=="signal_0")
+    {
+    bufColor=light->status.color;
+    bufConf=light->status.confidence;
+    }
   }
 
   // set contain_lights

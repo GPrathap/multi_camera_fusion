@@ -390,7 +390,8 @@ void CameraProcessSubnode::ExtObjDetectionCallback(const detection_msgs::Detecte
       if (det_obj.class_id > 7) //reject signs and lights
         continue;
       std::shared_ptr<VisualObject> obj(new VisualObject);
-      obj->type = static_cast<ObjectType>(det_obj.class_id);
+      obj->type = static_cast<ObjectType>(types_[det_obj.class_id]);
+
       obj->type_probs.assign(static_cast<int>(ObjectType::MAX_OBJECT_TYPE),
                              0.0f);
       int type_k = static_cast<int>(types_[det_obj.class_id]);
@@ -417,7 +418,7 @@ void CameraProcessSubnode::ExtObjDetectionCallback(const detection_msgs::Detecte
       apollo::common::math::L2Norm(feat_dim, obj->object_feature.data());
 
       ADEBUG << "Object added! Class: " << obj->type << " x1: " << obj->upper_left[0] << "y1: " << obj->upper_left[1] <<
-            " x2: " << obj->lower_right[0] << " y2: " << obj->lower_right[1];
+            " x2: " << obj->lower_right[0] << " y2: " << obj->lower_right[1] << "Confindece: " << obj->type_probs[type_k];
       objects.push_back(obj);
   }
 
@@ -561,6 +562,7 @@ void CameraProcessSubnode::VisualObjToSensorObj(
     obj->velocity = vobj->velocity.cast<double>();
     obj->anchor_point = obj->center;
     obj->state_uncertainty = vobj->state_uncertainty;
+    obj->type_probs = vobj->type_probs;
 
     (obj->camera_supplement).reset(new CameraSupplement());
     obj->camera_supplement->upper_left = vobj->upper_left.cast<double>();

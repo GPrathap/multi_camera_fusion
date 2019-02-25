@@ -1,13 +1,14 @@
 can_conf {
 
   can_card_parameter {
-    brand:ESD_CAN
-    type: PCI_CARD
-    channel_id: CHANNEL_ID_ONE
+  brand: SOCKET_CAN_RAW
+  type: USB_CARD
+  channel_id: CHANNEL_ID_ZERO
   }
 
-  enable_debug_mode: false
-  enable_receiver_log: false
+  enable_debug_mode: true
+  enable_receiver_log: true
+  enable_sender_log: true
 }
 
 radar_conf {
@@ -18,7 +19,7 @@ radar_conf {
   send_quality_valid: true
   send_ext_info_valid: true
   sort_index_valid: false
-  store_in_nvm_valid: true
+  store_in_nvm_valid: false
   ctrl_relay_valid: false
   rcs_threshold_valid: true
 

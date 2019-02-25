@@ -161,6 +161,9 @@ class Planning : public apollo::common::ApolloApp {
   ros::Timer timer_;
 
   routing::RoutingResponse last_routing_;
+
+  bool fixed_trajectory_ = false;
+  ADCTrajectory fix_trajectory_;
 };
 
 }  // namespace planning

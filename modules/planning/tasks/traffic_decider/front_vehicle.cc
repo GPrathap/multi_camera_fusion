@@ -48,8 +48,10 @@ Status FrontVehicle::ApplyRule(Frame* const frame,
                                ReferenceLineInfo* const reference_line_info) {
   CHECK_NOTNULL(frame);
   CHECK_NOTNULL(reference_line_info);
-
-  MakeDecisions(frame, reference_line_info);
+  auto first_segment = reference_line_info->Lanes()[0];
+  if (first_segment.lane->id().id() != "road_1_0"){
+    MakeDecisions(frame, reference_line_info);
+  }
 
   return Status::OK();
 }

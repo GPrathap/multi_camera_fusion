@@ -51,9 +51,11 @@ apollo::common::Status PathDecider::Execute(
 Status PathDecider::Process(const PathData &path_data,
                             PathDecision *const path_decision) {
   CHECK_NOTNULL(path_decision);
-  if (!MakeObjectDecision(path_data, path_decision)) {
-    AERROR << "Failed to make decision based on tunnel";
-    return Status(ErrorCode::PLANNING_ERROR, "dp_road_graph decision ");
+  if (!reference_line_info_->mutable_debug()->fix_trajectory()){
+    if (!MakeObjectDecision(path_data, path_decision)) {
+      AERROR << "Failed to make decision based on tunnel";
+      return Status(ErrorCode::PLANNING_ERROR, "dp_road_graph decision ");
+    }
   }
   return Status::OK();
 }

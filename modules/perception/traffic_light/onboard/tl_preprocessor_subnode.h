@@ -103,6 +103,8 @@ class TLPreprocessorSubnode : public Subnode {
   TLPreprocessor preprocessor_;
   TLPreprocessingData *preprocessing_data_ = nullptr;
 
+  double timestamp_ns_ = 0.0;
+
   HDMapInput *hd_map_ = nullptr;
   Mutex mutex_;
 
