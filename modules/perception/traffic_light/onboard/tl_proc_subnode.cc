@@ -275,6 +275,7 @@ double enter_proc_latency =0;
            << "sub_event:" << event.to_string();
     return false;
   }
+
   const double revise_latency = TimeUtil::GetCurrentTime() - before_revise_ts;
   PublishMessage(image_lights);
   AINFO << "TLProcSubnode process traffic_light, "
@@ -683,10 +684,10 @@ bool TLProcSubnode::PublishMessage(
                                         lights->at(0)->info.stop_line());
     light_debug->set_distance_to_stop_line(distance);
   }
- // if (FLAGS_output_debug_img) {
- //   OutputDebugImg(image_lights, light_debug, &img);
- // }
-OutputDebugImg(image_lights, light_debug, &img);
+ if (FLAGS_output_debug_img) {
+   OutputDebugImg(image_lights, light_debug, &img);
+ }
+
   AdapterManager::PublishTrafficLightDetection(result);
   auto process_time =
       TimeUtil::GetCurrentTime() - image_lights->preprocess_receive_timestamp;
