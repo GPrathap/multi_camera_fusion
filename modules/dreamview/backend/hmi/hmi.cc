@@ -160,7 +160,7 @@ void HMI::RegisterMessageHandlers() {
         AINFO << "Requested control pause: " << paused;
         std_msgs::String msg;
         // msg.header.stamp = ros::Time::now();
-        msg.data = paused ? "CARPAUSE" : "CARPLAY";
+        msg.data = paused ? "PAUSECAR" : "STARTCAR";
         common::adapter::AdapterManager::PublishPauseControl(msg);
         // auto *system_status = monitor::MonitorManager::GetStatus();
         // monitor::MonitorManager::SetRequireControlPause(paused);

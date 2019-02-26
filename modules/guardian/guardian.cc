@@ -109,8 +109,8 @@ void Guardian::OnPauseControl(const std_msgs::String& message) {
   AINFO << "Received pause control data: run pause control command callback.";
   std::lock_guard<std::mutex> lock(mutex_);
   AINFO << "Message data: " << message.data;
-  AINFO << "Compare: " << message.data.compare("CARPAUSE");
-  control_paused_ = (message.data.compare("CARPAUSE") == 0);
+  AINFO << "Compare: " << message.data.compare("PAUSECAR");
+  control_paused_ = (message.data.compare("PAUSECAR") == 0);
 }
 
 void Guardian::PassThroughControlCommand() {
