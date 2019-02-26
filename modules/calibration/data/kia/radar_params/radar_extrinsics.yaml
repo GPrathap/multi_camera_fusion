@@ -7,11 +7,11 @@ header:
 child_frame_id: radar
 transform:
   rotation:
-    x: 0.0
+    x: 1.0
     y: 0.0
     z: 0.0
-    w: 1.0
+    w: 0.0
   translation:
-    x: 2.63
+    x: 1.2
     y: 0.0
-    z: -1.0
+    z: 0.0
