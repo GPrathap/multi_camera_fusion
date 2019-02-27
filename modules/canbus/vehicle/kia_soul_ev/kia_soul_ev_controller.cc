@@ -390,10 +390,12 @@ Chassis KiaSoulEvController::chassis() {
   // give engage_advice based on error_code and canbus feedback
   if (chassis_error_mask_ || (chassis_.throttle_percentage() == 0.0) ||
       (chassis_.brake_percentage() == 0.0)) {
+        // AINFO << "Chassis error or 0 percentage: error mask " << chassis_error_mask_ << " throttle " << chassis_.throttle_percentage() << " brake " << chassis_.brake_percentage();
     chassis_.mutable_engage_advice()->set_advice(
         apollo::common::EngageAdvice::DISALLOW_ENGAGE);
     chassis_.mutable_engage_advice()->set_reason("Chassis error!");
   } else if (chassis_.parking_brake() || CheckSafetyError(chassis_detail)) {
+    // AINFO << "Parking brake or safety eror: parking brake " << chassis_.parking_brake() << " safety error " << CheckSafetyError(chassis_detail);
     chassis_.mutable_engage_advice()->set_advice(
         apollo::common::EngageAdvice::DISALLOW_ENGAGE);
     chassis_.mutable_engage_advice()->set_reason(
@@ -684,13 +686,13 @@ bool KiaSoulEvController::CheckChassisError() {
   // chassis_error_mask |=
   //     ((chassis_detail.eps().connector_fault()) << (error_cnt++));
   
-  if (!chassis_detail.has_brake()) {
-    AERROR_EVERY(100) << "ChassisDetail has NO brake."
-                      << chassis_detail.DebugString();
-    return false;
-  }
+  // if (!chassis_detail.has_brake()) {
+  //   AERROR_EVERY(100) << "ChassisDetail has NO brake."
+  //                     << chassis_detail.DebugString();
+  //   return false;
+  // }
   // brake fault
-  bool brake_fault = chassis_detail.brake().watchdog_fault() |
+  bool brake_fault = false; //chassis_detail.brake().watchdog_fault() |
                      chassis_detail.brake().channel_1_fault() |
                      chassis_detail.brake().channel_2_fault() |
                      chassis_detail.brake().boo_fault() |
@@ -706,36 +708,36 @@ bool KiaSoulEvController::CheckChassisError() {
   chassis_error_mask |=
       ((chassis_detail.brake().connector_fault()) << (error_cnt++));
 
-  if (!chassis_detail.has_gas()) {
-    AERROR_EVERY(100) << "ChassisDetail has NO gas."
-                      << chassis_detail.DebugString();
-    return false;
-  }
+  // if (!chassis_detail.has_gas()) {
+  //   AERROR_EVERY(100) << "ChassisDetail has NO gas."
+  //                     << chassis_detail.DebugString();
+  //   return false;
+  // }
   // throttle fault
-  bool throttle_fault = chassis_detail.gas().watchdog_fault() |
+  bool throttle_fault = false; // = chassis_detail.gas().watchdog_fault() |
                         chassis_detail.gas().channel_1_fault() |
                         chassis_detail.gas().channel_2_fault() |
                         chassis_detail.gas().connector_fault();
 
-  chassis_error_mask |=
-      ((chassis_detail.gas().watchdog_fault()) << (error_cnt++));
-  chassis_error_mask |=
-      ((chassis_detail.gas().channel_1_fault()) << (error_cnt++));
-  chassis_error_mask |=
-      ((chassis_detail.gas().channel_2_fault()) << (error_cnt++));
-  chassis_error_mask |=
-      ((chassis_detail.gas().connector_fault()) << (error_cnt++));
+  // chassis_error_mask |=
+  //     ((chassis_detail.gas().watchdog_fault()) << (error_cnt++));
+  // chassis_error_mask |=
+  //     ((chassis_detail.gas().channel_1_fault()) << (error_cnt++));
+  // chassis_error_mask |=
+  //     ((chassis_detail.gas().channel_2_fault()) << (error_cnt++));
+  // chassis_error_mask |=
+  //     ((chassis_detail.gas().connector_fault()) << (error_cnt++));
 
-  if (!chassis_detail.has_gear()) {
-    AERROR_EVERY(100) << "ChassisDetail has NO gear."
-                      << chassis_detail.DebugString();
-    return false;
-  }
+  // if (!chassis_detail.has_gear()) {
+  //   AERROR_EVERY(100) << "ChassisDetail has NO gear."
+  //                     << chassis_detail.DebugString();
+  //   return false;
+  // }
   // gear fault
-  bool gear_fault = chassis_detail.gear().canbus_fault();
+  bool gear_fault = false; //chassis_detail.gear().canbus_fault();
 
-  chassis_error_mask |=
-      ((chassis_detail.gear().canbus_fault()) << (error_cnt++));
+  // chassis_error_mask |=
+  //     ((chassis_detail.gear().canbus_fault()) << (error_cnt++));
 
   set_chassis_error_mask(chassis_error_mask);
 

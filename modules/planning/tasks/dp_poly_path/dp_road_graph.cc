@@ -314,7 +314,7 @@ void DPRoadGraph::UpdateNode(const std::list<DPRoadGraphNode> &prev_nodes,
   }
 
   // try to connect the current point with the first point directly
-  
+  /*
   if (level >= 2) {
     const float init_dl = init_frenet_frame_point_.dl();
     const float init_ddl = init_frenet_frame_point_.ddl();
@@ -328,6 +328,7 @@ void DPRoadGraph::UpdateNode(const std::list<DPRoadGraphNode> &prev_nodes,
         curve, init_sl_point_.s(), cur_node->sl_point.s(), level, total_level);
     cur_node->UpdateCost(front, curve, cost);
   }
+  */
   
 }
 

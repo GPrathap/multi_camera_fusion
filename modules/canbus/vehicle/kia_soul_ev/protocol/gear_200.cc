@@ -24,7 +24,7 @@ namespace kia_soul_ev {
 
 using ::apollo::drivers::canbus::Byte;
 
-const int32_t Gear200::ID = 0x200;
+const int32_t Gear200::ID = 0x250;
 
 void Gear200::Parse(const std::uint8_t *bytes, int32_t length,
                        ChassisDetail *chassis_detail) const {
@@ -42,7 +42,7 @@ void Gear200::Parse(const std::uint8_t *bytes, int32_t length,
       chassis_detail->mutable_gear()->set_gear_cmd(Chassis::GEAR_REVERSE);
       ADEBUG << "Reverse gear";
       break;
-    case 0x30:
+    case 0x30: case 0xB0:
       chassis_detail->mutable_gear()->set_gear_state(Chassis::GEAR_NEUTRAL);
       chassis_detail->mutable_gear()->set_gear_cmd(Chassis::GEAR_NEUTRAL);
       ADEBUG << "Neutral gear";
@@ -52,7 +52,7 @@ void Gear200::Parse(const std::uint8_t *bytes, int32_t length,
       chassis_detail->mutable_gear()->set_gear_cmd(Chassis::GEAR_DRIVE);
       ADEBUG << "Drive gear";
       break;
-    case 0x08:
+    case 0x08: case 0x88:
       chassis_detail->mutable_gear()->set_gear_state(Chassis::GEAR_LOW);
       chassis_detail->mutable_gear()->set_gear_cmd(Chassis::GEAR_LOW);
       ADEBUG << "Low gear";

@@ -20,8 +20,8 @@ lat_controller_conf {
   cr: 155494.663
   mass_fl: 378
   mass_fr: 378
-  mass_rl: 296
-  mass_rr: 296
+  mass_rl: 400
+  mass_rr: 400
   eps: 0.01
   matrix_q: 0.05
   matrix_q: 0.0
