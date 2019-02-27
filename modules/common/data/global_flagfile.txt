@@ -406,3 +406,4 @@
 --map_dir=/apollo/modules/map/data/polygon
 --map_dir=/apollo/modules/map/data/polygon
 --map_dir=/apollo/modules/map/data/polygon
+--map_dir=/apollo/modules/map/data/polygon
