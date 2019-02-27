@@ -374,8 +374,12 @@ void EMPlanner::GenerateFallbackPathProfile(
 
 void EMPlanner::GenerateFallbackSpeedProfile(
     const ReferenceLineInfo* reference_line_info, SpeedData* speed_data) {
+
+  *speed_data =GenerateZeroStopProfile();
+
+  /*
   *speed_data = GenerateStopProfileFromPolynomial(
-      reference_line_info->AdcPlanningPoint().v(),
+      0.0, //reference_line_info->AdcPlanningPoint().v(),
       reference_line_info->AdcPlanningPoint().a());
 
   if (speed_data->Empty()) {
@@ -383,6 +387,7 @@ void EMPlanner::GenerateFallbackSpeedProfile(
         GenerateStopProfile(reference_line_info->AdcPlanningPoint().v(),
                             reference_line_info->AdcPlanningPoint().a());
   }
+  */
 }
 
 SpeedData EMPlanner::GenerateStopProfile(const double init_speed,
@@ -426,6 +431,22 @@ SpeedData EMPlanner::GenerateStopProfile(const double init_speed,
                                   0.0);
     }
     pre_s = s;
+  }
+  return speed_data;
+}
+
+SpeedData EMPlanner::GenerateZeroStopProfile() const {
+  AERROR << "Slowing down the car.";
+  SpeedData speed_data;
+
+  const double max_t = 3.0;
+  const double unit_t = 0.02;
+
+  for (double t = 0.0; t < max_t; t += unit_t) {
+    double s = 0.0;
+    double v = 0.0;
+    speed_data.AppendSpeedPoint(s, t, v, FLAGS_slowdown_profile_deceleration,
+                                  0.0);
   }
   return speed_data;
 }

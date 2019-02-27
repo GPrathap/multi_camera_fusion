@@ -406,6 +406,7 @@
 --map_dir=/apollo/modules/map/data/polygon
 --map_dir=/apollo/modules/map/data/polygon
 --map_dir=/apollo/modules/map/data/polygon
+<<<<<<< HEAD
 
 --map_dir=/apollo/modules/map/data/piar_loop2
 
@@ -443,3 +444,6 @@
 --map_dir=/apollo/modules/map/data/snack_parking
 
 --map_dir=/apollo/modules/map/data/Polygon_New
+=======
+--map_dir=/apollo/modules/map/data/polygon
+>>>>>>> 962b155c797d91d8cb4ffa88bc9045bbaae910e5

@@ -203,7 +203,6 @@ void TLPreprocessorSubnode::ExtObjDetectionCallback(const detection_msgs::Detect
   if (lights.size()==0)
     return;
   std::shared_ptr<ImageLights> image_lights(new ImageLights); 
-  AERROR<<lights.size();
   MutexLock lock(&mutex_);
   const double sub_camera_image_start_ts = TimeUtil::GetCurrentTime();
   std::shared_ptr<Image> image(new Image);
@@ -213,7 +212,7 @@ void TLPreprocessorSubnode::ExtObjDetectionCallback(const detection_msgs::Detect
   cv::Mat cv_img;
    image_lights->camera_id=camera_id;
   CompMessageToMat(message.image,&cv_img);
-  bool should_pub = false;
+
   image->Init(timestamp, camera_id, cv_img);
    const double before_sync_image_ts = TimeUtil::GetCurrentTime();
    //image->GenerateMat();
@@ -228,11 +227,21 @@ void TLPreprocessorSubnode::ExtObjDetectionCallback(const detection_msgs::Detect
           << ", camera_id: " << kCameraIdToStr.at(camera_id);
     return;
    }
-   AERROR<<"verify Last Protection:"<< (image_lights->lights).get()->size();
+   AINFO<<"verify Last Protection:"<< (image_lights->lights).get()->size();
     std::vector<LightPtr> detected_bboxes;
-    cv::Size img_size=cv_img.size();
+        CarPose pose;
+    cv::Size img_size=cv_img.size();    
+    GetCarPose(timestamp, &pose);
+    double xPose=pose.pose()(12)+1.5;
+    double yPose=pose.pose()(13);
+
     for (size_t candidate_id = 0; candidate_id < image_lights->num_signals; ++candidate_id) {
-        if (candidate_id>=lights.size())
+
+       
+        
+
+         
+         if (candidate_id>=lights.size())
           break; 
         LightPtr tmp(new Light);
         tmp->region.rectified_roi.x =
@@ -253,12 +262,47 @@ void TLPreprocessorSubnode::ExtObjDetectionCallback(const detection_msgs::Detect
           continue;
         }
         std::vector<LightPtr> &lights_ref = *((image_lights->lights).get());
-        //tmp->region.rectified_roi = RefinedBox(tmp->region.rectified_roi, img_size);
-        tmp->region.is_detected = true;
-        lights_ref[candidate_id]->region.detect_score= tmp->region.detect_score ;
-        lights_ref[candidate_id]->region.detect_class_id = DetectionClassId(VERTICAL_CLASS);
         lights_ref[candidate_id]->region.rectified_roi=RefinedBox(tmp->region.rectified_roi, img_size);
-        lights_ref[candidate_id]->region.is_detected =true;
+        if (FLAGS_use_detection_fix)
+        {
+            if (((xPose<-4 && xPose>-16) && (yPose<-34 && yPose>-38))|| ((xPose<-32 && xPose>-39) && (yPose<-8 && yPose>-21)))
+            {
+
+                int xFrame=lights_ref[candidate_id]->region.rectified_roi.x;
+                int yFrame=lights_ref[candidate_id]->region.rectified_roi.y;
+
+                if (xFrame>600 ||(yFrame<50 && yFrame>200))
+                {   
+
+                  lights_ref[candidate_id]->region.detect_score= -1;
+                     lights_ref[candidate_id]->region.is_detected =false;
+                     lights_ref[candidate_id]->status.confidence =-1;
+                     lights_ref[candidate_id]->status.color =TrafficLight_Color_UNKNOWN;
+                   
+                     
+                    continue;    
+                }
+              tmp->region.is_detected = true;
+              lights_ref[candidate_id]->region.detect_score= tmp->region.detect_score ;
+              lights_ref[candidate_id]->region.detect_class_id = DetectionClassId(VERTICAL_CLASS);
+              lights_ref[candidate_id]->region.is_detected =true;
+            }
+            
+
+        }
+          else
+          {
+            tmp->region.is_detected = true;
+            lights_ref[candidate_id]->region.detect_score= tmp->region.detect_score ;
+            lights_ref[candidate_id]->region.detect_class_id = DetectionClassId(VERTICAL_CLASS);
+            lights_ref[candidate_id]->region.is_detected =true;
+          }
+       
+           
+     
+        
+        //tmp->region.rectified_roi = RefinedBox(tmp->region.rectified_roi, img_size);
+        
          //CarPose pose;
         //GetCarPose(timestamp, &pose);
          //auto light_distance = Distance2Stopline(pose.pose(), lights_ref[candidate_id]->info.stop_line());

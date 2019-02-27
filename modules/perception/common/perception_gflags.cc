@@ -92,7 +92,8 @@ DEFINE_string(onboard_fusion, "ProbabilisticFusion",
 
 DEFINE_double(query_signal_range, 100.0, "max distance to front signals");
 DEFINE_bool(output_raw_img, false, "write raw image to disk");
-DEFINE_bool(output_debug_img, false, "write debug image to disk");
+DEFINE_bool(use_detection_fix, true, "box for filtering lights");
+DEFINE_bool(output_debug_img, true, "write debug image to disk");
 
 /// Temporarily change Kalman motion fusion to config here.
 DEFINE_double(q_matrix_coefficient_amplifier, 0.5,
