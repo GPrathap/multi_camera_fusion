@@ -73,14 +73,18 @@ void Guardian::OnTimer(const ros::TimerEvent&) {
     }
   }
 
-  if (safety_mode_triggered) {
-    ADEBUG << "Safety mode triggered, enable safety mode";
+  if (safety_mode_triggered || control_paused_) {
+    if (control_paused_){
+      ADEBUG << "CONTROL PAUSED";
+    }
+    else {
+      ADEBUG << "Safety mode triggered, enable safety mode";
+    }
     TriggerSafetyMode();
   } else {
     ADEBUG << "Safety mode not triggered, bypass control command";
     PassThroughControlCommand();
   }
-
 
   AdapterManager::FillGuardianHeader(FLAGS_node_name, &guardian_cmd_);
   AdapterManager::PublishGuardian(guardian_cmd_);
