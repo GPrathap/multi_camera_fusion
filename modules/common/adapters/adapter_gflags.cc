@@ -165,3 +165,5 @@ DEFINE_string(image_front_camera_topic, "/apollo/sensor/camera/perception/image_
               "image_front_camera view camera");
 DEFINE_string(externel_obj_detection_topic, "/detections",
               "externel_detections_topic" );
+DEFINE_string(pause_control_topic, "/control_pause",
+              "externel_detections_topic" );

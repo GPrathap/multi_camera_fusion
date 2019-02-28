@@ -25,3 +25,6 @@
 [submodule "modules/additional_ros_packages/ardulog"]
 	path = modules/additional_ros_packages/ardulog
 	url = http://cordelia.university.innopolis.ru/kia/ardulog.git
+[submodule "modules/additional_ros_packages/radio_start_stop"]
+	path = modules/additional_ros_packages/radio_start_stop
+	url = git@cordelia.university.innopolis.ru:kia/radio_start_stop.git

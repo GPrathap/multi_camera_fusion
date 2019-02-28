@@ -242,6 +242,13 @@ export default class RosWebSocketEndpoint {
         }));
     }
 
+    toggleControlPause(paused) {
+        this.websocket.send(JSON.stringify({
+            type: "ToggleControlPause",
+            paused: paused || false
+        }));
+    }
+
     submitDriveEvent(eventTimeMs, eventMessage) {
     	this.websocket.send(JSON.stringify({
             type: "SubmitDriveEvent",

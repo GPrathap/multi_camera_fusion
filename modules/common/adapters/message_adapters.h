@@ -153,6 +153,7 @@ using CompressedImageFrontLeftSideAdapter = Adapter<::sensor_msgs::CompressedIma
 using CompressedImageFrontRightSideAdapter = Adapter<::sensor_msgs::CompressedImage>;
 using CompressedImageFrontCameraAdapter = Adapter<::sensor_msgs::CompressedImage>;
 using PointCloudDebugAdapter = Adapter<::sensor_msgs::PointCloud2>;
+using PauseControlAdapter = Adapter<std_msgs::String>;
 
 }  // namespace adapter
 }  // namespace common

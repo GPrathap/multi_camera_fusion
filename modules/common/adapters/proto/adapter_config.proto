@@ -82,6 +82,7 @@ message AdapterConfig {
     POINT_CLOUD_DEBUG = 75;
     ODOMETRY_CHASSIS = 76;
     ODOMETRY_GNSS = 77;
+    PAUSE_CONTROL = 78;
   }
   enum Mode {
     RECEIVE_ONLY = 0;

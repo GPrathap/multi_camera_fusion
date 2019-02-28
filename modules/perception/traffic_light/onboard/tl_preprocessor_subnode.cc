@@ -265,7 +265,7 @@ void TLPreprocessorSubnode::ExtObjDetectionCallback(const detection_msgs::Detect
         lights_ref[candidate_id]->region.rectified_roi=RefinedBox(tmp->region.rectified_roi, img_size);
         if (FLAGS_use_detection_fix)
         {
-            if (((xPose<-4 && xPose>-16) && (yPose<-34 && yPose>-38))|| ((xPose<-32 && xPose>-39) && (yPose<-8 && yPose>-21)))
+            if (((xPose<-4 && xPose>-24) && (yPose<-34 && yPose>-38))|| ((xPose<-32 && xPose>-39) && (yPose<-8 && yPose>-21)))
             {
 
                 int xFrame=lights_ref[candidate_id]->region.rectified_roi.x;

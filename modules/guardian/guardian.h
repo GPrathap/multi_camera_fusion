@@ -33,6 +33,7 @@
 #include "modules/guardian/proto/guardian.pb.h"
 #include "modules/monitor/proto/system_status.pb.h"
 #include "ros/include/ros/ros.h"
+#include "std_msgs/String.h"
 
 /**
  * @namespace apollo::guardian
@@ -53,6 +54,7 @@ class Guardian : public apollo::common::ApolloApp {
   void OnChassis(const apollo::canbus::Chassis& message);
   void OnControl(const apollo::control::ControlCommand& message);
   void OnSystemStatus(const apollo::monitor::SystemStatus& message);
+  void OnPauseControl(const std_msgs::String& message);
   void PassThroughControlCommand();
   void TriggerSafetyMode();
 
@@ -60,6 +62,7 @@ class Guardian : public apollo::common::ApolloApp {
   apollo::monitor::SystemStatus system_status_;
   apollo::control::ControlCommand control_cmd_;
   apollo::guardian::GuardianCommand guardian_cmd_;
+  bool control_paused_;
 
   std::mutex mutex_;
 
