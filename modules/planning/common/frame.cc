@@ -350,6 +350,7 @@ Status Frame::Init() {
     }
   }
   const auto *collision_obstacle = FindCollisionObstacle();
+  /*
   if (collision_obstacle) {
     std::string err_str =
         "Found collision with obstacle: " + collision_obstacle->Id();
@@ -357,6 +358,7 @@ Status Frame::Init() {
     buffer.ERROR(err_str);
     return Status(ErrorCode::PLANNING_ERROR, err_str);
   }
+  */
   if (!CreateReferenceLineInfo()) {
     AERROR << "Failed to init reference line info";
     return Status(ErrorCode::PLANNING_ERROR,

@@ -111,9 +111,15 @@ bool DPRoadGraph::FindPathTunnel(
     ADEBUG << "Lane ID[" << segment.lane->id().id() << "] " << " road ID[" << segment.lane->road_id().id() << "] ";
   }
 
-  auto first_segment = reference_line_info_.Lanes()[0];
-  auto second_segment = reference_line_info_.Lanes()[1];
-  if (first_segment.lane->id().id() == "road_1_0" && second_segment.lane->id().id() == "junction_9" && accumulated_s>20.0 && accumulated_s<30.0 && obstacle2_s>13.0 && obstacle2_s<50.0) //если мы в определенной зоне и видем препятствие №2, то формируем заготовленную траекторию
+  std::string first_segment_id = "";
+  std::string second_segment_id = "";
+  if (reference_line_info_.Lanes().size()>=2)
+  {
+    first_segment_id = reference_line_info_.Lanes()[0].lane->id().id();
+    second_segment_id = reference_line_info_.Lanes()[1].lane->id().id();
+  }
+
+  if (first_segment_id == "road_1_0" && second_segment_id == "junction_9" && accumulated_s>20.0 && accumulated_s<30.0 && obstacle2_s>13.0 && obstacle2_s<50.0) //если мы в определенной зоне и видем препятствие №2, то формируем заготовленную траекторию
   {
 
     ADEBUG << "Calculate fix trajectory!!!";
@@ -478,7 +484,8 @@ bool DPRoadGraph::SamplePathWaypoints(
     } 
     */
 
-    common::util::uniform_slice(-0.3f, 0.3f, 2, &sample_l);
+    //common::util::uniform_slice(-0.3f, 0.3f, 2, &sample_l);
+    sample_l.push_back(0.0);
 
     std::vector<common::SLPoint> level_points;
     planning_internal::SampleLayerDebug sample_layer_debug;
