@@ -112,10 +112,12 @@ bool DPRoadGraph::FindPathTunnel(
   }
 
   auto first_segment = reference_line_info_.Lanes()[0];
-  if (first_segment.lane->id().id() == "road_1_0" && accumulated_s>20.0 && accumulated_s<30.0 && obstacle2_s>0 && obstacle2_s<50.0) //если мы в определенной зоне и видем препятствие №2, то формируем заготовленную траекторию
+  auto second_segment = reference_line_info_.Lanes()[1];
+  if (first_segment.lane->id().id() == "road_1_0" && second_segment.lane->id().id() == "junction_9" && accumulated_s>20.0 && accumulated_s<30.0 && obstacle2_s>13.0 && obstacle2_s<50.0) //если мы в определенной зоне и видем препятствие №2, то формируем заготовленную траекторию
   {
 
     ADEBUG << "Calculate fix trajectory!!!";
+    double lat_dist = config_.task1_distance();
     QuinticPolynomialCurve1d* curve;
     for (std::size_t i = 0; i < 4; ++i) {
 
@@ -129,10 +131,10 @@ bool DPRoadGraph::FindPathTunnel(
           curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, path_length);
           break;
         case 1:
-          curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, 5.0, 0.0, 0.0, 12.0);
+          curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, lat_dist, 0.0, 0.0, 12.0);
           break;
         case 2:
-          curve = new QuinticPolynomialCurve1d(5.0, 0.0, 0.0, 0.0, 0.0, 0.0, 12.0);
+          curve = new QuinticPolynomialCurve1d(lat_dist, 0.0, 0.0, 0.0, 0.0, 0.0, 12.0);
           break;
         case 3:
           curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 12.0);
@@ -296,9 +298,12 @@ void DPRoadGraph::UpdateNode(const std::list<DPRoadGraphNode> &prev_nodes,
       init_dl = init_frenet_frame_point_.dl();
       init_ddl = init_frenet_frame_point_.ddl();
     }
+    double p = cur_point.s() - prev_sl_point.s();
+    if (p < 0.0)
+      p = 0.1; 
     QuinticPolynomialCurve1d curve(prev_sl_point.l(), init_dl, init_ddl,
                                    cur_point.l(), 0.0, 0.0,
-                                   cur_point.s() - prev_sl_point.s());
+                                   p);
 
     if (!IsValidCurve(curve)) {
       continue;
@@ -312,7 +317,7 @@ void DPRoadGraph::UpdateNode(const std::list<DPRoadGraphNode> &prev_nodes,
   }
 
   // try to connect the current point with the first point directly
-  
+  /*
   if (level >= 2) {
     const float init_dl = init_frenet_frame_point_.dl();
     const float init_ddl = init_frenet_frame_point_.ddl();
@@ -326,6 +331,7 @@ void DPRoadGraph::UpdateNode(const std::list<DPRoadGraphNode> &prev_nodes,
         curve, init_sl_point_.s(), cur_node->sl_point.s(), level, total_level);
     cur_node->UpdateCost(front, curve, cost);
   }
+  */
   
 }
 
@@ -433,6 +439,7 @@ bool DPRoadGraph::SamplePathWaypoints(
     }
 
     std::vector<float> sample_l;
+    /*
     if (reference_line_info_.IsChangeLanePath() &&
         !reference_line_info_.IsSafeToChangeLane()) {
       sample_l.push_back(reference_line_info_.OffsetToOtherReferenceLine());
@@ -469,6 +476,9 @@ bool DPRoadGraph::SamplePathWaypoints(
     {
       sample_l[min_idx] = 0.0;
     } 
+    */
+
+    common::util::uniform_slice(-0.3f, 0.3f, 2, &sample_l);
 
     std::vector<common::SLPoint> level_points;
     planning_internal::SampleLayerDebug sample_layer_debug;
