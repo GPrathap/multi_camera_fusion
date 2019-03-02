@@ -26,5 +26,9 @@ message DpPolyPathConfig {
   optional double sidepass_distance = 20;
   optional uint32 navigator_sample_num_each_level = 21;
   optional double task1_distance = 22;
+  optional double task1_s_start = 23;
+  optional double task1_s_stop = 24;
+  optional double task1_min_dist_obs2 = 25;
+  optional double task1_lon_distance = 26;
 
 }

@@ -119,31 +119,32 @@ bool DPRoadGraph::FindPathTunnel(
     second_segment_id = reference_line_info_.Lanes()[1].lane->id().id();
   }
 
-  if (first_segment_id == "road_1_0" && second_segment_id == "junction_9" && accumulated_s>20.0 && accumulated_s<30.0 && obstacle2_s>13.0 && obstacle2_s<50.0) //если мы в определенной зоне и видем препятствие №2, то формируем заготовленную траекторию
+  if (first_segment_id == "road_1_0" && second_segment_id == "junction_9" && accumulated_s>config_.task1_s_start() && accumulated_s<config_.task1_s_stop() && obstacle2_s>config_.task1_min_dist_obs2() && obstacle2_s<50.0) //если мы в определенной зоне и видем препятствие №2, то формируем заготовленную траекторию
   {
 
     ADEBUG << "Calculate fix trajectory!!!";
     double lat_dist = config_.task1_distance();
+    double lon_dist = config_.task1_lon_distance();
     QuinticPolynomialCurve1d* curve;
     for (std::size_t i = 0; i < 4; ++i) {
 
-      float path_length = 12.0;
+      float path_length = lon_dist;
       float current_s = 0.0;
       
       switch (i)
       {
         case 0:
-          path_length = obstacle2_s - 12.0;
+          path_length = obstacle2_s - lon_dist;
           curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, path_length);
           break;
         case 1:
-          curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, lat_dist, 0.0, 0.0, 12.0);
+          curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, lat_dist, 0.0, 0.0, lon_dist);
           break;
         case 2:
-          curve = new QuinticPolynomialCurve1d(lat_dist, 0.0, 0.0, 0.0, 0.0, 0.0, 12.0);
+          curve = new QuinticPolynomialCurve1d(lat_dist, 0.0, 0.0, 0.0, 0.0, 0.0, lon_dist);
           break;
         case 3:
-          curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 12.0);
+          curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, lon_dist);
           break;
         default:
           break;

@@ -33,6 +33,10 @@ em_planner_config {
         sidepass_distance: 4.0
         navigator_sample_num_each_level: 3
         task1_distance: 4.0
+        task1_s_start: 20.0
+        task1_s_stop: 30.0
+        task1_min_dist_obs2: 13.0
+        task1_lon_distance: 12.0
     }
     dp_st_speed_config {
         total_path_length: 149
