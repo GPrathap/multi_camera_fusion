@@ -32,7 +32,7 @@ em_planner_config {
         path_end_l_cost: 1.0e4
         sidepass_distance: 4.0
         navigator_sample_num_each_level: 3
-        task1_distance: 4.0
+        task1_distance: 3.0
         task1_s_start: 20.0
         task1_s_stop: 40.0
         task1_min_dist_obs2: 13.0
