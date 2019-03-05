@@ -119,58 +119,117 @@ bool DPRoadGraph::FindPathTunnel(
     second_segment_id = reference_line_info_.Lanes()[1].lane->id().id();
   }
 
-  if (first_segment_id == "road_1_0" && second_segment_id == "junction_9" && accumulated_s>config_.task1_s_start() && accumulated_s<config_.task1_s_stop() && obstacle2_s>config_.task1_min_dist_obs2() && obstacle2_s<50.0) //если мы в определенной зоне и видем препятствие №2, то формируем заготовленную траекторию
+  double lat_dist = config_.task1_distance();
+  double lon_dist = config_.task1_lon_distance();
+
+  if (first_segment_id == "road_1_0" && second_segment_id == "junction_9" && accumulated_s>config_.task1_s_start() && accumulated_s<config_.task1_s_stop())
   {
-
-    ADEBUG << "Calculate fix trajectory!!!";
-    double lat_dist = config_.task1_distance();
-    double lon_dist = config_.task1_lon_distance();
-    QuinticPolynomialCurve1d* curve;
-    for (std::size_t i = 0; i < 4; ++i) {
-
-      float path_length = lon_dist;
-      float current_s = 0.0;
-      
-      switch (i)
+      if (config_.task1_use_fix_long_dist())
       {
-        case 0:
-          path_length = obstacle2_s - lon_dist;
-          curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, path_length);
-          break;
-        case 1:
-          curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, lat_dist, 0.0, 0.0, lon_dist);
-          break;
-        case 2:
-          curve = new QuinticPolynomialCurve1d(lat_dist, 0.0, 0.0, 0.0, 0.0, 0.0, lon_dist);
-          break;
-        case 3:
-          curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, lon_dist);
-          break;
-        default:
-          break;
+          ADEBUG << "Calculate fix trajectory based on fixed distance!!!";
+          double fix_lon_dist = config_.task1_fix_long_dist();
+
+          QuinticPolynomialCurve1d* curve;
+          for (std::size_t i = 0; i < 4; ++i) {
+
+            float path_length = lon_dist;
+            float current_s = 0.0;
+          
+
+            switch (i)
+            {
+              case 0:
+                path_length = fix_lon_dist;
+                curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, path_length);
+                break;
+              case 1:
+                curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, lat_dist, 0.0, 0.0, lon_dist);
+                break;
+              case 2:
+                curve = new QuinticPolynomialCurve1d(lat_dist, 0.0, 0.0, 0.0, 0.0, 0.0, lon_dist);
+                break;
+              case 3:
+                curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, lon_dist);
+                break;
+              default:
+                break;
+            }
+
+            while (current_s + path_resolution / 2.0 < path_length) {
+              const float l = curve->Evaluate(0, current_s);
+              const float dl = curve->Evaluate(1, current_s);
+              const float ddl = curve->Evaluate(2, current_s);
+              common::FrenetFramePoint frenet_frame_point;
+              frenet_frame_point.set_s(accumulated_s + current_s);
+              frenet_frame_point.set_l(l);
+              frenet_frame_point.set_dl(dl);
+              frenet_frame_point.set_ddl(ddl);
+              frenet_path.push_back(std::move(frenet_frame_point));
+              current_s += path_resolution;
+            }
+            accumulated_s += path_length;
+          }
+
+          FrenetFramePath tunnel(frenet_path);
+          planning_debug_->set_fix_trajectory(true);
+          path_data->SetReferenceLine(&reference_line_);
+          path_data->SetFrenetPath(tunnel);
+
+
       }
+      else if (obstacle2_s>config_.task1_min_dist_obs2() && obstacle2_s<50.0) //если мы в определенной зоне и видем препятствие №2, то формируем заготовленную траекторию
+      {
 
-      while (current_s + path_resolution / 2.0 < path_length) {
-        const float l = curve->Evaluate(0, current_s);
-        const float dl = curve->Evaluate(1, current_s);
-        const float ddl = curve->Evaluate(2, current_s);
-        common::FrenetFramePoint frenet_frame_point;
-        frenet_frame_point.set_s(accumulated_s + current_s);
-        frenet_frame_point.set_l(l);
-        frenet_frame_point.set_dl(dl);
-        frenet_frame_point.set_ddl(ddl);
-        frenet_path.push_back(std::move(frenet_frame_point));
-        current_s += path_resolution;
-      }
-      accumulated_s += path_length;
-    }
+        double lon_dist = config_.task1_lon_distance();
+        ADEBUG << "Calculate fix trajectory!!!" << "obstacle2_s: " << obstacle2_s << " path_legth: " << obstacle2_s - lon_dist;
+        QuinticPolynomialCurve1d* curve;
+        for (std::size_t i = 0; i < 4; ++i) {
 
-    FrenetFramePath tunnel(frenet_path);
-    planning_debug_->set_fix_trajectory(true);
-    path_data->SetReferenceLine(&reference_line_);
-    path_data->SetFrenetPath(tunnel);
+          float path_length = lon_dist;
+          float current_s = 0.0;
+        
 
-      
+          switch (i)
+          {
+            case 0:
+              path_length = obstacle2_s - lon_dist;
+              curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, path_length);
+              break;
+            case 1:
+              curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, lat_dist, 0.0, 0.0, lon_dist);
+              break;
+            case 2:
+              curve = new QuinticPolynomialCurve1d(lat_dist, 0.0, 0.0, 0.0, 0.0, 0.0, lon_dist);
+              break;
+            case 3:
+              curve = new QuinticPolynomialCurve1d(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, lon_dist);
+              break;
+            default:
+              break;
+          }
+
+          while (current_s + path_resolution / 2.0 < path_length) {
+            const float l = curve->Evaluate(0, current_s);
+            const float dl = curve->Evaluate(1, current_s);
+            const float ddl = curve->Evaluate(2, current_s);
+            common::FrenetFramePoint frenet_frame_point;
+            frenet_frame_point.set_s(accumulated_s + current_s);
+            frenet_frame_point.set_l(l);
+            frenet_frame_point.set_dl(dl);
+            frenet_frame_point.set_ddl(ddl);
+            frenet_path.push_back(std::move(frenet_frame_point));
+            current_s += path_resolution;
+          }
+          accumulated_s += path_length;
+        }
+
+        FrenetFramePath tunnel(frenet_path);
+        planning_debug_->set_fix_trajectory(true);
+        path_data->SetReferenceLine(&reference_line_);
+        path_data->SetFrenetPath(tunnel);
+
+          
+      } 
   } else {
     for (std::size_t i = 1; i < min_cost_path.size(); ++i) {
       const auto &prev_node = min_cost_path[i - 1];

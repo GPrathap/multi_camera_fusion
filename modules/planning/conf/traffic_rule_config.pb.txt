@@ -127,7 +127,7 @@ config: {
     watch_vehicle_max_valid_stop_distance: 5.0
     wait_timeout: 8.0
     creep {
-      enabled: true
+      enabled: false
       creep_distance_to_stop_line: 1.5
       stop_distance: 0.3
       speed_limit: 1.0
