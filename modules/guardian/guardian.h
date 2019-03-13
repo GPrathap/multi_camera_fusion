@@ -34,13 +34,14 @@
 #include "modules/monitor/proto/system_status.pb.h"
 #include "ros/include/ros/ros.h"
 #include "std_msgs/String.h"
-
+#include "third_party/json/json.hpp"
 /**
  * @namespace apollo::guardian
  * @brief apollo::guardian
  */
 namespace apollo {
 namespace guardian {
+
 
 class Guardian : public apollo::common::ApolloApp {
  public:

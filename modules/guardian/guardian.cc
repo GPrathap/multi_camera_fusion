@@ -33,6 +33,7 @@ using apollo::common::adapter::AdapterManager;
 using apollo::control::ControlCommand;
 using apollo::guardian::GuardianCommand;
 using apollo::monitor::SystemStatus;
+using Json = nlohmann::json;
 
 std::string Guardian::Name() const { return FLAGS_module_name; }
 
@@ -112,9 +113,21 @@ void Guardian::OnControl(const ControlCommand& message) {
 void Guardian::OnPauseControl(const std_msgs::String& message) {
   AINFO << "Received pause control data: run pause control command callback.";
   std::lock_guard<std::mutex> lock(mutex_);
-  AINFO << "Message data: " << message.data;
-  AINFO << "Compare: " << message.data.compare("PAUSECAR");
-  control_paused_ = (message.data.compare("PAUSECAR") == 0);
+  if(message.data.compare("PAUSECAR") != 0){
+      auto message_ = Json::parse(message.data);
+      if (message_.find("resolution") != message_.end()) {
+          if(message_["resolution"] == "forbidden"){
+              control_paused_ = 1;
+              AERROR << message.data << "Car is not allowed to drive on this road, please consider it again";
+          }else{
+              control_paused_ = 0;
+              AINFO << "Message: "<< message.data << ", car is allowed to drive on this road, please consider it again";
+          }
+      }
+  }else{
+    AINFO << "Compare: " << message.data.compare("PAUSECAR");
+    control_paused_ = (message.data.compare("PAUSECAR") == 0);
+  }
 }
 
 void Guardian::PassThroughControlCommand() {
