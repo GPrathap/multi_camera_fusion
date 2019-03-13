@@ -101,8 +101,10 @@ Status Canbus::Init() {
   CHECK(AdapterManager::GetGuardian()) << "Guardian is not initialized.";
   // TODO(QiL) : depreacte this
   if (!FLAGS_receive_guardian) {
+    AINFO << "DRIVING DIRECTLY FROM CONTROL";
     AdapterManager::AddControlCommandCallback(&Canbus::OnControlCommand, this);
   } else {
+    AINFO << "DRIVING WITH GUARDIAN";
     AdapterManager::AddGuardianCallback(&Canbus::OnGuardianCommand, this);
   }
 

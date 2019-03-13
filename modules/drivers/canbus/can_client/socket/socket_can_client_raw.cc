@@ -194,7 +194,7 @@ ErrorCode SocketCanClientRaw::Receive(std::vector<CanFrame> *const frames,
     //   AERROR << "recv_frames_[" << i
     //          << "].can_dlc = " << recv_frames_[i].can_dlc
     //          << ", which is not equal to can message data length ("
-    //          << CANBUS_MESSAGE_LENGTH << ").";
+    //          << CANBUS_MESSAGE_LENGTH  << ").";
     //   return ErrorCode::CAN_CLIENT_ERROR_RECV_FAILED;
     // }
     cf.id = recv_frames_[i].can_id;

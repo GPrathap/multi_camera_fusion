@@ -2,6 +2,18 @@ syntax = "proto2";
 
 package apollo.parking;
 
+message ParkingSlotConf {
+  optional double x = 1;
+  optional double y = 2;
+}
+
+message DesicionSlotConf {
+  optional double x_left = 1;
+  optional double x_right = 2;
+  optional double y_top = 3;
+  optional double y_bottom = 4;
+}
+
 message ParkingConf {
 
   optional double control_period = 1;
@@ -17,4 +29,7 @@ message ParkingConf {
   optional double stop_parking_y = 9;
   optional double localization_period = 10;
   optional double chassis_period = 11;
+
+  repeated ParkingSlotConf slot_conf = 12; 
+  optional DesicionSlotConf desicion_slot_conf = 13;
 }

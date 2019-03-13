@@ -43,7 +43,11 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
                     const TrafficLightDebug *light_debug, cv::Mat *img) {
   const auto &lights = image_lights->lights;
   for (const auto &light : *lights) {
-    cv::Rect rect = light->region.rectified_roi;
+    cv::Rect rectDeb = light->region.rectified_roi;
+    if (light->status.confidence<=0.02)
+    {
+      continue;
+    }
     cv::Scalar color;
     switch (light->status.color) {
       case BLACK:
@@ -62,7 +66,8 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
         color = cv::Scalar(0, 76, 153);
     }
 
-    cv::rectangle(*img, rect, color, 2);
+    cv::rectangle(*img, rectDeb, color, 2);
+    //cv::rectangle(*img, cv::Point2f( 0, 50 ), cv::Point2f(500, 250), color, 2);
     //cv::rectangle(*img, light->region.projection_roi, cv::Scalar(255, 255, 0),2);
     //auto &crop_roi = lights->at(0)->region.rectified_roi[0];
     //cv::rectangle(*img, crop_roi, cv::Scalar(0, 255, 255), 2);
@@ -82,22 +87,22 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
   //             font_scale, CV_RGB(128, 255, 0), thickness);
   // draw distance to stopline
  
-  double distance = light_debug->distance_to_stop_line();
-  if (lights->size() > 0) {
-    std::string dis2sl_text = cv::format("dis2sl=%lf", distance);
-    cv::putText(*img, dis2sl_text, cv::Point(pos_x, pos_y),
-                cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(128, 255, 0),
-                thickness);
-  }
-  // draw "Signals Num"
-  pos_y += step_y;
-  if (light_debug->valid_pos()) {
-    std::string signal_txt = "Signals Num: " + std::to_string(lights->size());
-    cv::putText(*img, signal_txt, cv::Point(pos_x, pos_y),
-                cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0),
-                thickness);
-  }
-  pos_y += step_y;
+  //double distance = light_debug->distance_to_stop_line();
+  // if (lights->size() > 0) {
+  //   std::string dis2sl_text = cv::format("dis2sl=%lf", distance);
+  //   cv::putText(*img, dis2sl_text, cv::Point(pos_x, pos_y),
+  //               cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(128, 255, 0),
+  //               thickness);
+  // }
+  // // draw "Signals Num"
+  // pos_y += step_y;
+ // if (light_debug->valid_pos()) {
+ //   std::string signal_txt = "Signals Num: " + std::to_string(lights->size());
+ //   cv::putText(*img, signal_txt, cv::Point(pos_x, pos_y),
+  //              cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0),
+   //             thickness);
+//  }
+//  pos_y += step_y;
   // // draw "No Pose info."
   // pos_y += step_y;
   // if (!light_debug->valid_pos()) {
@@ -120,18 +125,18 @@ void OutputDebugImg(const std::shared_ptr<ImageLights> &image_lights,
   //             cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0), thickness);
 
   
-  std::string signal_txt = "camera id: " + image_lights->image->camera_id_str();
-  cv::putText(*img, signal_txt, cv::Point(pos_x, pos_y), cv::FONT_HERSHEY_PLAIN,
-              font_scale, CV_RGB(255, 0, 0), thickness);
+  // std::string signal_txt = "camera id: " + image_lights->image->camera_id_str();
+  // cv::putText(*img, signal_txt, cv::Point(pos_x, pos_y), cv::FONT_HERSHEY_PLAIN,
+  //             font_scale, CV_RGB(255, 0, 0), thickness);
   
-  // draw image border size (offset between hdmap-box and detection-box)
-  //    if (light_debug->project_error() > 100) {
-  std::string img_border_txt =
-      "Offset size: " + std::to_string(light_debug->project_error());
-  int kPosYOffset = rows - (step_y * 2);
-  cv::putText(*img, img_border_txt, cv::Point(pos_x, kPosYOffset),
-              cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0), thickness);
-  //    }
+  // // draw image border size (offset between hdmap-box and detection-box)
+  // //    if (light_debug->project_error() > 100) {
+  // std::string img_border_txt =
+  //     "Offset size: " + std::to_string(light_debug->project_error());
+  // int kPosYOffset = rows - (step_y * 2);
+  // cv::putText(*img, img_border_txt, cv::Point(pos_x, kPosYOffset),
+  //             cv::FONT_HERSHEY_PLAIN, font_scale, CV_RGB(255, 0, 0), thickness);
+  // //    }
 
   //cv::resize(*img, *img, cv::Size(960, 540));
 
@@ -223,10 +228,7 @@ double enter_proc_latency =0;
   // verify image_lights from cameras
   
   RectifyOption rectify_option;
-  if (!VerifyImageLights(*image_lights, &rectify_option.camera_id)) {
-   AERROR << "TLProcSubnode invalid image_lights ";
-   return false;
-  }
+
   if (!image_lights->image->GenerateMat()) {
     AERROR << "TLProcSubnode failed to generate mat";
     return false;
@@ -334,17 +336,14 @@ bool TLProcSubnode::ProcEventYoloNetwork(const Event &event) {
   double enter_proc_latency =0;
  
   RectifyOption rectify_option;
-  if (!VerifyImageLights(*image_lights, &rectify_option.camera_id)) {
-   AERROR << "TLProcSubnode invalid image_lights ";
-   return false;
-  }
+
   if (!image_lights->image->GenerateMat()) {
     AERROR << "TLProcSubnode failed to generate mat";
     return false;
   }
  
 
-  // update image_border
+      // update image_border
   MutexLock lock(&mutex_);
   // int cam_id = static_cast<int>(image_lights->camera_id);
   //ComputeImageBorder(*image_lights,
@@ -593,10 +592,25 @@ bool TLProcSubnode::PublishMessage(
   TrafficLight_Color bufColor=TrafficLight_Color_UNKNOWN;
    double bufConf=-1;
   // add traffic light result
+  double counter=0;
   for (const auto &light : *lights) {
+  
+    if (light->status.confidence<=0.2)
+    {
+      continue;
+    }
+     counter++;
+
     TrafficLight *light_result = result.add_traffic_light();
-    light_result->set_id(light->info.id().id());
     
+      if (light->info.id().id()=="signal_0")
+        light_result->set_id("signal_5");
+      else if (light->info.id().id()=="signal_4")
+        light_result->set_id("signal_2");
+      else
+        light_result->set_id(light->info.id().id());
+  
+
     if (bufColor!=TrafficLight_Color_UNKNOWN)
     {
      light_result->set_color(bufColor);
@@ -604,11 +618,15 @@ bool TLProcSubnode::PublishMessage(
     
     }
     else  {
+    
     light_result->set_color(light->status.color);
     light_result->set_confidence(light->status.confidence);
-  
     }
-    
+    if (light->info.id().id()=="signal_2")
+    {
+    bufColor=light->status.color;
+    bufConf=light->status.confidence;
+    }
     if (light->info.id().id()=="signal_0")
     {
     bufColor=light->status.color;
@@ -617,73 +635,85 @@ bool TLProcSubnode::PublishMessage(
   }
 
   // set contain_lights
-  result.set_contain_lights(image_lights->num_signals > 0);
+  result.set_contain_lights(counter > 0);
 
   // add traffic light debug info
-  TrafficLightDebug *light_debug = result.mutable_traffic_light_debug();
+  //TrafficLightDebug *light_debug = result.mutable_traffic_light_debug();
 
   // set signal number
   AINFO << "TLOutputSubnode num_signals: " << image_lights->num_signals
         << ", camera_id: " << kCameraIdToStr.at(image_lights->camera_id)
         << ", is_pose_valid: " << image_lights->is_pose_valid
         << ", ts: " << GLOG_TIMESTAMP(image_lights->timestamp);
-  light_debug->set_signal_num(image_lights->num_signals);
+ // light_debug->set_signal_num(image_lights->num_signals);
 
   // Crop ROI
-  if (lights->size() > 0 && lights->at(0)->region.debug_roi.size() > 0) {
-    auto &crop_roi = lights->at(0)->region.debug_roi[0];
-    auto tl_cropbox = light_debug->mutable_cropbox();
-    tl_cropbox->set_x(crop_roi.x);
-    tl_cropbox->set_y(crop_roi.y);
-    tl_cropbox->set_width(crop_roi.width);
-    tl_cropbox->set_height(crop_roi.height);
-  }
+  // if (lights->size() > 0 && lights->at(0)->region.debug_roi.size() > 0) {
+ 
+ 
+  //   auto &crop_roi = lights->at(0)->region.debug_roi[0];
+  //   auto tl_cropbox = light_debug->mutable_cropbox();
+  //   tl_cropbox->set_x(crop_roi.x);
+  //   tl_cropbox->set_y(crop_roi.y);
+  //   tl_cropbox->set_width(crop_roi.width);
+  //   tl_cropbox->set_height(crop_roi.height);
+  // }
 
   // Rectified ROI
-  for (const auto &light : *lights) {
-    auto &rectified_roi = light->region.rectified_roi;
-    auto tl_rectified_box = light_debug->add_box();
-    tl_rectified_box->set_x(rectified_roi.x);
-    tl_rectified_box->set_y(rectified_roi.y);
-    tl_rectified_box->set_width(rectified_roi.width);
-    tl_rectified_box->set_height(rectified_roi.height);
-    tl_rectified_box->set_color(light->status.color);
-    tl_rectified_box->set_selected(true);
-  }
+  // for (const auto &light : *lights) {
+  //   if (light->status.confidence<=0.03)
+  //     continue;
+ 
+  //   auto &rectified_roi = light->region.rectified_roi;
+  // //  auto tl_rectified_box = light_debug->add_box();
+  //   tl_rectified_box->set_x(rectified_roi.x);
+  //   tl_rectified_box->set_y(rectified_roi.y);
+  //   tl_rectified_box->set_width(rectified_roi.width);
+  //   tl_rectified_box->set_height(rectified_roi.height);
+  //   tl_rectified_box->set_color(light->status.color);
+  //   tl_rectified_box->set_selected(true);
+  // }
 
-  // Projection ROI
-  for (const auto &light : *lights) {
-    auto &projection_roi = light->region.projection_roi;
-    auto tl_projection_box = light_debug->add_box();
-    tl_projection_box->set_x(projection_roi.x);
-    tl_projection_box->set_y(projection_roi.y);
-    tl_projection_box->set_width(projection_roi.width);
-    tl_projection_box->set_height(projection_roi.height);
-  }
+  // // Projection ROI
+  // for (const auto &light : *lights) {
+  //       if (light->status.confidence<=0.03)
+  //     continue;
+ 
+  //   auto &projection_roi = light->region.projection_roi;
+  //   auto tl_projection_box = light_debug->add_box();
+  //   tl_projection_box->set_x(projection_roi.x);
+  //   tl_projection_box->set_y(projection_roi.y);
+  //   tl_projection_box->set_width(projection_roi.width);
+  //   tl_projection_box->set_height(projection_roi.height);
+  // }
 
   // debug ROI (candidate detection boxes)
-  if (lights->size() > 0 && lights->at(0)->region.debug_roi.size() > 0) {
-    for (size_t i = 1; i < lights->at(0)->region.debug_roi.size(); ++i) {
-      auto &debug_roi = lights->at(0)->region.debug_roi[i];
-      auto tl_debug_box = light_debug->add_box();
-      tl_debug_box->set_x(debug_roi.x);
-      tl_debug_box->set_y(debug_roi.y);
-      tl_debug_box->set_width(debug_roi.width);
-      tl_debug_box->set_height(debug_roi.height);
-    }
-  }
+  // if (lights->size() > 0 && lights->at(0)->region.debug_roi.size() > 0) {
+  //       if (light->status.confidence<=0.03)
+  //     continue;
 
-  light_debug->set_ts_diff_pos(image_lights->diff_image_pose_ts);
-  light_debug->set_ts_diff_sys(image_lights->diff_image_sys_ts);
-  light_debug->set_valid_pos(image_lights->is_pose_valid);
-  light_debug->set_project_error(image_lights->offset);
-  light_debug->set_camera_id(image_lights->camera_id);
+  //   for (size_t i = 1; i < lights->at(0)->region.debug_roi.size(); ++i) {
+  //     auto &debug_roi = lights->at(0)->region.debug_roi[i];
+  //     auto tl_debug_box = light_debug->add_box();
+  //     tl_debug_box->set_x(debug_roi.x);
+  //     tl_debug_box->set_y(debug_roi.y);
+  //     tl_debug_box->set_width(debug_roi.width);
+  //     tl_debug_box->set_height(debug_roi.height);
+  //   }
+  // }
 
-  if (lights->size() > 0) {
-    double distance = Distance2Stopline(image_lights->pose.pose(),
-                                        lights->at(0)->info.stop_line());
-    light_debug->set_distance_to_stop_line(distance);
-  }
+  // light_debug->set_ts_diff_pos(image_lights->diff_image_pose_ts);
+  // light_debug->set_ts_diff_sys(image_lights->diff_image_sys_ts);
+  // light_debug->set_valid_pos(image_lights->is_pose_valid);
+  // light_debug->set_project_error(image_lights->offset);
+  // light_debug->set_camera_id(image_lights->camera_id);
+
+ // if (lights->size() > 0) {
+  //  double distance = Distance2Stopline(image_lights->pose.pose(),
+                                        //lights->at(0)->info.stop_line());
+    //light_debug->set_distance_to_stop_line(distance);
+// }
+TrafficLightDebug *light_debug ;
  if (FLAGS_output_debug_img) {
    OutputDebugImg(image_lights, light_debug, &img);
  }

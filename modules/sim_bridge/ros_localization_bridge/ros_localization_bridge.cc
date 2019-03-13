@@ -113,8 +113,8 @@ void RosLocalizationBridge::OnChassis(const canbus::Chassis &msg)
   float base_length = 2.570;
   float max_steering_angle = 37 * (M_PI/180.0);
 
-  double steering_angle = (3.0/4.0)* 1.05 * (msg.steering_percentage() / 110.0) * max_steering_angle;
-  double angular_vel = -msg.speed_mps() * tan(steering_angle) / base_length;
+  double steering_angle = (3.0/4.0)* 1.0 * (msg.steering_percentage() / 110.0) * max_steering_angle;
+  double angular_vel = msg.speed_mps() * tan(steering_angle) / base_length;
 
 
   // double dt = 1.0/100.0;

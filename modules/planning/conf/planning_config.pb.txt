@@ -12,7 +12,7 @@ em_planner_config {
 
     dp_poly_path_config {
         sample_points_num_each_level: 7
-        step_length_max: 40.0
+        step_length_max: 10.0
         step_length_min: 5.0
         lateral_sample_offset: 0.5
         lateral_adjust_coeff: 0.5
@@ -22,7 +22,7 @@ em_planner_config {
         obstacle_collision_distance: 0.5
         obstacle_risk_distance: 2.0
         obstacle_collision_cost: 1e8
-        path_l_cost: 100.0
+        path_l_cost: 200.0
         path_dl_cost: 8e3
         path_ddl_cost: 5e1
         path_l_cost_param_l0: 1.50
@@ -32,6 +32,13 @@ em_planner_config {
         path_end_l_cost: 1.0e4
         sidepass_distance: 4.0
         navigator_sample_num_each_level: 3
+        task1_distance: 3.0
+        task1_s_start: 20.0
+        task1_s_stop: 40.0
+        task1_min_dist_obs2: 13.0
+        task1_lon_distance: 12.0
+        task1_use_fix_long_dist: true
+        task1_fix_long_dist: 15.0
     }
     dp_st_speed_config {
         total_path_length: 149
@@ -100,11 +107,11 @@ em_planner_config {
     }
     qp_st_speed_config {
         total_path_length: 250.0
-        total_time: 16.0
-        preferred_max_acceleration: 2.5
-        preferred_min_deceleration: -3.3
-        max_acceleration: 3.0
-        min_deceleration: -4.5
+        total_time: 20.0
+        preferred_max_acceleration: 4.5
+        preferred_min_deceleration: -4.3
+        max_acceleration: 4.0
+        min_deceleration: -5.5
 
         qp_spline_config {
             number_of_discrete_graph_t: 4

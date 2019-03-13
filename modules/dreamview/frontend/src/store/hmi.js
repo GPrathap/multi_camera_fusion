@@ -26,6 +26,7 @@ export default class HMI {
     @observable moduleStatus = observable.map();
     @observable hardwareStatus = observable.map();
     @observable enableStartAuto = false;
+    @observable controlPaused = false;
 
     displayName = {};
     utmZoneId = 10;
@@ -72,6 +73,8 @@ export default class HMI {
         if (newStatus.currentVehicle) {
             this.currentVehicle = newStatus.currentVehicle;
         }
+        this.controlPaused = newStatus.systemStatus.requireControlPause || false;
+
         if (newStatus.systemStatus) {
             if (newStatus.systemStatus.modules) {
                 for (const key in newStatus.systemStatus.modules) {

@@ -80,35 +80,24 @@ class Parking : public apollo::common::ApolloApp {
   virtual ~Parking() = default;
 
  private:
-  // Upon receiving pad message
-  void OnPad(const apollo::control::PadMessage &pad);
-
-  // Upon receiving monitor message
-  void OnMonitor(
-      const apollo::common::monitor::MonitorMessage &monitor_message);
-
   // Watch dog timer
   void OnTimer(const ros::TimerEvent &);
 
-  common::Status ProduceControlCommand(control::ControlCommand *control_command);
-  common::Status CheckInput();
-  common::Status CheckTimestamp();
-  common::Status CheckPad();
-
-  void SendCmd(control::ControlCommand *control_command);
+  void SendRouteRequest(double x_s, double y_s, double x, double y);
 
  private:
+
+  void SendPAD();
   double init_time_ = 0.0;
+  double park_x, park_y;
 
   localization::LocalizationEstimate localization_;
   canbus::Chassis chassis_;
-  control::PadMessage pad_msg_;
   ParkingState parking_state_;
 
 
 
   bool estop_ = false;
-  bool pad_received_ = false;
 
   unsigned int status_lost_ = 0;
   unsigned int status_sanity_check_failed_ = 0;

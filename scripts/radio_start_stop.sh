@@ -9,18 +9,16 @@ source "${DIR}/apollo_base.sh"
 source /home/tmp/ros/setup.bash
 
 function start() {
-    LOG="${APOLLO_ROOT_DIR}/data/log/geo2loc.out"
-    CMD="roslaunch geo2loc geo2loc_rtk.launch"
-    NUM_PROCESSES_G2L="$(pgrep -c -f "geo2loc.launch")"
-    #echo "NUM_PROCESSES" ${NUM_PROCESSES_G2L}
-    if [ "${NUM_PROCESSES_G2L}" -eq 0 ]; then
-        #echo "Start geo2loc"
+    LOG="${APOLLO_ROOT_DIR}/data/log/radio_start_stop.out"
+    CMD="roslaunch radio_start_stop radio.launch"
+    NUM_PROCESSES="$(pgrep -c -f "radio.launch")"
+    if [ "${NUM_PROCESSES}" -eq 0 ]; then
         eval "nohup ${CMD} </dev/null >${LOG} 2>&1 &"
     fi
 }
 
 function stop() {
-    pkill -9 -f nmea_serial_driver ; pkill -9 -f mtnode.py ; pkill -9 -f ekf_localization_node; pkill -9 -f ardulog; pkill -9 -f geo2loc 
+    pkill -9 -f radio_start_stop
 }
 
 # run command_name module_name
