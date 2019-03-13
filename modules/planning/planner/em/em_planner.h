@@ -103,6 +103,8 @@ class EMPlanner : public Planner {
   SpeedData GenerateStopProfile(const double init_speed,
                                 const double init_acc) const;
 
+  SpeedData GenerateZeroStopProfile() const;
+
   SpeedData GenerateStopProfileFromPolynomial(const double init_speed,
                                               const double init_acc) const;
 

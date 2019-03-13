@@ -320,8 +320,9 @@ class AdapterManager {
   REGISTER_ADAPTER(CompressedImageFrontCamera);
   REGISTER_ADAPTER(CompressedImageFrontLeftSide);
   REGISTER_ADAPTER(CompressedImageFrontRightSide);
-  REGISTER_ADAPTER(PointCloudDebug); 
-  REGISTER_ADAPTER(HDMAPPub);  
+  REGISTER_ADAPTER(PointCloudDebug);
+  REGISTER_ADAPTER(PauseControl);
+  REGISTER_ADAPTER(HDMAPPub);
   DECLARE_SINGLETON(AdapterManager);
 };
 

@@ -80,6 +80,7 @@ bool UnityRecognize::RecognizeStatus(const Image &image,
         AINFO << "Not support yet!";
       }
     } else {
+
       light->status.color = UNKNOWN_COLOR;
       light->status.confidence = 0;
       AINFO << "Unknown Detection Class: " << light->region.detect_class_id

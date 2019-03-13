@@ -1008,24 +1008,30 @@ void SimulationWorldService::GetRoutePathAsJsonForUVObs() const {
 
   std_msgs::String msg;
   Json response;
+  response["type"] = "RoutePath";
   response["routingTime"] = world_.routing_time();
   response["projection"] = projection;
-  response["center"] = Json::array();
-  response["center"].push_back({{"x", center_x},
-                               {"y", center_y},
-                               {"z", 0.0}});
+
+  auto center = Json::array();
+  center.push_back(center_x);
+  center.push_back(center_y);
+  center.push_back(0.0);
   response["routePath"] = Json::array();
   for (const auto &route_path : route_paths_) {
-    Json path;
-    path["point"] = Json::array();
+    auto points = Json::array();
     for (const auto &route_point : route_path.point()) {
-      path["point"].push_back({{"x", route_point.x()},
-                               {"y", route_point.y()},
-                               {"z", route_point.z()}});
+        auto point = Json::array();
+        point.push_back(route_point.x());
+        point.push_back(route_point.y());
+        point.push_back(route_point.z());
+        points.push_back(point);
     }
-    response["routePath"].push_back(path);
+    Json obj;
+    obj["sector"]="U39";
+    obj["center"] = center;
+    obj["point"] = points;
+    response["routePath"].push_back(obj);
   }
-  
   msg.data = response.dump();
   sleep(1);// Wait to make sure the connection has been established before
           // publishing.

@@ -292,6 +292,9 @@ void AdapterManager::Init(const AdapterManagerConfig &configs) {
       case AdapterConfig::COMPRESSED_IMAGE_FRONT_RIGHT_SIDE:
         EnableCompressedImageFrontRightSide(FLAGS_image_front_right_side_topic, config);
             break;
+      case AdapterConfig::PAUSE_CONTROL:
+        EnablePauseControl(FLAGS_pause_control_topic, config);
+        break;
       default:
         AERROR << "Unknown adapter config type!";
         break;

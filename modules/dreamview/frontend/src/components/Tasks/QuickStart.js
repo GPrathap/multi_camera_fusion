@@ -76,6 +76,20 @@ export default class QuickStarter extends React.Component {
                 this.speechSynthesis('Start Auto');
             },
         };
+
+        this.controlPause = {
+            "Pause Auto": () => {
+                WS.toggleControlPause(true);
+                this.speechSynthesis('Pause auto');
+            },
+        };
+
+        this.controlPlay = {
+            "Play Auto": () => {
+                WS.toggleControlPause(false);
+                this.speechSynthesis('Play auto');
+            },
+        };
     }
 
     componentWillUpdate() {
@@ -101,6 +115,10 @@ export default class QuickStarter extends React.Component {
                 <div className="card-content-column">
                     <CommandGroup disabled={tasksPanelLocked} commands={this.setup} />
                     <CommandGroup disabled={tasksPanelLocked} commands={this.reset} />
+                    {<CommandGroup disabled={tasksPanelLocked}
+                        commands={this.controlPause} />}
+                    {<CommandGroup disabled={tasksPanelLocked}
+                        commands={this.controlPlay} extraCommandClass="warning" />}
                     <CommandGroup disabled={!hmi.enableStartAuto || tasksPanelLocked}
                                   commands={this.auto}
                                   extraButtonClass="start-auto-button"
