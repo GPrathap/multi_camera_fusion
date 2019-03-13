@@ -154,7 +154,7 @@ using CompressedImageFrontRightSideAdapter = Adapter<::sensor_msgs::CompressedIm
 using CompressedImageFrontCameraAdapter = Adapter<::sensor_msgs::CompressedImage>;
 using PointCloudDebugAdapter = Adapter<::sensor_msgs::PointCloud2>;
 using PauseControlAdapter = Adapter<std_msgs::String>;
-
+using HDMAPPubAdapter = Adapter<std_msgs::String>;
 }  // namespace adapter
 }  // namespace common
 }  // namespace apollo

@@ -37,6 +37,12 @@ DEFINE_string(control_command_topic, "/apollo/control",
 DEFINE_string(pointcloud_topic,
               "/apollo/sensor/velodyne64/compensator/PointCloud2",
               "pointcloud topic name");
+DEFINE_string(hd_map_position_topic,
+              "/apollo/hd_map_position",
+              "hd map position publisher topic");
+DEFINE_string(is_published_hd_map_position,
+              "true",
+              "hd map position publisher publish or not");
 DEFINE_string(pointcloud_debug_topic,
               "/apollo/sensor/debug/PointCloud2",
               "pointcloud topic name");

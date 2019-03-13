@@ -62,6 +62,9 @@ void AdapterManager::Init(const AdapterManagerConfig &configs) {
       case AdapterConfig::POINT_CLOUD:
         EnablePointCloud(FLAGS_pointcloud_topic, config);
         break;
+      case AdapterConfig::HDMAP_PUBLISH:
+        EnableHDMAPPub(FLAGS_hd_map_position_topic, config);
+        break;
       case AdapterConfig::POINT_CLOUD_DEBUG:
         EnablePointCloudDebug(FLAGS_pointcloud_debug_topic, config);
         break;

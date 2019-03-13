@@ -83,6 +83,7 @@ message AdapterConfig {
     ODOMETRY_CHASSIS = 76;
     ODOMETRY_GNSS = 77;
     PAUSE_CONTROL = 78;
+    HDMAP_PUBLISH = 79;
   }
   enum Mode {
     RECEIVE_ONLY = 0;
