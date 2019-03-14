@@ -26,5 +26,6 @@ DECLARE_double(guardian_cmd_freq);
 DECLARE_double(guardian_cmd_soft_stop_percentage);
 DECLARE_double(guardian_cmd_emergency_stop_percentage);
 DECLARE_bool(guardian_enabled);
+DECLARE_bool(guardian_skip_commands);
 
 #endif

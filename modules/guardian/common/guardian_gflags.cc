@@ -31,3 +31,6 @@ DEFINE_double(guardian_cmd_emergency_stop_percentage, 50,
 
 DEFINE_bool(guardian_enabled, false,
             "Enable guardian, safe mode activation enabled");
+
+DEFINE_bool(guardian_skip_commands, false,
+            "Even this is enable, discard incoming command for selected triggers");

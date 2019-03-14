@@ -63,7 +63,7 @@ class Guardian : public apollo::common::ApolloApp {
   apollo::monitor::SystemStatus system_status_;
   apollo::control::ControlCommand control_cmd_;
   apollo::guardian::GuardianCommand guardian_cmd_;
-  bool control_paused_;
+  bool control_paused_ = false;
 
   std::mutex mutex_;
 

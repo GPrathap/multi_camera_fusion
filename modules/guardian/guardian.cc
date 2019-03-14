@@ -113,9 +113,10 @@ void Guardian::OnControl(const ControlCommand& message) {
 void Guardian::OnPauseControl(const std_msgs::String& message) {
   AINFO << "Received pause control data: run pause control command callback.";
   std::lock_guard<std::mutex> lock(mutex_);
-  if(message.data.compare("PAUSECAR") != 0){
+  if((message.data.compare("PAUSECAR") != 0) && !FLAGS_guardian_skip_commands){
       auto message_ = Json::parse(message.data);
-      if (message_.find("resolution") != message_.end()) {
+      if (!message_.is_discarded()){
+        if (message_.find("resolution") != message_.end()) {
           if(message_["resolution"] == "forbidden"){
               control_paused_ = 1;
               AERROR << message.data << "Car is not allowed to drive on this road, please consider it again";
@@ -123,7 +124,11 @@ void Guardian::OnPauseControl(const std_msgs::String& message) {
               control_paused_ = 0;
               AINFO << "Message: "<< message.data << ", car is allowed to drive on this road, please consider it again";
           }
+        }
+      }else{
+        AERROR << message.data << " is wrongly formatted, hence discarding the message";
       }
+      
   }else{
     AINFO << "Compare: " << message.data.compare("PAUSECAR");
     control_paused_ = (message.data.compare("PAUSECAR") == 0);
