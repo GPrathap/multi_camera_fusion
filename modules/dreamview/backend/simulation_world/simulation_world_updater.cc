@@ -201,6 +201,17 @@ void SimulationWorldUpdater::RegisterMessageHandlers() {
           AdapterManager::FillRoutingRequestHeader(FLAGS_dreamview_module_name,
                                                    &routing_request);
           AdapterManager::PublishRoutingRequest(routing_request);
+          if(FLAGS_is_published_hd_map_position == "true"){
+            std_msgs::String msg;
+            Json response;
+            response["type"] = "SendStartPosition";
+            response["SendRoutingRequest"] = json; 
+            auto position = json["start"];
+            msg.data = response.dump();
+            sleep(1);// Wait to make sure the connection has been established before
+              // publishing.
+            AdapterManager::PublishHDMAPPub(msg);
+          }
         }
 
         // Publish monitor message.

@@ -586,11 +586,25 @@ void SimulationWorldService::UpdateMainStopDecision(
   double stop_heading = 0.0;
   auto decision = world_main_decision->add_decision();
   decision->set_type(Decision::STOP);
+
+
+  std_msgs::String msg;
+  Json response;
+  response["type"] = "StopDecision";
+  response["routingTime"] = world_.routing_time();
+  auto position = Json::array();
+  
   if (main_decision.has_not_ready()) {
     // The car is not ready!
     // Use the current ADC pose since it is better not to self-drive.
     stop_pt.set_x(world_.auto_driving_car().position_x());
     stop_pt.set_y(world_.auto_driving_car().position_y());
+
+    position.push_back(world_.auto_driving_car().position_x());
+    position.push_back(world_.auto_driving_car().position_y());
+    position.push_back(0.0);
+    response["reason"] = "STOP_REASON_NOT_READY";
+
     stop_heading = world_.auto_driving_car().heading();
     decision->set_stopreason(Decision::STOP_REASON_NOT_READY);
   } else if (main_decision.has_estop()) {
@@ -599,6 +613,12 @@ void SimulationWorldService::UpdateMainStopDecision(
     stop_pt.set_x(world_.auto_driving_car().position_x());
     stop_pt.set_y(world_.auto_driving_car().position_y());
     stop_heading = world_.auto_driving_car().heading();
+
+    position.push_back(world_.auto_driving_car().position_x());
+    position.push_back(world_.auto_driving_car().position_y());
+    position.push_back(0.0);
+    response["reason"] = "STOP_REASON_EMERGENCY";
+
     decision->set_stopreason(Decision::STOP_REASON_EMERGENCY);
     world_.mutable_auto_driving_car()->set_current_signal("EMERGENCY");
   } else {
@@ -607,11 +627,25 @@ void SimulationWorldService::UpdateMainStopDecision(
     stop_pt.set_x(stop.stop_point().x());
     stop_pt.set_y(stop.stop_point().y());
     stop_heading = stop.stop_heading();
+
+    position.push_back(stop.stop_point().x());
+    position.push_back(stop.stop_point().y());
+    position.push_back(0.0);
+    response["reason"] = "STOP_REASON_NORMAL (" + std::to_string(stop.reason_code()) + ")";
+
     if (stop.has_reason_code()) {
       SetStopReason(stop.reason_code(), decision);
     }
   }
 
+  if(FLAGS_is_published_hd_map_position == "true"){
+    response["position"] = position;
+    msg.data = response.dump();
+    sleep(1);// Wait to make sure the connection has been established before
+            // publishing.
+    AdapterManager::PublishHDMAPPub(msg);
+  }
+  
   decision->set_position_x(stop_pt.x() + map_service_->GetXOffset());
   decision->set_position_y(stop_pt.y() + map_service_->GetYOffset());
   decision->set_heading(stop_heading);
