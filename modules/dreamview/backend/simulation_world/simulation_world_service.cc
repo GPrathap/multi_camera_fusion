@@ -631,8 +631,9 @@ void SimulationWorldService::UpdateMainStopDecision(
     position.push_back(stop.stop_point().x());
     position.push_back(stop.stop_point().y());
     position.push_back(0.0);
-    response["reason"] = "STOP_REASON_NORMAL (" + std::to_string(stop.reason_code()) + ")";
-
+    response["reason"] = "STOP_REASON_NORMAL";
+    response["code"] = stop.reason_code();
+    
     if (stop.has_reason_code()) {
       SetStopReason(stop.reason_code(), decision);
     }
@@ -642,7 +643,6 @@ void SimulationWorldService::UpdateMainStopDecision(
     response["position"] = position;
     msg.data = response.dump();
     sleep(1);// Wait to make sure the connection has been established before
-            // publishing.
     AdapterManager::PublishHDMAPPub(msg);
   }
   
