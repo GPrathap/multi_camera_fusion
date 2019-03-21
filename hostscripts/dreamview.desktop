@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Dreamview
+Exec=/home/race/apollo/hostscripts/dv-full-screen.sh
+Icon=/home/race/apollo/modules/dreamview/frontend/assets/images/logo_apollo.png
+
