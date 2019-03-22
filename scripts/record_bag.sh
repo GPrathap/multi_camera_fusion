@@ -83,7 +83,7 @@ function start() {
         /vel \
         /odom \
         /string_gnss \
-        /apollo/sensor/conti_radar
+        /apollo/sensor/conti_radar \
         /apollo/monitor/static_info </dev/null >"${LOG}" 2>&1 &
     fi
 }
