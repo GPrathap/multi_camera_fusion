@@ -71,7 +71,13 @@ modules {
   }
 }
 modules {
-  name: "perception"
+  name: "radio_start_stop"
+  process_conf {
+    process_cmd_keywords: "radio_start_stop"
+  }
+}
+modules {
+  name: "perception_front_cam+lidar16"
   process_conf {
     process_cmd_keywords: "modules/perception/perception"
   }
@@ -131,6 +137,24 @@ modules {
   }
 }
 modules {
+  name: "geo2loc"
+  process_conf {
+    process_cmd_keywords: "geo2loc_rtk.launch"
+  }
+}
+modules {
+  name: "front_and_side_cameras"
+  process_conf {
+    process_cmd_keywords: "start_pylon_camera.launch"
+  }
+}
+modules {
+  name: "ros_localization_bridge"
+  process_conf {
+    process_cmd_keywords: "sim_bridge"
+  }
+}
+modules {
   name: "radar"
   process_conf {
     process_cmd_keywords: "modules/drivers/radar/conti_radar/conti_radar"
@@ -140,7 +164,7 @@ modules {
   }
 }
 modules {
-  name: "record_bag"
+  name: "record_bag_kia"
   process_conf {
     process_cmd_keywords: "rosbag/record"
   }
@@ -178,7 +202,13 @@ modules {
 modules {
   name: "velodyne_16"
   process_conf {
-    process_cmd_keywords: "sensor_velodyne16_driver"
+    process_cmd_keywords: "start_velodyne_16.launch"
+  }
+}
+modules {
+  name: "parking"
+  process_conf {
+    process_cmd_keywords: "modules/parking/parking"
   }
 }
 hardware {
