@@ -36,7 +36,7 @@ function start() {
 }
 
 function stop() {
-    pkill -SIGTERM -f start_velodyne_16.launch
+    pkill -9 -f start_velodyne_16.launch ; pkill -9 -f velodyne16_nodelet_manager ; pkill -9 -f sensor_velodyne16_convert; pkill -9 -f sensor_velodyne16_compensator
 }
 
 # run command_name module_name
