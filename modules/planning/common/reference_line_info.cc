@@ -629,10 +629,12 @@ void ReferenceLineInfo::ExportEngageAdvice(EngageAdvice* engage_advice) const {
   auto* prev_advice = GetPlanningStatus()->mutable_engage_advice();
   if (!prev_advice->has_advice()) {
     prev_advice->set_advice(EngageAdvice::DISALLOW_ENGAGE);
+    AERROR << "DISALLOW ENGAGE FROM PLANNING 1";
   }
   if (!IsDrivable()) {
     if (prev_advice->advice() == EngageAdvice::DISALLOW_ENGAGE) {
       prev_advice->set_advice(EngageAdvice::DISALLOW_ENGAGE);
+      AERROR << "DISALLOW ENGAGE FROM PLANNING 2";
     } else {
       prev_advice->set_advice(EngageAdvice::PREPARE_DISENGAGE);
     }
@@ -640,6 +642,7 @@ void ReferenceLineInfo::ExportEngageAdvice(EngageAdvice* engage_advice) const {
   } else if (!is_on_reference_line_) {
     if (prev_advice->advice() == EngageAdvice::DISALLOW_ENGAGE) {
       prev_advice->set_advice(EngageAdvice::DISALLOW_ENGAGE);
+      AERROR << "DISALLOW ENGAGE FROM PLANNING 3";
     } else {
       prev_advice->set_advice(EngageAdvice::PREPARE_DISENGAGE);
     }
@@ -652,6 +655,7 @@ void ReferenceLineInfo::ExportEngageAdvice(EngageAdvice* engage_advice) const {
         kMaxAngleDiff) {
       if (prev_advice->advice() == EngageAdvice::DISALLOW_ENGAGE) {
         prev_advice->set_advice(EngageAdvice::DISALLOW_ENGAGE);
+        AERROR << "DISALLOW ENGAGE FROM PLANNING 4";
       } else {
         prev_advice->set_advice(EngageAdvice::PREPARE_DISENGAGE);
       }

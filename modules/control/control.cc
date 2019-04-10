@@ -145,6 +145,7 @@ Status Control::ProduceControlCommand(ControlCommand *control_command) {
     control_command->mutable_engage_advice()->set_reason(
         status.error_message());
     estop_ = true;
+    AERROR << "DISALLOW ENGAGE FROM CONTROL 1";
   } else {
     Status status_ts = CheckTimestamp();
     if (!status_ts.ok()) {
@@ -157,6 +158,7 @@ Status Control::ProduceControlCommand(ControlCommand *control_command) {
             apollo::common::EngageAdvice::DISALLOW_ENGAGE);
         control_command->mutable_engage_advice()->set_reason(
             status.error_message());
+          AERROR << "DISALLOW ENGAGE FROM CONTROL 2";
       }
     } else {
       control_command->mutable_engage_advice()->set_advice(

@@ -395,7 +395,7 @@ void Planning::RunOnce() {
   << " y: " << frame_->PlanningStartPoint().path_point().y();
 
   auto cur_point = frame_->PlanningStartPoint().path_point();
-  if (cur_point.y()>-1.0 && fixed_trajectory_)
+  if (cur_point.y()>3.0 && fixed_trajectory_)
   {
     ADEBUG << "Run regular planning!";
     fixed_trajectory_ = false;

@@ -390,16 +390,18 @@ Chassis KiaSoulEvController::chassis() {
   // give engage_advice based on error_code and canbus feedback
   if (chassis_error_mask_ || (chassis_.throttle_percentage() == 0.0) ||
       (chassis_.brake_percentage() == 0.0)) {
-        // AINFO << "Chassis error or 0 percentage: error mask " << chassis_error_mask_ << " throttle " << chassis_.throttle_percentage() << " brake " << chassis_.brake_percentage();
+        AINFO << "Chassis error or 0 percentage: error mask " << chassis_error_mask_ << " throttle " << chassis_.throttle_percentage() << " brake " << chassis_.brake_percentage();
     chassis_.mutable_engage_advice()->set_advice(
         apollo::common::EngageAdvice::DISALLOW_ENGAGE);
     chassis_.mutable_engage_advice()->set_reason("Chassis error!");
+    AERROR << "DISALLOW ENGAGE FROM CHASSIS 1";
   } else if (chassis_.parking_brake() || CheckSafetyError(chassis_detail)) {
     // AINFO << "Parking brake or safety eror: parking brake " << chassis_.parking_brake() << " safety error " << CheckSafetyError(chassis_detail);
     chassis_.mutable_engage_advice()->set_advice(
         apollo::common::EngageAdvice::DISALLOW_ENGAGE);
     chassis_.mutable_engage_advice()->set_reason(
         "Vehicle is not in a safe state to engage!");
+    AERROR << "DISALLOW ENGAGE FROM CHASSIS 2";
   } else {
     chassis_.mutable_engage_advice()->set_advice(
         apollo::common::EngageAdvice::READY_TO_ENGAGE);

@@ -32,13 +32,13 @@ em_planner_config {
         path_end_l_cost: 1.0e4
         sidepass_distance: 4.0
         navigator_sample_num_each_level: 3
-        task1_distance: 3.0
+        task1_distance: 0.0
         task1_s_start: 20.0
         task1_s_stop: 40.0
         task1_min_dist_obs2: 13.0
         task1_lon_distance: 12.0
         task1_use_fix_long_dist: true
-        task1_fix_long_dist: 15.0
+        task1_fix_long_dist: 15.8
     }
     dp_st_speed_config {
         total_path_length: 149
