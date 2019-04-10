@@ -455,48 +455,6 @@ void SimulationWorldService::UpdateSimulationWorld(const Chassis &chassis) {
   UpdateTurnSignal(chassis.signal(), auto_driving_car);
 
   auto_driving_car->set_disengage_type(DeduceDisengageType(chassis));
-
- 
-  if(FLAGS_is_published_hd_map_position == "true"){
-    std_msgs::String msg;
-    Json response;
-    bool is_started = false;
-
-    response["type"] = "SendStartPosition";
-    switch (chassis.driving_mode()) {
-        case Chassis::COMPLETE_AUTO_DRIVE:
-          response["code"] = "COMPLETE_AUTO_DRIVE";
-          is_started = true;
-          break;
-        case Chassis::COMPLETE_MANUAL:
-          response["code"] = "COMPLETE_MANUAL";
-          is_started = true;
-          break;
-        case Chassis::AUTO_STEER_ONLY:
-          response["code"] = "AUTO_STEER_ONLY";
-          is_started = true;
-          break;
-        case Chassis::AUTO_SPEED_ONLY:
-          response["code"] = "AUTO_SPEED_ONLY";
-          is_started = true;
-          break;
-        case Chassis::EMERGENCY_MODE:
-          response["code"] = "EMERGENCY_MODE";
-          is_started = true;
-          break;
-        default:
-          response["code"] = "DISENGAGE_UNKNOWN";
-          is_started = false;
-          break;
-    }
-    
-    if(is_started){
-        msg.data = response.dump();
-        sleep(1);// Wait to make sure the connection has been established before
-            // publishing.
-        AdapterManager::PublishHDMAPPub(msg);
-    }
-  }
 } 
 
 Object &SimulationWorldService::CreateWorldObjectIfAbsent(
@@ -674,14 +632,18 @@ void SimulationWorldService::UpdateMainStopDecision(
     position.push_back(stop.stop_point().y());
     position.push_back(0.0);
     response["reason"] = "STOP_REASON_NORMAL";
-    response["code"] = stop.reason_code();
+    //TODO Fix to correct stop code
+    // response["code"] = stop.reason_code();
+    response["code"] = 2;
     
     if (stop.has_reason_code()) {
+      AINFO << "Has stop reason code: " << stop.reason_code() << " Speed: " << world_.auto_driving_car().speed();
       SetStopReason(stop.reason_code(), decision);
     }
   }
 
-  if(FLAGS_is_published_hd_map_position == "true"){
+  if((FLAGS_is_published_hd_map_position == "true") && ((double) world_.auto_driving_car().speed() < 0.2)){
+    AINFO << "Publishing to Diginavis: " << response.dump();
     response["position"] = position;
     msg.data = response.dump();
     sleep(1);// Wait to make sure the connection has been established before

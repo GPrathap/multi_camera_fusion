@@ -21,6 +21,7 @@
 #include <vector>
 
 #include "gflags/gflags.h"
+#include "google/protobuf/util/json_util.h"
 #include "modules/common/adapters/adapter_manager.h"
 #include "modules/common/configs/vehicle_config_helper.h"
 #include "modules/common/util/json_util.h"
@@ -40,6 +41,7 @@ using apollo::common::adapter::AdapterManager;
 using apollo::common::time::Clock;
 using apollo::common::util::JsonUtil;
 using Json = WebSocketHandler::Json;
+using ::google::protobuf::util::MessageToJsonString;
 using RLock = boost::shared_lock<boost::shared_mutex>;
 
 HMI::HMI(WebSocketHandler *websocket, MapService *map_service)
@@ -143,6 +145,46 @@ void HMI::RegisterMessageHandlers() {
           Chassis::DrivingMode mode;
           if (Chassis::DrivingMode_Parse(new_mode, &mode)) {
             HMIWorker::ChangeToDrivingMode(mode);
+            if(FLAGS_is_published_hd_map_position == "true"){
+              std_msgs::String msg;
+              Json response;
+              bool is_started = false;
+
+              response["type"] = "SendStartPosition";
+              switch (mode) {
+                  case Chassis::COMPLETE_AUTO_DRIVE:
+                    response["code"] = "COMPLETE_AUTO_DRIVE";
+                    is_started = true;
+                    break;
+                  case Chassis::COMPLETE_MANUAL:
+                    response["code"] = "COMPLETE_MANUAL";
+                    is_started = true;
+                    break;
+                  case Chassis::AUTO_STEER_ONLY:
+                    response["code"] = "AUTO_STEER_ONLY";
+                    is_started = true;
+                    break;
+                  case Chassis::AUTO_SPEED_ONLY:
+                    response["code"] = "AUTO_SPEED_ONLY";
+                    is_started = true;
+                    break;
+                  case Chassis::EMERGENCY_MODE:
+                    response["code"] = "EMERGENCY_MODE";
+                    is_started = true;
+                    break;
+                  default:
+                    response["code"] = "DISENGAGE_UNKNOWN";
+                    is_started = false;
+                    break;
+              }
+              
+              if(is_started){
+                  msg.data = response.dump();
+                  sleep(1);// Wait to make sure the connection has been established before
+                      // publishing.
+                  AdapterManager::PublishHDMAPPub(msg);
+              }
+            }
           } else {
             AERROR << "Unknown driving mode " << new_mode;
           }
