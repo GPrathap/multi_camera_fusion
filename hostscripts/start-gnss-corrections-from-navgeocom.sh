@@ -31,7 +31,8 @@ function start() {
         #tmux send-keys -t gnss-corr:0.1 '/home/race/soul/rtklib_2.4.2/app/str2str/gcc/str2str -in tcpcli://localhost:5000  -out serial://rtk_corr:230400:8:o:1:off' C-m
 	#
         ## GNSS correction RTCM messages from Navigeocom
-	tmux send-keys -t gnss-corr:0.1 '/home/race/soul/rtklib_2.4.2/app/str2str/gcc/str2str -p 55.754452 48.740814 1 -in ntrip://aidgab:qwe123qwe@smartnet.navgeocom.ru:7016/USLN -out serial://rtk_corr:230400:8:o:1:off' C-m
+	# tmux send-keys -t gnss-corr:0.1 '/home/race/soul/rtklib_2.4.2/app/str2str/gcc/str2str -p 55.754452 48.740814 1 -in ntrip://aidgab:qwe123qwe@smartnet.navgeocom.ru:7016/USLN -out serial://rtk_corr:230400:8:o:1:off' C-m
+	tmux send-keys -t gnss-corr:0.1 '/home/race/soul/rtklib_2.4.2/app/str2str/gcc/str2str -p 55.754452 48.740814 1 -in ntrip://robolabinno:WiVCLD4hXZ92q8V@smartnet.navgeocom.ru:7016/USLN -out serial://rtk_corr:230400:8:o:1:off' C-m
 	## GNSS correction RTCM messages from Raspberry
         #tmux send-keys -t gnss-corr:0.1 '/home/race/soul/rtklib_2.4.2/app/str2str/gcc/str2str -in tcpcli://188.130.155.105:32323 -out file://test-corrections-raspberry' C-m
         sleep 1

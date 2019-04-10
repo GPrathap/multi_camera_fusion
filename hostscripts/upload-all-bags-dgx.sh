@@ -1,6 +1,8 @@
 #!/bin/bash
 
-BAG_DIR=/apollo/data/bag
+BAG_DIR=~/apollo/data/bag
+# BAG_DIR=/apollo/data/bag/localization_rosvelodyne/
+# BAG_DIR=/media/apollo/bag
 SERVER_HOST=dgx
 SERVER_USER=kiasoul
 SERVER_FOLDER=/home/datasets/kia
