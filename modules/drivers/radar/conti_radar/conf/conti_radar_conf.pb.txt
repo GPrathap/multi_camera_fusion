@@ -13,17 +13,17 @@ can_conf {
 
 radar_conf {
   max_distance_valid: true
-  sensor_id_valid: false
-  radar_power_valid: false
+  sensor_id_valid: true
+  radar_power_valid: true
   output_type_valid: true
   send_quality_valid: true
   send_ext_info_valid: true
-  sort_index_valid: false
+  sort_index_valid: true
   store_in_nvm_valid: false
-  ctrl_relay_valid: false
+  ctrl_relay_valid: true
   rcs_threshold_valid: true
 
-  max_distance: 250
+  max_distance: 200
   sensor_id: 0
   output_type: OUTPUT_TYPE_OBJECTS
   radar_power: 0
