@@ -122,9 +122,9 @@ void RosLocalizationBridge::OnChassis(const canbus::Chassis &msg)
   // y += msg.speed_mps() * sin(yaw) * dt;
   // yaw += angular_vel * dt;
 
-  // wheels_odom_msg.pose.pose.position.x = x;
-  // wheels_odom_msg.pose.pose.position.y = y;
-  // wheels_odom_msg.pose.pose.position.z = 0.0;
+  wheels_odom_msg.pose.pose.position.x = msg.steering_percentage();
+  wheels_odom_msg.pose.pose.position.y = msg.speed_mps();
+  wheels_odom_msg.pose.pose.position.z = 0.0;
 
   // tf::Quaternion q = tf::createQuaternionFromRPY(0, 0, -M_PI/2.0 + yaw);
   // quaternionTFToMsg(q, wheels_odom_msg.pose.pose.orientation);
