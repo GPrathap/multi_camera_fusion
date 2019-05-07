@@ -138,8 +138,6 @@ class SimulationWorldService {
 
   nlohmann::json GetRoutePathAsJson() const;
 
-  void GetRoutePathAsJsonForUVObs() const;
-
  private:
   /**
    * @brief Update simulation world with incoming data, e.g., chassis,

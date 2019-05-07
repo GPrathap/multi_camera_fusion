@@ -587,11 +587,6 @@ void SimulationWorldService::UpdateMainStopDecision(
   auto decision = world_main_decision->add_decision();
   decision->set_type(Decision::STOP);
 
-
-  std_msgs::String msg;
-  Json response;
-  response["type"] = "StopDecision";
-  response["routingTime"] = world_.routing_time();
   auto position = Json::array();
   
   if (main_decision.has_not_ready()) {
@@ -603,7 +598,6 @@ void SimulationWorldService::UpdateMainStopDecision(
     position.push_back(world_.auto_driving_car().position_x());
     position.push_back(world_.auto_driving_car().position_y());
     position.push_back(0.0);
-    response["reason"] = "STOP_REASON_NOT_READY";
 
     stop_heading = world_.auto_driving_car().heading();
     decision->set_stopreason(Decision::STOP_REASON_NOT_READY);
@@ -617,7 +611,6 @@ void SimulationWorldService::UpdateMainStopDecision(
     position.push_back(world_.auto_driving_car().position_x());
     position.push_back(world_.auto_driving_car().position_y());
     position.push_back(0.0);
-    response["reason"] = "STOP_REASON_EMERGENCY";
 
     decision->set_stopreason(Decision::STOP_REASON_EMERGENCY);
     world_.mutable_auto_driving_car()->set_current_signal("EMERGENCY");
@@ -631,23 +624,11 @@ void SimulationWorldService::UpdateMainStopDecision(
     position.push_back(stop.stop_point().x());
     position.push_back(stop.stop_point().y());
     position.push_back(0.0);
-    response["reason"] = "STOP_REASON_NORMAL";
-    //TODO Fix to correct stop code
-    // response["code"] = stop.reason_code();
-    response["code"] = 2;
     
     if (stop.has_reason_code()) {
       AINFO << "Has stop reason code: " << stop.reason_code() << " Speed: " << world_.auto_driving_car().speed();
       SetStopReason(stop.reason_code(), decision);
     }
-  }
-
-  if((FLAGS_is_published_hd_map_position == "true") && ((double) world_.auto_driving_car().speed() < 0.2)){
-    AINFO << "Publishing to Diginavis: " << response.dump();
-    response["position"] = position;
-    msg.data = response.dump();
-    sleep(1);// Wait to make sure the connection has been established before
-    AdapterManager::PublishHDMAPPub(msg);
   }
   
   decision->set_position_x(stop_pt.x() + map_service_->GetXOffset());
@@ -1020,61 +1001,6 @@ Json SimulationWorldService::GetRoutePathAsJson() const {
     response["routePath"].push_back(path);
   }
   return response;
-}
-
-void SimulationWorldService::GetRoutePathAsJsonForUVObs() const {
-
-  hdmap::Map hd_map = GetRelativeMap();
-  auto header_ = hd_map.mutable_header();
-  auto projection = header_->mutable_projection()->proj();
-
-  auto left = header_->left();
-  auto top = header_->top();
-  auto right = header_->right();
-  auto bottom = header_->bottom();
-
-  double center_y = (top-bottom)/2;
-  double center_x = (right-left)/2;
-
-  //TODO this is just for testing purpose since header of map is empty
-  if(projection.empty()){
-    projection = "+proj=utm +zone=39 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
-  }
-
-  center_y = 6181144.7;
-  center_x = 358177.2;
-
-  std_msgs::String msg;
-  Json response;
-  response["type"] = "RoutePath";
-  response["routingTime"] = world_.routing_time();
-  response["projection"] = projection;
-
-  auto center = Json::array();
-  center.push_back(center_x);
-  center.push_back(center_y);
-  center.push_back(0.0);
-  response["routePath"] = Json::array();
-  for (const auto &route_path : route_paths_) {
-    auto points = Json::array();
-    for (const auto &route_point : route_path.point()) {
-        auto point = Json::array();
-        point.push_back(route_point.x());
-        point.push_back(route_point.y());
-        point.push_back(route_point.z());
-        points.push_back(point);
-    }
-    Json obj;
-    obj["sector"]="U39";
-    obj["center"] = center;
-    obj["point"] = points;
-    response["routePath"].push_back(obj);
-  }
-  msg.data = response.dump();
-  sleep(1);// Wait to make sure the connection has been established before
-          // publishing.
-  AdapterManager::PublishHDMAPPub(msg);
-  return;
 }
 
 void SimulationWorldService::ReadRoutingFromFile(
