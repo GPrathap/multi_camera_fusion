@@ -12,6 +12,7 @@ import rospy
 from scipy import interpolate
 import json
 import numpy as np
+from numpy import linalg 
 import ConfigParser
 
 from modules.routing.proto import routing_pb2
@@ -56,6 +57,8 @@ class UvobsListener():
         self.sequence_num = 0
         self.start = 0
         self.end = 0
+        self.previos_route_distance = 0
+        self.current_route_distance = 0
         self.automode = False
         self.mapdir = ""
         self.central_curves = {}
@@ -75,7 +78,22 @@ class UvobsListener():
             , self.planning_callback)
 
         routing_path_topic = self.config.get('Configuration', 'hd_map_position_topic')
-        self.vehicle_status = rospy.Publisher(routing_path_topic, String, queue_size=1)
+        self.vehicle_status = rospy.Publisher(routing_path_topic, String, queue_size=20, latch=True)
+        
+        map_type = kv_db.KVDB.Get('apollo:dreamview:map')
+        if map_type is None:
+            self.logger.error('Map type is not defined')
+            exit(0)
+
+        new_mapdir = self.get_map_dir_from_name(map_type)
+        self.logger.info(new_mapdir)
+
+        if (new_mapdir!= self.mapdir):
+            self.reload_map(new_mapdir)
+            self.logger.info('Map loaded')
+        else:
+            self.logger.error('Map could not be loaded')
+            exit(0)
     
 
     def reload_map(self, new_mapdir):
@@ -112,16 +130,11 @@ class UvobsListener():
 
 
     def route_response_callback(self, data):
-        # check if maps changed or was empty
         try:
-            new_mapdir = self.get_map_dir_from_name(kv_db.KVDB.Get('apollo:dreamview:map'))
-            if (new_mapdir!= self.mapdir):
-                self.reload_map(new_mapdir)
-                self.logger.info('Map loaded')
             self.route.CopyFrom(data)            
             self.send_routing_request()
         except Exception:
-            self.logger.error("Cannot load the map")
+            self.logger.error("Something went wrong went sending routing path...")
             # exit(0)
             pass
             
@@ -153,18 +166,28 @@ class UvobsListener():
                 "center" : center_position,
                 "point" : path
             }
+            self.current_route_distance += linalg.norm(np.array(path))
             routePath.append(path_sector)
 
-        time_now = rospy.get_time()
-        response = {
-            "type": "RoutePath",
-            "routingTime": time_now,
-            "projection": "+proj=utm +zone=39 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
-            "routePath" : routePath
-        } 
-        response = json.dumps(response)
-        self.vehicle_status.publish(response)
-        self.logger.info(response)
+        self.logger.info("Distance between current and next paths: " + str(self.current_route_distance) + ", " + str(self.previos_route_distance))
+        if(np.abs(self.current_route_distance - self.previos_route_distance ) < 0.2):
+            self.logger.warn("Routhing path will not be sent, assuming as the previous path")
+        else:  
+            time_now = rospy.get_time()
+            response = {
+                "type": "RoutePath",
+                "routingTime": time_now,
+                "projection": "+proj=utm +zone=39 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
+                "routePath" : routePath
+            } 
+            response = json.dumps(response)
+            # response = str(response)
+            rospy.sleep(1) 
+            self.vehicle_status.publish(response)
+            self.logger.info(response)
+            self.start = 1
+        
+        self.previos_route_distance = self.current_route_distance
    
 
     def get_map_dir_from_name(self, map_name):
@@ -176,18 +199,21 @@ class UvobsListener():
             self.automode = (self.chassis.driving_mode == chassis_pb2.Chassis.COMPLETE_AUTO_DRIVE)
             self.carspeed = self.chassis.speed_mps
             # self.logger.info(self.chassis)
-            if((self.chassis.driving_mode == chassis_pb2.Chassis.COMPLETE_AUTO_DRIVE)):
+            if((self.start == 1) and (self.chassis.driving_mode == chassis_pb2.Chassis.COMPLETE_AUTO_DRIVE)):
+                self.logger.info(self.start)
                 response = {
                     "type" :  "SendStartPosition",
                     "code" :  "COMPLETE_AUTO_DRIVE"
                 }
                 response = json.dumps(response)
+                # response = str(response)
+                rospy.sleep(1) 
                 self.vehicle_status.publish(response)
-            
+                self.start = 0
         
     def padmsg_callback(self, data):
             self.padmsg.CopyFrom(data)
-            self.logger.info("calling padding message")
+            self.logger.info("Calling padding message")
             self.logger.info(self.padmsg)
 
     def planning_callback(self, data):
@@ -196,17 +222,19 @@ class UvobsListener():
         stop_code = self.planning.decision.main_decision.stop.reason_code
         stop_point = self.planning.decision.main_decision.stop.stop_point
         self.logger.info(self.planning.decision.main_decision)
-        if(stop_code){
-            if((stop_code == self.STOP_REASON_DESTINATION) and self.carspeed < 0.01){
-                response = {
-                    "type" :  "StopDecision",
-                    "reason" : "STOP_REASON_DESTINATION",
-                    "code" : 2
-                }
-                response = json.dumps(response)
-                self.vehicle_status.publish(response)
+        self.logger.info(self.carspeed)
+        
+        if((stop_code == self.STOP_REASON_DESTINATION) and (self.carspeed < 0.1)):
+            response = {
+                "type" :  "StopDecision",
+                "reason" : "STOP_REASON_DESTINATION",
+                "code" : 2
             }
-        }
+            rospy.sleep(1) 
+            response = json.dumps(response)
+            # response = str(response)
+            self.vehicle_status.publish(response)
+       
         
 
 def main():

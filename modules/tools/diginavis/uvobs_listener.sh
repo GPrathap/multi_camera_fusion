@@ -20,7 +20,7 @@ source "${DIR}/../../../scripts/apollo_base.sh"
 function start() {
     LOG="${APOLLO_ROOT_DIR}/data/log/uvobs-listener-node.out"
     CMD="python modules/tools/diginavis/uvobs-listener-node.py"
-    NUM_PROCESSES_G2L="$(pgrep -c -f uvobs_listener_node)"
+    NUM_PROCESSES_G2L="$(pgrep -c -f uvobs-listener-node)"
     # echo "NUM_PROCESSES" ${NUM_PROCESSES_G2L}
     if [ "${NUM_PROCESSES_G2L}" -eq 0 ]; then
         eval "nohup ${CMD} </dev/null >${LOG} 2>&1 &"
@@ -29,7 +29,7 @@ function start() {
 }
 
 function stop() {
-    pkill -9 -f uvobs_listener_node
+    pkill -9 -f uvobs-listener-node
 }
 
 # run command_name module_name
