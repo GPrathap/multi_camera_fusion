@@ -125,7 +125,7 @@ class UvobsListener():
         # transform to point array
         ptx = []
         for i in range(start_plot_index, end_plot_index):
-            ptx.append([node_x[i], node_y[i]])
+            ptx.append([node_x[i], node_y[i], 0.0])
         return ptx
 
 
@@ -182,7 +182,10 @@ class UvobsListener():
             } 
             response = json.dumps(response)
             # response = str(response)
-            rospy.sleep(1) 
+            while self.vehicle_status.get_num_connections() == 0:
+                self.logger.info("Waiting for at least one subscriber to connect")
+                rospy.sleep(1)
+
             self.vehicle_status.publish(response)
             self.logger.info(response)
             self.start = 1
@@ -206,8 +209,9 @@ class UvobsListener():
                     "code" :  "COMPLETE_AUTO_DRIVE"
                 }
                 response = json.dumps(response)
-                # response = str(response)
-                rospy.sleep(1) 
+                while self.vehicle_status.get_num_connections() == 0:
+                    self.logger.info("Waiting for at least one subscriber to connect")
+                    rospy.sleep(1)
                 self.vehicle_status.publish(response)
                 self.start = 0
         
@@ -230,7 +234,9 @@ class UvobsListener():
                 "reason" : "STOP_REASON_DESTINATION",
                 "code" : 2
             }
-            rospy.sleep(1) 
+            while self.vehicle_status.get_num_connections() == 0:
+                self.logger.info("Waiting for at least one subscriber to connect")
+                rospy.sleep(1)
             response = json.dumps(response)
             # response = str(response)
             self.vehicle_status.publish(response)

@@ -17,6 +17,10 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "${DIR}/../../../scripts/apollo_base.sh"
 
+export ROS_MASTER_URI=http://172.17.0.1:11311
+export ROS_HOSTNAME=172.17.0.1
+export ROS_IP=172.17.0.1
+
 function start() {
     LOG="${APOLLO_ROOT_DIR}/data/log/uvobs-listener-node.out"
     CMD="python modules/tools/diginavis/uvobs-listener-node.py"
