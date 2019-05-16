@@ -528,6 +528,11 @@ void LatController::ComputeLateralErrors(
   // TODO(QiL): Code reformat when done with test
   const double raw_lateral_error =
       cos_matched_theta * dy - sin_matched_theta * dx;
+  
+  double filtered_lateral_error =
+        lateral_error_filter_.Update(raw_lateral_error);
+    debug->set_lateral_error(filtered_lateral_error);
+  /*
   if (FLAGS_enable_navigation_mode_handlilng) {
     double filtered_lateral_error =
         lateral_error_filter_.Update(raw_lateral_error);
@@ -535,6 +540,7 @@ void LatController::ComputeLateralErrors(
   } else {
     debug->set_lateral_error(raw_lateral_error);
   }
+  */
   const double delta_theta =
       common::math::NormalizeAngle(theta - target_point.path_point().theta());
   const double sin_delta_theta = std::sin(delta_theta);
@@ -542,12 +548,15 @@ void LatController::ComputeLateralErrors(
   // theta_error = delta_theta
   // TODO(QiL): Code reformat after test
   debug->set_lateral_error_rate(linear_v * sin_delta_theta);
+  debug->set_heading_error(heading_error_filter_.Update(delta_theta));
+  /*
   if (FLAGS_enable_navigation_mode_handlilng) {
     debug->set_heading_error(heading_error_filter_.Update(delta_theta));
   } else {
     debug->set_heading_error(delta_theta);
   }
-
+  */
+ 
   // theta_error_dot = angular_v - target_point.path_point().kappa() *
   // target_point.v();
   debug->set_heading_error_rate(angular_v - target_point.path_point().kappa() *
