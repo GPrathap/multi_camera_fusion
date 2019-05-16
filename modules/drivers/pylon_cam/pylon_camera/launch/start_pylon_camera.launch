@@ -81,15 +81,15 @@
         <node pkg="nodelet" type="nodelet" name="camera_nodelet_manager" args="manager" respawn="true" />
         <node pkg="nodelet" type="nodelet" name="sensor_camera_front_side" output="screen"
               args="load pylon_camera/PylonCamNodelet camera_nodelet_manager" respawn="true" >
-            <param name="camera_frame" value="pylon_camera" />
+            <param name="camera_frame" value="front_camera" />
             <param name="device_user_id" value="front_side_camera" />
 
             <param name="width" value="$(arg trigger_width)" />
             <param name="height" value="$(arg trigger_height)" />
             <param name="offset_x" value="$(arg trigger_offset_x)" />
-            <param name="offset_y" value="$(arg trigger_offset_y)" />
-            <param name="reverse_x" value="true" />
-            <param name="reverse_y" value="true" />
+            <param name="offset_y" value="274" />
+            <param name="reverse_x" value="false" />
+            <param name="reverse_y" value="false" />
 
             <param name="pgi_mode" value="true" />
             <param name="noise_reduction" value="0" />

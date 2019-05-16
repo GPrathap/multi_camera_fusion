@@ -15,9 +15,9 @@ camera_info_url: "file:///apollo/modules/calibration/data/kia/camera_info/front_
 width: 1280
 height: 512
 offset_x: 0
-offset_y: 288
-reverse_x: true
-reverse_y: true
+offset_y: 274
+reverse_x: false
+reverse_y: false
 pgi_mode: true
 noise_reduction: 0
 sharpness_enhancement: 1.5

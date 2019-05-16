@@ -15,7 +15,7 @@ binning_x: 0
 binning_y: 0
 roi: 
   x_offset: 0
-  y_offset: 0
+  y_offset: 274
   height: 0
   width: 0
   do_rectify: False

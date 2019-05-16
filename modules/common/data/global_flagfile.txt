@@ -15,3 +15,17 @@
 --use_navigation_mode=false
 
 --map_dir=/apollo/modules/map/data/Polygon_New
+
+--map_dir=/apollo/modules/map/data/piar_loop2
+
+--map_dir=/apollo/modules/map/data/Innopolis
+
+--map_dir=/apollo/modules/map/data/innopolis
+
+--map_dir=/apollo/modules/map/data/from_parking_to_road
+
+--map_dir=/apollo/modules/map/data/innopolis
+
+--map_dir=/apollo/modules/map/data/piar_loop_v0.2
+
+--map_dir=/apollo/modules/map/data/innopolis
