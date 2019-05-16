@@ -174,8 +174,7 @@ std::vector<TrajectoryPoint> TrajectoryStitcher::ComputeStitchingTrajectory(
 
   ADEBUG << "matched_index: " << matched_index;
   std::vector<TrajectoryPoint> stitching_trajectory(
-      prev_trajectory->trajectory_points().begin() +
-          std::max(0, static_cast<int>(matched_index - 1)),
+      prev_trajectory->trajectory_points().begin(), // + std::max(0, static_cast<int>(matched_index - 1)),
       prev_trajectory->trajectory_points().begin() + forward_index + 1);
 
   const double zero_s = matched_point.path_point().s();
