@@ -164,7 +164,8 @@ void Guardian::TriggerSafetyMode() {
   }
 
   guardian_cmd_.mutable_control_command()->set_throttle(0.0);
-  guardian_cmd_.mutable_control_command()->set_steering_target(0.0);
+  // guardian_cmd_.mutable_control_command()->set_steering_target(0.0);
+  guardian_cmd_.mutable_control_command()->set_steering_target(control_cmd_->steering_target());
   guardian_cmd_.mutable_control_command()->set_steering_rate(0.0);
   guardian_cmd_.mutable_control_command()->set_is_in_safe_mode(true);
 
