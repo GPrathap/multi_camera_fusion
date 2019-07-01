@@ -29,3 +29,9 @@
 --map_dir=/apollo/modules/map/data/piar_loop_v0.2
 
 --map_dir=/apollo/modules/map/data/innopolis
+
+--map_dir=/apollo/modules/map/data/from_parking_to_road
+
+--map_dir=/apollo/modules/map/data/from_road_to_parking
+
+--map_dir=/apollo/modules/map/data/from_parking_to_road
